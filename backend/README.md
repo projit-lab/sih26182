@@ -317,14 +317,48 @@ backend/
 
 ---
 
-## 8. Quick Start & Execution
+## 8. System Requirements & Environment Compatibility
 
-### 1. Install Dependencies
+### A. Python Version Compatibility
+| Python Version | Compatibility Status | Notes |
+|---|---|---|
+| **Python 3.11.x** | **Recommended (Production)** | Fastest execution, optimal Cython/SciPy sparse linear algebra performance. |
+| **Python 3.10.x** | Fully Supported | Stable baseline for standard Linux/Ubuntu distributions. |
+| **Python 3.12.x** | Supported | Verified with modern wheels for DuckDB and NetworkX. |
+| *Python < 3.10* | Not Recommended | Missing `match/case` and modern `typing` union operator (`|`) syntax. |
+
+### B. Operating System & Hardware
+- **Operating Systems:** Windows 10/11 (PowerShell / Git Bash), macOS (Apple Silicon M1/M2/M3 & Intel), Linux (Ubuntu/Debian, Fedora, Arch).
+- **Memory (RAM):** Minimum 4 GB RAM (8 GB recommended for multi-hop graph mining).
+- **Disk Space:** ~500 MB for local DuckDB/SQLite cache and TagPack indices.
+
+### C. Core Dependencies Breakdown (`backend/requirements.txt`)
+- `fastapi>=0.104.0` & `uvicorn>=0.24.0`: Asynchronous ASGI web framework and high-concurrency production server.
+- `scipy>=1.10.0` & `numpy>=1.24.0`: Sparse Cholesky/LU decomposition solvers for the Grounded Laplacian ($Lx = b$).
+- `networkx>=3.0`: Graph topology construction, bidirectional node adjacency, and edge conductance weighting.
+- `duckdb>=0.9.0`: Embedded columnar OLAP engine for zero-latency local transaction and tag indexing (gracefully falls back to `sqlite3`).
+- `requests>=2.31.0` & `urllib3`: Resilient blockchain crawler with dual-stack IPv4/IPv6 support and SSL proxy failover.
+- `pydantic>=2.0.0`: Strict data validation for API schemas and forensic audit records.
+- `reportlab>=4.0.0`: Programmatic generation of Section 65B Indian Evidence Act compliant forensic PDF reports.
+- `pytest>=7.4.0` & `httpx>=0.25.0`: Automated test suite for database, ingestion, extractor, and API endpoints.
+
+---
+
+## 9. Quick Start & Execution
+
+### 1. Verify Python Version
+```bash
+python --version
+# Expected: Python 3.10.x, 3.11.x, or 3.12.x (Python 3.11 recommended)
+```
+
+### 2. Install Dependencies
 ```bash
 pip install -r backend/requirements.txt
 ```
 
-### 2. Configure Mode (`.env`)
+### 3. Configure Mode (`.env`)
+The backend is pre-configured for live on-chain data:
 ```ini
 USE_LIVE_API=true
 BLOCKSTREAM_BASE_URL=https://mempool.space/api
@@ -334,7 +368,7 @@ DEFAULT_HOP_DEPTH=2
 MAX_HOP_DEPTH=4
 ```
 
-### 3. Start Backend Server
+### 4. Start Backend Server
 ```bash
 uvicorn backend.main:app --reload --port 8000
 ```
@@ -342,7 +376,7 @@ uvicorn backend.main:app --reload --port 8000
 - **System Health Status:** `http://localhost:8000/health`
 - **Visualizer Frontend:** Open `graph_visualizer.html` directly in your browser.
 
-### 4. Run Automated Test Suite
+### 5. Run Automated Test Suite
 ```bash
 pytest backend/tests/ -v
 ```
