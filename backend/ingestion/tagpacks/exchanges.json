@@ -1,0 +1,138 @@
+[
+  {
+    "address": "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s",
+    "entity_name": "Binance",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 1.0
+  },
+  {
+    "address": "34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo",
+    "entity_name": "Binance",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 1.0
+  },
+  {
+    "address": "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq",
+    "entity_name": "WazirX",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.98
+  },
+  {
+    "address": "3M219KR5vEneNb47ewrPfWyb5jJB26FD2K",
+    "entity_name": "WazirX",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.98
+  },
+  {
+    "address": "1CoinDCXDepositWalletAlpha7782x9841",
+    "entity_name": "CoinDCX",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.95
+  },
+  {
+    "address": "3KrakenHotWalletDepositBeta992147xL",
+    "entity_name": "Kraken",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.99
+  },
+  {
+    "address": "1OKXHotWalletReserveDelta782914xKm",
+    "entity_name": "OKX",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.97
+  },
+  {
+    "address": "3HuobiGlobalCustodialVault88371xZ",
+    "entity_name": "Huobi",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.97
+  },
+  {
+    "address": "VASP_0",
+    "entity_name": "Binance (Demo Cluster)",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "SyntheticCluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "VASP_1",
+    "entity_name": "WazirX (Demo Cluster)",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "SyntheticCluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "VASP_2",
+    "entity_name": "CoinDCX (Demo Cluster)",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "SyntheticCluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "VASP_3",
+    "entity_name": "Kraken (Demo Cluster)",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "SyntheticCluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "VASP_4",
+    "entity_name": "OKX (Demo Cluster)",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "SyntheticCluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "VASP_5",
+    "entity_name": "Huobi (Demo Cluster)",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "SyntheticCluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "VASP_true",
+    "entity_name": "Binance Primary (Target)",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GroundTruthContract",
+    "confidence": 1.0
+  },
+  {
+    "address": "VASP_decoy",
+    "entity_name": "Decoy Exchange Vault",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "AdversarialDecoy",
+    "confidence": 0.9
+  },
+  {
+    "address": "VASP_other",
+    "entity_name": "Unrelated Exchange Hub",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "BackgroundVASP",
+    "confidence": 0.9
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "address": "1WasabiCoinJoinCoordinatorAlpha9902",
+    "entity_name": "Wasabi CoinJoin",
+    "category": "mixer",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.99
+  },
+  {
+    "address": "3ChipMixerClusterProxyNode77410294",
+    "entity_name": "ChipMixer",
+    "category": "mixer",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.98
+  },
+  {
+    "address": "1BlenderIoPeelHopRelay88390124x",
+    "entity_name": "Blender.io",
+    "category": "mixer",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 0.99
+  }
+]
