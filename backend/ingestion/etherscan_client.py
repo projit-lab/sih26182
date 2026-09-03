@@ -32,13 +32,21 @@ class EtherscanClient:
         self.api_key = api_key
         self.base_url = base_url.rstrip("/")
         self.repo = repo or TransactionEdgeRepository()
-        self.use_live_api = use_live_api
         self.session = requests.Session()
+        self.session.verify = False
+        import urllib3
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        self.session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) SIH26182/1.0"})
+
+    @property
+    def live_enabled(self) -> bool:
+        import backend.config as cfg
+        return self.use_live_api or getattr(cfg, "USE_LIVE_API", True)
 
     def fetch_account_transactions(
         self, address: str, limit: int = 50
     ) -> List[Dict[str, Any]]:
-        if not self.use_live_api:
+        if not self.live_enabled:
             return []
 
         params = {

@@ -8,7 +8,6 @@ from backend.services.graph_service import GraphService
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/v1/graph", tags=["Graph Visualizations"])
-_graph_service = GraphService()
 
 
 @router.get("/subgraph/{address}", response_model=SubgraphResponse)
@@ -27,8 +26,12 @@ def get_address_subgraph(
         raise HTTPException(status_code=400, detail=str(e))
 
     try:
-        subgraph = _graph_service.get_cytoscape_subgraph(
+        service = GraphService()
+        subgraph = service.get_cytoscape_subgraph(
             suspect_address=sanitized_addr, max_depth=depth, chain=chain
+        )
+        logger.info(
+            f"API Subgraph for '{sanitized_addr}': {len(subgraph.nodes)} nodes, {len(subgraph.edges)} edges"
         )
         if not subgraph.nodes:
             raise HTTPException(

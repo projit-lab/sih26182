@@ -80,12 +80,15 @@ class SubgraphExtractor:
                 edges = self.eth_client.get_or_fetch_edges(curr_addr)
             else:
                 edges = self.btc_client.get_or_fetch_edges(curr_addr)
+            logger.info(f"Extractor fetched {len(edges)} edges for {curr_addr}")
 
-            for edge in edges:
+            # Sort edges by volume (conductance) descending
+            sorted_edges = sorted(edges, key=lambda e: e.amount_satoshis, reverse=True)
+
+            for edge in sorted_edges[:50]:
                 src = edge.source_address
                 dst = edge.target_address
-                # Convert satoshis to BTC (or normalized units) so conductances match engine contract scale
-                # 1 BTC = 100,000,000 sats; prevents effective resistance underflowing to 0.0000
+                # Convert satoshis to BTC so conductances match engine contract scale
                 weight = max(1e-6, float(edge.amount_satoshis) / 100_000_000.0)
 
                 # Add to NetworkX graph (accumulate weights if parallel flows exist)
@@ -94,27 +97,36 @@ class SubgraphExtractor:
                 else:
                     G.add_edge(src, dst, weight=weight)
 
-                # Classify node metadata
-                if dst not in node_metadata:
-                    tag = self.tag_repo.get_tag(dst)
-                    if tag:
-                        role = "candidate_vasp" if tag["category"] in ("exchange", "custodial", "vasp") else tag["category"]
-                        node_metadata[dst] = {
-                            "role": role,
-                            "label": tag["entity_name"],
-                            "entity": tag["entity_name"],
-                            "category": tag["category"],
-                        }
-                    elif "mixer" in dst.lower():
-                        node_metadata[dst] = {"role": "mixer_hop", "label": dst, "entity": "Mixer Node"}
-                    elif "hop" in dst.lower():
-                        node_metadata[dst] = {"role": "hop", "label": dst, "entity": "Intermediary Hop"}
-                    else:
-                        node_metadata[dst] = {"role": "background", "label": dst, "entity": "Peer Wallet"}
+                # Classify node metadata for both endpoints
+                for endpoint in (src, dst):
+                    if endpoint not in node_metadata:
+                        tag = self.tag_repo.get_tag(endpoint)
+                        if tag:
+                            role = "candidate_vasp" if tag["category"] in ("exchange", "custodial", "vasp") else tag["category"]
+                            node_metadata[endpoint] = {
+                                "role": role,
+                                "label": tag["entity_name"],
+                                "entity": tag["entity_name"],
+                                "category": tag["category"],
+                            }
+                        elif "mixer" in endpoint.lower():
+                            node_metadata[endpoint] = {"role": "mixer_hop", "label": endpoint, "entity": "Mixer Node"}
+                        elif "hop" in endpoint.lower():
+                            node_metadata[endpoint] = {"role": "hop", "label": endpoint, "entity": "Intermediary Hop"}
+                        else:
+                            node_metadata[endpoint] = {"role": "background", "label": endpoint, "entity": "Peer Wallet"}
 
-                if dst not in visited_nodes:
-                    visited_nodes.add(dst)
-                    queue.append((dst, depth + 1))
+            # Conductance Beam Search: Queue only top 6 highest-volume next hops
+            # Bounding O(b^k) branching ensures depth 2-4 traversals execute in seconds
+            hops_queued = 0
+            for edge in sorted_edges:
+                next_hop = edge.target_address if edge.source_address == curr_addr else edge.source_address
+                if next_hop not in visited_nodes and next_hop not in known_vasps:
+                    visited_nodes.add(next_hop)
+                    queue.append((next_hop, depth + 1))
+                    hops_queued += 1
+                    if hops_queued >= 6:
+                        break
 
         # Candidate VASP Isolation
         candidate_vasps = [n for n in G.nodes() if n in known_vasps and n != suspect_address]

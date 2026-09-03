@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Transaction Graph Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Cytoscape Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+  <!-- Dagre layout for Cytoscape -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.min.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-surface: #111827;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent-suspect: #ef4444;
+      --accent-mixer: #a855f7;
+      --accent-vasp: #10b981;
+      --accent-hop: #3b82f6;
+      --accent-bg: #64748b;
+      --accent-cyan: #06b6d4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header & Control Bar */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .title-group h1 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .title-group p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .controls-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 4px 8px;
+      gap: 8px;
+    }
+
+    .input-group label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    input, select {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      padding: 4px 8px;
+    }
+
+    input[type="text"] {
+      font-family: 'JetBrains Mono', monospace;
+      width: 240px;
+    }
+
+    select {
+      cursor: pointer;
+      background: #1f2937;
+      border-radius: 4px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    button.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    button.secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Main Container */
+    #main-wrapper {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    #cy {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, #151d30 0%, #0b0f19 100%);
+    }
+
+    /* Floating Overlay Panels */
+    .glass-panel {
+      position: absolute;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(16px);
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+    }
+
+    /* Legend */
+    #legend-panel {
+      bottom: 24px;
+      left: 24px;
+      padding: 16px;
+      font-size: 12px;
+      width: 250px;
+    }
+
+    #legend-panel h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-line {
+      width: 20px;
+      height: 4px;
+      background: #38bdf8;
+      border-radius: 2px;
+    }
+
+    /* Details Inspector */
+    #inspector-panel {
+      top: 24px;
+      right: 24px;
+      width: 340px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 20px;
+      display: none;
+    }
+
+    #inspector-panel h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .data-row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .data-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .data-value {
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+      word-break: break-all;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* Floating Stats Bar */
+    #stats-bar {
+      top: 24px;
+      left: 24px;
+      padding: 8px 16px;
+      display: flex;
+      gap: 20px;
+      font-size: 12px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--accent-cyan);
+    }
+
+    /* Layout Buttons Toolstrip */
+    #toolbar {
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+    }
+
+    #toolbar button {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Controls -->
+  <header>
+    <div class="brand">
+      <span class="logo-badge">SIH26182</span>
+      <div class="title-group">
+        <h1>On-Chain Graph & Edge Weight Visualizer</h1>
+        <p>Dynamic Flow & Attribution Inspector</p>
+      </div>
+    </div>
+
+    <div class="controls-container">
+      <!-- Preset Scenarios -->
+      <div class="input-group">
+        <label>Scenario:</label>
+        <select id="scenarioSelect" onchange="loadPresetScenario(this.value)">
+          <option value="scenario_0">Scenario 0: Frozen Contract (suspect_042)</option>
+          <option value="genesis">Scenario 1: Genesis / Multi-Mixer (1A1zP1...)</option>
+          <option value="peel_chain">Scenario 2: Peel Chain Hop (suspect_003)</option>
+        </select>
+      </div>
+
+      <!-- Live Address Input -->
+      <div class="input-group">
+        <label>Address:</label>
+        <input type="text" id="addressInput" value="suspect_042" placeholder="BTC/ETH address">
+      </div>
+
+      <div class="input-group">
+        <label>Depth:</label>
+        <select id="depthInput">
+          <option value="1">1 Hop</option>
+          <option value="2">2 Hops</option>
+          <option value="3" selected>3 Hops</option>
+          <option value="4">4 Hops</option>
+        </select>
+      </div>
+
+      <button onclick="fetchFromBackend()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-9-9c2.52 0 4.85.83 6.72 2.24L21 8M21 3v5h-5"/></svg>
+        Fetch Live API
+      </button>
+
+      <button class="secondary" onclick="resetLayout()">
+        Reset View
+      </button>
+    </div>
+  </header>
+
+  <!-- Visual Canvas -->
+  <div id="main-wrapper">
+    <!-- Graph Canvas -->
+    <div id="cy"></div>
+
+    <!-- Quick Stats -->
+    <div id="stats-bar" class="glass-panel">
+      <div class="stat-item">
+        <span class="stat-num" id="statNodes">0</span>
+        <span style="color:var(--text-muted);">Nodes</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" id="statEdges">0</span>
+        <span style="color:var(--text-muted);">Edges (Flows)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" id="statVolume">0.00 BTC</span>
+        <span style="color:var(--text-muted);">Total Flow</span>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div id="legend-panel" class="glass-panel">
+      <h4>Graph Legend</h4>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--accent-suspect); box-shadow: 0 0 8px var(--accent-suspect);"></div>
+        <span>Suspect Wallet</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--accent-mixer); box-shadow: 0 0 8px var(--accent-mixer);"></div>
+        <span>Mixer / Tumbler Hop</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--accent-vasp); box-shadow: 0 0 8px var(--accent-vasp);"></div>
+        <span>Candidate VASP / Exchange</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--accent-hop);"></div>
+        <span>Intermediary Hop</span>
+      </div>
+      <div class="legend-item" style="margin-top: 10px;">
+        <div class="legend-line"></div>
+        <span>Edge thickness = Weight (Volume)</span>
+      </div>
+    </div>
+
+    <!-- Floating Layout Switcher -->
+    <div id="toolbar" class="glass-panel">
+      <button class="secondary" onclick="applyLayout('dagre')">Hierarchical</button>
+      <button class="secondary" onclick="applyLayout('cose')">Force-Directed</button>
+      <button class="secondary" onclick="applyLayout('concentric')">Concentric</button>
+      <button class="secondary" onclick="cy.fit(null, 50)">Fit All</button>
+    </div>
+
+    <!-- Node/Edge Details Inspector -->
+    <div id="inspector-panel" class="glass-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 id="inspector-title">Item Details</h3>
+        <button class="close-btn" onclick="closeInspector()">&times;</button>
+      </div>
+      <div id="inspector-content">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Embedded Demo Scenarios for instant offline visual testing
+    const PRESETS = {
+      scenario_0: {
+        nodes: [
+          { data: { id: "suspect_042", label: "suspect_042", role: "suspect" } },
+          { data: { id: "mixer_hop_1", label: "Wasabi Mixer Hop", role: "mixer_hop", entity: "Wasabi Mixer", category: "mixer" } },
+          { data: { id: "VASP_true", label: "Binance Hot Deposit", role: "candidate_vasp", entity: "Binance", category: "exchange" } },
+          { data: { id: "decoy_hop_1", label: "Decoy Hop", role: "hop" } },
+          { data: { id: "VASP_decoy", label: "WazirX Decoy", role: "candidate_vasp", entity: "WazirX", category: "exchange" } }
+        ],
+        edges: [
+          { data: { id: "e1", source: "suspect_042", target: "mixer_hop_1", weight: 140000000, amount_satoshis: 140000000, tx_hash: "a4f891b2c3d4..." } },
+          { data: { id: "e2", source: "mixer_hop_1", target: "VASP_true", weight: 210000000, amount_satoshis: 210000000, tx_hash: "b7e231c5d9a1..." } },
+          { data: { id: "e3", source: "suspect_042", target: "decoy_hop_1", weight: 5000000, amount_satoshis: 5000000, tx_hash: "c9d817e4f201..." } },
+          { data: { id: "e4", source: "decoy_hop_1", target: "VASP_decoy", weight: 5000000, amount_satoshis: 5000000, tx_hash: "d1a294b8e734..." } }
+        ]
+      },
+      genesis: {
+        nodes: [
+          { data: { id: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", label: "1A1zP1... (Genesis Suspect)", role: "suspect" } },
+          { data: { id: "mixer_0", label: "Mixer Alpha 0", role: "mixer_hop", entity: "Tornado/Wasabi" } },
+          { data: { id: "mixer_1", label: "Mixer Alpha 1", role: "mixer_hop", entity: "Tornado/Wasabi" } },
+          { data: { id: "mixer_2", label: "Mixer Alpha 2", role: "mixer_hop", entity: "Tornado/Wasabi" } },
+          { data: { id: "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s", label: "Binance Cluster", role: "candidate_vasp", entity: "Binance", category: "exchange" } },
+          { data: { id: "peel_hop", label: "Peel Decoy", role: "hop" } },
+          { data: { id: "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq", label: "WazirX Cluster", role: "candidate_vasp", entity: "WazirX", category: "exchange" } }
+        ],
+        edges: [
+          { data: { id: "g1", source: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", target: "mixer_0", weight: 35000000, amount_satoshis: 35000000, tx_hash: "3b92..." } },
+          { data: { id: "g2", source: "mixer_0", target: "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s", weight: 34300000, amount_satoshis: 34300000, tx_hash: "4c11..." } },
+          { data: { id: "g3", source: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", target: "mixer_1", weight: 42000000, amount_satoshis: 42000000, tx_hash: "5d22..." } },
+          { data: { id: "g4", source: "mixer_1", target: "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s", weight: 41160000, amount_satoshis: 41160000, tx_hash: "6e33..." } },
+          { data: { id: "g5", source: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", target: "mixer_2", weight: 28000000, amount_satoshis: 28000000, tx_hash: "7f44..." } },
+          { data: { id: "g6", source: "mixer_2", target: "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s", weight: 27440000, amount_satoshis: 27440000, tx_hash: "8a55..." } },
+          { data: { id: "g7", source: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", target: "peel_hop", weight: 1000000, amount_satoshis: 1000000, tx_hash: "9b66..." } },
+          { data: { id: "g8", source: "peel_hop", target: "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq", weight: 1000000, amount_satoshis: 1000000, tx_hash: "0c77..." } }
+        ]
+      },
+      peel_chain: {
+        nodes: [
+          { data: { id: "suspect_003", label: "suspect_003", role: "suspect" } },
+          { data: { id: "peel_hop_1", label: "Hop 1 (Peel)", role: "hop" } },
+          { data: { id: "peel_hop_2", label: "Hop 2 (Peel)", role: "hop" } },
+          { data: { id: "3KrakenHotWallet", label: "Kraken Deposit", role: "candidate_vasp", entity: "Kraken", category: "exchange" } }
+        ],
+        edges: [
+          { data: { id: "p1", source: "suspect_003", target: "peel_hop_1", weight: 55000000, amount_satoshis: 55000000 } },
+          { data: { id: "p2", source: "peel_hop_1", target: "peel_hop_2", weight: 54500000, amount_satoshis: 54500000 } },
+          { data: { id: "p3", source: "peel_hop_2", target: "3KrakenHotWallet", weight: 54000000, amount_satoshis: 54000000 } }
+        ]
+      }
+    };
+
+    function satoshisToBtc(sats) {
+      return (sats / 1e8).toFixed(4) + ' BTC';
+    }
+
+    let cy;
+
+    function initCytoscape(elements) {
+      // Find max weight for dynamic edge scaling
+      let maxWeight = 1;
+      elements.edges.forEach(e => {
+        if (e.data.weight > maxWeight) maxWeight = e.data.weight;
+      });
+
+      cy = cytoscape({
+        container: document.getElementById('cy'),
+        elements: elements,
+        style: [
+          // Base Node Style
+          {
+            selector: 'node',
+            style: {
+              'label': 'data(label)',
+              'color': '#f3f4f6',
+              'font-size': '11px',
+              'font-family': 'Inter, sans-serif',
+              'text-valign': 'bottom',
+              'text-margin-y': 6,
+              'background-color': '#64748b',
+              'width': 44,
+              'height': 44,
+              'border-width': 3,
+              'border-color': 'rgba(255, 255, 255, 0.2)',
+              'transition-property': 'background-color, border-color, width, height',
+              'transition-duration': '0.2s'
+            }
+          },
+          // Role-specific Node Styles
+          {
+            selector: 'node[role = "suspect"]',
+            style: {
+              'background-color': '#ef4444',
+              'border-color': '#fca5a5',
+              'border-width': 4,
+              'width': 56,
+              'height': 56,
+              'font-weight': 'bold'
+            }
+          },
+          {
+            selector: 'node[role = "mixer_hop"]',
+            style: {
+              'background-color': '#a855f7',
+              'border-color': '#e9d5ff',
+              'border-width': 3,
+              'width': 48,
+              'height': 48
+            }
+          },
+          {
+            selector: 'node[role = "candidate_vasp"]',
+            style: {
+              'background-color': '#10b981',
+              'border-color': '#a7f3d0',
+              'border-width': 4,
+              'width': 54,
+              'height': 54,
+              'font-weight': 'bold'
+            }
+          },
+          {
+            selector: 'node[role = "hop"]',
+            style: {
+              'background-color': '#3b82f6',
+              'border-color': '#93c5fd',
+              'width': 40,
+              'height': 40
+            }
+          },
+          // Edges with Weights & Arrows
+          {
+            selector: 'edge',
+            style: {
+              'width': `mapData(weight, 0, ${maxWeight}, 2.5, 9)`,
+              'line-color': '#38bdf8',
+              'target-arrow-color': '#38bdf8',
+              'target-arrow-shape': 'triangle',
+              'arrow-scale': 1.4,
+              'curve-style': 'bezier',
+              'label': function(ele) {
+                const sats = ele.data('amount_satoshis') || ele.data('weight') || 0;
+                return satoshisToBtc(sats);
+              },
+              'font-size': '10px',
+              'font-family': 'JetBrains Mono, monospace',
+              'font-weight': '500',
+              'color': '#cbd5e1',
+              'text-background-color': '#111827',
+              'text-background-opacity': 0.85,
+              'text-background-padding': '3px',
+              'text-background-shape': 'roundrectangle',
+              'text-rotation': 'autorotate',
+              'opacity': 0.85
+            }
+          },
+          // Hover & Selection Highlight
+          {
+            selector: 'node:selected, node:active',
+            style: {
+              'border-color': '#38bdf8',
+              'border-width': 6,
+              'shadow-blur': 25,
+              'shadow-color': '#38bdf8',
+              'shadow-opacity': 0.9
+            }
+          },
+          {
+            selector: 'edge:selected',
+            style: {
+              'line-color': '#f59e0b',
+              'target-arrow-color': '#f59e0b',
+              'width': 8,
+              'color': '#fbbf24'
+            }
+          }
+        ],
+        layout: {
+          name: 'dagre',
+          rankDir: 'LR',
+          nodeSep: 60,
+          rankSep: 100,
+          padding: 60
+        }
+      });
+
+      // Update Top Stats
+      document.getElementById('statNodes').innerText = elements.nodes.length;
+      document.getElementById('statEdges').innerText = elements.edges.length;
+
+      let totalWeight = 0;
+      elements.edges.forEach(e => {
+        totalWeight += (e.data.amount_satoshis || e.data.weight || 0);
+      });
+      document.getElementById('statVolume').innerText = satoshisToBtc(totalWeight);
+
+      // Node Click Handler -> Show Inspector
+      cy.on('tap', 'node', function(evt) {
+        const node = evt.target;
+        const data = node.data();
+        showNodeInspector(data, node);
+      });
+
+      // Edge Click Handler -> Show Inspector
+      cy.on('tap', 'edge', function(evt) {
+        const edge = evt.target;
+        const data = edge.data();
+        showEdgeInspector(data);
+      });
+
+      // Background Click -> Close Inspector
+      cy.on('tap', function(evt) {
+        if (evt.target === cy) {
+          closeInspector();
+        }
+      });
+    }
+
+    function showNodeInspector(data, nodeEle) {
+      const panel = document.getElementById('inspector-panel');
+      const title = document.getElementById('inspector-title');
+      const content = document.getElementById('inspector-content');
+
+      title.innerHTML = `Node Inspector`;
+
+      const inDegree = nodeEle.incomers('edge').length;
+      const outDegree = nodeEle.outgoers('edge').length;
+
+      content.innerHTML = `
+        <div class="data-row">
+          <span class="data-label">Address / ID</span>
+          <span class="data-value">${data.id}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Classification Role</span>
+          <span class="data-value"><span class="badge" style="background:${getRoleColor(data.role)}">${data.role || 'background'}</span></span>
+        </div>
+        ${data.entity ? `
+        <div class="data-row">
+          <span class="data-label">Attributed Entity</span>
+          <span class="data-value" style="color:var(--accent-vasp); font-weight:bold;">${data.entity}</span>
+        </div>` : ''}
+        ${data.category ? `
+        <div class="data-row">
+          <span class="data-label">Category</span>
+          <span class="data-value">${data.category}</span>
+        </div>` : ''}
+        <div class="data-row">
+          <span class="data-label">Degree (In / Out)</span>
+          <span class="data-value">${inDegree} Inbound &bull; ${outDegree} Outbound</span>
+        </div>
+      `;
+      panel.style.display = 'block';
+    }
+
+    function showEdgeInspector(data) {
+      const panel = document.getElementById('inspector-panel');
+      const title = document.getElementById('inspector-title');
+      const content = document.getElementById('inspector-content');
+
+      title.innerHTML = `Edge (Flow) Inspector`;
+
+      const sats = data.amount_satoshis || data.weight || 0;
+
+      content.innerHTML = `
+        <div class="data-row">
+          <span class="data-label">Edge ID</span>
+          <span class="data-value">${data.id}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Transfer Weight</span>
+          <span class="data-value" style="color:var(--accent-cyan); font-weight:bold; font-size:15px;">
+            ${sats.toLocaleString()} Satoshis<br>
+            <span style="color:#fff;">(${satoshisToBtc(sats)})</span>
+          </span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Sender (Source)</span>
+          <span class="data-value">${data.source}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Receiver (Target)</span>
+          <span class="data-value">${data.target}</span>
+        </div>
+        ${data.tx_hash ? `
+        <div class="data-row">
+          <span class="data-label">Transaction Hash</span>
+          <span class="data-value">${data.tx_hash}</span>
+        </div>` : ''}
+      `;
+      panel.style.display = 'block';
+    }
+
+    function closeInspector() {
+      document.getElementById('inspector-panel').style.display = 'none';
+    }
+
+    function getRoleColor(role) {
+      switch(role) {
+        case 'suspect': return 'var(--accent-suspect)';
+        case 'mixer_hop': return 'var(--accent-mixer)';
+        case 'candidate_vasp': return 'var(--accent-vasp)';
+        case 'hop': return 'var(--accent-hop)';
+        default: return 'var(--accent-bg)';
+      }
+    }
+
+    function applyLayout(name) {
+      let layoutOptions = { name: name, animate: true, animationDuration: 400 };
+      if (name === 'dagre') {
+        layoutOptions.rankDir = 'LR';
+        layoutOptions.nodeSep = 60;
+        layoutOptions.rankSep = 100;
+        layoutOptions.padding = 60;
+      } else if (name === 'cose') {
+        layoutOptions.componentSpacing = 100;
+        layoutOptions.nodeOverlap = 20;
+      }
+      cy.layout(layoutOptions).run();
+    }
+
+    function resetLayout() {
+      applyLayout('dagre');
+      cy.fit(null, 50);
+    }
+
+    function loadPresetScenario(key) {
+      const scenario = PRESETS[key];
+      if (scenario) {
+        if (key === 'scenario_0') document.getElementById('addressInput').value = 'suspect_042';
+        else if (key === 'genesis') document.getElementById('addressInput').value = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
+        else if (key === 'peel_chain') document.getElementById('addressInput').value = 'suspect_003';
+        initCytoscape(scenario);
+      }
+    }
+
+    async function fetchFromBackend() {
+      const address = document.getElementById('addressInput').value.trim();
+      const depth = document.getElementById('depthInput').value;
+
+      if (!address) {
+        alert("Please enter a suspect address");
+        return;
+      }
+
+      const url = `http://127.0.0.1:8000/api/v1/graph/subgraph/${encodeURIComponent(address)}?depth=${depth}&chain=BTC`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.detail || `Server responded with ${res.status}`);
+        }
+        const data = await res.json();
+        if (!data.nodes || data.nodes.length === 0) {
+          alert(`No transactions or subgraph found for address ${address}`);
+          return;
+        }
+
+        initCytoscape({
+          nodes: data.nodes,
+          edges: data.edges
+        });
+      } catch (err) {
+        alert(`Failed to fetch from live backend:\n${err.message}\n\nMake sure FastAPI is running on http://127.0.0.1:8000 (uvicorn backend.main:app)`);
+      }
+    }
+
+    // Initial Load with Scenario 0
+    window.addEventListener('DOMContentLoaded', () => {
+      loadPresetScenario('scenario_0');
+    });
+  </script>
+</body>
+</html>

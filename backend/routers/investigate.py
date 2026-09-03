@@ -12,7 +12,6 @@ from backend.services.attribution_service import AttributionService
 logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["Attribution & Investigation"])
-_service = AttributionService()
 
 
 @router.post("/api/v1/investigate", response_model=InvestigateResponse)
@@ -25,7 +24,8 @@ def investigate_wallet(req: InvestigateRequest):
     4. Returns ranked VASPs, effective resistance, and normalized confidence scores
     """
     try:
-        return _service.investigate(req)
+        service = AttributionService()
+        return service.investigate(req)
     except ValueError as e:
         err_msg = str(e)
         if "not found in" in err_msg or "no transaction history" in err_msg:

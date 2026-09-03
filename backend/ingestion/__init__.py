@@ -7,11 +7,21 @@ Data Ingestion Pipeline:
 - Downstream Subgraph Extractor with VASP boundary pruning
 """
 from backend.ingestion.schemas import UniformEdge, EntityTagItem
-from backend.ingestion.tagpack_loader import TagPackLoader
-from backend.ingestion.blockstream_client import BlockstreamClient
-from backend.ingestion.etherscan_client import EtherscanClient
-from backend.ingestion.extractor import SubgraphExtractor
-from backend.ingestion.elliptic_loader import EllipticLoader
+
+_lazy_imports = {
+    "TagPackLoader": ".tagpack_loader",
+    "BlockstreamClient": ".blockstream_client",
+    "EtherscanClient": ".etherscan_client",
+    "SubgraphExtractor": ".extractor",
+    "EllipticLoader": ".elliptic_loader",
+}
+
+def __getattr__(name: str):
+    if name in _lazy_imports:
+        import importlib
+        module = importlib.import_module(_lazy_imports[name], __package__)
+        return getattr(module, name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 __all__ = [
     "UniformEdge",

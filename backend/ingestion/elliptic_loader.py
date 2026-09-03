@@ -133,3 +133,12 @@ class EllipticLoader:
         self.edge_repo.insert_edges(edges)
 
         return len(tags), len(edges)
+
+
+if __name__ == "__main__":
+    from backend.database.db import get_db_connection, init_db
+    conn = get_db_connection()
+    init_db(conn)
+    loader = EllipticLoader()
+    t_count, e_count = loader.generate_and_ingest_sample()
+    print(f"Successfully ingested Elliptic++ benchmark sample: {t_count} tags, {e_count} edges.")

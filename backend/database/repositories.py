@@ -93,13 +93,15 @@ class TransactionEdgeRepository:
         self.db.executemany(query, edges)
         self.db.commit()
 
-    def get_outgoing_edges(self, source_address: str) -> List[Dict[str, Any]]:
+    def get_connected_edges(self, address: str, limit: int = 100) -> List[Dict[str, Any]]:
         query = """
             SELECT tx_hash, source_address, target_address, amount_satoshis, timestamp 
             FROM transaction_edges 
-            WHERE source_address = ?
+            WHERE source_address = ? OR target_address = ?
+            ORDER BY amount_satoshis DESC
+            LIMIT ?
         """
-        rows = self.db.fetchall(query, (source_address,))
+        rows = self.db.fetchall(query, (address, address, limit))
         return [
             {
                 "tx_hash": r[0],

@@ -11,13 +11,25 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 DB_PATH = DATA_DIR / "attribution.duckdb"
 SQLITE_DB_PATH = DATA_DIR / "attribution.sqlite"
 
+# Load .env if present
+for env_path in [PROJECT_ROOT / ".env", BACKEND_DIR / ".env"]:
+    if env_path.exists():
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    k, v = k.strip(), v.strip().strip('"\'')
+                    if k not in os.environ:
+                        os.environ[k] = v
+
 # Runtime Flags
-USE_LIVE_API = os.getenv("USE_LIVE_API", "false").lower() in ("true", "1", "yes")
+USE_LIVE_API = os.getenv("USE_LIVE_API", "true").lower() in ("true", "1", "yes")
 
 # External APIs
-BLOCKSTREAM_BASE_URL = os.getenv("BLOCKSTREAM_BASE_URL", "https://blockstream.info/api")
-REQUEST_TIMEOUT_SECONDS = int(os.getenv("REQUEST_TIMEOUT_SECONDS", "10"))
-MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
+BLOCKSTREAM_BASE_URL = os.getenv("BLOCKSTREAM_BASE_URL", "https://mempool.space/api")
+REQUEST_TIMEOUT_SECONDS = int(os.getenv("REQUEST_TIMEOUT_SECONDS", "6"))
+MAX_RETRIES = int(os.getenv("MAX_RETRIES", "1"))
 
 # Graph Search Limits
 DEFAULT_HOP_DEPTH = int(os.getenv("DEFAULT_HOP_DEPTH", "3"))
