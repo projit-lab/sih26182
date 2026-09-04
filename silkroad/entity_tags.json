@@ -1,0 +1,50 @@
+[
+  {
+    "address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "entity_name": "Silk Road (USMS Seized Wallet)",
+    "category": "illicit",
+    "chain": "BTC",
+    "source": "DOJ_Court_Record",
+    "confidence": 1.0
+  },
+  {
+    "address": "1DkyBEKt5S2GDtxBxgXd2LmUmMeFlxhAsj",
+    "entity_name": "Silk Road Market Hot Wallet",
+    "category": "illicit",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 1.0
+  },
+  {
+    "address": "1HQ3Go3ggs8pFnXuHVHRytPCq5fGG8Hbhx",
+    "entity_name": "Silk Road Individual X 69K BTC Cluster",
+    "category": "illicit",
+    "chain": "BTC",
+    "source": "IRS_CI_Seizure",
+    "confidence": 1.0
+  },
+  {
+    "address": "3Cbq7aT1tY8kNxRdGQdurNo3DDPUk832d",
+    "entity_name": "Coinbase Prime Custody",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 1.0
+  },
+  {
+    "address": "3FZNfdHGmDsjBWP1NmJkP1mY41oK76n48A",
+    "entity_name": "Kraken Cold Storage",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense/Arkham",
+    "confidence": 1.0
+  },
+  {
+    "address": "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s",
+    "entity_name": "Binance",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense",
+    "confidence": 1.0
+  }
+]

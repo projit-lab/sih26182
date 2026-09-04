@@ -1,0 +1,83 @@
+[
+  {
+    "tx_hash": "6f952bdec878456ab273c4ced35c1684fd81dff52d9f8c33e9025c422a80e94e",
+    "source_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target_address": "silkroad_peel_hop_01",
+    "amount_satoshis": 1500000000,
+    "timestamp": "2024-04-02T16:15:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab",
+    "source_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target_address": "silkroad_peel_hop_02",
+    "amount_satoshis": 850000000,
+    "timestamp": "2024-04-02T16:20:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "3f1306079b9ad78c01bcd2936681c80bcc192a70b114de2875004ce589f45b7d",
+    "source_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target_address": "silkroad_mixer_hub_alpha",
+    "amount_satoshis": 2200000000,
+    "timestamp": "2024-04-02T16:30:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1",
+    "source_address": "silkroad_peel_hop_01",
+    "target_address": "silkroad_mixer_hub_alpha",
+    "amount_satoshis": 1490000000,
+    "timestamp": "2024-04-02T17:00:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c",
+    "source_address": "silkroad_peel_hop_02",
+    "target_address": "silkroad_mixer_hub_beta",
+    "amount_satoshis": 845000000,
+    "timestamp": "2024-04-02T17:15:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa",
+    "source_address": "silkroad_mixer_hub_alpha",
+    "target_address": "3Cbq7aT1tY8kNxRdGQdurNo3DDPUk832d",
+    "amount_satoshis": 3650000000,
+    "timestamp": "2024-04-02T18:00:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "b47c0a91e8ff42c273220e174bb59220e6a617afd3fa5592e4796e1bc1qgx53",
+    "source_address": "silkroad_mixer_hub_beta",
+    "target_address": "3FZNfdHGmDsjBWP1NmJkP1mY41oK76n48A",
+    "amount_satoshis": 840000000,
+    "timestamp": "2024-04-02T18:30:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "c9284fbf7c03e6e4f5d557443bc1qxszp7ph8e0d4nm4jl0muq0nwfaw42azryua",
+    "source_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target_address": "silkroad_decoy_hop",
+    "amount_satoshis": 50000000,
+    "timestamp": "2024-04-02T16:10:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "d5a5d98e14b8a401b79ab590c7aa338505bc1q4nex84d9mx8pfw9yqxme4dvsc7",
+    "source_address": "silkroad_decoy_hop",
+    "target_address": "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s",
+    "amount_satoshis": 49000000,
+    "timestamp": "2024-04-02T17:45:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  }
+]

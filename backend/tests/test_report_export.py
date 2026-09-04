@@ -41,6 +41,11 @@ def test_export_pdf_report():
     assert resp.headers["content-type"] == "application/pdf"
     assert resp.content.startswith(b"%PDF")
 
+    # Request PDF export by suspect address fallback
+    resp_addr = client.get("/api/v1/reports/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa/export")
+    assert resp_addr.status_code == 200
+    assert resp_addr.headers["content-type"] == "application/pdf"
+
 
 def test_export_unknown_case_returns_404():
     resp = client.get("/api/v1/reports/CASE-NONEXISTENT/export")

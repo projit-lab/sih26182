@@ -1,5 +1,6 @@
 import logging
 import sqlite3
+import threading
 from typing import Any
 from pathlib import Path
 
@@ -20,66 +21,75 @@ class DatabaseConnection:
     """
     Unified database interface supporting DuckDB with graceful SQLite fallback.
     Both support standard SQL queries and '?' parameter markers.
+    Thread-safe across parallel ingestion workers via RLock.
     """
 
     def __init__(self, db_path: Path = DB_PATH, use_duckdb: bool = HAS_DUCKDB):
         self.db_path = db_path
         self.use_duckdb = use_duckdb
         self._conn = None
+        self._lock = threading.RLock()
 
     def connect(self):
-        if self._conn is not None:
+        with self._lock:
+            if self._conn is not None:
+                return self._conn
+
+            if self.use_duckdb:
+                try:
+                    import duckdb
+                    self.db_path.parent.mkdir(parents=True, exist_ok=True)
+                    self._conn = duckdb.connect(database=str(self.db_path), read_only=False)
+                    return self._conn
+                except Exception as e:
+                    logger.error(f"Failed to connect to DuckDB: {e}. Falling back to SQLite.")
+                    self.use_duckdb = False
+
+            SQLITE_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+            self._conn = sqlite3.connect(str(SQLITE_DB_PATH), check_same_thread=False)
+            self._conn.row_factory = sqlite3.Row
             return self._conn
 
-        if self.use_duckdb:
-            try:
-                import duckdb
-                self.db_path.parent.mkdir(parents=True, exist_ok=True)
-                self._conn = duckdb.connect(database=str(self.db_path), read_only=False)
-                return self._conn
-            except Exception as e:
-                logger.error(f"Failed to connect to DuckDB: {e}. Falling back to SQLite.")
-                self.use_duckdb = False
-
-        SQLITE_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-        self._conn = sqlite3.connect(str(SQLITE_DB_PATH), check_same_thread=False)
-        self._conn.row_factory = sqlite3.Row
-        return self._conn
-
     def execute(self, query: str, parameters: tuple = ()):
-        conn = self.connect()
-        cursor = conn.cursor()
-        cursor.execute(query, parameters)
-        return cursor
+        with self._lock:
+            conn = self.connect()
+            cursor = conn.cursor()
+            cursor.execute(query, parameters)
+            return cursor
 
     def executemany(self, query: str, seq_of_parameters: list):
-        conn = self.connect()
-        cursor = conn.cursor()
-        cursor.executemany(query, seq_of_parameters)
-        return cursor
+        with self._lock:
+            conn = self.connect()
+            cursor = conn.cursor()
+            cursor.executemany(query, seq_of_parameters)
+            return cursor
 
     def fetchall(self, query: str, parameters: tuple = ()) -> list:
-        cursor = self.execute(query, parameters)
-        if hasattr(cursor, "fetchall"):
-            rows = cursor.fetchall()
-            # If duckdb, rows might be tuples or numpy arrays
-            return rows
-        return []
+        with self._lock:
+            cursor = self.execute(query, parameters)
+            if hasattr(cursor, "fetchall"):
+                rows = cursor.fetchall()
+                # If duckdb, rows might be tuples or numpy arrays
+                return rows
+            return []
 
     def fetchone(self, query: str, parameters: tuple = ()) -> Any:
-        cursor = self.execute(query, parameters)
-        if hasattr(cursor, "fetchone"):
-            return cursor.fetchone()
-        return None
+        with self._lock:
+            cursor = self.execute(query, parameters)
+            if hasattr(cursor, "fetchone"):
+                return cursor.fetchone()
+            return None
 
     def commit(self):
-        if self._conn is not None and not self.use_duckdb:
-            self._conn.commit()
+        with self._lock:
+            if self._conn is not None and not self.use_duckdb:
+                self._conn.commit()
 
     def close(self):
-        if self._conn is not None:
-            self._conn.close()
-            self._conn = None
+        with self._lock:
+            if self._conn is not None:
+                self._conn.close()
+                self._conn = None
 
 
 # Singleton connection
@@ -161,6 +171,15 @@ def init_db(db: DatabaseConnection | None = None):
             confidence DOUBLE NOT NULL,
             results_json VARCHAR NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    """)
+
+    # 5. crawled_addresses table
+    db.execute("""
+        CREATE TABLE IF NOT EXISTS crawled_addresses (
+            address VARCHAR PRIMARY KEY,
+            chain VARCHAR DEFAULT 'BTC',
+            crawled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     """)
 

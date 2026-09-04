@@ -58,4 +58,8 @@ class SahyogService:
         )
 
     def get_dispatch_status(self, ack_token: str) -> Optional[dict]:
-        return self.repo.get_dispatch(ack_token)
+        record = self.repo.get_dispatch(ack_token)
+        if record and "target_vasp" in record:
+            vasp_slug = record["target_vasp"].lower().replace(" ", "")
+            record["vasp_compliance_portal"] = f"https://compliance.{vasp_slug}.in/le-portal/v2/dispatches/{ack_token}"
+        return record

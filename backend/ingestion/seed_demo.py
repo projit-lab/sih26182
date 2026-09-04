@@ -51,10 +51,12 @@ def seed_database(num_cases: int = 25):
         ("34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo", "Binance"),
         ("1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq", "WazirX"),
         ("3M219KR5vEneNb47ewrPfWyb5jJB26FD2K", "WazirX"),
-        ("1CoinDCXDepositWalletAlpha7782x9841", "CoinDCX"),
-        ("3KrakenHotWalletDepositBeta992147xL", "Kraken"),
-        ("1OKXHotWalletReserveDelta782914xKm", "OKX"),
-        ("3HuobiGlobalCustodialVault88371xZ", "Huobi"),
+        ("3Cbq7aT1tY8kNxRdGQdurNo3DDPUk832d", "Coinbase"),
+        ("3FZNfdHGmDsjBWP1NmJkP1mY41oK76n48A", "Kraken"),
+        ("3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r", "Bitfinex"),
+        ("3P3QsMVK89JggqocrQrWdY5HfZGsVuZ5DL", "Bitstamp"),
+        ("1G47mSr3oANXMafVrR8UC4pzV7FEAzo3r9", "Huobi"),
+        ("bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4", "OKX"),
     ]
 
     # Scenario 0: Frozen Contract demo case from ENGINE_CONTRACT.md

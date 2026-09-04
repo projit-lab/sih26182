@@ -1,5 +1,6 @@
+from datetime import datetime, timedelta
 import logging
-from typing import Dict, List, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 import networkx as nx
 
 from backend.config import DEFAULT_HOP_DEPTH, MAX_SUBGRAPH_NODES
@@ -56,7 +57,8 @@ class SubgraphExtractor:
         is_eth = chain.upper() == "ETH" or suspect_address.startswith("0x")
 
         visited_nodes: Set[str] = {suspect_address}
-        queue: List[Tuple[str, int]] = [(suspect_address, 0)]
+        # queue stores (address, depth, arrival_timestamp)
+        queue: List[Tuple[str, int, Optional[datetime]]] = [(suspect_address, 0, None)]
 
         G = nx.Graph()
         G.add_node(suspect_address, kind="suspect")
@@ -65,68 +67,143 @@ class SubgraphExtractor:
             suspect_address: {"role": "suspect", "label": suspect_address, "entity": "Suspect Target"}
         }
 
+        from concurrent.futures import ThreadPoolExecutor
+
+        fetch_client = self.eth_client if is_eth else self.btc_client
+
         while queue and len(visited_nodes) < MAX_SUBGRAPH_NODES:
-            curr_addr, depth = queue.pop(0)
+            # Batch up to 4 nodes at the current depth to crawl concurrently (avoids public API rate-limits)
+            current_depth = queue[0][1]
+            batch: List[Tuple[str, int, Optional[datetime]]] = []
+            while queue and queue[0][1] == current_depth and len(batch) < 4:
+                addr, d, t_arr = queue.pop(0)
+                if addr in known_vasps and addr != suspect_address:
+                    continue
+                if d >= max_depth:
+                    continue
+                batch.append((addr, d, t_arr))
 
-            # Stop expansion along a path once a recognized VASP node is reached
-            if curr_addr in known_vasps and curr_addr != suspect_address:
+            if not batch:
                 continue
 
-            if depth >= max_depth:
-                continue
+            def _fetch_node_edges(item: Tuple[str, int, Optional[datetime]]) -> Tuple[str, int, Optional[datetime], list]:
+                a, dep, t_a = item
+                try:
+                    return a, dep, t_a, fetch_client.get_or_fetch_edges(a)
+                except Exception as ex:
+                    logger.warning(f"Error fetching edges for {a}: {ex}")
+                    return a, dep, t_a, []
 
-            # Fetch outgoing edges (from DB cache, Blockstream/Mempool, or Etherscan)
-            if is_eth:
-                edges = self.eth_client.get_or_fetch_edges(curr_addr)
+            # Execute parallel concurrent fetch across all batch nodes
+            if len(batch) == 1:
+                batch_results = [_fetch_node_edges(batch[0])]
             else:
-                edges = self.btc_client.get_or_fetch_edges(curr_addr)
-            logger.info(f"Extractor fetched {len(edges)} edges for {curr_addr}")
+                with ThreadPoolExecutor(max_workers=len(batch)) as executor:
+                    batch_results = list(executor.map(_fetch_node_edges, batch))
 
-            # Sort edges by volume (conductance) descending
-            sorted_edges = sorted(edges, key=lambda e: e.amount_satoshis, reverse=True)
+            for curr_addr, depth, t_arrival, edges in batch_results:
+                if not edges:
+                    continue
+                logger.info(f"Extractor fetched {len(edges)} edges for {curr_addr}")
 
-            for edge in sorted_edges[:50]:
-                src = edge.source_address
-                dst = edge.target_address
-                # Convert satoshis to BTC so conductances match engine contract scale
-                weight = max(1e-6, float(edge.amount_satoshis) / 100_000_000.0)
+                sorted_edges = sorted(edges, key=lambda e: e.amount_satoshis, reverse=True)
 
-                # Add to NetworkX graph (accumulate weights if parallel flows exist)
-                if G.has_edge(src, dst):
-                    G[src][dst]["weight"] += weight
-                else:
-                    G.add_edge(src, dst, weight=weight)
+                for edge in sorted_edges[:50]:
+                    src = edge.source_address
+                    dst = edge.target_address
+                    # Convert satoshis to BTC so conductances match engine contract scale
+                    weight = max(1e-6, float(edge.amount_satoshis) / 100_000_000.0)
 
-                # Classify node metadata for both endpoints
-                for endpoint in (src, dst):
-                    if endpoint not in node_metadata:
-                        tag = self.tag_repo.get_tag(endpoint)
-                        if tag:
-                            role = "candidate_vasp" if tag["category"] in ("exchange", "custodial", "vasp") else tag["category"]
-                            node_metadata[endpoint] = {
-                                "role": role,
-                                "label": tag["entity_name"],
-                                "entity": tag["entity_name"],
-                                "category": tag["category"],
-                            }
-                        elif "mixer" in endpoint.lower():
-                            node_metadata[endpoint] = {"role": "mixer_hop", "label": endpoint, "entity": "Mixer Node"}
-                        elif "hop" in endpoint.lower():
-                            node_metadata[endpoint] = {"role": "hop", "label": endpoint, "entity": "Intermediary Hop"}
-                        else:
-                            node_metadata[endpoint] = {"role": "background", "label": endpoint, "entity": "Peer Wallet"}
+                    # Add to NetworkX graph (accumulate weights and satoshis if parallel flows exist)
+                    if G.has_edge(src, dst):
+                        G[src][dst]["weight"] += weight
+                        G[src][dst]["amount_satoshis"] = G[src][dst].get("amount_satoshis", 0) + edge.amount_satoshis
+                    else:
+                        G.add_edge(src, dst, weight=weight, amount_satoshis=edge.amount_satoshis, tx_hash=edge.tx_hash)
 
-            # Conductance Beam Search: Queue only top 6 highest-volume next hops
-            # Bounding O(b^k) branching ensures depth 2-4 traversals execute in seconds
-            hops_queued = 0
-            for edge in sorted_edges:
-                next_hop = edge.target_address if edge.source_address == curr_addr else edge.source_address
-                if next_hop not in visited_nodes and next_hop not in known_vasps:
+                    # Classify node metadata for both endpoints
+                    for endpoint in (src, dst):
+                        if endpoint not in node_metadata:
+                            if endpoint.upper() == "COINBASE":
+                                node_metadata[endpoint] = {
+                                    "role": "background",
+                                    "label": "Coinbase (Mined)",
+                                    "entity": "Coinbase Block Reward",
+                                    "category": "mining",
+                                }
+                                continue
+
+                            tag = self.tag_repo.get_tag(endpoint)
+                            if tag:
+                                role = "candidate_vasp" if tag["category"] in ("exchange", "custodial", "vasp") else tag["category"]
+                                node_metadata[endpoint] = {
+                                    "role": role,
+                                    "label": tag["entity_name"],
+                                    "entity": tag["entity_name"],
+                                    "category": tag["category"],
+                                }
+                            elif "mixer" in endpoint.lower():
+                                node_metadata[endpoint] = {"role": "mixer_hop", "label": endpoint, "entity": "Mixer Node"}
+                            elif "hop" in endpoint.lower():
+                                node_metadata[endpoint] = {"role": "hop", "label": endpoint, "entity": "Intermediary Hop"}
+                            else:
+                                node_metadata[endpoint] = {"role": "background", "label": endpoint, "entity": "Peer Wallet"}
+
+                # High-degree super hub detection (unlisted mining pool, mixer hub, or exchange deposit cluster)
+                # Halt deep expansion past massive non-suspect hubs to prevent graph explosion & noise
+                is_super_hub = len(edges) >= 45 and curr_addr != suspect_address
+                if is_super_hub:
+                    if node_metadata.get(curr_addr, {}).get("role") == "background":
+                        node_metadata[curr_addr]["entity"] = "High-Degree Cluster / Suspected Hub"
+                        node_metadata[curr_addr]["role"] = "suspected_hub"
+                    logger.info(f"Node {curr_addr} is a high-degree hub ({len(edges)} edges). Halting deeper branch expansion.")
+                    continue
+
+                # Filter candidate hops with Directional Temporal Causality (t_out >= t_in - 2h)
+                candidate_hops: List[Tuple[Any, str]] = []
+                for edge in sorted_edges:
+                    next_hop = edge.target_address if edge.source_address == curr_addr else edge.source_address
+                    if not next_hop or next_hop.upper() == "COINBASE":
+                        continue
+                    if next_hop in visited_nodes or next_hop in known_vasps:
+                        continue
+
+                    # Directional Temporal Filter:
+                    # If funds are flowing downstream (edge.source_address == curr_addr),
+                    # the outgoing transfer cannot have occurred prior to funds arriving at curr_addr.
+                    # Leeway of 2 hours is granted to account for Bitcoin miner block timestamp drift.
+                    if (
+                        t_arrival is not None
+                        and edge.timestamp is not None
+                        and edge.source_address == curr_addr
+                    ):
+                        if edge.timestamp < t_arrival - timedelta(hours=2):
+                            continue
+
+                    candidate_hops.append((edge, next_hop))
+
+                # Adaptive Cumulative Volume Beam Search:
+                # Dynamically accumulate candidate branches until >= 85% of total candidate volume
+                # is captured (bounded between MIN_BEAM=3 and MAX_BEAM=12).
+                # This guarantees peel chains with dispersed equal-value splits are not prematurely pruned.
+                total_candidate_vol = sum(e.amount_satoshis for e, _ in candidate_hops)
+                accumulated_vol = 0
+                hops_queued = 0
+                min_beam = 3
+                max_beam = 12
+                target_ratio = 0.85
+
+                for edge, next_hop in candidate_hops:
                     visited_nodes.add(next_hop)
-                    queue.append((next_hop, depth + 1))
+                    queue.append((next_hop, depth + 1, edge.timestamp))
                     hops_queued += 1
-                    if hops_queued >= 6:
-                        break
+                    accumulated_vol += edge.amount_satoshis
+
+                    if hops_queued >= min_beam:
+                        if hops_queued >= max_beam:
+                            break
+                        if total_candidate_vol > 0 and (accumulated_vol / total_candidate_vol) >= target_ratio:
+                            break
 
         # Candidate VASP Isolation
         candidate_vasps = [n for n in G.nodes() if n in known_vasps and n != suspect_address]

@@ -1,45 +1,53 @@
-title: "GraphSense Curated Exchange TagPack"
+title: "GraphSense Curated Exchange TagPack (Verified Bitcoin Mainnet)"
 creator: "GraphSense & Crypto-Tags Open Registry"
 currency: "BTC"
-lastmod: "2026-09-01"
+lastmod: "2026-09-04"
 tags:
   - address: "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s"
-    label: "Binance"
+    label: "Binance Hot Wallet 6"
     category: "exchange"
     confidence: 1.0
   - address: "34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo"
     label: "Binance Cold Storage"
     category: "exchange"
     confidence: 1.0
-  - address: "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq"
-    label: "WazirX Primary Deposit"
+  - address: "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h"
+    label: "Binance Cold Storage II"
+    category: "exchange"
+    confidence: 1.0
+  - address: "3Cbq7aT1tY8kNxRdGQdurNo3DDPUk832d"
+    label: "Coinbase Prime Custody"
+    category: "exchange"
+    confidence: 1.0
+  - address: "347N1Thc213qcVSvaZnmMF4QQdKfhCHRke"
+    label: "Coinbase Cold Storage"
+    category: "exchange"
+    confidence: 1.0
+  - address: "3FZNfdHGmDsjBWP1NmJkP1mY41oK76n48A"
+    label: "Kraken Cold Storage"
+    category: "exchange"
+    confidence: 1.0
+  - address: "1AnNwLo5mRoxFSLfNxz5G9mxhcNNF9kxh8"
+    label: "Kraken Hot Wallet"
     category: "exchange"
     confidence: 0.99
-  - address: "3M219KR5vEneNb47ewrPfWyb5jJB26FD2K"
-    label: "WazirX Settlement Vault"
+  - address: "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r"
+    label: "Bitfinex Cold Storage"
     category: "exchange"
-    confidence: 0.99
-  - address: "1CoinDCXDepositWalletAlpha7782x9841"
-    label: "CoinDCX Hot Wallet"
+    confidence: 1.0
+  - address: "3P3QsMVK89JggqocrQrWdY5HfZGsVuZ5DL"
+    label: "Bitstamp Cold Storage"
     category: "exchange"
-    confidence: 0.98
-  - address: "3KrakenHotWalletDepositBeta992147xL"
-    label: "Kraken Exchange Hub"
+    confidence: 1.0
+  - address: "1G47mSr3oANXMafVrR8UC4pzV7FEAzo3r9"
+    label: "Huobi Cold Vault"
     category: "exchange"
-    confidence: 0.99
-  - address: "1OKXHotWalletReserveDelta782914xKm"
-    label: "OKX Settlement Gateway"
+    confidence: 1.0
+  - address: "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4"
+    label: "OKX Cold Storage"
     category: "exchange"
-    confidence: 0.98
-  - address: "3HuobiGlobalCustodialVault88371xZ"
-    label: "Huobi Custodial Vault"
+    confidence: 1.0
+  - address: "3PkmHz45xKuEQ1cmwmip12QSq36SZLbRZ5"
+    label: "Gemini Custody Vault"
     category: "exchange"
-    confidence: 0.98
-  - address: "1WasabiCoinJoinCoordinatorAlpha9902"
-    label: "Wasabi CoinJoin Pool"
-    category: "mixer"
-    confidence: 0.99
-  - address: "3ChipMixerClusterProxyNode77410294"
-    label: "ChipMixer Obfuscation Relay"
-    category: "mixer"
     confidence: 0.99

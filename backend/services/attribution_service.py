@@ -60,9 +60,25 @@ class AttributionService:
             all_known = self.tag_repo.list_all_vasp_addresses()
             candidate_pool = [v for v in all_known if v in graph.nodes and v != req.suspect_address]
 
+        # Dynamic fallback for real-world unlabelled subgraphs:
+        # If no tagged exchange was hit within k hops, select top-volume recipient nodes
+        # in the same connected component as candidate targets
+        if not candidate_pool:
+            if nx.is_connected(graph):
+                reachable_nodes = set(graph.nodes)
+            else:
+                reachable_nodes = nx.node_connected_component(graph, req.suspect_address)
+
+            non_suspect_nodes = [n for n in reachable_nodes if n != req.suspect_address]
+            candidate_pool = sorted(
+                non_suspect_nodes,
+                key=lambda n: graph.degree(n, weight="weight"),
+                reverse=True,
+            )[:5]
+
         if not candidate_pool:
             raise ValueError(
-                f"No candidate VASP addresses reachable within {req.depth_limit} hops from suspect wallet."
+                f"No connected peer or candidate VASP addresses reachable within {req.depth_limit} hops from suspect wallet."
             )
 
         # Filter candidates to only those present in graph
@@ -97,15 +113,16 @@ class AttributionService:
             r_eff = attr_result.scores[c]
             if math.isinf(r_eff):
                 conf = 0.0
+                eff_res_val = 999999.0
             else:
                 conf = round(inverse_weights[c] / total_weight, 3)
+                eff_res_val = round(r_eff, 4) if r_eff >= 0.0001 else round(r_eff, 8)
 
             # Get entity name from metadata or repository
             node_meta = metadata.get(c, {})
             tag = self.tag_repo.get_tag(c)
             entity_name = node_meta.get("entity") or (tag["entity_name"] if tag else c)
 
-            eff_res_val = round(r_eff, 4) if r_eff >= 0.0001 else round(r_eff, 8)
             ranked_items.append(
                 RankedVaspItem(
                     vasp_name=entity_name,
@@ -122,16 +139,18 @@ class AttributionService:
             solver_method=attr_result.method,
         )
 
+        # 5. Persist case for audit & report export
+        case_id = f"CASE-{req.suspect_address[:8].upper()}-{int(time.time())}"
+        top_vasp = ranked_items[0].vasp_name if ranked_items else "Unknown"
+        top_conf = ranked_items[0].confidence_score if ranked_items else 0.0
+
         response = InvestigateResponse(
+            case_id=case_id,
             suspect_address=req.suspect_address,
             ranked_vasps=ranked_items,
             graph_summary=graph_summary,
         )
 
-        # 5. Persist case for audit & report export
-        case_id = f"CASE-{req.suspect_address[:8].upper()}-{int(time.time())}"
-        top_vasp = ranked_items[0].vasp_name if ranked_items else "Unknown"
-        top_conf = ranked_items[0].confidence_score if ranked_items else 0.0
         self.case_repo.save_case(
             case_id=case_id,
             suspect_address=req.suspect_address,

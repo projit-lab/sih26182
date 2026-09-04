@@ -32,7 +32,9 @@ class ReportService:
     def generate_pdf_report(self, case_id: str) -> io.BytesIO:
         case_data = self.case_repo.get_case(case_id)
         if not case_data:
-            raise ValueError(f"Case ID '{case_id}' not found in database.")
+            case_data = self.case_repo.get_latest_case_by_suspect(case_id)
+        if not case_data:
+            raise ValueError(f"Case ID or Suspect '{case_id}' not found in database.")
 
         suspect = case_data["suspect_address"]
         top_vasp = case_data["top_vasp"]
@@ -110,9 +112,10 @@ Section 65B Indian Evidence Act Certification Verified.
             "CodeText",
             parent=styles["Normal"],
             fontName="Courier",
-            fontSize=8,
-            leading=10,
+            fontSize=7.5,
+            leading=9.5,
             textColor=colors.HexColor("#0f172a"),
+            wordWrap="CJK",
         )
 
         story = []

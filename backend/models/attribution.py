@@ -29,6 +29,7 @@ class GraphSummary(BaseModel):
 
 
 class InvestigateResponse(BaseModel):
+    case_id: Optional[str] = Field(None, description="Unique case reference for audit and PDF reporting")
     suspect_address: str
     ranked_vasps: List[RankedVaspItem]
     graph_summary: GraphSummary

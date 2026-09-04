@@ -52,6 +52,12 @@ class GraphService:
         edges: list[CytoscapeEdge] = []
         for u, v, data in graph.edges(data=True):
             weight = float(data.get("weight", 1.0))
+            raw_sats = data.get("amount_satoshis")
+            if raw_sats is not None:
+                amount_sats = int(raw_sats)
+            else:
+                amount_sats = int(weight) if weight > 1000 else int(round(weight * 100_000_000))
+
             edge_id = f"{u}->{v}"
             edges.append(
                 CytoscapeEdge(
@@ -60,7 +66,7 @@ class GraphService:
                         source=u,
                         target=v,
                         weight=weight,
-                        amount_satoshis=int(weight),
+                        amount_satoshis=amount_sats,
                         tx_hash=data.get("tx_hash"),
                     )
                 )

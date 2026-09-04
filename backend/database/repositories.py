@@ -113,12 +113,50 @@ class TransactionEdgeRepository:
             for r in rows
         ]
 
+    def get_outgoing_edges(self, address: str, limit: int = 100) -> List[Dict[str, Any]]:
+        query = """
+            SELECT tx_hash, source_address, target_address, amount_satoshis, timestamp 
+            FROM transaction_edges 
+            WHERE source_address = ?
+            ORDER BY amount_satoshis DESC
+            LIMIT ?
+        """
+        rows = self.db.fetchall(query, (address, limit))
+        return [
+            {
+                "tx_hash": r[0],
+                "source_address": r[1],
+                "target_address": r[2],
+                "amount_satoshis": r[3],
+                "timestamp": r[4],
+            }
+            for r in rows
+        ]
+
     def has_address_transactions(self, address: str) -> bool:
         row = self.db.fetchone(
             "SELECT 1 FROM transaction_edges WHERE source_address = ? OR target_address = ? LIMIT 1",
             (address, address),
         )
         return row is not None
+
+    def is_address_crawled(self, address: str) -> bool:
+        try:
+            row = self.db.fetchone(
+                "SELECT 1 FROM crawled_addresses WHERE address = ? LIMIT 1",
+                (address,),
+            )
+            return row is not None
+        except Exception:
+            return False
+
+    def mark_address_crawled(self, address: str, chain: str = "BTC"):
+        query = "INSERT OR REPLACE INTO crawled_addresses (address, chain, crawled_at) VALUES (?, ?, CURRENT_TIMESTAMP)"
+        try:
+            self.db.execute(query, (address, chain))
+            self.db.commit()
+        except Exception as e:
+            logger.debug(f"Note marking crawled address {address}: {e}")
 
 
 class SahyogRepository:
@@ -193,6 +231,22 @@ class CaseRepository:
 
     def get_case(self, case_id: str) -> Optional[Dict[str, Any]]:
         row = self.db.fetchone("SELECT * FROM investigation_cases WHERE case_id = ?", (case_id,))
+        if row:
+            return {
+                "case_id": row[0],
+                "suspect_address": row[1],
+                "top_vasp": row[2],
+                "confidence": row[3],
+                "results": json.loads(row[4]),
+                "created_at": str(row[5]),
+            }
+        return None
+
+    def get_latest_case_by_suspect(self, suspect_address: str) -> Optional[Dict[str, Any]]:
+        row = self.db.fetchone(
+            "SELECT * FROM investigation_cases WHERE suspect_address = ? ORDER BY created_at DESC LIMIT 1",
+            (suspect_address,),
+        )
         if row:
             return {
                 "case_id": row[0],

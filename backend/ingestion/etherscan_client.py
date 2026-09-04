@@ -125,8 +125,8 @@ class EtherscanClient:
         return edges
 
     def get_or_fetch_edges(self, address: str) -> List[UniformEdge]:
-        cached = self.repo.get_outgoing_edges(address)
-        if cached:
+        if self.repo.is_address_crawled(address):
+            cached = self.repo.get_outgoing_edges(address)
             return [
                 UniformEdge(
                     source_address=r["source_address"],
@@ -139,8 +139,22 @@ class EtherscanClient:
                 for r in cached
             ]
 
-        if not self.use_live_api:
-            return []
+        # 2. Skip live API for non-EVM or synthetic address formats
+        is_eth_format = isinstance(address, str) and address.startswith("0x") and len(address) == 42
+
+        if not is_eth_format or not self.live_enabled:
+            cached = self.repo.get_outgoing_edges(address)
+            return [
+                UniformEdge(
+                    source_address=r["source_address"],
+                    target_address=r["target_address"],
+                    amount_satoshis=r["amount_satoshis"],
+                    tx_hash=r["tx_hash"],
+                    timestamp=None,
+                    chain="ETH",
+                )
+                for r in cached
+            ] if cached else []
 
         raw_txs = self.fetch_account_transactions(address)
         new_edges = self.resolve_evm_edges(raw_txs)
@@ -159,5 +173,22 @@ class EtherscanClient:
                 for e in new_edges
             ]
             self.repo.insert_edges(tuples)
+
+        if new_edges or (isinstance(raw_txs, list) and len(raw_txs) == 0):
+            self.repo.mark_address_crawled(address, chain="ETH")
+
+        cached = self.repo.get_outgoing_edges(address)
+        if cached:
+            return [
+                UniformEdge(
+                    source_address=r["source_address"],
+                    target_address=r["target_address"],
+                    amount_satoshis=r["amount_satoshis"],
+                    tx_hash=r["tx_hash"],
+                    timestamp=None,
+                    chain="ETH",
+                )
+                for r in cached
+            ]
 
         return new_edges

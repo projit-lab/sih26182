@@ -28,13 +28,14 @@ USE_LIVE_API = os.getenv("USE_LIVE_API", "true").lower() in ("true", "1", "yes")
 
 # External APIs
 BLOCKSTREAM_BASE_URL = os.getenv("BLOCKSTREAM_BASE_URL", "https://mempool.space/api")
-REQUEST_TIMEOUT_SECONDS = int(os.getenv("REQUEST_TIMEOUT_SECONDS", "6"))
-MAX_RETRIES = int(os.getenv("MAX_RETRIES", "1"))
+REQUEST_TIMEOUT_SECONDS = int(os.getenv("REQUEST_TIMEOUT_SECONDS", "12"))
+MAX_RETRIES = int(os.getenv("MAX_RETRIES", "2"))
+API_REQUEST_DELAY_MS = int(os.getenv("API_REQUEST_DELAY_MS", "80"))
 
 # Graph Search Limits
 DEFAULT_HOP_DEPTH = int(os.getenv("DEFAULT_HOP_DEPTH", "3"))
-MAX_HOP_DEPTH = int(os.getenv("MAX_HOP_DEPTH", "6"))
-MAX_SUBGRAPH_NODES = int(os.getenv("MAX_SUBGRAPH_NODES", "2000"))
+MAX_HOP_DEPTH = int(os.getenv("MAX_HOP_DEPTH", "10"))
+MAX_SUBGRAPH_NODES = int(os.getenv("MAX_SUBGRAPH_NODES", "3500"))
 
 # CORS settings for Frontend connection
 CORS_ORIGINS = [

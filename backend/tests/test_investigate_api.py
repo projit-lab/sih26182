@@ -31,6 +31,7 @@ def test_investigate_seeded_case():
     data = response.json()
 
     assert data["suspect_address"] == "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+    assert "case_id" in data and data["case_id"].startswith("CASE-")
     assert "ranked_vasps" in data
     assert len(data["ranked_vasps"]) > 0
 

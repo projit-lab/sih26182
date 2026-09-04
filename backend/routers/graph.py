@@ -13,7 +13,7 @@ router = APIRouter(prefix="/api/v1/graph", tags=["Graph Visualizations"])
 @router.get("/subgraph/{address}", response_model=SubgraphResponse)
 def get_address_subgraph(
     address: str,
-    depth: int = Query(3, ge=1, le=6, description="Traversal depth limit (hops)"),
+    depth: int = Query(3, ge=1, le=10, description="Traversal depth limit (hops)"),
     chain: str = Query("BTC", description="Blockchain network (BTC, ETH)"),
 ):
     """
