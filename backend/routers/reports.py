@@ -45,6 +45,36 @@ def export_project_overview_report():
         raise HTTPException(status_code=500, detail=f"Project Report Generation Error: {str(e)}")
 
 
+@router.get("/backend-implementation/export")
+def export_backend_implementation_report():
+    """
+    Exports a comprehensive PDF report covering the full backend implementation,
+    function-by-function specifications, code snippets, and grounded Laplacian architecture.
+    """
+    try:
+        import io
+        from pathlib import Path
+        from generate_backend_pdf import build_backend_report_pdf
+
+        root_dir = Path(__file__).resolve().parent.parent.parent
+        pdf_path = root_dir / "SIH26182_Backend_Implementation_Report.pdf"
+        build_backend_report_pdf(pdf_path)
+
+        with open(pdf_path, "rb") as f:
+            pdf_bytes = f.read()
+
+        buf = io.BytesIO(pdf_bytes)
+        filename = "SIH26182_Backend_Implementation_Report.pdf"
+        return StreamingResponse(
+            buf,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={filename}"},
+        )
+    except Exception as e:
+        logger.exception("Failed to export backend implementation PDF report")
+        raise HTTPException(status_code=500, detail=f"Backend Report Generation Error: {str(e)}")
+
+
 @router.get("/{case_id}/export")
 def export_case_report(case_id: str):
     """

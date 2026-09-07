@@ -223,7 +223,7 @@ def export_report(suspect: str = "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"):
             f"#{idx}",
             vasp.vasp_name,
             vasp.address[:16] + "...",
-            f"{vasp.effective_resistance:.4f} \u03a9",
+            f"{vasp.effective_resistance:.4f} Ohms",
             f"{vasp.confidence_score * 100:.1f}%",
         ])
     t_results = Table(table_data, colWidths=[40, 160, 140, 100, 100])

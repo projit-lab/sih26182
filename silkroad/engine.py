@@ -103,8 +103,20 @@ class SilkRoadAttributionEngine:
         import time
         t0 = time.perf_counter()
 
-        if suspect_address not in self._idx:
+        if suspect_address not in self.graph:
             raise ValueError(f"Suspect address '{suspect_address}' not present in Silk Road graph.")
+
+        # Ensure Laplacian solver operates on connected component containing suspect
+        if not nx.is_connected(self.graph):
+            comp_nodes = nx.node_connected_component(self.graph, suspect_address)
+            active_graph = self.graph.subgraph(comp_nodes).copy()
+        else:
+            active_graph = self.graph
+
+        self._nodes = list(active_graph.nodes())
+        self._idx = {n: i for i, n in enumerate(self._nodes)}
+        self._n = len(self._nodes)
+        self._lu = None
 
         results: List[SilkRoadVaspRanking] = []
         resistances: Dict[str, float] = {}

@@ -1,0 +1,122 @@
+[
+  {
+    "address": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+    "entity_name": "Suspect Shadow Syndicate Root",
+    "category": "suspect",
+    "chain": "BTC",
+    "source": "LEA_Intelligence_Target",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1q_decoy_relay_1",
+    "entity_name": "Decoy Diversion Relay (Short Path)",
+    "category": "hop",
+    "chain": "BTC",
+    "source": "Mempool_Space",
+    "confidence": 1.0
+  },
+  {
+    "address": "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq",
+    "entity_name": "WazirX Decoy Exchange",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense/Arkham",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1q_layer1_peel_relay",
+    "entity_name": "Layer-1 Peeling Relay (95 BTC)",
+    "category": "hop",
+    "chain": "BTC",
+    "source": "Mempool_Space",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1q_swarm_splitter_alpha",
+    "entity_name": "Parallel Swarm Splitter Hub",
+    "category": "hop",
+    "chain": "BTC",
+    "source": "Mempool_Space",
+    "confidence": 1.0
+  },
+  {
+    "address": "1Mixer_Channel_Alpha",
+    "entity_name": "Mixer Swarm Channel Alpha",
+    "category": "mixer",
+    "chain": "BTC",
+    "source": "Wasabi/CoinJoin_Cluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "1Mixer_Channel_Beta",
+    "entity_name": "Mixer Swarm Channel Beta",
+    "category": "mixer",
+    "chain": "BTC",
+    "source": "Wasabi/CoinJoin_Cluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "1Mixer_Channel_Gamma",
+    "entity_name": "Mixer Swarm Channel Gamma",
+    "category": "mixer",
+    "chain": "BTC",
+    "source": "Wasabi/CoinJoin_Cluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "1Mixer_Channel_Delta",
+    "entity_name": "Mixer Swarm Channel Delta",
+    "category": "mixer",
+    "chain": "BTC",
+    "source": "Wasabi/CoinJoin_Cluster",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1q_mule_hop_a",
+    "entity_name": "Mule Forwarding Hop A",
+    "category": "hop",
+    "chain": "BTC",
+    "source": "Mempool_Space",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1q_mule_hop_b",
+    "entity_name": "Mule Forwarding Hop B",
+    "category": "hop",
+    "chain": "BTC",
+    "source": "Mempool_Space",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1q_mule_hop_c",
+    "entity_name": "Mule Forwarding Hop C",
+    "category": "hop",
+    "chain": "BTC",
+    "source": "Mempool_Space",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1q_mule_hop_d",
+    "entity_name": "Mule Forwarding Hop D",
+    "category": "hop",
+    "chain": "BTC",
+    "source": "Mempool_Space",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1q_consolidation_aggregator",
+    "entity_name": "Fan-In Consolidation Aggregator",
+    "category": "hop",
+    "chain": "BTC",
+    "source": "Mempool_Space",
+    "confidence": 1.0
+  },
+  {
+    "address": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "entity_name": "Binance Institutional Cold Storage Vault II",
+    "category": "exchange",
+    "chain": "BTC",
+    "source": "GraphSense/Arkham",
+    "confidence": 1.0
+  }
+]

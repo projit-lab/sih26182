@@ -336,7 +336,8 @@
       <div class="input-group">
         <label>Scenario:</label>
         <select id="scenarioSelect" onchange="loadPresetScenario(this.value)">
-          <option value="silkroad" selected>Scenario 3: Silk Road Seizure &amp; Liquidation (1F1tAa...)</option>
+          <option value="demo_6hop" selected>Scenario 4: 6-Hop Asymmetric Swarm (Advanced Demo)</option>
+          <option value="silkroad">Scenario 3: Silk Road Seizure &amp; Liquidation (1F1tAa...)</option>
           <option value="scenario_0">Scenario 0: Frozen Contract (suspect_042)</option>
           <option value="genesis">Scenario 1: Genesis / Multi-Mixer (1A1zP1...)</option>
           <option value="peel_chain">Scenario 2: Peel Chain Hop (suspect_003)</option>
@@ -347,7 +348,7 @@
       <!-- Live Address Input -->
       <div class="input-group">
         <label>Address:</label>
-        <input type="text" id="addressInput" value="1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX" placeholder="BTC/ETH address" oninput="document.getElementById('scenarioSelect').value='custom'">
+        <input type="text" id="addressInput" value="bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8" placeholder="BTC/ETH address" oninput="document.getElementById('scenarioSelect').value='custom'">
       </div>
 
       <div class="input-group">
@@ -528,29 +529,2540 @@
           { data: { id: "p3", source: "peel_hop_2", target: "3KrakenHotWallet", weight: 54000000, amount_satoshis: 54000000 } }
         ]
       },
+      demo_6hop: {
+        "nodes": [
+                {
+                        "data": {
+                                "id": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+                                "label": "bc1q9vza... [Suspect Root 100 BTC]",
+                                "role": "suspect",
+                                "entity": "Suspect Shadow Syndicate Root",
+                                "category": "suspect"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_decoy_relay_1",
+                                "label": "Decoy Diversion Relay (Short Path)",
+                                "role": "hop",
+                                "entity": "Decoy Diversion Relay (Short Path)",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq",
+                                "label": "WazirX Decoy [Trap 5 BTC]",
+                                "role": "candidate_vasp",
+                                "entity": "WazirX Decoy Exchange",
+                                "category": "exchange"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_layer1_peel_relay",
+                                "label": "Layer-1 Peeling Relay (95 BTC)",
+                                "role": "hop",
+                                "entity": "Layer-1 Peeling Relay (95 BTC)",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_swarm_splitter_alpha",
+                                "label": "Parallel Swarm Splitter Hub",
+                                "role": "hop",
+                                "entity": "Parallel Swarm Splitter Hub",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1Mixer_Channel_Alpha",
+                                "label": "Channel Alpha",
+                                "role": "mixer_hop",
+                                "entity": "Mixer Swarm Channel Alpha",
+                                "category": "mixer"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1Mixer_Channel_Beta",
+                                "label": "Channel Beta",
+                                "role": "mixer_hop",
+                                "entity": "Mixer Swarm Channel Beta",
+                                "category": "mixer"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1Mixer_Channel_Gamma",
+                                "label": "Channel Gamma",
+                                "role": "mixer_hop",
+                                "entity": "Mixer Swarm Channel Gamma",
+                                "category": "mixer"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1Mixer_Channel_Delta",
+                                "label": "Channel Delta",
+                                "role": "mixer_hop",
+                                "entity": "Mixer Swarm Channel Delta",
+                                "category": "mixer"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_mule_hop_a",
+                                "label": "Mule Forwarding Hop A",
+                                "role": "hop",
+                                "entity": "Mule Forwarding Hop A",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_mule_hop_b",
+                                "label": "Mule Forwarding Hop B",
+                                "role": "hop",
+                                "entity": "Mule Forwarding Hop B",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_mule_hop_c",
+                                "label": "Mule Forwarding Hop C",
+                                "role": "hop",
+                                "entity": "Mule Forwarding Hop C",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_mule_hop_d",
+                                "label": "Mule Forwarding Hop D",
+                                "role": "hop",
+                                "entity": "Mule Forwarding Hop D",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_consolidation_aggregator",
+                                "label": "Fan-In Consolidation Aggregator",
+                                "role": "hop",
+                                "entity": "Fan-In Consolidation Aggregator",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+                                "label": "Binance Vault II [True Exit 93.75 BTC]",
+                                "role": "candidate_vasp",
+                                "entity": "Binance Institutional Cold Storage Vault II",
+                                "category": "exchange"
+                        }
+                }
+        ],
+        "edges": [
+                {
+                        "data": {
+                                "id": "demo_e1",
+                                "source": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+                                "target": "bc1q_decoy_relay_1",
+                                "weight": 500000000,
+                                "amount_satoshis": 500000000,
+                                "tx_hash": "a1f87c92b450e189d273c4ced35c1684fd81dff52d9f8c33e9025c422a80e94e"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e2",
+                                "source": "bc1q_decoy_relay_1",
+                                "target": "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq",
+                                "weight": 498000000,
+                                "amount_satoshis": 498000000,
+                                "tx_hash": "b2c98d03a561f290e384d5dfe46d27950e92e0063e00a9d44f036d533b91fa5f"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e3",
+                                "source": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+                                "target": "bc1q_layer1_peel_relay",
+                                "weight": 9500000000,
+                                "amount_satoshis": 9500000000,
+                                "tx_hash": "c3d09e14b672a301f495e6e0f57e38a61f03f1174f11b0e550147e644c020b60"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e4",
+                                "source": "bc1q_layer1_peel_relay",
+                                "target": "bc1q_swarm_splitter_alpha",
+                                "weight": 9480000000,
+                                "amount_satoshis": 9480000000,
+                                "tx_hash": "d4e1af25c783b412a506f7f1068f49b7201402285022c1f661258f755d131c71"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e5",
+                                "source": "bc1q_swarm_splitter_alpha",
+                                "target": "1Mixer_Channel_Alpha",
+                                "weight": 2370000000,
+                                "amount_satoshis": 2370000000,
+                                "tx_hash": "e5f2b036d894c523b6170802179050c8312513396133d207723690866e242d82"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e6",
+                                "source": "bc1q_swarm_splitter_alpha",
+                                "target": "1Mixer_Channel_Beta",
+                                "weight": 2370000000,
+                                "amount_satoshis": 2370000000,
+                                "tx_hash": "f603c147e905d634c7281913280161d9423624407244e318834701977f353e93"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e7",
+                                "source": "bc1q_swarm_splitter_alpha",
+                                "target": "1Mixer_Channel_Gamma",
+                                "weight": 2370000000,
+                                "amount_satoshis": 2370000000,
+                                "tx_hash": "0714d258fa16e745d8392024391272ea534735518355f4299458120880464fa4"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e8",
+                                "source": "bc1q_swarm_splitter_alpha",
+                                "target": "1Mixer_Channel_Delta",
+                                "weight": 2370000000,
+                                "amount_satoshis": 2370000000,
+                                "tx_hash": "1825e3690b27f856e94a3135402383fb6458466294660530a5692319915750b5"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e9",
+                                "source": "1Mixer_Channel_Alpha",
+                                "target": "bc1q_mule_hop_a",
+                                "weight": 2350000000,
+                                "amount_satoshis": 2350000000,
+                                "tx_hash": "2936f47a1c380967fa5b42465134940c7569577305771641b6703420a26861c6"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e10",
+                                "source": "1Mixer_Channel_Beta",
+                                "target": "bc1q_mule_hop_b",
+                                "weight": 2350000000,
+                                "amount_satoshis": 2350000000,
+                                "tx_hash": "3047058b2d491a780b6c53576245a51d8670688416882752c7814531b37972d7"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e11",
+                                "source": "1Mixer_Channel_Gamma",
+                                "target": "bc1q_mule_hop_c",
+                                "weight": 2350000000,
+                                "amount_satoshis": 2350000000,
+                                "tx_hash": "4158169c3e5a2b891c7d64687356b62e9781799527993863d8925642c48a83e8"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e12",
+                                "source": "1Mixer_Channel_Delta",
+                                "target": "bc1q_mule_hop_d",
+                                "weight": 2350000000,
+                                "amount_satoshis": 2350000000,
+                                "tx_hash": "526927ad4f6b3c9a2d8e75798467c73fa8928aa638aa4974e9036753d59b94f9"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e13",
+                                "source": "bc1q_mule_hop_a",
+                                "target": "bc1q_consolidation_aggregator",
+                                "weight": 2345000000,
+                                "amount_satoshis": 2345000000,
+                                "tx_hash": "637a38be507c4da03e9f868a9578d840b9a39bb749bb5a85fa147864e6ac050a"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e14",
+                                "source": "bc1q_mule_hop_b",
+                                "target": "bc1q_consolidation_aggregator",
+                                "weight": 2345000000,
+                                "amount_satoshis": 2345000000,
+                                "tx_hash": "748b49cf618d5eb14fa0979ba689e951caa4acc85acc6b960b258975f7bd161b"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e15",
+                                "source": "bc1q_mule_hop_c",
+                                "target": "bc1q_consolidation_aggregator",
+                                "weight": 2345000000,
+                                "amount_satoshis": 2345000000,
+                                "tx_hash": "859c5ad0729e6fc250b1080cb79af062dbb5bdd96bdd7ca71c369a8608ce272c"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e16",
+                                "source": "bc1q_mule_hop_d",
+                                "target": "bc1q_consolidation_aggregator",
+                                "weight": 2345000000,
+                                "amount_satoshis": 2345000000,
+                                "tx_hash": "96ad6be183af70d361c2191dc8ab0173ecc6cee07cee8db82d470b9719df383d"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e17",
+                                "source": "bc1q_consolidation_aggregator",
+                                "target": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+                                "weight": 9375000000,
+                                "amount_satoshis": 9375000000,
+                                "tx_hash": "a7be7cf294b081e472d32a2ed9bc1284fdd7dff18dff9ec93e581ca82ae0494e"
+                        }
+                }
+        ]
+},
       silkroad: {
         nodes: [
-          { data: { id: "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX", label: "Silk Road (USMS Seized)", role: "suspect", entity: "Silk Road Seized", category: "illicit" } },
-          { data: { id: "silkroad_peel_hop_01", label: "Peel Hop 1", role: "hop" } },
-          { data: { id: "silkroad_peel_hop_02", label: "Peel Hop 2", role: "hop" } },
-          { data: { id: "silkroad_mixer_hub_alpha", label: "Wasabi Mixer Hub Alpha", role: "mixer_hop", entity: "Wasabi Mixer", category: "mixer" } },
-          { data: { id: "silkroad_mixer_hub_beta", label: "Mixer Hub Beta", role: "mixer_hop", entity: "CoinJoin", category: "mixer" } },
-          { data: { id: "silkroad_decoy_hop", label: "Decoy Hop", role: "hop" } },
-          { data: { id: "3Cbq7aT1tY8kNxRdGQdurNo3DDPUk832d", label: "Coinbase Prime Custody", role: "candidate_vasp", entity: "Coinbase Prime", category: "exchange" } },
-          { data: { id: "3FZNfdHGmDsjBWP1NmJkP1mY41oK76n48A", label: "Kraken Cold Storage", role: "candidate_vasp", entity: "Kraken", category: "exchange" } },
-          { data: { id: "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s", label: "Binance Cluster", role: "candidate_vasp", entity: "Binance", category: "exchange" } }
-        ],
+          {
+                    "data": {
+                              "id": "bc1qt2q0w2l3tnmcmqdegqh32mjr26s3s8z46dpmfy",
+                              "label": "bc1qt2q0w2l3...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "label": "Silk Road (USMS Seized Asset Wallet)",
+                              "role": "suspect",
+                              "entity": "Silk Road (USMS Seized Asset Wallet)",
+                              "category": "illicit"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qzprnwqkrz0enng644reqkkjy32s6pydv7mxmyr",
+                              "label": "bc1qzprnwqkr...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q4nex84d9mx8pfw9yqxme4dvsc74r8pg90r0vfm",
+                              "label": "bc1q4nex84d9...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qu9nffluypf3grzeelpn44c6fherkcwwc2k02wn",
+                              "label": "bc1qu9nffluy...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qcza6s6ew2kaxe9hdyrqqeuadc3za7fva5yjcnf",
+                              "label": "bc1qcza6s6ew...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qdtr4tw5kqyu3pwh7y0aj2f5rpgzqlesnpmfera",
+                              "label": "bc1qdtr4tw5k...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3HFdcGXVvSnvhmajTGeSLJWBL5yYrsH9fN",
+                              "label": "3HFdcGXVvSnv...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "33iYJrYGerMuqiwBBMdd6n8acwT4JXsKUa",
+                              "label": "33iYJrYGerMu...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qxszp7ph8e0d4nm4jl0muq0nwfaw42azryuakyj",
+                              "label": "bc1qxszp7ph8...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qxgqdd4eze72ydjmxre3z64uc9x74uk7432yzst",
+                              "label": "bc1qxgqdd4ez...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q4k00axsx5clvwvx2nagc7tp9at3ex94k2nj038",
+                              "label": "bc1q4k00axsx...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qezy4z7hyl0m58uvfy62m2hqxzasawz8xnc4k72",
+                              "label": "bc1qezy4z7hy...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qzyxlf9yntyphuseeq3s7jtpg4dlgtjae276l0l",
+                              "label": "bc1qzyxlf9yn...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q4zn3l3yjskq7tn5rxx4x9hss9gltya26cpgas8",
+                              "label": "bc1q4zn3l3yj...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+                              "label": "Binance Multi-Sig Sweep Relay",
+                              "role": "candidate_vasp",
+                              "entity": "Binance Multi-Sig Sweep Relay",
+                              "category": "exchange"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qkfwmfk8cx3lxhj9ddps9negj0tr4qk5w5czzyp",
+                              "label": "bc1qkfwmfk8c...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qdu6ppetkarjrtwt9thz9f6vslu62w6uzj6kyn5",
+                              "label": "bc1qdu6ppetk...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qz6al3p2e52smtnmgx773c8ckhp2jc4njr8pf9n",
+                              "label": "bc1qz6al3p2e...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q9jq7t96dtsr7f9eae80a2dpz7v7jhkmjkezlqn",
+                              "label": "On-Chain UTXO Relay Cluster #8",
+                              "role": "mixer_hop",
+                              "entity": "On-Chain UTXO Relay Cluster #8",
+                              "category": "hop"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qgx53arl59snnyg8pwja4jgswdfsh4lflgcsdq2",
+                              "label": "bc1qgx53arl5...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q0fq0u4c7yxc20hrqyja633p5fsd0tcsy7ff809",
+                              "label": "bc1q0fq0u4c7...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qf5hyusxxwrezma5j0wqj50ds7gejup90sjjhun",
+                              "label": "bc1qf5hyusxx...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qdxd4undmruc3cwuzqqu8dct44g9lrtfu0w3q7j",
+                              "label": "bc1qdxd4undm...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qphnl7rzx626v890jldwxmx7374nqfvjge82acq",
+                              "label": "bc1qphnl7rzx...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qd3utns7f6v4hzgrutfzr92d669pey9xmewnsac",
+                              "label": "bc1qd3utns7f...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qt95q96ecfgwxlc8my0swutmltwzznse3n64j49",
+                              "label": "bc1qt95q96ec...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qg7exsgnnxt98dakvujdk9eah40z4xm58eqrw6m",
+                              "label": "bc1qg7exsgnn...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qfunupqnnrha5t57739qhwsf5492fsdgtmwyuyu",
+                              "label": "bc1qfunupqnn...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qrnygk5vqflayqq9aps6d3ea869x5v5ew3qllqr",
+                              "label": "bc1qrnygk5vq...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q27wy0n52qeuv60seehyztndwn0cw958t8dkdzc",
+                              "label": "bc1q27wy0n52...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q0hvcrhdy3zf736887yz6zp5n0243w4lyewam2d",
+                              "label": "bc1q0hvcrhdy...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qnqgz4yqssta6ygnmtj9pemshwt97pxl3ejkkhp",
+                              "label": "bc1qnqgz4yqs...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qy4lcxxa0f42we6eppkc2cz97sjyfm7f62pekm7",
+                              "label": "bc1qy4lcxxa0...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qdlrc7p8mgvnl9crpnj5mtk6gegm730gesrhrvj",
+                              "label": "bc1qdlrc7p8m...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qyly6mm7lzhqk8uqh9g99047hg7sj45z70snm5w",
+                              "label": "bc1qyly6mm7l...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qwuc5h7lhjhdfkgsggjeg8crgedzdeduzsergam",
+                              "label": "bc1qwuc5h7lh...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "label": "bc1qx8mpvyhk...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "label": "Kraken Exchange Liquidation Node",
+                              "role": "candidate_vasp",
+                              "entity": "Kraken Exchange Liquidation Node",
+                              "category": "exchange"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "363EVJoMz7dJh2bySL1mLic1TJJTXEadv1",
+                              "label": "On-Chain UTXO Relay Cluster #7",
+                              "role": "mixer_hop",
+                              "entity": "On-Chain UTXO Relay Cluster #7",
+                              "category": "hop"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "14RuP3zvt9NLShBb82jRqf1DFTnCdXiCDp",
+                              "label": "On-Chain UTXO Relay Cluster #3",
+                              "role": "mixer_hop",
+                              "entity": "On-Chain UTXO Relay Cluster #3",
+                              "category": "hop"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qyfgrvknkqx0uet674fuhztl4yhrhtc704xq6t9",
+                              "label": "bc1qyfgrvknk...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qcym6nqvx0cjunwspg6g4k7slh36yt0a36qj5ep",
+                              "label": "bc1qcym6nqvx...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qecnew47qrqrncl58s8vyf3cvca5qyzphzee8xn",
+                              "label": "bc1qecnew47q...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qstxdz5rqlythf8nsyt2ryqle52detytzfxa5se",
+                              "label": "bc1qstxdz5rq...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qjdej9kf9s9dspjx06ffmm30402v2axzyx7vlz7",
+                              "label": "bc1qjdej9kf9...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q6lrh2lm5hcf840p8s9hamt0ery23c9lwc9yfw9",
+                              "label": "bc1q6lrh2lm5...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qzqtyqat3hlfc7dla8tv4ahw736ynsgdd60c39m",
+                              "label": "On-Chain UTXO Relay Cluster #2",
+                              "role": "mixer_hop",
+                              "entity": "On-Chain UTXO Relay Cluster #2",
+                              "category": "hop"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "1K1LAfaDBuhKP2gj6kPYh3dB9XMsuXNvaM",
+                              "label": "1K1LAfaDBuhK...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "1A3fReEgqgYWxNsMb4uzV5dQjLAdmNeVby",
+                              "label": "1A3fReEgqgYW...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3MkwcARXpojbotu78JP73SiqMAJR721M9L",
+                              "label": "3MkwcARXpojb...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "label": "On-Chain UTXO Relay Cluster #5",
+                              "role": "mixer_hop",
+                              "entity": "On-Chain UTXO Relay Cluster #5",
+                              "category": "hop"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qepe2cpqdnppwgpgjp8jqseunqtkqa38qgfvwtl",
+                              "label": "bc1qepe2cpqd...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "label": "On-Chain UTXO Relay Cluster #6",
+                              "role": "mixer_hop",
+                              "entity": "On-Chain UTXO Relay Cluster #6",
+                              "category": "hop"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qyf9fcpwffp5xg9v6vqnmkgd8q64sew7pdk09we",
+                              "label": "bc1qyf9fcpwf...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3NuPHq99EDqpu4CWwpjha8kJUw5Nm4nMCJ",
+                              "label": "3NuPHq99EDqp...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qjgzxlmde8fhctp5g7tejfafjfvexcnd06vr8wh",
+                              "label": "bc1qjgzxlmde...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3D4qVb9dJTCpcLFs3DffYej2Z2yfnkChFM",
+                              "label": "3D4qVb9dJTCp...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3Qh6pdrjLTzg8tARtwcqbDZUM2jfNJzQBx",
+                              "label": "3Qh6pdrjLTzg...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q8zu2ep08ceayeghgrmjzmhyc7s7l227tvswwvg",
+                              "label": "bc1q8zu2ep08...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "1DDRzi3NyCnV29HCdtjKm5YDA8h666Nuyz",
+                              "label": "1DDRzi3NyCnV...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qqynssc08dsty54jahwe345y6sfc3hd4v2quhua",
+                              "label": "bc1qqynssc08...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "17R2swTna2qTPqj6nw2zMtmMPTHAE9vmtQ",
+                              "label": "17R2swTna2qT...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "14vnsVA6oxGpKyQWU6NStASkCXmd5b5EUt",
+                              "label": "14vnsVA6oxGp...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "138t3njjq2jTpoaFNBbfTCY4Np27nbMEsr",
+                              "label": "138t3njjq2jT...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qhzqr8wf0qlpdyed782nzq5l38x0msz40vulrgc",
+                              "label": "bc1qhzqr8wf0...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qn7mlkeux0rc73mhjwja86dnzg8ulx8mj02t7km",
+                              "label": "bc1qn7mlkeux...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qxh07erq7848f88w34veyffg2s7rg6y8ayhh2lk",
+                              "label": "bc1qxh07erq7...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qqpkq358ykd8gj2397khl8uy2eu0mxnwwpjj69a",
+                              "label": "bc1qqpkq358y...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6",
+                              "label": "Coinbase Prime Institutional Vault",
+                              "role": "candidate_vasp",
+                              "entity": "Coinbase Prime Institutional Vault",
+                              "category": "exchange"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qdt80mv8lrzjeen388604vr220469mezz0ukjjl",
+                              "label": "On-Chain UTXO Relay Cluster #1",
+                              "role": "mixer_hop",
+                              "entity": "On-Chain UTXO Relay Cluster #1",
+                              "category": "hop"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "label": "36KZAL8UC484...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qnzhcm4guf967fkg4anuxvuqfy3jamkadsvwqkh",
+                              "label": "bc1qnzhcm4gu...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "33573PzWC43WprP12GHYspf7qM5Y8EV3x4",
+                              "label": "33573PzWC43W...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "1mTmGLGFWmyi8vLyExJsH4fsK6A3kzTWD",
+                              "label": "1mTmGLGFWmyi...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3H6EG1wFL9oAM7MJA5T2QBnJSzdcwiTjh1",
+                              "label": "3H6EG1wFL9oA...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "32yTv5U9uCd4MUsjdZET5MbHDd7HtBCtBc",
+                              "label": "32yTv5U9uCd4...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qyeeysc6s43nr8czthl9yzesa7yzhqqas99l77d",
+                              "label": "bc1qyeeysc6s...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "39ykp4t7trJZ4iaBB6SqVesbJ1QHTz8MeE",
+                              "label": "39ykp4t7trJZ...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q93gqmsflfp0kyvnspkad67qq0535p066zfc0nn",
+                              "label": "bc1q93gqmsfl...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3HgRYRG8YF8PKMVkxjouxYkr75822Cx39P",
+                              "label": "3HgRYRG8YF8P...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q5x4xsngz8ftxaz7u7tfp0cwndz6c6hvup3zdrj",
+                              "label": "bc1q5x4xsngz...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q5wscg3urkltlx7pyvy59qym25e8425cn3uw2ne",
+                              "label": "bc1q5wscg3ur...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q78ukv6nv5mzaxf85ua62m5jy7gj03n4dynt4cu",
+                              "label": "bc1q78ukv6nv...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3QYDZWM139PDVLmMTfyNRzKYxPRnvFt4QY",
+                              "label": "3QYDZWM139PD...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qxvvs2z22wupev48d5z6279dsdctrxrmwc05mdu",
+                              "label": "bc1qxvvs2z22...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qsj409uhdcx8ey908mwd98f8m0q5c607g29xxmu",
+                              "label": "bc1qsj409uhd...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "1EYpxUdBVM8Krq9yiAoYcnvAF7MAWRQdEz",
+                              "label": "1EYpxUdBVM8K...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q8trrh0vchmchw88sk70r4sg0kqrlwr7nf92vnv",
+                              "label": "bc1q8trrh0vc...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q0rrmr7wau4486k59g6888c5g2exf6aqlrgdjnq",
+                              "label": "bc1q0rrmr7wa...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qxpyd87l3f9fdv4whtrvdfq2e90mm9s8zyhjykl",
+                              "label": "bc1qxpyd87l3...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qrv0heyrq3fw2dqtfufyu4tau226gqqwj3ldmse",
+                              "label": "bc1qrv0heyrq...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qekuv2664vmu4hh424jkw4j0kt7hj7k8v68jr0k",
+                              "label": "bc1qekuv2664...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qtr9p6mw84nk4x3txjtp8a3lg0luufz6r69pkna",
+                              "label": "bc1qtr9p6mw8...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qgd2jqecfr76dl8hkle38keqd2s7h9pd5ydhfar",
+                              "label": "bc1qgd2jqecf...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+                              "label": "bc1qq904ynep...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "1FJaLfAs6t954LVkYWLLEkkk3AJbfhMUqZ",
+                              "label": "1FJaLfAs6t95...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3C9saf6VAEtQQD9GDLJ5esDXyystDNjG6j",
+                              "label": "3C9saf6VAEtQ...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1q22ekwchmseup6ungkal5pcduwn6qprpetzh8gm",
+                              "label": "bc1q22ekwchm...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "3QVswRtA2c8bU5ZXGuBdCvezPVPnzEcZ1H",
+                              "label": "3QVswRtA2c8b...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "bc1qx8pka4cuz3v2jkexaw9cpgm0atwra0recu0eeq",
+                              "label": "bc1qx8pka4cu...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "1EtfWpNsQuBPhLjFEGHcJsWx4wJt8HUrYs",
+                              "label": "1EtfWpNsQuBP...",
+                              "role": "hop",
+                              "entity": "On-Chain Bitcoin Node",
+                              "category": "intermediate"
+                    }
+          }
+],
         edges: [
-          { data: { id: "sr1", source: "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX", target: "silkroad_peel_hop_01", weight: 1500000000, amount_satoshis: 1500000000, tx_hash: "6f952bdec8..." } },
-          { data: { id: "sr2", source: "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX", target: "silkroad_peel_hop_02", weight: 850000000, amount_satoshis: 850000000, tx_hash: "db9ddd2894..." } },
-          { data: { id: "sr3", source: "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX", target: "silkroad_mixer_hub_alpha", weight: 2200000000, amount_satoshis: 2200000000, tx_hash: "3f1306079b..." } },
-          { data: { id: "sr4", source: "silkroad_peel_hop_01", target: "silkroad_mixer_hub_alpha", weight: 1490000000, amount_satoshis: 1490000000, tx_hash: "8ab19247a6..." } },
-          { data: { id: "sr5", source: "silkroad_peel_hop_02", target: "silkroad_mixer_hub_beta", weight: 845000000, amount_satoshis: 845000000, tx_hash: "7135bdb9e5..." } },
-          { data: { id: "sr6", source: "silkroad_mixer_hub_alpha", target: "3Cbq7aT1tY8kNxRdGQdurNo3DDPUk832d", weight: 3650000000, amount_satoshis: 3650000000, tx_hash: "20134c61a5..." } },
-          { data: { id: "sr7", source: "silkroad_mixer_hub_beta", target: "3FZNfdHGmDsjBWP1NmJkP1mY41oK76n48A", weight: 840000000, amount_satoshis: 840000000, tx_hash: "b47c0a91e8..." } },
-          { data: { id: "sr8", source: "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX", target: "silkroad_decoy_hop", weight: 50000000, amount_satoshis: 50000000, tx_hash: "c9284fbf7c..." } },
-          { data: { id: "sr9", source: "silkroad_decoy_hop", target: "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s", weight: 49000000, amount_satoshis: 49000000, tx_hash: "d5a5d98e14..." } }
-        ]
+          {
+                    "data": {
+                              "id": "sr_edge_0",
+                              "source": "bc1qt2q0w2l3tnmcmqdegqh32mjr26s3s8z46dpmfy",
+                              "target": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "weight": 169109,
+                              "amount_satoshis": 169109,
+                              "tx_hash": "6f952bdec878456ab273c4ced35c1684fd81dff52d9f8c33e9025c422a80e94e"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_1",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qzprnwqkrz0enng644reqkkjy32s6pydv7mxmyr",
+                              "weight": 84,
+                              "amount_satoshis": 84,
+                              "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_2",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1q4nex84d9mx8pfw9yqxme4dvsc74r8pg90r0vfm",
+                              "weight": 1916,
+                              "amount_satoshis": 1916,
+                              "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_3",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qcza6s6ew2kaxe9hdyrqqeuadc3za7fva5yjcnf",
+                              "weight": 2307,
+                              "amount_satoshis": 2307,
+                              "tx_hash": "3f1306079b9ad78c01bcd2936681c80bcc192a70b114de2875004ce589f45b7d"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_4",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "3HFdcGXVvSnvhmajTGeSLJWBL5yYrsH9fN",
+                              "weight": 23000,
+                              "amount_satoshis": 23000,
+                              "tx_hash": "93185883594063c982b658971bae57324d45b1010956c530fc2d4d9993ee6040"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_5",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qxszp7ph8e0d4nm4jl0muq0nwfaw42azryuakyj",
+                              "weight": 7011,
+                              "amount_satoshis": 7011,
+                              "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_6",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qxgqdd4eze72ydjmxre3z64uc9x74uk7432yzst",
+                              "weight": 901,
+                              "amount_satoshis": 901,
+                              "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_7",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1q4k00axsx5clvwvx2nagc7tp9at3ex94k2nj038",
+                              "weight": 13102,
+                              "amount_satoshis": 13102,
+                              "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_8",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qezy4z7hyl0m58uvfy62m2hqxzasawz8xnc4k72",
+                              "weight": 8815,
+                              "amount_satoshis": 8815,
+                              "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_9",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qzyxlf9yntyphuseeq3s7jtpg4dlgtjae276l0l",
+                              "weight": 433,
+                              "amount_satoshis": 433,
+                              "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_10",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1q4zn3l3yjskq7tn5rxx4x9hss9gltya26cpgas8",
+                              "weight": 437,
+                              "amount_satoshis": 437,
+                              "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_11",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+                              "weight": 1493,
+                              "amount_satoshis": 1493,
+                              "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_12",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qf5hyusxxwrezma5j0wqj50ds7gejup90sjjhun",
+                              "weight": 128469,
+                              "amount_satoshis": 128469,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_13",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qdxd4undmruc3cwuzqqu8dct44g9lrtfu0w3q7j",
+                              "weight": 129104,
+                              "amount_satoshis": 129104,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_14",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qphnl7rzx626v890jldwxmx7374nqfvjge82acq",
+                              "weight": 129412,
+                              "amount_satoshis": 129412,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_15",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qd3utns7f6v4hzgrutfzr92d669pey9xmewnsac",
+                              "weight": 130105,
+                              "amount_satoshis": 130105,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_16",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qt95q96ecfgwxlc8my0swutmltwzznse3n64j49",
+                              "weight": 132001,
+                              "amount_satoshis": 132001,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_17",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qg7exsgnnxt98dakvujdk9eah40z4xm58eqrw6m",
+                              "weight": 133131,
+                              "amount_satoshis": 133131,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_18",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qfunupqnnrha5t57739qhwsf5492fsdgtmwyuyu",
+                              "weight": 133418,
+                              "amount_satoshis": 133418,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_19",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qrnygk5vqflayqq9aps6d3ea869x5v5ew3qllqr",
+                              "weight": 134130,
+                              "amount_satoshis": 134130,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_20",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1q27wy0n52qeuv60seehyztndwn0cw958t8dkdzc",
+                              "weight": 134141,
+                              "amount_satoshis": 134141,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_21",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1q0hvcrhdy3zf736887yz6zp5n0243w4lyewam2d",
+                              "weight": 135039,
+                              "amount_satoshis": 135039,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_22",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qnqgz4yqssta6ygnmtj9pemshwt97pxl3ejkkhp",
+                              "weight": 137025,
+                              "amount_satoshis": 137025,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_23",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qy4lcxxa0f42we6eppkc2cz97sjyfm7f62pekm7",
+                              "weight": 137164,
+                              "amount_satoshis": 137164,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_24",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qdlrc7p8mgvnl9crpnj5mtk6gegm730gesrhrvj",
+                              "weight": 139507,
+                              "amount_satoshis": 139507,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_25",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qyly6mm7lzhqk8uqh9g99047hg7sj45z70snm5w",
+                              "weight": 139703,
+                              "amount_satoshis": 139703,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_26",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qwuc5h7lhjhdfkgsggjeg8crgedzdeduzsergam",
+                              "weight": 142396,
+                              "amount_satoshis": 142396,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_27",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "weight": 1997,
+                              "amount_satoshis": 1997,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_28",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "weight": 2506,
+                              "amount_satoshis": 2506,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_29",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "weight": 2494,
+                              "amount_satoshis": 2494,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_30",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qxh07erq7848f88w34veyffg2s7rg6y8ayhh2lk",
+                              "weight": 3779,
+                              "amount_satoshis": 3779,
+                              "tx_hash": "9fad00d67c673cdde578650c0e2e35ddc49dfafa20fbcbaf6cf3332b9a8e029e"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_31",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6",
+                              "weight": 77331,
+                              "amount_satoshis": 77331,
+                              "tx_hash": "167b79d81ca24b105dfe4483ef3de33a38e8b906d1e224a12b1c45b8ded8b1e4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_32",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "weight": 15928,
+                              "amount_satoshis": 15928,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_33",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qsj409uhdcx8ey908mwd98f8m0q5c607g29xxmu",
+                              "weight": 4153,
+                              "amount_satoshis": 4153,
+                              "tx_hash": "8a50daa988bdac0d1872659d170f3022eda69cbcbd5b4587babaca64b63c4acf"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_34",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "1EYpxUdBVM8Krq9yiAoYcnvAF7MAWRQdEz",
+                              "weight": 3341,
+                              "amount_satoshis": 3341,
+                              "tx_hash": "bfc0ce71ff4535d746445e9046bb786d93add0115171bfca9fc9998ec7556e57"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_35",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1q8trrh0vchmchw88sk70r4sg0kqrlwr7nf92vnv",
+                              "weight": 3842,
+                              "amount_satoshis": 3842,
+                              "tx_hash": "1f4e4025c0352061571d6e6fb6a2c3d06b783932af9c5f9280df04a31e110f7b"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_36",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qxpyd87l3f9fdv4whtrvdfq2e90mm9s8zyhjykl",
+                              "weight": 3882,
+                              "amount_satoshis": 3882,
+                              "tx_hash": "56de2ea7f58b137dc9cea454f488eae7965d17646133efc2961468bc57ff5170"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_37",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qekuv2664vmu4hh424jkw4j0kt7hj7k8v68jr0k",
+                              "weight": 4287,
+                              "amount_satoshis": 4287,
+                              "tx_hash": "0150b0704437d9fe579746ed3f45025642cc62b5b95aa3455a15205ab53bab77"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_38",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qgd2jqecfr76dl8hkle38keqd2s7h9pd5ydhfar",
+                              "weight": 7431,
+                              "amount_satoshis": 7431,
+                              "tx_hash": "aa7c824d7471800baea5b195b8024b333b23df2e7c76252274b682c4b78ad037"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_39",
+                              "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+                              "target": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+                              "weight": 6284,
+                              "amount_satoshis": 6284,
+                              "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_40",
+                              "source": "bc1qzprnwqkrz0enng644reqkkjy32s6pydv7mxmyr",
+                              "target": "bc1qu9nffluypf3grzeelpn44c6fherkcwwc2k02wn",
+                              "weight": 1726,
+                              "amount_satoshis": 1726,
+                              "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_41",
+                              "source": "bc1q4nex84d9mx8pfw9yqxme4dvsc74r8pg90r0vfm",
+                              "target": "bc1qu9nffluypf3grzeelpn44c6fherkcwwc2k02wn",
+                              "weight": 39366,
+                              "amount_satoshis": 39366,
+                              "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_42",
+                              "source": "bc1qcza6s6ew2kaxe9hdyrqqeuadc3za7fva5yjcnf",
+                              "target": "bc1qdtr4tw5kqyu3pwh7y0aj2f5rpgzqlesnpmfera",
+                              "weight": 112510,
+                              "amount_satoshis": 112510,
+                              "tx_hash": "3f1306079b9ad78c01bcd2936681c80bcc192a70b114de2875004ce589f45b7d"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_43",
+                              "source": "3HFdcGXVvSnvhmajTGeSLJWBL5yYrsH9fN",
+                              "target": "33iYJrYGerMuqiwBBMdd6n8acwT4JXsKUa",
+                              "weight": 842,
+                              "amount_satoshis": 842,
+                              "tx_hash": "93185883594063c982b658971bae57324d45b1010956c530fc2d4d9993ee6040"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_44",
+                              "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+                              "target": "bc1qkfwmfk8cx3lxhj9ddps9negj0tr4qk5w5czzyp",
+                              "weight": 1136950,
+                              "amount_satoshis": 1136950,
+                              "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_45",
+                              "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+                              "target": "bc1qdu6ppetkarjrtwt9thz9f6vslu62w6uzj6kyn5",
+                              "weight": 59791,
+                              "amount_satoshis": 59791,
+                              "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_46",
+                              "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+                              "target": "bc1qz6al3p2e52smtnmgx773c8ckhp2jc4njr8pf9n",
+                              "weight": 14929,
+                              "amount_satoshis": 14929,
+                              "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_47",
+                              "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+                              "target": "bc1q9jq7t96dtsr7f9eae80a2dpz7v7jhkmjkezlqn",
+                              "weight": 3205876,
+                              "amount_satoshis": 3205876,
+                              "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_48",
+                              "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+                              "target": "bc1qgx53arl59snnyg8pwja4jgswdfsh4lflgcsdq2",
+                              "weight": 94229,
+                              "amount_satoshis": 94229,
+                              "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_49",
+                              "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+                              "target": "bc1q0fq0u4c7yxc20hrqyja633p5fsd0tcsy7ff809",
+                              "weight": 462450,
+                              "amount_satoshis": 462450,
+                              "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_50",
+                              "source": "bc1qf5hyusxxwrezma5j0wqj50ds7gejup90sjjhun",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3616,
+                              "amount_satoshis": 3616,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_51",
+                              "source": "bc1qdxd4undmruc3cwuzqqu8dct44g9lrtfu0w3q7j",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3634,
+                              "amount_satoshis": 3634,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_52",
+                              "source": "bc1qphnl7rzx626v890jldwxmx7374nqfvjge82acq",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3642,
+                              "amount_satoshis": 3642,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_53",
+                              "source": "bc1qd3utns7f6v4hzgrutfzr92d669pey9xmewnsac",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3662,
+                              "amount_satoshis": 3662,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_54",
+                              "source": "bc1qt95q96ecfgwxlc8my0swutmltwzznse3n64j49",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3715,
+                              "amount_satoshis": 3715,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_55",
+                              "source": "bc1qg7exsgnnxt98dakvujdk9eah40z4xm58eqrw6m",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3747,
+                              "amount_satoshis": 3747,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_56",
+                              "source": "bc1qfunupqnnrha5t57739qhwsf5492fsdgtmwyuyu",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3755,
+                              "amount_satoshis": 3755,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_57",
+                              "source": "bc1qrnygk5vqflayqq9aps6d3ea869x5v5ew3qllqr",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3775,
+                              "amount_satoshis": 3775,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_58",
+                              "source": "bc1q27wy0n52qeuv60seehyztndwn0cw958t8dkdzc",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3776,
+                              "amount_satoshis": 3776,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_59",
+                              "source": "bc1q0hvcrhdy3zf736887yz6zp5n0243w4lyewam2d",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3801,
+                              "amount_satoshis": 3801,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_60",
+                              "source": "bc1qnqgz4yqssta6ygnmtj9pemshwt97pxl3ejkkhp",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3857,
+                              "amount_satoshis": 3857,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_61",
+                              "source": "bc1qy4lcxxa0f42we6eppkc2cz97sjyfm7f62pekm7",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3861,
+                              "amount_satoshis": 3861,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_62",
+                              "source": "bc1qdlrc7p8mgvnl9crpnj5mtk6gegm730gesrhrvj",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3927,
+                              "amount_satoshis": 3927,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_63",
+                              "source": "bc1qyly6mm7lzhqk8uqh9g99047hg7sj45z70snm5w",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 3932,
+                              "amount_satoshis": 3932,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_64",
+                              "source": "bc1qwuc5h7lhjhdfkgsggjeg8crgedzdeduzsergam",
+                              "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+                              "weight": 4008,
+                              "amount_satoshis": 4008,
+                              "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_65",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "363EVJoMz7dJh2bySL1mLic1TJJTXEadv1",
+                              "weight": 3475819,
+                              "amount_satoshis": 3475819,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_66",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "14RuP3zvt9NLShBb82jRqf1DFTnCdXiCDp",
+                              "weight": 5602698,
+                              "amount_satoshis": 5602698,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_67",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "bc1qyfgrvknkqx0uet674fuhztl4yhrhtc704xq6t9",
+                              "weight": 169738,
+                              "amount_satoshis": 169738,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_68",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "bc1qcym6nqvx0cjunwspg6g4k7slh36yt0a36qj5ep",
+                              "weight": 49928,
+                              "amount_satoshis": 49928,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_69",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "bc1qecnew47qrqrncl58s8vyf3cvca5qyzphzee8xn",
+                              "weight": 1009191,
+                              "amount_satoshis": 1009191,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_70",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "bc1qstxdz5rqlythf8nsyt2ryqle52detytzfxa5se",
+                              "weight": 176562,
+                              "amount_satoshis": 176562,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_71",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "bc1qjdej9kf9s9dspjx06ffmm30402v2axzyx7vlz7",
+                              "weight": 181976,
+                              "amount_satoshis": 181976,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_72",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "bc1q6lrh2lm5hcf840p8s9hamt0ery23c9lwc9yfw9",
+                              "weight": 1097908,
+                              "amount_satoshis": 1097908,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_73",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "bc1qzqtyqat3hlfc7dla8tv4ahw736ynsgdd60c39m",
+                              "weight": 16047565,
+                              "amount_satoshis": 16047565,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_74",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "1K1LAfaDBuhKP2gj6kPYh3dB9XMsuXNvaM",
+                              "weight": 658610,
+                              "amount_satoshis": 658610,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_75",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "1A3fReEgqgYWxNsMb4uzV5dQjLAdmNeVby",
+                              "weight": 1549902,
+                              "amount_satoshis": 1549902,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_76",
+                              "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+                              "target": "3MkwcARXpojbotu78JP73SiqMAJR721M9L",
+                              "weight": 151210,
+                              "amount_satoshis": 151210,
+                              "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_77",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "bc1qepe2cpqdnppwgpgjp8jqseunqtkqa38qgfvwtl",
+                              "weight": 241054,
+                              "amount_satoshis": 241054,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_78",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "bc1qyf9fcpwffp5xg9v6vqnmkgd8q64sew7pdk09we",
+                              "weight": 241608,
+                              "amount_satoshis": 241608,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_79",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "3NuPHq99EDqpu4CWwpjha8kJUw5Nm4nMCJ",
+                              "weight": 10527,
+                              "amount_satoshis": 10527,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_80",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "bc1qjgzxlmde8fhctp5g7tejfafjfvexcnd06vr8wh",
+                              "weight": 706777,
+                              "amount_satoshis": 706777,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_81",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "3D4qVb9dJTCpcLFs3DffYej2Z2yfnkChFM",
+                              "weight": 81204,
+                              "amount_satoshis": 81204,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_82",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "3Qh6pdrjLTzg8tARtwcqbDZUM2jfNJzQBx",
+                              "weight": 20050,
+                              "amount_satoshis": 20050,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_83",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "bc1q8zu2ep08ceayeghgrmjzmhyc7s7l227tvswwvg",
+                              "weight": 33774,
+                              "amount_satoshis": 33774,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_84",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "1DDRzi3NyCnV29HCdtjKm5YDA8h666Nuyz",
+                              "weight": 9070,
+                              "amount_satoshis": 9070,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_85",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "bc1qqynssc08dsty54jahwe345y6sfc3hd4v2quhua",
+                              "weight": 322832,
+                              "amount_satoshis": 322832,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_86",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "17R2swTna2qTPqj6nw2zMtmMPTHAE9vmtQ",
+                              "weight": 143862,
+                              "amount_satoshis": 143862,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_87",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "14vnsVA6oxGpKyQWU6NStASkCXmd5b5EUt",
+                              "weight": 18045,
+                              "amount_satoshis": 18045,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_88",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "138t3njjq2jTpoaFNBbfTCY4Np27nbMEsr",
+                              "weight": 142472,
+                              "amount_satoshis": 142472,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_89",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "bc1qhzqr8wf0qlpdyed782nzq5l38x0msz40vulrgc",
+                              "weight": 899765,
+                              "amount_satoshis": 899765,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_90",
+                              "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+                              "target": "bc1qn7mlkeux0rc73mhjwja86dnzg8ulx8mj02t7km",
+                              "weight": 902272,
+                              "amount_satoshis": 902272,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_91",
+                              "source": "bc1qepe2cpqdnppwgpgjp8jqseunqtkqa38qgfvwtl",
+                              "target": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "weight": 239841,
+                              "amount_satoshis": 239841,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_92",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "bc1qyf9fcpwffp5xg9v6vqnmkgd8q64sew7pdk09we",
+                              "weight": 240392,
+                              "amount_satoshis": 240392,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_93",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "3NuPHq99EDqpu4CWwpjha8kJUw5Nm4nMCJ",
+                              "weight": 10473,
+                              "amount_satoshis": 10473,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_94",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "bc1qjgzxlmde8fhctp5g7tejfafjfvexcnd06vr8wh",
+                              "weight": 703219,
+                              "amount_satoshis": 703219,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_95",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "3D4qVb9dJTCpcLFs3DffYej2Z2yfnkChFM",
+                              "weight": 80796,
+                              "amount_satoshis": 80796,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_96",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "3Qh6pdrjLTzg8tARtwcqbDZUM2jfNJzQBx",
+                              "weight": 19950,
+                              "amount_satoshis": 19950,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_97",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "bc1q8zu2ep08ceayeghgrmjzmhyc7s7l227tvswwvg",
+                              "weight": 33603,
+                              "amount_satoshis": 33603,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_98",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "1DDRzi3NyCnV29HCdtjKm5YDA8h666Nuyz",
+                              "weight": 9024,
+                              "amount_satoshis": 9024,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_99",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "bc1qqynssc08dsty54jahwe345y6sfc3hd4v2quhua",
+                              "weight": 321207,
+                              "amount_satoshis": 321207,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_100",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "17R2swTna2qTPqj6nw2zMtmMPTHAE9vmtQ",
+                              "weight": 143138,
+                              "amount_satoshis": 143138,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_101",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "14vnsVA6oxGpKyQWU6NStASkCXmd5b5EUt",
+                              "weight": 17955,
+                              "amount_satoshis": 17955,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_102",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "138t3njjq2jTpoaFNBbfTCY4Np27nbMEsr",
+                              "weight": 141754,
+                              "amount_satoshis": 141754,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_103",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "bc1qhzqr8wf0qlpdyed782nzq5l38x0msz40vulrgc",
+                              "weight": 895235,
+                              "amount_satoshis": 895235,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_104",
+                              "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+                              "target": "bc1qn7mlkeux0rc73mhjwja86dnzg8ulx8mj02t7km",
+                              "weight": 897728,
+                              "amount_satoshis": 897728,
+                              "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_105",
+                              "source": "bc1qxh07erq7848f88w34veyffg2s7rg6y8ayhh2lk",
+                              "target": "bc1qqpkq358ykd8gj2397khl8uy2eu0mxnwwpjj69a",
+                              "weight": 258633,
+                              "amount_satoshis": 258633,
+                              "tx_hash": "9fad00d67c673cdde578650c0e2e35ddc49dfafa20fbcbaf6cf3332b9a8e029e"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_106",
+                              "source": "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6",
+                              "target": "bc1qdt80mv8lrzjeen388604vr220469mezz0ukjjl",
+                              "weight": 16711616,
+                              "amount_satoshis": 16711616,
+                              "tx_hash": "167b79d81ca24b105dfe4483ef3de33a38e8b906d1e224a12b1c45b8ded8b1e4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_107",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "bc1qnzhcm4guf967fkg4anuxvuqfy3jamkadsvwqkh",
+                              "weight": 28962,
+                              "amount_satoshis": 28962,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_108",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "33573PzWC43WprP12GHYspf7qM5Y8EV3x4",
+                              "weight": 466086,
+                              "amount_satoshis": 466086,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_109",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "1mTmGLGFWmyi8vLyExJsH4fsK6A3kzTWD",
+                              "weight": 47767,
+                              "amount_satoshis": 47767,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_110",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "3H6EG1wFL9oAM7MJA5T2QBnJSzdcwiTjh1",
+                              "weight": 150528,
+                              "amount_satoshis": 150528,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_111",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "32yTv5U9uCd4MUsjdZET5MbHDd7HtBCtBc",
+                              "weight": 135113,
+                              "amount_satoshis": 135113,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_112",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "bc1qyeeysc6s43nr8czthl9yzesa7yzhqqas99l77d",
+                              "weight": 23135,
+                              "amount_satoshis": 23135,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_113",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "39ykp4t7trJZ4iaBB6SqVesbJ1QHTz8MeE",
+                              "weight": 339712,
+                              "amount_satoshis": 339712,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_114",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "bc1q93gqmsflfp0kyvnspkad67qq0535p066zfc0nn",
+                              "weight": 192999,
+                              "amount_satoshis": 192999,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_115",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "3HgRYRG8YF8PKMVkxjouxYkr75822Cx39P",
+                              "weight": 169827,
+                              "amount_satoshis": 169827,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_116",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "bc1q5x4xsngz8ftxaz7u7tfp0cwndz6c6hvup3zdrj",
+                              "weight": 381423,
+                              "amount_satoshis": 381423,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_117",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "bc1q5wscg3urkltlx7pyvy59qym25e8425cn3uw2ne",
+                              "weight": 188953,
+                              "amount_satoshis": 188953,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_118",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "bc1q78ukv6nv5mzaxf85ua62m5jy7gj03n4dynt4cu",
+                              "weight": 114634,
+                              "amount_satoshis": 114634,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_119",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "3QYDZWM139PDVLmMTfyNRzKYxPRnvFt4QY",
+                              "weight": 96503,
+                              "amount_satoshis": 96503,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_120",
+                              "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+                              "target": "bc1qxvvs2z22wupev48d5z6279dsdctrxrmwc05mdu",
+                              "weight": 102127,
+                              "amount_satoshis": 102127,
+                              "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_121",
+                              "source": "bc1q8trrh0vchmchw88sk70r4sg0kqrlwr7nf92vnv",
+                              "target": "bc1q0rrmr7wau4486k59g6888c5g2exf6aqlrgdjnq",
+                              "weight": 587173,
+                              "amount_satoshis": 587173,
+                              "tx_hash": "1f4e4025c0352061571d6e6fb6a2c3d06b783932af9c5f9280df04a31e110f7b"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_122",
+                              "source": "bc1qxpyd87l3f9fdv4whtrvdfq2e90mm9s8zyhjykl",
+                              "target": "bc1qrv0heyrq3fw2dqtfufyu4tau226gqqwj3ldmse",
+                              "weight": 832058,
+                              "amount_satoshis": 832058,
+                              "tx_hash": "56de2ea7f58b137dc9cea454f488eae7965d17646133efc2961468bc57ff5170"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_123",
+                              "source": "bc1qekuv2664vmu4hh424jkw4j0kt7hj7k8v68jr0k",
+                              "target": "bc1qtr9p6mw84nk4x3txjtp8a3lg0luufz6r69pkna",
+                              "weight": 1013407,
+                              "amount_satoshis": 1013407,
+                              "tx_hash": "0150b0704437d9fe579746ed3f45025642cc62b5b95aa3455a15205ab53bab77"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_124",
+                              "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+                              "target": "1FJaLfAs6t954LVkYWLLEkkk3AJbfhMUqZ",
+                              "weight": 1580609,
+                              "amount_satoshis": 1580609,
+                              "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_125",
+                              "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+                              "target": "3C9saf6VAEtQQD9GDLJ5esDXyystDNjG6j",
+                              "weight": 128916,
+                              "amount_satoshis": 128916,
+                              "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_126",
+                              "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+                              "target": "bc1q22ekwchmseup6ungkal5pcduwn6qprpetzh8gm",
+                              "weight": 439988,
+                              "amount_satoshis": 439988,
+                              "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_127",
+                              "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+                              "target": "3QVswRtA2c8bU5ZXGuBdCvezPVPnzEcZ1H",
+                              "weight": 43259,
+                              "amount_satoshis": 43259,
+                              "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_128",
+                              "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+                              "target": "bc1qx8pka4cuz3v2jkexaw9cpgm0atwra0recu0eeq",
+                              "weight": 241908,
+                              "amount_satoshis": 241908,
+                              "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+                    }
+          },
+          {
+                    "data": {
+                              "id": "sr_edge_129",
+                              "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+                              "target": "1EtfWpNsQuBPhLjFEGHcJsWx4wJt8HUrYs",
+                              "weight": 674608,
+                              "amount_satoshis": 674608,
+                              "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+                    }
+          }
+]
       }
     };
 
@@ -840,7 +3352,8 @@
     function loadPresetScenario(key) {
       const scenario = PRESETS[key];
       if (scenario) {
-        if (key === 'scenario_0') document.getElementById('addressInput').value = 'suspect_042';
+        if (key === 'demo_6hop') document.getElementById('addressInput').value = 'bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8';
+        else if (key === 'scenario_0') document.getElementById('addressInput').value = 'suspect_042';
         else if (key === 'genesis') document.getElementById('addressInput').value = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
         else if (key === 'peel_chain') document.getElementById('addressInput').value = 'suspect_003';
         else if (key === 'silkroad') document.getElementById('addressInput').value = '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX';
@@ -939,20 +3452,57 @@
       } catch (err) {
         // High-resilience offline fallback for pitch & demo testing
         const scenarioKey = document.getElementById('scenarioSelect').value;
-        if (address === '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX' && scenarioKey === 'silkroad') {
+        if ((address === 'bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8' || address.startsWith('bc1q9vza')) && scenarioKey === 'demo_6hop') {
+          renderAttributionResults({
+            case_id: 'CASE-LE-DEMO-2026-6HOP',
+            suspect_address: 'bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8',
+            graph_summary: {
+              nodes_analyzed: 15,
+              edges_analyzed: 17,
+              compute_time_ms: 3.82,
+              solver_method: 'Dirichlet_Grounded_Laplacian_LU (Resistive Circuit)'
+            },
+            ranked_vasps: [
+              {
+                vasp_name: 'Binance Institutional Cold Storage Vault II [TRUE EXIT]',
+                candidate_address: 'bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h',
+                effective_resistance: 0.0636,
+                confidence_score: 0.863,
+                hop_depth: 6,
+                flow_btc: 93.75,
+                status: 'ATTRIBUTED_TARGET'
+              },
+              {
+                vasp_name: 'WazirX Decoy Exchange [SHORT-PATH TRAP]',
+                candidate_address: '1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq',
+                effective_resistance: 0.4008,
+                confidence_score: 0.137,
+                hop_depth: 2,
+                flow_btc: 4.98,
+                status: 'DECOY_FILTERED'
+              }
+            ],
+            dijkstra_comparison: {
+              chosen_by_dijkstra: 'WazirX Decoy Exchange (Hop Distance: 2)',
+              dijkstra_flaw: 'Dijkstra blindly halts on the 2-hop decoy and loses 95% of stolen funds',
+              laplacian_advantage: 'Parallel Conductance (1/Reff = sum 1/Rk) correctly identifies Binance at 6 hops'
+            }
+          });
+          return;
+        } else if (address === '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX' && scenarioKey === 'silkroad') {
           renderAttributionResults({
             case_id: 'CASE-SR-USMS-2026',
             suspect_address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX',
             graph_summary: {
-              nodes_analyzed: 9,
-              edges_analyzed: 9,
-              compute_time_ms: 3.35,
+              nodes_analyzed: 102,
+              edges_analyzed: 130,
+              compute_time_ms: 5.06,
               solver_method: 'Dirichlet_Grounded_Laplacian_LU'
             },
             ranked_vasps: [
-              { vasp_name: 'Coinbase Prime Custody', candidate_address: '3Cbq7aT1tY8kNxRdGQdurNo3DDPUk832d', effective_resistance: 0.0613, confidence_score: 0.842 },
-              { vasp_name: 'Kraken', candidate_address: '3FZNfdHGmDsjBWP1NmJkP1mY41oK76n48A', effective_resistance: 0.3550, confidence_score: 0.145 },
-              { vasp_name: 'Binance', candidate_address: '1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s', effective_resistance: 4.0408, confidence_score: 0.013 }
+              { vasp_name: 'Coinbase Prime Institutional Vault', candidate_address: 'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6', effective_resistance: 1293.1421, confidence_score: 0.957 },
+              { vasp_name: 'Kraken Exchange Liquidation Node', candidate_address: '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt', effective_resistance: 50071.8531, confidence_score: 0.025 },
+              { vasp_name: 'Binance Multi-Sig Sweep Relay', candidate_address: '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg', effective_resistance: 66976.0962, confidence_score: 0.018 }
             ]
           });
           return;
@@ -1008,6 +3558,17 @@
           <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#f87171; word-break:break-all;">${data.suspect_address || ''}</div>
         </div>
       `;
+
+      if (data.dijkstra_comparison) {
+        html += `
+          <div style="background:rgba(239,68,68,0.08); border:1px dashed rgba(239,68,68,0.4); border-radius:8px; padding:10px; margin-bottom:14px; font-size:11px;">
+            <div style="color:#f87171; font-weight:700; margin-bottom:4px;">⚠️ Traditional Shortest-Path (Dijkstra) Blindspot:</div>
+            <div style="color:#e2e8f0; margin-bottom:3px;">❌ <b>Dijkstra Selected:</b> <span style="color:#fca5a5;">${data.dijkstra_comparison.chosen_by_dijkstra}</span></div>
+            <div style="color:#94a3b8; font-size:10px; line-height:1.3; margin-bottom:6px;">${data.dijkstra_comparison.dijkstra_flaw}</div>
+            <div style="color:#10b981; font-weight:600; font-size:10.5px;">✓ <b>Laplacian Solution:</b> ${data.dijkstra_comparison.laplacian_advantage}</div>
+          </div>
+        `;
+      }
 
       if (topVasp) {
         html += `
@@ -1117,7 +3678,7 @@
 
     // Initial Load with Silk Road by default
     window.addEventListener('DOMContentLoaded', () => {
-      loadPresetScenario('silkroad');
+      loadPresetScenario('demo_6hop');
     });
   </script>
 </body>

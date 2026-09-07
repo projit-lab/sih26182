@@ -1,881 +1,683 @@
-# SIH26182 Backend Implementation & Function Reference Report
+# SIH26182 — Backend Implementation, Architecture & Function Reference Report
 
-This report provides an exhaustive, function-by-function technical audit of the `backend` directory in **SIH26182** (`Wallet-to-VASP Attribution & Ingestion Engine`). It details what has been implemented, how each subsystem functions, and specifies the exact inputs, parameters, and outputs for every function across all modules.
-
----
-
-## 1. System Overview & Architecture
-
-The `backend` folder provides the production orchestration and ingestion infrastructure connecting live blockchain networks (UTXO Bitcoin & EVM Ethereum) with the **Circuit Theory Graph Laplacian Attribution Engine ($Lx = b$)**, the **Cytoscape/D3 Graph Visualizer**, the **Indian Government SAHYOG Statutory Dispatcher (Section 91 CrPC)**, and **Section 65B Indian Evidence Act Forensic PDF Report Generation**.
-
-```
-                           +-----------------------------------------------+
-                           |        Client / Frontend Visualizer           |
-                           |   (graph_visualizer.html / Cytoscape.js)      |
-                           +-----------------------+-----------------------+
-                                                   | HTTP REST
-                                                   v
-                           +-----------------------------------------------+
-                           |          FastAPI Application Layer            |
-                           |              (backend/main.py)                |
-                           +-----------------------+-----------------------+
-                                                   |
-         +--------------------+--------------------+--------------------+--------------------+
-         |                    |                    |                    |                    |
-         v                    v                    v                    v                    v
-+-----------------+  +-----------------+  +-----------------+  +-----------------+  +-----------------+
-| routers/        |  | routers/        |  | routers/        |  | routers/        |  | /health, /      |
-| investigate.py  |  | graph.py        |  | sahyog.py       |  | reports.py      |  | System Status   |
-+--------+--------+  +--------+--------+  +--------+--------+  +--------+--------+  +-----------------+
-         |                    |                    |                    |
-         v                    v                    v                    v
-+-----------------+  +-----------------+  +-----------------+  +-----------------+
-| services/       |  | services/       |  | services/       |  | services/       |
-| attribution_... |  | graph_service.py|  | sahyog_service  |  | report_service  |
-+--------+--------+  +--------+--------+  +--------+--------+  +--------+--------+
-         |                    |                                         |
-         |                    +--------------------+                    v
-         |                                         |          +--------------------+
-         v                                         v          | services/project_  |
-+-----------------------------------------------------+       | report_generator   |
-|         ingestion/extractor.py (SubgraphExtractor)  |       +--------------------+
-|  - Temporal Causality Filter (t_out >= t_in - 2h)   |
-|  - High-Degree Hub Pruning (degree >= 45)           |
-|  - Adaptive Volume Beam Search (85% volume mass)    |
-+--------------------------+--------------------------+
-                           |
-         +-----------------+-----------------+
-         |                                   |
-         v                                   v
-+--------------------------+       +--------------------------+
-| ingestion/               |       | ingestion/               |
-| blockstream_client.py    |       | etherscan_client.py      |
-| (Mempool -> Blockstream  |       | (Etherscan API           |
-|  -> Blockchain.info)     |       |  normalized transfers)   |
-+------------+-------------+       +------------+-------------+
-             |                                  |
-             +-----------------+----------------+
-                               |
-                               v
-+-----------------------------------------------------+
-|        Database Layer (DuckDB + SQLite Fallback)    |
-|   - entity_tags (GraphSense / Crypto-Tags / VASP)   |
-|   - transaction_edges (Uniform UTXO & EVM edges)    |
-|   - sahyog_dispatches (Statutory notice registry)   |
-|   - investigation_cases (Audit records)             |
-|   - crawled_addresses (Cache tracking)              |
-+-----------------------------------------------------+
-```
+> **Comprehensive Technical Specification of the SIH26182 Backend Engine**  
+> *End-to-End Architectural Flow, Ingestion Pipelines, Grounded Graph Laplacian ($Lx = b$), Code Snippets, and Function Input/Output Contracts.*
 
 ---
 
-## 2. Directory Structure
+## Table of Contents
+1. [Executive Summary & Problem Statement](#1-executive-summary--problem-statement)
+2. [How the Backend Works (Complete Architectural Flow)](#2-how-the-backend-works-complete-architectural-flow)
+3. [Module & Function Technical Reference (With Code Snippets)](#3-module--function-technical-reference-with-code-snippets)
+   - [A. Application Entrypoint & Config](#a-application-entrypoint--config)
+   - [B. Database & Storage Layer](#b-database--storage-layer)
+   - [C. Ingestion & Subgraph Extraction](#c-ingestion--subgraph-extraction)
+   - [D. Validation & Pydantic Contracts](#d-validation--pydantic-contracts)
+   - [E. Core Services Layer](#e-core-services-layer)
+   - [F. API Routers](#f-api-routers)
+4. [Master Function Input & Output Reference Table](#4-master-function-input--output-reference-table)
+5. [How to Convert This Report to PDF](#5-how-to-convert-this-report-to-pdf)
+
+---
+
+## 1. Executive Summary & Problem Statement
+
+### The Fundamental Flaw of Traditional Blockchain Forensics
+Commercial forensics suites (Chainalysis, Elliptic, basic graph search) rely heavily on **Shortest-Path algorithms (Dijkstra / A\*)** or **Maximum-Flow heuristics**. In real-world financial laundering, adversaries exploit these heuristics using:
+
+1. **The Mixer Entropy Trap (CoinJoin, Wasabi, Tornado.cash):**
+   - Suspect funds enter high-entropy mixing pools with uniform denomination outputs.
+   - Shortest-path algorithms treat all paths as equally cheap or get permanently trapped in the pool.
+2. **Peeling Chains & Low-Fee Decoy Traps:**
+   - A launderer splits $100\text{ BTC}$ into a $0.001\text{ BTC}$ decoy transfer (2 hops) and routes the remaining $99.999\text{ BTC}$ through a 5-hop peel chain to a cash-out exchange.
+   - Shortest-path incorrectly attributes the funds to the decoy wallet.
+3. **Combinatorial Search Explosion ($O(b^k)$):**
+   - Unbounded BFS crawling addresses with high branching factors $b > 100$ (mining pools, exchange sweep clusters) produces $1,000,000+$ nodes by depth 3, crashing servers.
+
+### The SIH26182 Circuit Theory Solution
+Our engine transforms the transaction graph into an **Electrical Resistor Network**:
+- **Nodes** = Wallet addresses.
+- **Conductances ($w$)** = Transaction amounts (Satoshis / normalized ETH units).
+- **Suspect Wallet** = Unit current source ($I = 1.0\text{ A}$).
+- **Candidate VASPs (Exchanges)** = Dirichlet ground nodes ($V = 0\text{ V}$).
+- **Attribution Confidence** = Inverse Effective Resistance ($\frac{1}{R_{\text{eff}}}$).
+
+Instead of following a single path, our system computes the **Effective Resistance ($R_{\text{eff}}$)** between the suspect wallet and every candidate exchange by solving the **Grounded Graph Laplacian ($Lx = b$)**:
+
+$$\mathbf{L}_{\text{grounded}} \cdot \mathbf{v} = \mathbf{I}_{\text{unit}}$$
+
+Because current divides across parallel paths according to Kirchhoff's Laws, **Effective Resistance aggregates evidence across ALL parallel paths simultaneously**, making mixer splits and peeling chains mathematically transparent.
+
+---
+
+## 2. How the Backend Works (Complete Architectural Flow)
+
+The following diagram and 7-step walkthrough illustrate the complete lifecycle of an investigation query:
 
 ```
-backend/
-├── __init__.py                  # Package version declaration ("1.0.0")
-├── api/
-│   ├── __init__.py              # Package init
-│   └── main.py                  # API entrypoint exposing app
-├── config.py                    # Environment variables, timeouts, DB paths, CORS settings
-├── main.py                      # FastAPI app initialization, lifespan, CORS, router mounting
-├── database/
-│   ├── __init__.py              # Re-exports get_db_connection, init_db
-│   ├── db.py                    # Unified DuckDB / SQLite connection manager & table init
-│   └── repositories.py          # Data Access Objects (EntityTag, TransactionEdge, Sahyog, Case)
-├── ingestion/
-│   ├── __init__.py              # Lazy import exports for ingestion tools
-│   ├── blockstream_client.py    # 3-Tier Bitcoin API client (Mempool.space -> Blockstream -> B.info)
-│   ├── elliptic_loader.py       # Parser for Elliptic/Elliptic++ AML benchmark dataset
-│   ├── etherscan_client.py      # Ethereum/EVM account-based transaction fetcher
-│   ├── extractor.py             # SubgraphExtractor (temporal filtering, beam search, hub pruning)
-│   ├── fetch_datasets.py        # CLI tool to trigger ingestion across all sources
-│   ├── schemas.py               # Dataclasses: UniformEdge, EntityTagItem
-│   ├── seed_demo.py             # Generates 25 test cases & offline synthetic laundering graphs
-│   └── tagpack_loader.py        # GraphSense TagPack parser (JSON, YAML, CSV)
-├── models/
-│   ├── __init__.py              # Re-exports all Pydantic schemas
-│   ├── attribution.py           # Investigation request/response, VASP items, GraphSummary
-│   ├── common.py                # Regex-based cryptocurrency address validator & CryptoAddress type
-│   ├── graph.py                 # Cytoscape.js node & edge schemas, SubgraphResponse
-│   ├── reports.py               # Forensic report metadata & export response schemas
-│   └── sahyog.py                # SAHYOG statutory notice request & response models
-├── routers/
-│   ├── __init__.py              # Re-exports router modules
-│   ├── graph.py                 # GET /api/v1/graph/subgraph/{address}
-│   ├── investigate.py           # POST /api/v1/investigate and POST /attribute
-│   ├── reports.py               # GET /api/v1/reports/{case_id}/export & /project-overview/export
-│   └── sahyog.py                # POST /api/v1/sahyog/dispatch & GET /api/v1/sahyog/{ack_token}
-├── services/
-│   ├── __init__.py              # Re-exports service classes
-│   ├── attribution_service.py   # Subgraph extraction, candidate resolution, Laplacian solve, scores
-│   ├── graph_service.py         # Formats NetworkX subgraphs into Cytoscape-compatible models
-│   ├── project_report_generator.py # Generates 5+ page comprehensive PDF project architecture report
-│   ├── report_service.py        # Generates Section 65B LEA forensic PDF incident reports
-│   └── sahyog_service.py        # Handles statutory notice creation, hashing, and token dispatch
-└── tests/                       # Unit & integration test suite (8 test modules)
+[ Investigator / Web UI ]
+           │
+           │ HTTP POST /api/v1/investigate { suspect_address, depth_limit=4 }
+           ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 1. Request Validation & Lifespan Setup                                  │
+│    • Pydantic checks address regex (BTC Base58/Bech32, EVM 0x...)       │
+│    • Database initialization (DuckDB with SQLite fallback)              │
+│    • Auto-seeds 25 demo laundering cases if database is empty           │
+└────────────────────────────────────┬────────────────────────────────────┘
+                                     │
+                                     ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 2. Bounded Downstream Subgraph Extractor (backend/ingestion/extractor) │
+│    • Directional Temporal Filter: Prunes edges where t_out < t_in - 2h  │
+│    • High-Degree Super-Hub Pruning: Halts deeper expansion if deg >= 45 │
+│    • Adaptive Volume Beam Search: Gathers top branches until >= 85%     │
+│      cumulative volume mass is retained (bounded 3 to 12 branches)      │
+│    • Halts traversal at known VASP boundaries (Dirichlet grounds)       │
+└────────────────────────────────────┬────────────────────────────────────┘
+                                     │
+                                     ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 3. Multi-Tier Live Blockchain Ingestion                                 │
+│    • Live Bitcoin: Mempool.space ──► Blockstream ──► Blockchain.info    │
+│    • Proportional UTXO Haircut: Allocates vout by input satoshi stake   │
+│    • Live Ethereum: Etherscan API normalized to satoshi-equivalent scale│
+│    • Ingested edges cached in DuckDB/SQLite to eliminate repeat queries │
+└────────────────────────────────────┬────────────────────────────────────┘
+                                     │
+                                     ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 4. Grounded Laplacian Circuit Solver (src/attribution/engine.py)       │
+│    • Ground Node 0 (V_0 = 0V) to eliminate Laplacian null space         │
+│    • Factorize grounded Laplacian via SciPy Sparse LU: L_grounded = splu│
+│    • Inject unit current vector b: (+1.0A at suspect, -1.0A at VASP)    │
+│    • Solve L * x = b  ==>  R_eff = |v_suspect - v_candidate|            │
+└────────────────────────────────────┬────────────────────────────────────┘
+                                     │
+                                     ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 5. Inverse-Resistance Confidence Normalization                          │
+│    • Conductance weights: weight_i = 1.0 / (R_eff,i + 1e-6)             │
+│    • Normalized probability: confidence_i = weight_i / sum(weights)     │
+│    • Lower resistance yields mathematically higher attribution rank     │
+└────────────────────────────────────┬────────────────────────────────────┘
+                                     │
+                                     ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 6. Case Persistence & SAHYOG Statutory Dispatch                         │
+│    • Logs case in investigation_cases table with unique case_id         │
+│    • Issues formal Section 91 CrPC freeze directive to destination VASP │
+│    • Computes SHA-256 audit hash and issues SAHYOG-ACK-2026-XXXXXX token│
+└────────────────────────────────────┬────────────────────────────────────┘
+                                     │
+                                     ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 7. Court-Admissible Reporting & Visualization                           │
+│    • Returns Cytoscape.js subgraphs (GET /api/v1/graph/subgraph/{addr}) │
+│    • Compiles Section 65B Indian Evidence Act certified PDF dossier     │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 3. Detailed File, Class & Function Specification
+## 3. Module & Function Technical Reference (With Code Snippets)
 
 ---
 
-### A. Core & Configuration
+### A. Application Entrypoint & Config
 
 #### File: `backend/config.py`
-Defines operational constants, filesystem paths, database file locations, network timeouts, and CORS policies.
+Defines filesystem paths, database locations, runtime flags, API parameters, and CORS origins.
 
-- **Variables Configured**:
-  - `BACKEND_DIR`: Absolute path to backend folder.
-  - `PROJECT_ROOT`: Absolute path to the repository root.
-  - `DATA_DIR`: Directory where databases reside (`backend/data`).
-  - `DB_PATH`: Path to DuckDB database (`backend/data/attribution.duckdb`).
-  - `SQLITE_DB_PATH`: Fallback path (`backend/data/attribution.sqlite`).
-  - `USE_LIVE_API`: Boolean flag loaded from environment (`true`/`false`).
-  - `BLOCKSTREAM_BASE_URL`: Base URL for Mempool/Blockstream API (`https://mempool.space/api`).
-  - `REQUEST_TIMEOUT_SECONDS`: Maximum request wait duration (default: `12`).
-  - `MAX_RETRIES`: Number of retry attempts on network error (default: `2`).
-  - `API_REQUEST_DELAY_MS`: Delay between outgoing requests to prevent IP ban (default: `80` ms).
-  - `DEFAULT_HOP_DEPTH`, `MAX_HOP_DEPTH`, `MAX_SUBGRAPH_NODES`: Traversal bounds (`3`, `10`, `3500`).
-  - `CORS_ORIGINS`: Allowed origins (`localhost:3000`, `localhost:5173`, `*`).
+##### Code Snippet:
+```python
+import os
+from pathlib import Path
+
+BACKEND_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BACKEND_DIR.parent
+DATA_DIR = BACKEND_DIR / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+DB_PATH = DATA_DIR / "attribution.duckdb"
+SQLITE_DB_PATH = DATA_DIR / "attribution.sqlite"
+
+USE_LIVE_API = os.getenv("USE_LIVE_API", "true").lower() in ("true", "1", "yes")
+BLOCKSTREAM_BASE_URL = os.getenv("BLOCKSTREAM_BASE_URL", "https://mempool.space/api")
+REQUEST_TIMEOUT_SECONDS = int(os.getenv("REQUEST_TIMEOUT_SECONDS", "12"))
+API_REQUEST_DELAY_MS = int(os.getenv("API_REQUEST_DELAY_MS", "80"))
+
+DEFAULT_HOP_DEPTH = int(os.getenv("DEFAULT_HOP_DEPTH", "3"))
+MAX_HOP_DEPTH = int(os.getenv("MAX_HOP_DEPTH", "10"))
+MAX_SUBGRAPH_NODES = int(os.getenv("MAX_SUBGRAPH_NODES", "3500"))
+```
 
 ---
 
 #### File: `backend/main.py`
-Initializes the FastAPI application, registers global lifecycle handlers, mounts CORS middleware, and exposes router endpoints.
+Instantiates FastAPI, manages lifecycle hooks, applies CORS middleware, and mounts routers.
 
-##### `lifespan(app: FastAPI)`
-* **Description**: Async context manager for application startup and shutdown. On startup, connects to the database, creates required tables (`init_db`), and checks whether VASP tags exist. If empty, automatically seeds 25 offline demo cases and TagPacks via `seed_database(num_cases=25)`.
-* **Input**: `app: FastAPI` (Application instance).
-* **Output**: Asynchronous generator yielding control to the running application.
+##### 1. `lifespan(app: FastAPI)`
+* **Description**: Async context manager for application startup and shutdown. Connects to database, initializes tables via `init_db(db)`, and seeds 25 demo cases if empty.
+* **Inputs**: `app: FastAPI`
+* **Outputs**: Async generator yielding control.
+* **Code Snippet**:
+```python
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Initializing SIH26182 Backend Engine...")
+    db = get_db_connection()
+    init_db(db)
 
-##### `health_check()`
-* **Description**: Health check endpoint (GET `/health`).
-* **Input**: None.
-* **Output**: `dict`:
-  ```json
-  {
-    "status": "healthy",
-    "service": "SIH26182 Backend & Ingestion Layer",
-    "version": "1.0.0",
-    "use_live_api": true
-  }
-  ```
+    tag_repo = EntityTagRepository(db)
+    if not tag_repo.list_all_vasp_addresses():
+        logger.info("Empty database detected. Seeding offline demo dataset...")
+        seed_database(num_cases=25)
 
-##### `root()`
-* **Description**: Root welcome endpoint (GET `/`).
-* **Input**: None.
-* **Output**: `dict` containing welcome message, documentation link (`/docs`), and health check link (`/health`).
+    logger.info(f"SIH26182 Engine Ready (USE_LIVE_API={USE_LIVE_API}).")
+    yield
+    logger.info("Shutting down backend services.")
+```
+
+##### 2. `health_check()`
+* **Route**: `GET /health`
+* **Description**: Simple health probe endpoint.
+* **Inputs**: None
+* **Outputs**: `dict`: `{"status": "healthy", "service": "...", "version": "1.0.0", "use_live_api": bool}`
 
 ---
 
-### B. Database Subsystem
+### B. Database & Storage Layer
 
 #### File: `backend/database/db.py`
-Provides thread-safe relational database management for DuckDB with automatic SQLite fallback.
+Thread-safe database connection manager supporting DuckDB with automatic SQLite fallback.
 
 ##### Class: `DatabaseConnection`
-Thread-safe database connection wrapper utilizing an `RLock`.
+* **`connect(self)`**:
+  * **Description**: Returns open DuckDB connection. If DuckDB is unavailable or throws an error, falls back to SQLite with `check_same_thread=False` and `sqlite3.Row` row factory.
+  * **Inputs**: None
+  * **Outputs**: Connection instance (`duckdb.DuckDBPyConnection` or `sqlite3.Connection`).
+  * **Code Snippet**:
+```python
+def connect(self):
+    with self._lock:
+        if self._conn is not None:
+            return self._conn
+        if self.use_duckdb:
+            try:
+                import duckdb
+                self.db_path.parent.mkdir(parents=True, exist_ok=True)
+                self._conn = duckdb.connect(database=str(self.db_path), read_only=False)
+                return self._conn
+            except Exception as e:
+                logger.error(f"DuckDB connection failed: {e}. Falling back to SQLite.")
+                self.use_duckdb = False
+        SQLITE_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+        self._conn = sqlite3.connect(str(SQLITE_DB_PATH), check_same_thread=False)
+        self._conn.row_factory = sqlite3.Row
+        return self._conn
+```
 
-* **`__init__(self, db_path: Path = DB_PATH, use_duckdb: bool = HAS_DUCKDB)`**
-  * **Input**:
-    * `db_path`: Target filesystem path for DuckDB file.
-    * `use_duckdb`: Boolean indicating whether DuckDB is available.
-  * **Output**: Instance of `DatabaseConnection`.
-
-* **`connect(self) -> Connection`**
-  * **Description**: Establishes or returns the existing open connection. Attempts DuckDB; if DuckDB fails, seamlessly falls back to SQLite (`sqlite3.Row` factory enabled).
-  * **Input**: None.
-  * **Output**: Open database connection object (`duckdb.DuckDBPyConnection` or `sqlite3.Connection`).
-
-* **`execute(self, query: str, parameters: tuple = ()) -> Cursor`**
-  * **Description**: Executes a parameterized SQL query under thread lock.
-  * **Input**:
-    * `query`: SQL string with `?` parameter markers.
-    * `parameters`: Tuple of positional parameter values.
-  * **Output**: Database cursor containing execution results.
-
-* **`executemany(self, query: str, seq_of_parameters: list) -> Cursor`**
-  * **Description**: Executes batch parameterized statements under thread lock.
-  * **Input**:
-    * `query`: SQL string with `?` parameter markers.
-    * `seq_of_parameters`: List of tuples containing row parameters.
-  * **Output**: Database cursor.
-
-* **`fetchall(self, query: str, parameters: tuple = ()) -> list`**
-  * **Description**: Executes query and fetches all matching rows.
-  * **Input**:
-    * `query`: SQL string.
-    * `parameters`: Query parameter tuple.
-  * **Output**: `list` of matching records.
-
-* **`fetchone(self, query: str, parameters: tuple = ()) -> Any`**
-  * **Description**: Executes query and returns the first row or `None`.
-  * **Input**:
-    * `query`: SQL string.
-    * `parameters`: Query parameter tuple.
-  * **Output**: A single row tuple/Row object, or `None`.
-
-* **`commit(self) -> None`**
-  * **Description**: Commits active transaction (SQLite only; DuckDB operates in auto-commit mode).
-  * **Input**: None.
-  * **Output**: `None`.
-
-* **`close(self) -> None`**
-  * **Description**: Closes the open database connection and resets instance state.
-  * **Input**: None.
-  * **Output**: `None`.
-
-##### `get_db_connection() -> DatabaseConnection`
-* **Description**: Returns the global singleton `DatabaseConnection` instance.
-* **Input**: None.
-* **Output**: `DatabaseConnection`.
+* **`execute(self, query: str, parameters: tuple = ())`**: Executes parameterized query under thread lock. Returns cursor.
+* **`fetchall(self, query: str, parameters: tuple = ()) -> list`**: Returns all matching rows.
+* **`fetchone(self, query: str, parameters: tuple = ()) -> Any`**: Returns single matching row or `None`.
 
 ##### `init_db(db: DatabaseConnection | None = None) -> None`
-* **Description**: Creates core relational tables and indices if they do not exist:
-  1. `entity_tags`: Tagged addresses, entity names, categories (`exchange`, `mixer`), sources, and confidence.
-  2. `transaction_edges`: Directed edges (`tx_hash`, `source_address`, `target_address`, `amount_satoshis`, `timestamp`, `chain`, `is_coinbase`). Includes indices on `source_address` and `target_address`.
-  3. `sahyog_dispatches`: Government Section 91 CrPC notice dispatch records.
-  4. `investigation_cases`: Case metadata, suspect address, top VASP, confidence, and JSON results.
-  5. `crawled_addresses`: Registry of addresses crawled from live APIs.
-* **Input**: `db`: Optional `DatabaseConnection` instance (defaults to singleton).
-* **Output**: `None`.
+* **Description**: Creates 5 core tables and their performance indices:
+  1. `entity_tags`: Tagged addresses, entity names, categories (`exchange`, `mixer`, `illicit`).
+  2. `transaction_edges`: Directed edges (`tx_hash`, `source`, `target`, `amount_satoshis`, `timestamp`, `chain`).
+  3. `sahyog_dispatches`: Section 91 CrPC notice dispatch records.
+  4. `investigation_cases`: Audit results, suspect address, top VASP, confidence score, and JSON payload.
+  5. `crawled_addresses`: Registry of addresses crawled from live APIs to prevent re-fetching.
+* **Inputs**: `db: Optional[DatabaseConnection]`
+* **Outputs**: `None`
 
 ---
 
 #### File: `backend/database/repositories.py`
-Data Access Object (DAO) pattern implementations for all tables.
+Data Access Objects (DAOs) encapsulating SQL execution.
 
-##### Class: `EntityTagRepository`
-Interacts with the `entity_tags` table.
+##### 1. `EntityTagRepository.get_vasp_candidates_for_addresses(self, addresses: List[str]) -> List[Dict[str, Any]]`
+* **Description**: Filters input address list to return those categorized as `exchange`, `custodial`, or `vasp`.
+* **Inputs**: `addresses: List[str]`
+* **Outputs**: `List[dict]` containing `address`, `entity_name`, `category`, `confidence`.
+* **Code Snippet**:
+```python
+def get_vasp_candidates_for_addresses(self, addresses: List[str]) -> List[Dict[str, Any]]:
+    if not addresses:
+        return []
+    placeholders = ",".join(["?"] * len(addresses))
+    query = f"""
+        SELECT address, entity_name, category, confidence 
+        FROM entity_tags 
+        WHERE address IN ({placeholders}) AND category IN ('exchange', 'custodial', 'vasp')
+    """
+    rows = self.db.fetchall(query, tuple(addresses))
+    return [{"address": r[0], "entity_name": r[1], "category": r[2], "confidence": r[3]} for r in rows]
+```
 
-* **`__init__(self, db=None)`**
-  * **Input**: `db`: Optional `DatabaseConnection`.
-  * **Output**: Instance.
+##### 2. `TransactionEdgeRepository.get_connected_edges(self, address: str, limit: int = 100) -> List[Dict[str, Any]]`
+* **Description**: Returns all incoming and outgoing edges for an address, ordered by volume descending.
+* **Inputs**: `address: str`, `limit: int` (default 100).
+* **Outputs**: `List[Dict[str, Any]]` (`tx_hash`, `source_address`, `target_address`, `amount_satoshis`, `timestamp`).
 
-* **`upsert_tag(self, address: str, entity_name: str, category: str, chain: str = "BTC", source: str = "GraphSense", confidence: float = 1.0) -> None`**
-  * **Description**: Inserts or replaces a tagged entity record.
-  * **Input**: Address string, entity name, category, blockchain, data source, confidence score.
-  * **Output**: `None`.
-
-* **`bulk_insert_tags(self, tags: List[tuple]) -> None`**
-  * **Description**: Performs batch insert of tag tuples.
-  * **Input**: `tags`: List of tuples `(address, entity_name, category, chain, source, confidence)`.
-  * **Output**: `None`.
-
-* **`get_tag(self, address: str) -> Optional[Dict[str, Any]]`**
-  * **Description**: Looks up entity tag for a single address.
-  * **Input**: `address`: Wallet address string.
-  * **Output**: `dict` containing tag fields or `None`.
-
-* **`get_vasp_candidates_for_addresses(self, addresses: List[str]) -> List[Dict[str, Any]]`**
-  * **Description**: Finds all addresses within the input list classified as `exchange`, `custodial`, or `vasp`.
-  * **Input**: `addresses`: List of address strings.
-  * **Output**: `list` of dicts `[{"address", "entity_name", "category", "confidence"}]`.
-
-* **`list_all_vasp_addresses(self) -> List[str]`**
-  * **Description**: Retrieves all known exchange/custodial wallet addresses in the registry.
-  * **Input**: None.
-  * **Output**: `List[str]` of wallet addresses.
+##### 3. `CaseRepository.save_case(self, case_id: str, suspect_address: str, top_vasp: str, confidence: float, results_data: dict) -> None`
+* **Description**: Saves or updates investigation results with serialized JSON.
+* **Inputs**: `case_id: str`, `suspect_address: str`, `top_vasp: str`, `confidence: float`, `results_data: dict`
+* **Outputs**: `None`
 
 ---
 
-##### Class: `TransactionEdgeRepository`
-Interacts with `transaction_edges` and `crawled_addresses`.
-
-* **`insert_edges(self, edges: List[tuple]) -> None`**
-  * **Description**: Inserts transaction edge tuples, ignoring duplicate `(tx_hash, source, target)` keys.
-  * **Input**: `edges`: List of tuples `(tx_hash, source_address, target_address, amount_satoshis, timestamp, chain, is_coinbase)`.
-  * **Output**: `None`.
-
-* **`get_connected_edges(self, address: str, limit: int = 100) -> List[Dict[str, Any]]`**
-  * **Description**: Retrieves edges where `address` is either source or target, ordered by amount descending.
-  * **Input**: `address: str`, `limit: int` (default `100`).
-  * **Output**: `List[Dict[str, Any]]` with keys `tx_hash`, `source_address`, `target_address`, `amount_satoshis`, `timestamp`.
-
-* **`get_outgoing_edges(self, address: str, limit: int = 100) -> List[Dict[str, Any]]`**
-  * **Description**: Retrieves outgoing edges (`source_address = address`), sorted by volume descending.
-  * **Input**: `address: str`, `limit: int`.
-  * **Output**: `List[Dict[str, Any]]`.
-
-* **`has_address_transactions(self, address: str) -> bool`**
-  * **Description**: Checks if an address exists anywhere in the edges table.
-  * **Input**: `address: str`.
-  * **Output**: `bool`.
-
-* **`is_address_crawled(self, address: str) -> bool`**
-  * **Description**: Verifies if an address was already crawled via live APIs to prevent redundant HTTP requests.
-  * **Input**: `address: str`.
-  * **Output**: `bool`.
-
-* **`mark_address_crawled(self, address: str, chain: str = "BTC") -> None`**
-  * **Description**: Records that an address has been crawled in `crawled_addresses`.
-  * **Input**: `address: str`, `chain: str`.
-  * **Output**: `None`.
-
----
-
-##### Class: `SahyogRepository`
-Interacts with the `sahyog_dispatches` table.
-
-* **`create_dispatch(self, ack_token: str, case_id: str, suspect_address: str, target_vasp: str, action: str, officer_name: str, jurisdiction: str, law_section: str, dispatch_hash: str, status: str = "SUBMITTED") -> None`**
-  * **Description**: Inserts an official statutory dispatch notice record.
-  * **Input**: Tracking token, case ID, suspect wallet, destination exchange, legal action, officer details, statutory section, SHA-256 hash, status.
-  * **Output**: `None`.
-
-* **`get_dispatch(self, ack_token: str) -> Optional[Dict[str, Any]]`**
-  * **Description**: Fetches dispatch details by acknowledgment token.
-  * **Input**: `ack_token: str`.
-  * **Output**: `dict` of notice details or `None`.
-
----
-
-##### Class: `CaseRepository`
-Interacts with the `investigation_cases` table.
-
-* **`save_case(self, case_id: str, suspect_address: str, top_vasp: str, confidence: float, results_data: dict) -> None`**
-  * **Description**: Saves or updates an investigation case result with its full JSON results payload.
-  * **Input**: Case ID, suspect address, top VASP name, confidence rating, result dictionary.
-  * **Output**: `None`.
-
-* **`get_case(self, case_id: str) -> Optional[Dict[str, Any]]`**
-  * **Description**: Retrieves case record and deserializes the stored JSON results.
-  * **Input**: `case_id: str`.
-  * **Output**: `dict` or `None`.
-
-* **`get_latest_case_by_suspect(self, suspect_address: str) -> Optional[Dict[str, Any]]`**
-  * **Description**: Fetches the most recent case associated with a given suspect address.
-  * **Input**: `suspect_address: str`.
-  * **Output**: `dict` or `None`.
-
----
-
-### C. Ingestion Subsystem
+### C. Ingestion & Subgraph Extraction
 
 #### File: `backend/ingestion/schemas.py`
+Immutable dataclasses standardizing data structures.
 
-##### Class: `UniformEdge`
-* **Description**: Immutable dataclass standardizing UTXO and Account-based transaction flows.
-* **Fields**:
-  * `source_address: str`
-  * `target_address: str`
-  * `amount_satoshis: int`
-  * `tx_hash: str`
-  * `timestamp: Optional[datetime]`
-  * `chain: str = "BTC"`
-  * `is_coinbase: bool = False`
-* **Property: `amount_btc -> float`**: Computes `amount_satoshis / 100_000_000.0`.
+##### Code Snippet:
+```python
+@dataclass(frozen=True)
+class UniformEdge:
+    source_address: str
+    target_address: str
+    amount_satoshis: int
+    tx_hash: str
+    timestamp: Optional[datetime] = None
+    chain: str = "BTC"
+    is_coinbase: bool = False
 
-##### Class: `EntityTagItem`
-* **Description**: Immutable dataclass representing a verified entity label.
-* **Fields**: `address: str`, `entity_name: str`, `category: str`, `chain: str = "BTC"`, `source: str = "GraphSense"`, `confidence: float = 1.0`.
+    @property
+    def amount_btc(self) -> float:
+        return self.amount_satoshis / 100_000_000.0
+
+@dataclass(frozen=True)
+class EntityTagItem:
+    address: str
+    entity_name: str
+    category: str
+    chain: str = "BTC"
+    source: str = "GraphSense"
+    confidence: float = 1.0
+```
 
 ---
 
 #### File: `backend/ingestion/blockstream_client.py`
-Implements a 3-tier live Bitcoin transaction fetcher with failover across Mempool.space, Blockstream Info, and Blockchain.info.
+3-tier live Bitcoin fetcher (Mempool.space $\rightarrow$ Blockstream $\rightarrow$ Blockchain.info).
 
-##### Class: `BlockstreamClient`
+##### `resolve_utxo_edges(self, tx_obj: dict) -> List[UniformEdge]`
+* **Description**: Deconstructs raw Bitcoin transactions into directed edges using **Proportional UTXO Haircut Allocation**. Each source input is apportioned outgoing output satoshis proportionally according to its fraction of total inputs.
+* **Inputs**: `tx_obj: dict` (Raw transaction JSON).
+* **Outputs**: `List[UniformEdge]`.
+* **Code Snippet**:
+```python
+def resolve_utxo_edges(self, tx_obj: dict) -> List[UniformEdge]:
+    tx_hash = tx_obj.get("txid", "")
+    inputs = tx_obj.get("vin", [])[:15]
+    outputs = tx_obj.get("vout", [])[:15]
 
-* **`__init__(self, base_url, fallback_url, repo, use_live_api)`**
-  * **Input**: Base URL, fallback URL, optional `TransactionEdgeRepository`, `use_live_api` boolean.
-  * **Output**: Configured client with connection pooling (`pool_connections=25`).
+    source_values = {}
+    for vin in inputs:
+        prevout = vin.get("prevout")
+        if prevout and "scriptpubkey_address" in prevout:
+            addr = prevout["scriptpubkey_address"]
+            val = prevout.get("value", 0)
+            if addr:
+                source_values[addr] = source_values.get(addr, 0) + val
 
-* **Property: `live_enabled -> bool`**
-  * **Description**: Checks runtime configuration to determine if live API queries are allowed.
-  * **Output**: `bool`.
+    sources = list(source_values.keys())
+    total_input_value = sum(source_values.values())
+    edges = []
 
-* **`_get_with_failover(self, path: str) -> Optional[Any]`**
-  * **Description**: Queries endpoints sequentially (Mempool -> Blockstream). Handles rate-limiting (HTTP 429 backoff) and non-existent addresses (HTTP 404 returns `[]`).
-  * **Input**: `path: str` (e.g. `address/{addr}/txs`).
-  * **Output**: Parsed JSON data or `None`.
+    for vout in outputs:
+        target_addr = vout.get("scriptpubkey_address")
+        value = vout.get("value", 0)
+        if not target_addr or value <= 0:
+            continue
+        for src in sources:
+            if src != target_addr:
+                # Proportional Haircut allocation
+                if total_input_value > 0 and source_values[src] > 0:
+                    allocated_amount = max(1, round(value * (source_values[src] / total_input_value)))
+                else:
+                    allocated_amount = max(1, value // len(sources))
+                edges.append(UniformEdge(src, target_addr, allocated_amount, tx_hash, timestamp=None))
+    return edges
+```
 
-* **`fetch_address_transactions(self, address: str) -> Optional[List[Dict[str, Any]]]`**
-  * **Description**: Queries live transaction list for an address (capped at top 25).
-  * **Input**: `address: str`.
-  * **Output**: `List[dict]` of transactions or `None`.
-
-* **`fetch_transaction_details(self, txid: str) -> Optional[Dict[str, Any]]`**
-  * **Description**: Queries detailed transaction inputs and outputs for a specific txid.
-  * **Input**: `txid: str`.
-  * **Output**: `dict` or `None`.
-
-* **`resolve_utxo_edges(self, tx_obj: dict) -> List[UniformEdge]`**
-  * **Description**: Decomposes raw Bitcoin transaction inputs (`vin`) and outputs (`vout`) into `UniformEdge` instances using **Proportional UTXO Haircut allocation**:
-    $$\text{allocated\_amount} = \text{round}\left(\text{vout\_value} \times \frac{\text{prevout\_val}[\text{src}]}{\text{total\_input\_val}}\right)$$
-    Caps fan-out at 15 inputs and 15 outputs to eliminate combinatorial explosion from mining pools.
-  * **Input**: `tx_obj: dict` (Raw transaction JSON).
-  * **Output**: `List[UniformEdge]`.
-
-* **`fetch_from_blockchain_info(self, address: str) -> List[UniformEdge]`**
-  * **Description**: Third-tier fallback querying `blockchain.info/rawaddr/{address}` when Mempool and Blockstream fail.
-  * **Input**: `address: str`.
-  * **Output**: `List[UniformEdge]`.
-
-* **`get_or_fetch_edges(self, address: str) -> List[UniformEdge]`**
-  * **Description**: Core ingestion entrypoint:
-    1. Checks if address was already crawled in local DB.
-    2. Filters synthetic/demo addresses to remain offline.
-    3. Fetches live data via failover chain if enabled.
-    4. Inserts new edges into database.
-    5. Marks address as crawled.
-  * **Input**: `address: str`.
-  * **Output**: `List[UniformEdge]`.
-
----
-
-#### File: `backend/ingestion/etherscan_client.py`
-Ethereum/EVM account-based transaction fetcher.
-
-##### Class: `EtherscanClient`
-
-* **`__init__(self, api_key, base_url, repo, use_live_api)`**
-  * **Input**: API key, base URL, repository, live API flag.
-  * **Output**: Instance.
-
-* **Property: `live_enabled -> bool`**
-  * **Output**: `bool`.
-
-* **`fetch_account_transactions(self, address: str, limit: int = 50) -> List[Dict[str, Any]]`**
-  * **Description**: Calls Etherscan `account.txlist` endpoint with retry backoff.
-  * **Input**: `address: str`, `limit: int` (default `50`).
-  * **Output**: `List[dict]` of raw transaction records.
-
-* **`resolve_evm_edges(self, raw_txs: List[dict]) -> List[UniformEdge]`**
-  * **Description**: Converts successful EVM transactions (`isError == "0"`) into `UniformEdge` objects, scaling Wei to normalized satoshi-equivalent units (`wei // 10_000_000_000`).
-  * **Input**: `raw_txs: List[dict]`.
-  * **Output**: `List[UniformEdge]`.
-
-* **`get_or_fetch_edges(self, address: str) -> List[UniformEdge]`**
-  * **Description**: Checks local cache, executes Etherscan fetch for EVM addresses (`0x...`), stores in DB, and returns outgoing edges.
-  * **Input**: `address: str`.
-  * **Output**: `List[UniformEdge]`.
+##### `get_or_fetch_edges(self, address: str) -> List[UniformEdge]`
+* **Description**: Checks if address is already crawled in local DB. If not, queries live APIs with failover, resolves edges, saves to database, marks address crawled, and returns edges.
+* **Inputs**: `address: str`
+* **Outputs**: `List[UniformEdge]`
 
 ---
 
 #### File: `backend/ingestion/extractor.py`
 Downstream Subgraph Extractor implementing bounded traversal with heuristic pruning.
 
-##### Class: `SubgraphExtractor`
+##### `extract_subgraph(self, suspect_address: str, max_depth: int = 3, chain: str = "BTC") -> Tuple[nx.Graph, List[str], Dict[str, dict]]`
+* **Description**: Traverses downstream transaction paths starting at `suspect_address`:
+  - **Temporal Directional Filter**: Prunes edges where $t_{\text{out}} < t_{\text{in}} - 2\text{h}$ to prevent backward-in-time traversal.
+  - **High-Degree Super-Hub Pruning**: If a non-suspect node has $\ge 45$ edges (mining pools, mixers), halts deeper branch traversal.
+  - **Adaptive Cumulative Volume Beam Search**: Accumulates candidate branches until $\ge 85\%$ of candidate volume mass is retained (bounded 3 to 12 branches).
+  - **VASP Boundary Halting**: Stops when reaching known exchange addresses.
+* **Inputs**: `suspect_address: str`, `max_depth: int`, `chain: str`
+* **Outputs**: `Tuple[nx.Graph, List[str], Dict[str, dict]]`:
+  - `G (nx.Graph)`: Weighted NetworkX graph.
+  - `candidate_vasps`: List of discovered exchange wallet addresses.
+  - `node_metadata`: Map of address to role, entity name, and category.
+* **Code Snippet**:
+```python
+# 1. Directional Temporal Causality Filter
+if t_arrival is not None and edge.timestamp is not None and edge.source_address == curr_addr:
+    if edge.timestamp < t_arrival - timedelta(hours=2):
+        continue  # Funds cannot exit before they arrive
 
-* **`__init__(self, db, tag_repo, edge_repo, btc_client, eth_client)`**
-  * **Description**: Initializes extractor with repositories and network clients.
-  * **Input**: Optional database and client instances.
+# 2. Super Hub Detection
+if len(edges) >= 45 and curr_addr != suspect_address:
+    node_metadata[curr_addr]["role"] = "suspected_hub"
+    logger.info(f"Node {curr_addr} is a high-degree hub. Halting deeper branch expansion.")
+    continue
 
-* **`extract_subgraph(self, suspect_address: str, max_depth: int = DEFAULT_HOP_DEPTH, chain: str = "BTC") -> Tuple[nx.Graph, List[str], Dict[str, dict]]`**
-  * **Description**: Traverses the transaction network starting from `suspect_address` using 3 key algorithms:
-    1. **Directional Temporal Causality Filter**: Prunes downstream edges where timestamp $t_{\text{out}} < t_{\text{in}} - 2\text{h}$ (allowing 2-hour drift for Bitcoin block time variance).
-    2. **High-Degree Super Hub Pruning**: If a non-suspect node has $\ge 45$ edges (e.g. mining pool or consolidation wallet), marks it as `suspected_hub` and halts deeper expansion.
-    3. **Adaptive Cumulative Volume Beam Search**: Accumulates candidate outgoing branches until $\ge 85\%$ of total candidate volume is captured (bounded between $3$ and $12$ branches), preventing combinatorial explosion while preserving peel chains.
-    4. **Dirichlet Boundary Halting**: Stops traversal whenever a known VASP boundary node is reached.
-  * **Input**:
-    * `suspect_address: str`: Seed address under investigation.
-    * `max_depth: int`: Traversal depth limit (hops).
-    * `chain: str`: Network (`BTC` or `ETH`).
-  * **Output**: `Tuple[nx.Graph, List[str], Dict[str, dict]]`:
-    * `G (nx.Graph)`: Weighted undirected NetworkX graph where weights represent transaction volume.
-    * `candidate_vasps`: List of discovered VASP wallet addresses.
-    * `node_metadata`: Map of address to attributes (`role`, `label`, `entity`, `category`).
-
----
-
-#### File: `backend/ingestion/elliptic_loader.py`
-Ingestion loader for the academic Elliptic / Elliptic++ Anti-Money Laundering benchmark dataset.
-
-##### Class: `EllipticLoader`
-
-* **`__init__(self, tag_repo, edge_repo)`**
-  * **Input**: Repositories.
-
-* **`ingest_classes(self, classes_csv_path: Path) -> int`**
-  * **Description**: Reads `txClasses.csv` and maps Class 1 (illicit) to `mixer` category and Class 2 (licit) to `exchange` category in `entity_tags`.
-  * **Input**: Path to CSV file.
-  * **Output**: `int` (Number of tags inserted).
-
-* **`ingest_edgelist(self, edgelist_csv_path: Path, default_weight: int = 10_000_000) -> int`**
-  * **Description**: Reads `txEdgeList.csv` (`txId1 -> txId2`) and loads edges into `transaction_edges`.
-  * **Input**: Path to CSV file, default weight in satoshis.
-  * **Output**: `int` (Number of edges inserted).
-
-* **`generate_and_ingest_sample(self, num_nodes: int = 40) -> Tuple[int, int]`**
-  * **Description**: Bundles and seeds an authentic Elliptic++ reference benchmark scenario featuring an illicit syndicate (`tx_101`), 3 parallel mixer hubs (`tx_102`, `tx_103`, `tx_104`), a true regulated exchange (`tx_201`), and a low-volume decoy exchange (`tx_202`).
-  * **Input**: `num_nodes: int` (default 40).
-  * **Output**: `Tuple[int, int]` `(tags_count, edges_count)`.
+# 3. Adaptive Volume Beam Search
+total_candidate_vol = sum(e.amount_satoshis for e, _ in candidate_hops)
+accumulated_vol = 0
+hops_queued = 0
+for edge, next_hop in candidate_hops:
+    visited_nodes.add(next_hop)
+    queue.append((next_hop, depth + 1, edge.timestamp))
+    hops_queued += 1
+    accumulated_vol += edge.amount_satoshis
+    if hops_queued >= 3:
+        if hops_queued >= 12 or (total_candidate_vol > 0 and (accumulated_vol / total_candidate_vol) >= 0.85):
+            break
+```
 
 ---
 
-#### File: `backend/ingestion/tagpack_loader.py`
-Parses and loads GraphSense TagPacks and Crypto-Tags registries.
-
-##### `parse_simple_yaml(text: str) -> List[dict]`
-* **Description**: Zero-dependency lightweight YAML parser that extracts `tags` blocks with `address`, `label`, and `category` when PyYAML is unavailable.
-* **Input**: `text: str` (Raw YAML string).
-* **Output**: `List[dict]`.
-
-##### Class: `TagPackLoader`
-
-* **`__init__(self, repo)`**
-  * **Input**: Optional `EntityTagRepository`.
-
-* **`sanitize_and_validate(self, record: dict) -> Optional[tuple]`**
-  * **Description**: Validates address format via `validate_crypto_address`, standardizes categories (`exchange`, `mixer`, `illicit`), and returns sanitized record tuple.
-  * **Input**: `record: dict`.
-  * **Output**: `tuple` `(address, entity_name, category, chain, source, confidence)` or `None`.
-
-* **`load_from_text(self, content: str, filename: str = "data.json") -> int`**
-  * **Description**: Ingests tagpack from string (detects JSON, YAML, or CSV by filename extension).
-  * **Input**: File content string, filename string.
-  * **Output**: `int` (Valid tags inserted).
-
-* **`load_from_file(self, file_path: Path) -> int`**
-  * **Description**: Ingests tagpack directly from a local filesystem path.
-  * **Input**: `file_path: Path`.
-  * **Output**: `int`.
-
-* **`fetch_remote_tagpack(self, url: str) -> int`**
-  * **Description**: Fetches raw TagPack from remote HTTP URL (e.g. GitHub raw) and loads into database.
-  * **Input**: `url: str`.
-  * **Output**: `int`.
-
-* **`load_all_bundled_tagpacks(self) -> int`**
-  * **Description**: Scans `backend/ingestion/tagpacks/` and ingests all bundled JSON, YAML, and CSV files.
-  * **Input**: None.
-  * **Output**: `int` (Total tags ingested).
-
----
-
-#### File: `backend/ingestion/seed_demo.py`
-Synthesizes test graphs and offline laundering scenarios.
-
-##### `generate_fake_tx_hash(src: str, dst: str, nonce: int) -> str`
-* **Description**: Generates deterministic SHA-256 hash for simulated transactions.
-* **Input**: `src: str`, `dst: str`, `nonce: int`.
-* **Output**: `str` (64-character hex hash).
-
-##### `seed_database(num_cases: int = 25) -> None`
-* **Description**: Populates the database with:
-  1. Bundled GraphSense and Crypto-Tags registries.
-  2. Elliptic++ AML benchmark dataset.
-  3. Scenario 0: Frozen contract validation case from `docs/ENGINE_CONTRACT.md`.
-  4. Scenario 1: Famous Genesis laundering case (`1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa` -> 6 parallel mixer channels -> Binance).
-  5. Scenarios 2 to `num_cases`: 23 procedural laundering graphs alternating between multi-hop peel chains and high-entropy mixer splits.
-* **Input**: `num_cases: int` (default `25`).
-* **Output**: `None`.
-
----
-
-#### File: `backend/ingestion/fetch_datasets.py`
-Standalone CLI management script for triggering ingestion.
-
-##### `fetch_vasp_tags(repo: EntityTagRepository) -> None`
-* **Description**: Ingests local bundled tagpacks and attempts remote GitHub fetching.
-* **Input**: `EntityTagRepository`.
-* **Output**: `None`.
-
-##### `fetch_elliptic_dataset(tag_repo: EntityTagRepository, edge_repo: TransactionEdgeRepository, path: str | None = None) -> None`
-* **Description**: Ingests Elliptic++ dataset from path or loads the built-in reference benchmark.
-* **Input**: Repositories, optional local CSV directory path.
-* **Output**: `None`.
-
-##### `query_live_bitcoin(address: str, repo: TransactionEdgeRepository) -> None`
-* **Description**: CLI test querying and printing live Bitcoin transactions for an address.
-* **Input**: Address string, repository.
-* **Output**: `None`.
-
-##### `query_live_ethereum(address: str, repo: TransactionEdgeRepository) -> None`
-* **Description**: CLI test querying and printing live Ethereum transactions for an EVM address.
-* **Input**: Address string, repository.
-* **Output**: `None`.
-
-##### `main() -> None`
-* **Description**: CLI argument parser supporting `--all`, `--tags`, `--elliptic [path]`, `--live-btc <addr>`, and `--live-eth <addr>`.
-* **Input**: Command-line arguments (`sys.argv`).
-* **Output**: `None`.
-
----
-
-### D. Pydantic Models & Validation
+### D. Validation & Pydantic Contracts
 
 #### File: `backend/models/common.py`
 ##### `validate_crypto_address(val: str) -> str`
-* **Description**: Validates address against Bitcoin Base58 regex (`^[13]...`), Bitcoin Bech32 regex (`^bc1...`), EVM regex (`^0x[a-fA-F0-9]{40}$`), or synthetic demo prefixes (`suspect_*`, `VASP_*`, `mixer_*`, `peel_*`, `tx_*`).
-* **Input**: `val: str`.
-* **Output**: `str` (Trimmed address) or raises `ValueError`.
+* **Description**: Validates that an address matches Bitcoin Base58 regex (`^[13]...`), Bitcoin Bech32 regex (`^bc1...`), EVM regex (`^0x[a-fA-F0-9]{40}$`), or synthetic test identifiers (`suspect_*`, `VASP_*`, `mixer_*`, `peel_*`).
+* **Inputs**: `val: str`
+* **Outputs**: `str` (trimmed address) or raises `ValueError`.
 
-##### `CryptoAddress`
-* **Description**: Annotated Pydantic type with `BeforeValidator(validate_crypto_address)`.
+##### Code Snippet:
+```python
+BTC_BASE58_REGEX = re.compile(r"^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$")
+BTC_BECH32_REGEX = re.compile(r"^bc1[a-z0-9]{39,59}$")
+EVM_REGEX = re.compile(r"^0x[a-fA-F0-9]{40}$")
+SYNTHETIC_REGEX = re.compile(r"^(suspect|VASP|mixer|hop|bg|demo|decoy|peel|tx)_[a-zA-Z0-9_-]+$")
+
+def validate_crypto_address(val: str) -> str:
+    trimmed = str(val).strip()
+    if (
+        BTC_BASE58_REGEX.match(trimmed)
+        or BTC_BECH32_REGEX.match(trimmed)
+        or EVM_REGEX.match(trimmed)
+        or SYNTHETIC_REGEX.match(trimmed)
+    ):
+        return trimmed
+    raise ValueError(f"Invalid cryptocurrency address: '{trimmed}'.")
+
+CryptoAddress = Annotated[str, BeforeValidator(validate_crypto_address)]
+```
 
 ---
 
 #### File: `backend/models/attribution.py`
-* **`InvestigateRequest`**: Primary investigation payload (`suspect_address: CryptoAddress`, `chain: str = "BTC"`, `depth_limit: int = 4`, `candidate_vasps: Optional[List[str]]`).
-* **`RankedVaspItem`**: Individual attribution result (`vasp_name: str`, `candidate_address: str`, `effective_resistance: float`, `confidence_score: float`).
-* **`GraphSummary`**: Graph computational metrics (`nodes_analyzed: int`, `edges_analyzed: int`, `compute_time_ms: float`, `solver_method: str = "effective_resistance"`).
-* **`InvestigateResponse`**: Complete response payload (`case_id: Optional[str]`, `suspect_address: str`, `ranked_vasps: List[RankedVaspItem]`, `graph_summary: GraphSummary`).
-* **`AttributionRequest` & `AttributionResponse`**: Backwards-compatibility schemas conforming to `ENGINE_CONTRACT.md`.
+* **`InvestigateRequest`**: `suspect_address: CryptoAddress`, `chain: str = "BTC"`, `depth_limit: int = 4`, `candidate_vasps: Optional[List[str]]`.
+* **`RankedVaspItem`**: `vasp_name: str`, `candidate_address: str`, `effective_resistance: float`, `confidence_score: float`.
+* **`GraphSummary`**: `nodes_analyzed: int`, `edges_analyzed: int`, `compute_time_ms: float`, `solver_method: str = "effective_resistance"`.
+* **`InvestigateResponse`**: `case_id: str`, `suspect_address: str`, `ranked_vasps: List[RankedVaspItem]`, `graph_summary: GraphSummary`.
 
 ---
 
-#### File: `backend/models/graph.py`
-* **`CytoscapeNodeData` & `CytoscapeNode`**: Node representation for Cytoscape.js (`id`, `label`, `role: "suspect" | "mixer_hop" | "candidate_vasp" | "hop" | "background"`, `entity`, `category`).
-* **`CytoscapeEdgeData` & `CytoscapeEdge`**: Edge representation (`id: "u->v"`, `source`, `target`, `weight`, `amount_satoshis`, `tx_hash`).
-* **`SubgraphResponse`**: Top-level graph payload containing `nodes: List[CytoscapeNode]`, `edges: List[CytoscapeEdge]`, and `stats: dict`.
-
----
-
-#### File: `backend/models/reports.py`
-* **`ReportMetadata`**: Case metadata for report header.
-* **`ReportExportResponse`**: File export confirmation metadata (`case_id`, `filename`, `content_type`, `file_size_bytes`).
-
----
-
-#### File: `backend/models/sahyog.py`
-* **`SahyogDispatchRequest`**: Input for lawful freeze notice (`case_id`, `suspect_address`, `target_vasp`, `action`, `officer_name`, `jurisdiction`, `law_section`).
-* **`SahyogDispatchResponse`**: Acknowledgment payload (`ack_token`, `case_id`, `suspect_address`, `target_vasp`, `action`, `status: "SUBMITTED"`, `timestamp`, `dispatch_hash`, `vasp_compliance_portal`).
-
----
-
-### E. Services Subsystem
+### E. Core Services Layer
 
 #### File: `backend/services/attribution_service.py`
-Orchestrates subgraph extraction, candidate identification, Laplacian solving, and confidence scoring.
+Connects extraction, candidate selection, the Grounded Laplacian Solver, and confidence normalization.
 
-##### Class: `AttributionService`
+##### `investigate(self, req: InvestigateRequest) -> InvestigateResponse`
+* **Description**:
+  1. Extracts the $k$-hop neighborhood graph around the suspect wallet.
+  2. Resolves candidate VASPs (from explicit request $\rightarrow$ discovered graph tags $\rightarrow$ all known VASPs in graph).
+  3. Instantiates `AttributionEngine(graph)` and executes the Grounded Laplacian Solver ($Lx = b$).
+  4. Converts effective resistance ($R_{\text{eff}}$) into probabilistic confidence scores via inverse conductance:
+     $$w_i = \frac{1}{R_{\text{eff}, i} + 10^{-6}}, \quad \text{confidence}_i = \frac{w_i}{\sum w}$$
+  5. Saves the case to the `investigation_cases` table.
+  6. Returns `InvestigateResponse`.
+* **Inputs**: `req: InvestigateRequest`
+* **Outputs**: `InvestigateResponse`
+* **Code Snippet**:
+```python
+def investigate(self, req: InvestigateRequest) -> InvestigateResponse:
+    t0 = time.perf_counter()
+    graph, discovered_vasps, metadata = self.extractor.extract_subgraph(
+        suspect_address=req.suspect_address, max_depth=req.depth_limit, chain=req.chain
+    )
+    if graph.number_of_nodes() <= 1:
+        raise ValueError(f"Suspect wallet '{req.suspect_address}' has no transaction history")
 
-* **`__init__(self, extractor, tag_repo, case_repo)`**
-  * **Input**: Optional instances of `SubgraphExtractor`, `EntityTagRepository`, and `CaseRepository`.
-  * **Output**: Instance.
+    candidate_pool = req.candidate_vasps or discovered_vasps or self.tag_repo.list_all_vasp_addresses()
+    candidates_in_graph = [c for c in candidate_pool if c in graph.nodes and c != req.suspect_address]
 
-* **`investigate(self, req: InvestigateRequest) -> InvestigateResponse`**
-  * **Description**:
-    1. Calls `extractor.extract_subgraph()` to generate the $k$-hop neighborhood graph.
-    2. Resolves candidate VASPs from: explicit request candidates $\rightarrow$ discovered graph tags $\rightarrow$ all repository VASPs in graph $\rightarrow$ dynamic fallback to top-conductance recipient hubs.
-    3. Instantiates `src.attribution.engine.AttributionEngine(graph, weight_attr="weight")` and executes `engine.attribute(suspect, candidates)`.
-    4. Normalizes effective resistance ($R_{\text{eff}}$) into probabilistic confidence scores via inverse conductance weighting:
-       $$\text{weight}_i = \frac{1}{R_{\text{eff}, i} + 10^{-6}}, \quad \text{confidence}_i = \frac{\text{weight}_i}{\sum \text{weight}}$$
-    5. Generates unique audit `case_id` (`CASE-<SUSPECT_PREFIX>-<TIMESTAMP>`).
-    6. Persists the case in `investigation_cases` table.
-    7. Returns structured `InvestigateResponse`.
-  * **Input**: `req: InvestigateRequest`.
-  * **Output**: `InvestigateResponse`.
-  * **Errors Raised**: `ValueError` if suspect has no transaction history or no reachable candidates exist.
+    # Core Laplacian Solver (AttributionEngine: Lx = b)
+    engine = AttributionEngine(graph, weight_attr="weight")
+    attr_result = engine.attribute(req.suspect_address, candidates_in_graph)
 
----
+    # Inverse Resistance Normalization into Probabilities
+    inverse_weights = {
+        c: 1.0 / (attr_result.scores[c] + 1e-6)
+        for c in attr_result.ranked_candidates if not math.isinf(attr_result.scores[c])
+    }
+    total_weight = sum(inverse_weights.values()) or 1.0
 
-#### File: `backend/services/graph_service.py`
-Translates extracted NetworkX graphs into frontend visualization schemas.
+    ranked_items = [
+        RankedVaspItem(
+            vasp_name=metadata.get(c, {}).get("entity", c),
+            candidate_address=c,
+            effective_resistance=round(attr_result.scores[c], 4),
+            confidence_score=round(inverse_weights.get(c, 0.0) / total_weight, 3),
+        )
+        for c in attr_result.ranked_candidates
+    ]
 
-##### Class: `GraphService`
-
-* **`__init__(self, extractor: Optional[SubgraphExtractor] = None)`**
-  * **Input**: Optional `SubgraphExtractor`.
-
-* **`get_cytoscape_subgraph(self, suspect_address: str, max_depth: int = 3, chain: str = "BTC") -> SubgraphResponse`**
-  * **Description**: Calls `SubgraphExtractor.extract_subgraph`, maps each NetworkX node into `CytoscapeNode` with role styling (`suspect`, `mixer_hop`, `candidate_vasp`, `background`), maps each edge into `CytoscapeEdge` with satoshi amounts and weights, and computes graph summary statistics.
-  * **Input**: `suspect_address: str`, `max_depth: int = 3`, `chain: str = "BTC"`.
-  * **Output**: `SubgraphResponse`.
+    case_id = f"CASE-{req.suspect_address[:8].upper()}-{int(time.time())}"
+    response = InvestigateResponse(
+        case_id=case_id, suspect_address=req.suspect_address,
+        ranked_vasps=ranked_items,
+        graph_summary=GraphSummary(
+            nodes_analyzed=graph.number_of_nodes(),
+            edges_analyzed=graph.number_of_edges(),
+            compute_time_ms=round((time.perf_counter() - t0) * 1000, 2),
+            solver_method=attr_result.method
+        )
+    )
+    self.case_repo.save_case(case_id, req.suspect_address, ranked_items[0].vasp_name, ranked_items[0].confidence_score, response.model_dump())
+    return response
+```
 
 ---
 
 #### File: `backend/services/sahyog_service.py`
-Simulates statutory notices sent to Indian VASP compliance portals.
+Simulates statutory notices under Section 91 CrPC.
 
-##### Class: `SahyogService`
+##### `dispatch_notice(self, req: SahyogDispatchRequest) -> SahyogDispatchResponse`
+* **Description**: Creates official tracking token (`SAHYOG-ACK-2026-XXXXXX`), calculates SHA-256 audit hash across parameters, persists record in `sahyog_dispatches`, and returns response with mock compliance URL.
+* **Inputs**: `req: SahyogDispatchRequest`
+* **Outputs**: `SahyogDispatchResponse`
+* **Code Snippet**:
+```python
+def dispatch_notice(self, req: SahyogDispatchRequest) -> SahyogDispatchResponse:
+    ack_token = f"SAHYOG-ACK-2026-{uuid.uuid4().hex[:6].upper()}"
+    now_str = datetime.utcnow().isoformat() + "Z"
 
-* **`__init__(self, repo: Optional[SahyogRepository] = None)`**
-  * **Input**: Optional `SahyogRepository`.
+    payload_raw = f"{req.case_id}:{req.suspect_address}:{req.target_vasp}:{req.action}:{now_str}"
+    dispatch_hash = hashlib.sha256(payload_raw.encode("utf-8")).hexdigest()
 
-* **`dispatch_notice(self, req: SahyogDispatchRequest) -> SahyogDispatchResponse`**
-  * **Description**:
-    1. Generates unique tracking token: `SAHYOG-ACK-2026-<HEX6>`.
-    2. Computes SHA-256 audit hash: $\text{SHA256}(\text{case\_id} : \text{suspect} : \text{vasp} : \text{action} : \text{timestamp})$.
-    3. Persists dispatch record in `sahyog_dispatches` table.
-    4. Returns `SahyogDispatchResponse` with mock compliance portal URL.
-  * **Input**: `req: SahyogDispatchRequest`.
-  * **Output**: `SahyogDispatchResponse`.
-
-* **`get_dispatch_status(self, ack_token: str) -> Optional[dict]`**
-  * **Description**: Fetches existing dispatch from repository and constructs the compliance portal link.
-  * **Input**: `ack_token: str`.
-  * **Output**: `Optional[dict]`.
+    self.repo.create_dispatch(
+        ack_token=ack_token, case_id=req.case_id, suspect_address=req.suspect_address,
+        target_vasp=req.target_vasp, action=req.action, officer_name=req.officer_name,
+        jurisdiction=req.jurisdiction, law_section=req.law_section,
+        dispatch_hash=dispatch_hash, status="SUBMITTED"
+    )
+    compliance_url = f"https://compliance.{req.target_vasp.lower().replace(' ', '')}.in/le-portal/v2/dispatches/{ack_token}"
+    return SahyogDispatchResponse(
+        ack_token=ack_token, case_id=req.case_id, suspect_address=req.suspect_address,
+        target_vasp=req.target_vasp, action=req.action, status="SUBMITTED",
+        timestamp=now_str, dispatch_hash=dispatch_hash, vasp_compliance_portal=compliance_url
+    )
+```
 
 ---
 
 #### File: `backend/services/report_service.py`
-Generates court-admissible forensic incident dossiers compliant with Section 65B of the Indian Evidence Act.
+Generates court-admissible forensic incident dossiers.
 
-##### Class: `ReportService`
+##### `generate_pdf_report(self, case_id: str) -> io.BytesIO`
+* **Description**: Builds a ReportLab document containing Executive Summary, Attribution Matrix, Graph Computation Metrics, and Section 65B Indian Evidence Act Certificate (with SHA-256 integrity hash).
+* **Inputs**: `case_id: str`
+* **Outputs**: `io.BytesIO` positioned at byte 0 ready for streaming.
+* **Code Snippet**:
+```python
+def generate_pdf_report(self, case_id: str) -> io.BytesIO:
+    case_data = self.case_repo.get_case(case_id) or self.case_repo.get_latest_case_by_suspect(case_id)
+    if not case_data:
+        raise ValueError(f"Case ID or Suspect '{case_id}' not found in database.")
 
-* **`__init__(self, case_repo: Optional[CaseRepository] = None)`**
-  * **Input**: Optional `CaseRepository`.
-
-* **`generate_pdf_report(self, case_id: str) -> io.BytesIO`**
-  * **Description**:
-    1. Queries case details from `CaseRepository` by `case_id` or suspect address.
-    2. Builds formatted PDF in an in-memory `BytesIO` buffer via ReportLab (with fallback text emulation if ReportLab is missing).
-    3. Sections included:
-       - Header: Cyber Crime Forensic Intelligence Dossier banner.
-       - Case Meta Box: Case reference, generation timestamp, network, top attributed VASP, and confidence percentage.
-       - Executive Summary: Contextual breakdown of $Lx = b$ effective resistance calculation.
-       - Candidate VASP Attribution Matrix: Ranked table showing entity names, masked addresses, $R_{\text{eff}}$ values, and confidence.
-       - Graph Computation Metrics: Node count, edge count, solver execution time, and method.
-       - Section 65B Indian Evidence Act Certificate: Cryptographic verification statement with SHA-256 hash.
-       - Signature Blocks: Lines for Investigating Officer and Digital Forensics Lead.
-  * **Input**: `case_id: str`.
-  * **Output**: `io.BytesIO` positioned at byte 0 ready for streaming.
-  * **Errors Raised**: `ValueError` if case is not found.
-
----
-
-#### File: `backend/services/project_report_generator.py`
-Compiles an exhaustive, multi-page technical report describing the mathematical breakthroughs, benchmarks, and architecture of the SIH26182 platform.
-
-##### Class: `NumberedCanvas(canvas.Canvas)`
-* **Description**: Two-pass ReportLab canvas that calculates total page count dynamically to render "Page X of Y", confidential headers, and footer divider lines.
-* **Methods**:
-  * `showPage(self)`: Records page state dictionary.
-  * `save(self)`: Iterates through saved page states and invokes `draw_page_decorations(page_count)`.
-  * `draw_page_decorations(self, page_count: int)`: Renders top header rule and bottom confidentiality text.
-
-##### `build_project_implementation_pdf(output_stream: io.BytesIO) -> None`
-* **Description**: Builds a 5-6 page comprehensive PDF report with custom typography, problem analysis, circuit physics mathematics, multi-tier ingestion architecture, empirical benchmark tables, and law enforcement integrations.
-* **Input**: `output_stream: io.BytesIO`.
-* **Output**: `None` (Writes directly to stream).
-
-##### `generate_pdf_file(target_path: Path) -> str`
-* **Description**: Wrapper that generates the project report and writes it to a file on disk.
-* **Input**: `target_path: Path`.
-* **Output**: `str` (Path string of generated PDF).
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=36)
+    story = []
+    # Title & Meta Box
+    # 1. Executive Forensic Summary
+    # 2. Candidate VASP Attribution Matrix
+    # 3. Section 65B Certificate:
+    raw_hash = hashlib.sha256(f"{case_id}:{case_data['suspect_address']}:{case_data['top_vasp']}".encode()).hexdigest()
+    cert_text = (
+        f"It is certified that the cryptocurrency graph extraction and attribution outputs contained "
+        f"in this dossier were produced by an automated digital forensics computer system during its lawful, "
+        f"ordinary operation. Cryptographic integrity hash: SHA-256: {raw_hash}"
+    )
+    story.append(Paragraph(cert_text, body_style))
+    doc.build(story)
+    buffer.seek(0)
+    return buffer
+```
 
 ---
 
 ### F. API Routers
 
 #### File: `backend/routers/investigate.py`
-Mounted at root (`tags=["Attribution & Investigation"]`).
-
 ##### `investigate_wallet(req: InvestigateRequest) -> InvestigateResponse`
-* **HTTP Route**: `POST /api/v1/investigate`
-* **Description**: Primary investigation endpoint. Traverses $k$-hop neighborhood, identifies candidate VASPs, solves $Lx = b$, normalizes confidence scores, persists case, and returns results.
-* **Input**: `req: InvestigateRequest` (JSON body).
-* **Output**: `InvestigateResponse` (HTTP 200).
-* **HTTP Errors**:
-  * `400 Bad Request`: Validation failure or empty parameters.
-  * `404 Not Found`: Wallet has no transaction history in the graph.
-  * `500 Internal Server Error`: Unexpected solver failure.
-
-##### `attribute_frozen_contract(req: AttributionRequest) -> AttributionResponse`
-* **HTTP Route**: `POST /attribute`
-* **Description**: Legacy frozen contract endpoint matching `docs/ENGINE_CONTRACT.md`. Accepts `{ suspect_wallet, candidate_vasps }` and returns `{ suspect, ranked_candidates, scores, method }`.
-* **Input**: `req: AttributionRequest` (JSON body).
-* **Output**: `AttributionResponse` (HTTP 200).
-* **HTTP Errors**: `400`, `404`, `500`.
+* **Route**: `POST /api/v1/investigate`
+* **Inputs**: `req: InvestigateRequest` (JSON)
+* **Outputs**: `InvestigateResponse` (JSON)
+* **Code Snippet**:
+```python
+@router.post("/api/v1/investigate", response_model=InvestigateResponse)
+def investigate_wallet(req: InvestigateRequest):
+    try:
+        return _service.investigate(req)
+    except ValueError as e:
+        err_msg = str(e)
+        if "not found in" in err_msg or "no transaction history" in err_msg:
+            raise HTTPException(status_code=404, detail=err_msg)
+        raise HTTPException(status_code=400, detail=err_msg)
+    except Exception as e:
+        logger.exception("Unexpected error during investigation")
+        raise HTTPException(status_code=500, detail=f"Internal attribution solver error: {str(e)}")
+```
 
 ---
 
 #### File: `backend/routers/graph.py`
-Mounted with prefix `/api/v1/graph` (`tags=["Graph Visualizations"]`).
-
 ##### `get_address_subgraph(address: str, depth: int = Query(3), chain: str = Query("BTC")) -> SubgraphResponse`
-* **HTTP Route**: `GET /api/v1/graph/subgraph/{address}`
-* **Description**: Returns graph nodes and edges formatted for direct Cytoscape.js or D3.js rendering, including entity metadata and node roles (`suspect`, `mixer_hop`, `candidate_vasp`, `background`).
-* **Input**:
-  * `address: str` (Path parameter): Target wallet address.
-  * `depth: int` (Query parameter, range 1-10, default 3): Hops limit.
-  * `chain: str` (Query parameter, default "BTC"): Target blockchain.
-* **Output**: `SubgraphResponse` (HTTP 200).
-* **HTTP Errors**:
-  * `400 Bad Request`: Malformed cryptocurrency address.
-  * `404 Not Found`: No transaction subgraph discovered for address.
-  * `500 Internal Server Error`: Subgraph extraction failure.
+* **Route**: `GET /api/v1/graph/subgraph/{address}`
+* **Inputs**: `address: str` (path), `depth: int` (query), `chain: str` (query)
+* **Outputs**: `SubgraphResponse` (JSON containing Cytoscape nodes and edges)
 
 ---
 
 #### File: `backend/routers/sahyog.py`
-Mounted with prefix `/api/v1/sahyog` (`tags=["SAHYOG Lawful Dispatcher"]`).
-
 ##### `dispatch_lawful_notice(req: SahyogDispatchRequest) -> SahyogDispatchResponse`
-* **HTTP Route**: `POST /api/v1/sahyog/dispatch`
-* **Description**: Submits statutory Section 91 CrPC notice to target VASP, records SHA-256 audit hash, and returns government tracking token.
-* **Input**: `req: SahyogDispatchRequest` (JSON body).
-* **Output**: `SahyogDispatchResponse` (HTTP 200).
-* **HTTP Errors**: `500 Internal Server Error`.
+* **Route**: `POST /api/v1/sahyog/dispatch`
+* **Inputs**: `req: SahyogDispatchRequest` (JSON)
+* **Outputs**: `SahyogDispatchResponse` (JSON)
 
-##### `get_dispatch_details(ack_token: str) -> dict`
-* **HTTP Route**: `GET /api/v1/sahyog/{ack_token}`
-* **Description**: Retrieves audit details and compliance status for a previously issued SAHYOG notice.
-* **Input**: `ack_token: str` (Path parameter).
-* **Output**: `dict` containing dispatch details (HTTP 200).
-* **HTTP Errors**: `404 Not Found` if token does not exist in registry.
+##### `get_dispatch_details(ack_token: str)`
+* **Route**: `GET /api/v1/sahyog/{ack_token}`
+* **Inputs**: `ack_token: str` (path)
+* **Outputs**: `dict` of stored notice details
 
 ---
 
 #### File: `backend/routers/reports.py`
-Mounted with prefix `/api/v1/reports` (`tags=["Forensic Reports"]`).
-
-##### `export_project_overview_report() -> StreamingResponse`
-* **HTTP Route**: `GET /api/v1/reports/project-overview/export`
-* **Description**: Builds and streams the comprehensive multi-page PDF project architecture and implementation report (`SIH26182_Project_Implementation_Report.pdf`), while also caching a copy in the project root.
-* **Input**: None.
-* **Output**: `StreamingResponse` (media type `application/pdf`, filename `SIH26182_Project_Implementation_Report.pdf`).
-* **HTTP Errors**: `500 Internal Server Error`.
-
 ##### `export_case_report(case_id: str) -> StreamingResponse`
-* **HTTP Route**: `GET /api/v1/reports/{case_id}/export`
-* **Description**: Generates and streams a court-admissible LEA-style forensic PDF report certified under Section 65B of the Indian Evidence Act.
-* **Input**: `case_id: str` (Path parameter).
-* **Output**: `StreamingResponse` (media type `application/pdf`, filename `Forensic_Report_{case_id}.pdf`).
-* **HTTP Errors**:
-  * `404 Not Found`: Case reference or suspect not found.
-  * `500 Internal Server Error`: Generation failure.
+* **Route**: `GET /api/v1/reports/{case_id}/export`
+* **Inputs**: `case_id: str` (path)
+* **Outputs**: `StreamingResponse` (media type `application/pdf`)
+
+##### `export_backend_implementation_report() -> StreamingResponse`
+* **Route**: `GET /api/v1/reports/backend-implementation/export`
+* **Inputs**: None
+* **Outputs**: `StreamingResponse` (media type `application/pdf`, filename `SIH26182_Backend_Implementation_Report.pdf`)
 
 ---
 
-## 4. Test Suite Summary
+## 4. Master Function Input & Output Reference Table
 
-The backend includes 8 dedicated pytest test suites located in `backend/tests/`:
-
-| Test Module | Coverage & Functions Tested |
-| :--- | :--- |
-| `test_investigate_api.py` | Validates `POST /api/v1/investigate` and legacy `POST /attribute`, tests confidence score normalization, and validates 404 handling. |
-| `test_blockstream.py` | Tests Blockstream and Mempool client connection pooling, UTXO edge resolution, and haircut allocation. |
-| `test_extractor.py` | Tests SubgraphExtractor temporal causality filtering, beam search volume thresholds, and hub pruning. |
-| `test_tagpack_loader.py` | Validates GraphSense YAML, JSON, and CSV parsing, regex address validation, and category mapping. |
-| `test_sahyog_dispatch.py` | Tests SAHYOG notice submission, SHA-256 dispatch hashing, database persistence, and lookup. |
-| `test_report_export.py` | Validates in-memory ReportLab PDF generation, Section 65B text inclusion, and table rendering. |
-| `test_db.py` | Tests DuckDB connection, automatic SQLite fallback, table initialization, and index creation. |
-| `test_ingestion_sources.py` | Tests multi-tier failover from Mempool to Blockstream to Blockchain.info. |
+| Component / Function | HTTP Route / Class Method | Inputs (Parameters & Types) | Outputs (Return Value & Types) |
+| :--- | :--- | :--- | :--- |
+| **Investigate Wallet** | `POST /api/v1/investigate` | `req: InvestigateRequest` (`suspect_address`, `chain`, `depth_limit`, `candidate_vasps`) | `InvestigateResponse` (`case_id`, `suspect_address`, `ranked_vasps`, `graph_summary`) |
+| **Legacy Attribution** | `POST /attribute` | `req: AttributionRequest` (`suspect_wallet`, `candidate_vasps`) | `AttributionResponse` (`suspect`, `ranked_candidates`, `scores`, `method`) |
+| **Cytoscape Subgraph** | `GET /api/v1/graph/subgraph/{address}` | `address: str`, `depth: int = 3`, `chain: str = "BTC"` | `SubgraphResponse` (`suspect_address`, `nodes`, `edges`, `stats`) |
+| **SAHYOG Notice** | `POST /api/v1/sahyog/dispatch` | `req: SahyogDispatchRequest` (`case_id`, `suspect_address`, `target_vasp`, `action`, `officer`, etc.) | `SahyogDispatchResponse` (`ack_token`, `dispatch_hash`, `compliance_portal`, `status`) |
+| **SAHYOG Status** | `GET /api/v1/sahyog/{ack_token}` | `ack_token: str` (path) | `dict` (Stored statutory notice details) |
+| **Export Case PDF** | `GET /api/v1/reports/{case_id}/export` | `case_id: str` (path) | `StreamingResponse` (PDF document) |
+| **Export Backend PDF**| `GET /api/v1/reports/backend-implementation/export`| None | `StreamingResponse` (Backend Implementation PDF) |
+| **Health Check** | `GET /health` | None | `{"status": "healthy", "service": "...", "use_live_api": bool}` |
+| **AttributionService.investigate** | Method | `req: InvestigateRequest` | `InvestigateResponse` |
+| **GraphService.get_cytoscape_subgraph** | Method | `suspect_address: str`, `max_depth: int`, `chain: str` | `SubgraphResponse` |
+| **SahyogService.dispatch_notice** | Method | `req: SahyogDispatchRequest` | `SahyogDispatchResponse` |
+| **ReportService.generate_pdf_report** | Method | `case_id: str` | `io.BytesIO` (ReportLab PDF stream) |
+| **SubgraphExtractor.extract_subgraph** | Method | `suspect_address: str`, `max_depth: int`, `chain: str` | `Tuple[nx.Graph, List[str], Dict[str, dict]]` |
+| **BlockstreamClient.get_or_fetch_edges**| Method | `address: str` | `List[UniformEdge]` |
+| **BlockstreamClient.resolve_utxo_edges**| Method | `tx_obj: dict` | `List[UniformEdge]` |
+| **EtherscanClient.get_or_fetch_edges** | Method | `address: str` | `List[UniformEdge]` |
+| **EtherscanClient.resolve_evm_edges** | Method | `raw_txs: List[dict]` | `List[UniformEdge]` |
+| **TagPackLoader.load_from_text** | Method | `content: str`, `filename: str` | `int` (Count of valid tags inserted) |
+| **TagPackLoader.sanitize_and_validate** | Method | `record: dict` | `Optional[tuple]` (Sanitized record) |
+| **EllipticLoader.ingest_classes** | Method | `classes_csv_path: Path` | `int` (Count of labels ingested) |
+| **EllipticLoader.ingest_edgelist** | Method | `edgelist_csv_path: Path`, `default_weight: int` | `int` (Count of edges ingested) |
+| **DatabaseConnection.execute** | Method | `query: str`, `parameters: tuple` | Database Cursor |
+| **DatabaseConnection.fetchall** | Method | `query: str`, `parameters: tuple` | `list` of row records |
+| **DatabaseConnection.fetchone** | Method | `query: str`, `parameters: tuple` | Single row or `None` |
+| **validate_crypto_address** | Standalone function | `val: str` | `str` (Validated address) or raises `ValueError` |
 
 ---
 
-## 5. Input & Output Quick Reference Table
+## 5. How to Convert This Report to PDF
 
-| Function / Endpoint | Input Type | Output Type |
-| :--- | :--- | :--- |
-| `POST /api/v1/investigate` | `InvestigateRequest` | `InvestigateResponse` |
-| `POST /attribute` | `AttributionRequest` | `AttributionResponse` |
-| `GET /api/v1/graph/subgraph/{address}` | `address: str`, `depth: int`, `chain: str` | `SubgraphResponse` |
-| `POST /api/v1/sahyog/dispatch` | `SahyogDispatchRequest` | `SahyogDispatchResponse` |
-| `GET /api/v1/sahyog/{ack_token}` | `ack_token: str` | `dict` |
-| `GET /api/v1/reports/{case_id}/export` | `case_id: str` | `StreamingResponse (PDF)` |
-| `GET /api/v1/reports/project-overview/export` | None | `StreamingResponse (PDF)` |
-| `GET /health` | None | `dict` |
-| `AttributionService.investigate` | `InvestigateRequest` | `InvestigateResponse` |
-| `GraphService.get_cytoscape_subgraph` | `address: str`, `max_depth: int`, `chain: str` | `SubgraphResponse` |
-| `SahyogService.dispatch_notice` | `SahyogDispatchRequest` | `SahyogDispatchResponse` |
-| `ReportService.generate_pdf_report` | `case_id: str` | `io.BytesIO` |
-| `SubgraphExtractor.extract_subgraph` | `suspect_address: str`, `max_depth: int`, `chain: str` | `Tuple[nx.Graph, List[str], Dict[str, dict]]` |
-| `BlockstreamClient.get_or_fetch_edges` | `address: str` | `List[UniformEdge]` |
-| `BlockstreamClient.resolve_utxo_edges` | `tx_obj: dict` | `List[UniformEdge]` |
-| `EtherscanClient.get_or_fetch_edges` | `address: str` | `List[UniformEdge]` |
-| `EtherscanClient.resolve_evm_edges` | `raw_txs: List[dict]` | `List[UniformEdge]` |
-| `TagPackLoader.load_from_text` | `content: str`, `filename: str` | `int` (Tag count) |
-| `TagPackLoader.sanitize_and_validate` | `record: dict` | `Optional[tuple]` |
-| `EllipticLoader.ingest_classes` | `classes_csv_path: Path` | `int` (Inserted count) |
-| `EllipticLoader.ingest_edgelist` | `edgelist_csv_path: Path`, `default_weight: int` | `int` (Inserted count) |
-| `DatabaseConnection.execute` | `query: str`, `parameters: tuple` | `Cursor` |
-| `DatabaseConnection.fetchall` | `query: str`, `parameters: tuple` | `list` |
-| `DatabaseConnection.fetchone` | `query: str`, `parameters: tuple` | `Any` |
-| `validate_crypto_address` | `val: str` | `str` |
+You can convert this markdown document into a PDF through any of the following methods:
+
+### Method 1: Interactive 1-Click Print (Immediate Vector PDF)
+Open the companion HTML document in Chrome or Edge:  
+👉 **[`Backend_Implementation_Report.html`](file:///d:/hackathon/SIH/sih26182/Backend_Implementation_Report.html)**  
+- Click the floating **"Save / Print as PDF"** button (or press `Ctrl + P`).
+- Destination: **Save as PDF** $\rightarrow$ Click **Save**.
+- Generates an A4 vector PDF with page-break protection for code snippets and tables.
+
+### Method 2: Python Script (ReportLab)
+Execute the CLI compilation script in your terminal:
+```powershell
+python generate_backend_pdf.py
+```
+This compiles and writes `SIH26182_Backend_Implementation_Report.pdf` directly into the project root.
+
+### Method 3: VS Code / IDE Markdown PDF Extension
+If you have the **Markdown PDF** or **Markdown Preview Enhanced** extension installed in VS Code:
+1. Open this file: `Backend_Implementation_Report.md`.
+2. Right-click anywhere in the editor.
+3. Select **Markdown PDF: Export (pdf)**.

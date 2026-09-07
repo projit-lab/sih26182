@@ -1,0 +1,155 @@
+[
+  {
+    "tx_hash": "a1f87c92b450e189d273c4ced35c1684fd81dff52d9f8c33e9025c422a80e94e",
+    "source_address": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+    "target_address": "bc1q_decoy_relay_1",
+    "amount_satoshis": 500000000,
+    "timestamp": "2026-09-01T10:00:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "b2c98d03a561f290e384d5dfe46d27950e92e0063e00a9d44f036d533b91fa5f",
+    "source_address": "bc1q_decoy_relay_1",
+    "target_address": "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq",
+    "amount_satoshis": 498000000,
+    "timestamp": "2026-09-01T10:15:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "c3d09e14b672a301f495e6e0f57e38a61f03f1174f11b0e550147e644c020b60",
+    "source_address": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+    "target_address": "bc1q_layer1_peel_relay",
+    "amount_satoshis": 9500000000,
+    "timestamp": "2026-09-01T10:02:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "d4e1af25c783b412a506f7f1068f49b7201402285022c1f661258f755d131c71",
+    "source_address": "bc1q_layer1_peel_relay",
+    "target_address": "bc1q_swarm_splitter_alpha",
+    "amount_satoshis": 9480000000,
+    "timestamp": "2026-09-01T10:20:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "e5f2b036d894c523b6170802179050c8312513396133d207723690866e242d82",
+    "source_address": "bc1q_swarm_splitter_alpha",
+    "target_address": "1Mixer_Channel_Alpha",
+    "amount_satoshis": 2370000000,
+    "timestamp": "2026-09-01T10:40:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "f603c147e905d634c7281913280161d9423624407244e318834701977f353e93",
+    "source_address": "bc1q_swarm_splitter_alpha",
+    "target_address": "1Mixer_Channel_Beta",
+    "amount_satoshis": 2370000000,
+    "timestamp": "2026-09-01T10:41:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "0714d258fa16e745d8392024391272ea534735518355f4299458120880464fa4",
+    "source_address": "bc1q_swarm_splitter_alpha",
+    "target_address": "1Mixer_Channel_Gamma",
+    "amount_satoshis": 2370000000,
+    "timestamp": "2026-09-01T10:42:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "1825e3690b27f856e94a3135402383fb6458466294660530a5692319915750b5",
+    "source_address": "bc1q_swarm_splitter_alpha",
+    "target_address": "1Mixer_Channel_Delta",
+    "amount_satoshis": 2370000000,
+    "timestamp": "2026-09-01T10:43:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "2936f47a1c380967fa5b42465134940c7569577305771641b6703420a26861c6",
+    "source_address": "1Mixer_Channel_Alpha",
+    "target_address": "bc1q_mule_hop_a",
+    "amount_satoshis": 2350000000,
+    "timestamp": "2026-09-01T11:00:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "3047058b2d491a780b6c53576245a51d8670688416882752c7814531b37972d7",
+    "source_address": "1Mixer_Channel_Beta",
+    "target_address": "bc1q_mule_hop_b",
+    "amount_satoshis": 2350000000,
+    "timestamp": "2026-09-01T11:01:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "4158169c3e5a2b891c7d64687356b62e9781799527993863d8925642c48a83e8",
+    "source_address": "1Mixer_Channel_Gamma",
+    "target_address": "bc1q_mule_hop_c",
+    "amount_satoshis": 2350000000,
+    "timestamp": "2026-09-01T11:02:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "526927ad4f6b3c9a2d8e75798467c73fa8928aa638aa4974e9036753d59b94f9",
+    "source_address": "1Mixer_Channel_Delta",
+    "target_address": "bc1q_mule_hop_d",
+    "amount_satoshis": 2350000000,
+    "timestamp": "2026-09-01T11:03:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "637a38be507c4da03e9f868a9578d840b9a39bb749bb5a85fa147864e6ac050a",
+    "source_address": "bc1q_mule_hop_a",
+    "target_address": "bc1q_consolidation_aggregator",
+    "amount_satoshis": 2345000000,
+    "timestamp": "2026-09-01T11:25:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "748b49cf618d5eb14fa0979ba689e951caa4acc85acc6b960b258975f7bd161b",
+    "source_address": "bc1q_mule_hop_b",
+    "target_address": "bc1q_consolidation_aggregator",
+    "amount_satoshis": 2345000000,
+    "timestamp": "2026-09-01T11:26:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "859c5ad0729e6fc250b1080cb79af062dbb5bdd96bdd7ca71c369a8608ce272c",
+    "source_address": "bc1q_mule_hop_c",
+    "target_address": "bc1q_consolidation_aggregator",
+    "amount_satoshis": 2345000000,
+    "timestamp": "2026-09-01T11:27:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "96ad6be183af70d361c2191dc8ab0173ecc6cee07cee8db82d470b9719df383d",
+    "source_address": "bc1q_mule_hop_d",
+    "target_address": "bc1q_consolidation_aggregator",
+    "amount_satoshis": 2345000000,
+    "timestamp": "2026-09-01T11:28:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  },
+  {
+    "tx_hash": "a7be7cf294b081e472d32a2ed9bc1284fdd7dff18dff9ec93e581ca82ae0494e",
+    "source_address": "bc1q_consolidation_aggregator",
+    "target_address": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "amount_satoshis": 9375000000,
+    "timestamp": "2026-09-01T12:00:00Z",
+    "chain": "BTC",
+    "is_coinbase": false
+  }
+]
