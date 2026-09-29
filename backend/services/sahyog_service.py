@@ -19,7 +19,7 @@ class SahyogService:
     def dispatch_notice(self, req: SahyogDispatchRequest) -> SahyogDispatchResponse:
         # Generate MOCK acknowledgment token (no real SAHYOG call)
         unique_suffix = uuid.uuid4().hex[:6].upper()
-        ack_token = f"SAHYOG-ACK-2026-{unique_suffix}"
+        ack_token = f"MOCK-SAHYOG-ACK-2026-{unique_suffix}"
         now_str = datetime.utcnow().isoformat() + "Z"
 
         # Demo checksum of request parameters (not tamper-proof, not a certification)

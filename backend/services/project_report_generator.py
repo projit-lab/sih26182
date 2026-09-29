@@ -452,7 +452,7 @@ def build_project_implementation_pdf(output_stream: io.BytesIO) -> None:
     story.append(
         Paragraph(
             "&bull; <b>SAHYOG Statutory Notice Automation (Section 91 CrPC):</b> When an exchange is identified, the investigator can immediately dispatch a digital Section 91 CrPC directive "
-            "requesting an urgent asset freeze, KYC records, and IP login logs. Dispatches receive an immutable statutory tracking token (e.g. <code>SAHYOG-ACK-2026-XXXXXX</code>) and SHA-256 audit hash.",
+            "requesting an urgent asset freeze, KYC records, and IP login logs. The prototype returns a MOCK acknowledgment token and a demo checksum; no real SAHYOG request is sent.",
             bullet_style,
         )
     )

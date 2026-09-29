@@ -35,6 +35,12 @@ class DatabaseConnection:
             if self._conn is not None:
                 return self._conn
 
+            if self.db_path.exists():
+                with open(self.db_path, "rb") as f:
+                    if f.read(16) == b"SQLite format 3\x00":
+                        self.use_duckdb = False
+                        logger.info("attribution.duckdb is a SQLite file; using sqlite3")
+
             if self.use_duckdb:
                 try:
                     import duckdb

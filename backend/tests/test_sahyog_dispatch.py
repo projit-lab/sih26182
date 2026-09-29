@@ -19,8 +19,9 @@ def test_sahyog_dispatch_and_retrieve():
     assert resp.status_code == 200
     data = resp.json()
 
-    assert data["ack_token"].startswith("SAHYOG-ACK-2026-")
-    assert data["status"] == "SUBMITTED"
+    assert data["ack_token"].startswith("MOCK-SAHYOG-ACK-2026-")
+    assert data["status"] == "SIMULATED"
+    assert data["simulated"] is True
     assert "dispatch_hash" in data
     assert len(data["dispatch_hash"]) == 64  # SHA256 hex string
 
