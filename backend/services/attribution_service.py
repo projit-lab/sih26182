@@ -41,6 +41,7 @@ class AttributionService:
 
     def investigate(self, req: InvestigateRequest) -> InvestigateResponse:
         t0 = time.perf_counter()
+        heuristic_applied = False
 
         # 1. Extract k-hop neighborhood graph
         graph, discovered_vasps, metadata, is_truncated = self.extractor.extract_subgraph(
