@@ -40,6 +40,7 @@ def load_case(case_id: str) -> dict:
         "suspect": meta["suspect"],
         "truncated": meta.get("truncated", False),
         "degree_correction": meta.get("degree_correction", False),
+        "null_test_runs": meta.get("null_test", []),
     }
 
 

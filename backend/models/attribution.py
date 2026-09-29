@@ -46,7 +46,7 @@ class InvestigateResponse(BaseModel):
     )
     separation_ratio: Optional[float] = None
     degree_corrected: bool = False
-    null_test: Optional[Dict[str, Any]] = None
+    null_test: Optional[Any] = None
     unreachable_vasps: List[Dict[str, str]] = Field(default_factory=list)
     data_source: str = "live/cached crawl"
 

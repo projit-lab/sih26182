@@ -3513,68 +3513,22 @@
       } catch (err) {
         // High-resilience offline fallback for pitch & demo testing
         const scenarioKey = document.getElementById('scenarioSelect').value;
-        if ((address === 'bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8' || address.startsWith('bc1q9vza')) && scenarioKey === 'demo_6hop') {
-          renderAttributionResults({
-            case_id: 'CASE-LE-DEMO-2026-6HOP',
-            suspect_address: 'bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8',
-            graph_summary: {
-              nodes_analyzed: 15,
-              edges_analyzed: 17,
-              compute_time_ms: 3.82,
-              solver_method: 'Dirichlet_Grounded_Laplacian_LU (Resistive Circuit)'
-            },
-            ranked_vasps: [
-              {
-                vasp_name: 'Binance Institutional Cold Storage Vault II [TRUE EXIT]',
-                candidate_address: 'bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h',
-                effective_resistance: 0.0636,
-                separation_ratio: 6.30,
-                hop_depth: 6,
-                flow_btc: 93.75,
-                status: 'ATTRIBUTED_TARGET'
-              },
-              {
-                vasp_name: 'WazirX Decoy Exchange [SHORT-PATH TRAP]',
-                candidate_address: '1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq',
-                effective_resistance: 0.4008,
-                separation_ratio: 1.00,
-                hop_depth: 2,
-                flow_btc: 4.98,
-                status: 'DECOY_FILTERED'
-              }
-            ],
-            dijkstra_comparison: {
-              chosen_by_dijkstra: 'WazirX Decoy Exchange (Hop Distance: 2)',
-              dijkstra_flaw: 'Dijkstra blindly halts on the 2-hop decoy and loses 95% of stolen funds',
-              laplacian_advantage: 'Parallel Conductance (1/Reff = sum 1/Rk) correctly identifies Binance at 6 hops'
-            }
-          });
-          return;
-        } else if (address === '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX' && scenarioKey === 'silkroad') {
+        if (address === '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX' && scenarioKey === 'silkroad') {
           renderAttributionResults({
             case_id: 'CASE-SR-USMS-2026',
             suspect_address: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX',
             graph_summary: {
-              nodes_analyzed: 102,
-              edges_analyzed: 130,
-              compute_time_ms: 5.06,
-              solver_method: 'Dirichlet_Grounded_Laplacian_LU'
+              nodes_analyzed: 199,
+              edges_analyzed: 235,
+              compute_time_ms: 12.18,
+              solver_method: 'effective_resistance'
             },
+            separation_ratio: 1.48,
+            degree_corrected: false,
             ranked_vasps: [
-              { vasp_name: 'Coinbase Prime Institutional Vault', candidate_address: 'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6', effective_resistance: 1293.1421, separation_ratio: 38.7 },
-              { vasp_name: 'Kraken Exchange Liquidation Node', candidate_address: '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt', effective_resistance: 50071.8531, separation_ratio: 1.33 },
-              { vasp_name: 'Binance Multi-Sig Sweep Relay', candidate_address: '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg', effective_resistance: 66976.0962, separation_ratio: 1.0 }
-            ]
-          });
-          return;
-        } else if (address === 'suspect_042' && scenarioKey === 'scenario_0') {
-          renderAttributionResults({
-            case_id: 'CASE-DEMO-042',
-            suspect_address: 'suspect_042',
-            graph_summary: { nodes_analyzed: 5, edges_analyzed: 4, compute_time_ms: 1.82, solver_method: 'Dirichlet_Grounded_Laplacian_LU' },
-            ranked_vasps: [
-              { vasp_name: 'Binance (Hot Deposit)', candidate_address: 'VASP_true', effective_resistance: 0.1428, separation_ratio: 7.64 },
-              { vasp_name: 'WazirX (Decoy)', candidate_address: 'VASP_decoy', effective_resistance: 1.0921, separation_ratio: 1.0 }
+              { vasp_name: 'Coinbase Prime Institutional Vault', candidate_address: 'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6', effective_resistance: 0.0888, raw_effective_resistance: 0.0888, score: 0.0888 },
+              { vasp_name: 'Kraken Exchange Liquidation Node', candidate_address: '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt', effective_resistance: 0.1316, raw_effective_resistance: 0.1316, score: 0.1316 },
+              { vasp_name: 'Binance Multi-Sig Sweep Relay', candidate_address: '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg', effective_resistance: 0.1368, raw_effective_resistance: 0.1368, score: 0.1368 }
             ]
           });
           return;
@@ -3716,7 +3670,7 @@
           <div onclick="focusNodeOnGraph('${topVasp.candidate_address}')" title="Click to locate on graph" style="cursor:pointer; background:linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(5,150,105,0.05) 100%); border:1px solid rgba(16,185,129,0.4); border-radius:8px; padding:12px; margin-bottom:16px; transition:transform 0.15s, border-color 0.15s;" onmouseover="this.style.borderColor='#10b981'" onmouseout="this.style.borderColor='rgba(16,185,129,0.4)'">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
               <span style="font-size:10px; font-weight:700; text-transform:uppercase; color:#10b981; letter-spacing:0.5px;">PRIMARY ATTRIBUTION (TOP 1) &bull; CLICK TO LOCATE</span>
-              <span style="font-size:15px; font-weight:800; color:#10b981;">RANK #1 (SR: ${(topVasp.separation_ratio || 0).toFixed(1)}x)</span>
+              <span style="font-size:15px; font-weight:800; color:#10b981;">RANK #1 - separation x${data.separation_ratio ? data.separation_ratio.toFixed(2) : 'n/a'}</span>
             </div>
             <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:2px;">${topVasp.vasp_name || 'Unknown'}</div>
             <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-muted); word-break:break-all; margin-bottom:8px;">${topVasp.candidate_address || ''}</div>
@@ -3727,8 +3681,11 @@
 
       html += `<div style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">All Ranked Candidates (${rankedVasps.length})</div>`;
 
+      html += `<div style="font-size:10px; color:#94a3b8; margin-bottom:8px;">Degree correction: ${data.degree_corrected ? 'on' : 'off'}</div>`;
+
       rankedVasps.forEach((v, idx) => {
-        const srValue = (v.separation_ratio || 0).toFixed(1);
+        const rawREff = v.raw_effective_resistance ? v.raw_effective_resistance.toFixed(4) : (v.effective_resistance || 0).toFixed(4);
+        const scoreVal = (v.score || 0).toFixed(4);
         const candAddr = v.candidate_address || '';
         const shortAddr = candAddr.length > 16 ? `${candAddr.substring(0, 10)}...${candAddr.substring(candAddr.length - 6)}` : candAddr;
         html += `
@@ -3738,8 +3695,8 @@
               <div style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-muted);">${shortAddr}</div>
             </div>
             <div style="text-align:right;">
-              <div style="font-size:13px; font-weight:700; color:#10b981;">SR: ${srValue}x</div>
-              <div style="font-size:10px; color:#38bdf8; font-family:'JetBrains Mono',monospace;">R: ${v.effective_resistance}Ω</div>
+              <div style="font-size:13px; font-weight:700; color:#10b981;">Score: ${scoreVal}</div>
+              <div style="font-size:10px; color:#38bdf8; font-family:'JetBrains Mono',monospace;">raw R_eff: ${rawREff}Ω</div>
             </div>
           </div>
         `;

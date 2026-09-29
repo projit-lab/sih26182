@@ -51,14 +51,15 @@ class AttributionService:
         if req.case_id == "silkroad":
             case = load_case("silkroad")
             graph = case["graph"]
-            # the load_case already log-scales the weights! Wait, let's verify if load_case returns log-scaled.
-            # load_case adds the weights as they are in edges.json. In E1 we applied _log_scale_weights before saving edges.json.
+            # Verified case datasets already contain log1p-scaled edges.json from E1.
             candidate_pool = list(case["candidate_vasps"].keys())
             candidates_in_graph = [c for c in candidate_pool if c in graph.nodes]
             metadata = {c: {"entity": case["candidate_vasps"].get(c, c)} for c in candidates_in_graph}
             is_truncated = case.get("truncated", False)
             req.suspect_address = case["suspect"]
             data_source = "verified silkroad dataset"
+            cached_degree_correction = case.get("degree_correction", False)
+            cached_null_test_runs = case.get("null_test_runs", [])
         else:
             # 1. Extract k-hop neighborhood graph
             graph, discovered_vasps, metadata, is_truncated = self.extractor.extract_subgraph(
@@ -146,18 +147,23 @@ class AttributionService:
             graph = _log_scale_weights(graph)
 
         # 3. Null test
-        engine = AttributionEngine(graph, weight_attr="weight", degree_correction=False)
-        null_test_result = None
         degree_corrected = False
-        
-        if graph.number_of_nodes() < 20:
-            null_test_result = {"note": "Graph too small (<20 nodes) for null test"}
+        null_test_result = None
+
+        if req.case_id == "silkroad":
+            degree_corrected = cached_degree_correction
+            null_test_result = cached_null_test_runs
+            engine = AttributionEngine(graph, weight_attr="weight", degree_correction=degree_corrected)
         else:
-            exclude = {req.suspect_address, *candidates_in_graph}
-            null_test_result = engine.null_test(candidates_in_graph, exclude=exclude, n=40, seed=0)
-            if null_test_result.get("likely_needs_degree_correction"):
-                degree_corrected = True
-                engine = AttributionEngine(graph, weight_attr="weight", degree_correction=True)
+            engine = AttributionEngine(graph, weight_attr="weight", degree_correction=False)
+            if graph.number_of_nodes() < 20:
+                null_test_result = {"note": "Graph too small (<20 nodes) for null test"}
+            else:
+                exclude = {req.suspect_address, *candidates_in_graph}
+                null_test_result = engine.null_test(candidates_in_graph, exclude=exclude, n=40, seed=0)
+                if null_test_result.get("likely_needs_degree_correction"):
+                    degree_corrected = True
+                    engine = AttributionEngine(graph, weight_attr="weight", degree_correction=True)
 
         attr_result = engine.attribute(req.suspect_address, candidates_in_graph)
         compute_ms = round((time.perf_counter() - t0) * 1000, 2)
@@ -179,7 +185,7 @@ class AttributionService:
                 RankedVaspItem(
                     vasp_name=entity_name,
                     candidate_address=c,
-                    effective_resistance=score_val, # For backwards compatibility if needed? Wait, field is effective_resistance
+                    effective_resistance=raw_r_eff,
                     raw_effective_resistance=raw_r_eff,
                     score=score_val,
                     confidence_score=None,

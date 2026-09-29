@@ -82,3 +82,13 @@ Unreachable:
     "seed": 0
   }
 ]
+
+=== Null Test (degree_correction=True) ===
+n=40 seed=0: reachable=17 unreachable=23
+  wins: {'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6': 15, '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg': 1, '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt': 1}
+n=40 seed=1: reachable=20 unreachable=20
+  wins: {'366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg': 3, '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt': 4, 'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6': 13}
+n=40 seed=2: reachable=25 unreachable=15
+  wins: {'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6': 20, '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg': 2, '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt': 3}
+n=200 seed=0: reachable=98 unreachable=97
+  wins: {'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6': 80, '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt': 12, '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg': 6}
