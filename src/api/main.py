@@ -10,7 +10,7 @@ import networkx as nx
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from src.attribution.engine import AttributionEngine
+from src.attribution.engine import AttributionEngine, outward_reachable_subgraph
 from src.attribution.weights import _log_scale_weights
 import json
 from pathlib import Path
@@ -29,9 +29,8 @@ def load_case(case_id: str) -> dict:
     with open(edges_file, "r", encoding="utf-8") as f:
         edges = json.load(f)
 
-    G = nx.Graph()
+    G = nx.DiGraph()
     for e in edges:
-        # weights are already log-scaled, so we just add them
         G.add_edge(e["source"], e["target"], **e)
 
     return {
@@ -61,6 +60,7 @@ class AttributionRequest(BaseModel):
     case_id: str = "silkroad"
     suspect_wallet: str | None = None       # defaults to the case's known suspect if omitted
     candidate_vasps: list[str] | None = None  # defaults to all known exchange candidates in the case
+    direction: str = "undirected"
 
 
 @app.get("/cases")
@@ -81,7 +81,7 @@ def list_cases():
 def graph_health(case_id: str = "silkroad"):
     if case_id not in _CASES:
         raise HTTPException(status_code=404, detail=f"Unknown case_id '{case_id}'")
-    engine = AttributionEngine(_CASES[case_id]["graph"])
+    engine = AttributionEngine(nx.Graph(_CASES[case_id]["graph"]))
     return engine.graph_health()
 
 
@@ -97,7 +97,16 @@ def attribute(req: AttributionRequest):
 
     candidates = req.candidate_vasps or list(case["candidate_vasps"].keys())
 
-    engine = AttributionEngine(case["graph"], degree_correction=case.get("degree_correction", False))
+    DG = case["graph"]
+    try:
+        if req.direction == "outward":
+            G = outward_reachable_subgraph(DG, suspect)
+        else:
+            G = nx.Graph(DG)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    engine = AttributionEngine(G, degree_correction=case.get("degree_correction", False))
     try:
         result = engine.attribute(suspect, candidates)
     except ValueError as e:
@@ -106,6 +115,7 @@ def attribute(req: AttributionRequest):
     payload = result.to_json_dict()
     payload["case_id"] = req.case_id
     payload["truncated"] = case["truncated"]
+    payload["direction"] = req.direction
     payload["graph"] = engine.graph_health()
     # attach human-readable VASP names for whatever candidates were scored
     payload["candidate_labels"] = {

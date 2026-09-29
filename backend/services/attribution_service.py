@@ -50,7 +50,7 @@ class AttributionService:
         
         if req.case_id == "silkroad":
             case = load_case("silkroad")
-            graph = case["graph"]
+            graph = nx.Graph(case["graph"])
             # Verified case datasets already contain log1p-scaled edges.json from E1.
             candidate_pool = list(case["candidate_vasps"].keys())
             candidates_in_graph = [c for c in candidate_pool if c in graph.nodes]

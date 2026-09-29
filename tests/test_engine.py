@@ -162,3 +162,37 @@ def test_graph_health_reports_disconnection():
     assert health["n_components"] == 2
     assert health["nodes"] == 4
     assert health["edges"] == 2
+
+# ------------------------------------------------------------- outward reachable
+
+from src.attribution.engine import outward_reachable_subgraph
+
+def test_outward_reachable_against_direction():
+    DG = nx.DiGraph()
+    DG.add_edge("cand1", "suspect", weight=1.0)
+    DG.add_edge("suspect", "cand2", weight=1.0)
+    G = outward_reachable_subgraph(DG, "suspect")
+    eng = AttributionEngine(G)
+    res = eng.attribute("suspect", ["cand1", "cand2"])
+    assert "cand1" in res.unreachable
+    assert "cand2" in res.ranked_candidates
+
+def test_outward_reachable_pure_forward_chain():
+    DG = nx.DiGraph()
+    DG.add_edge("suspect", "a", weight=2.0)
+    DG.add_edge("a", "b", weight=4.0)
+    G = outward_reachable_subgraph(DG, "suspect")
+    eng1 = AttributionEngine(G)
+    res1 = eng1.attribute("suspect", ["b"])
+    
+    G_un = nx.Graph(DG)
+    eng2 = AttributionEngine(G_un)
+    res2 = eng2.attribute("suspect", ["b"])
+    
+    assert math.isclose(res1.raw_resistance["b"], res2.raw_resistance["b"])
+
+def test_outward_reachable_missing_suspect():
+    DG = nx.DiGraph()
+    DG.add_edge("a", "b")
+    with pytest.raises(ValueError):
+        outward_reachable_subgraph(DG, "missing")

@@ -76,6 +76,32 @@ class AttributionResult:
         }
 
 
+def outward_reachable_subgraph(DG: nx.DiGraph, suspect: str, weight_attr: str = "weight") -> nx.Graph:
+    """
+    Extract the outward-reachable subgraph from a suspect in a directed graph,
+    then return it as an undirected graph with summed edge weights where both
+    directions existed.
+    """
+    if suspect not in DG:
+        raise ValueError(f"Suspect wallet '{suspect}' not found in graph")
+    
+    nodes = nx.descendants(DG, suspect)
+    nodes.add(suspect)
+    
+    sub = DG.subgraph(nodes)
+    G = nx.Graph()
+    G.add_nodes_from(sub.nodes(data=True))
+    
+    for u, v, d in sub.edges(data=True):
+        w = d.get(weight_attr, 0.0)
+        if G.has_edge(u, v):
+            G[u][v][weight_attr] = G[u][v].get(weight_attr, 0.0) + w
+        else:
+            G.add_edge(u, v, **{weight_attr: w})
+            
+    return G
+
+
 class AttributionEngine:
     """
     Wraps a transaction graph (networkx, weighted by tx amount/frequency) and

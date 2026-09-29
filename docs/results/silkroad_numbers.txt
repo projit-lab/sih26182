@@ -92,3 +92,17 @@ n=40 seed=2: reachable=25 unreachable=15
   wins: {'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6': 20, '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg': 2, '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt': 3}
 n=200 seed=0: reachable=98 unreachable=97
   wins: {'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6': 80, '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt': 12, '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg': 6}
+
+=== Silk Road: Undirected vs Outward ===
+
+--- Undirected ---
+#1 Coinbase Prime Institutional Vault: 0.0888
+#2 Kraken Exchange Liquidation Node: 0.1316
+#3 Binance Multi-Sig Sweep Relay: 0.1368
+
+--- Outward ---
+#1 Coinbase Prime Institutional Vault: 0.0888
+#2 Kraken Exchange Liquidation Node: 0.1316
+#3 Binance Multi-Sig Sweep Relay: 0.1368
+
+Unreachable in outward: []

@@ -56,6 +56,35 @@ def build_silkroad_graph() -> tuple[nx.Graph, dict]:
     return G, candidate_vasps
 
 
+def build_silkroad_digraph() -> tuple[nx.DiGraph, dict]:
+    """Builds the Silk Road directed graph from local JSON data files."""
+    edges_file = SILKROAD_DIR / "subgraph_edges.json"
+    tags_file = SILKROAD_DIR / "entity_tags.json"
+
+    with open(edges_file, "r", encoding="utf-8") as f:
+        edges_data = json.load(f)
+    with open(tags_file, "r", encoding="utf-8") as f:
+        tags_data = json.load(f)
+
+    G = nx.DiGraph()
+    for e in edges_data:
+        u = e["source_address"]
+        v = e["target_address"]
+        w = max(1e-6, float(e["amount_satoshis"]) / 1e8)
+        if G.has_edge(u, v):
+            G[u][v]["weight"] += w
+            G[u][v]["amount_satoshis"] += e["amount_satoshis"]
+        else:
+            G.add_edge(u, v, weight=w, amount_satoshis=e["amount_satoshis"], tx_hash=e.get("tx_hash", ""))
+
+    candidate_vasps = {}
+    for t in tags_data:
+        if t.get("category") == "exchange":
+            candidate_vasps[t["address"]] = t["entity_name"]
+
+    return G, candidate_vasps
+
+
 def generate_silkroad_pdf_report(res, pdf_path: Path):
     """Generates an illustrative investigator lead report PDF (NOT a legal or forensic document)."""
     from reportlab.lib import colors
