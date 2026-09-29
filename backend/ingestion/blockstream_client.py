@@ -1,7 +1,7 @@
 import logging
 import time
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 import requests
 import urllib3
 
@@ -66,7 +66,7 @@ class BlockstreamClient:
     @property
     def live_enabled(self) -> bool:
         import backend.config as cfg
-        return self.use_live_api or getattr(cfg, "USE_LIVE_API", True)
+        return self.use_live_api
 
     def _get_with_failover(self, path: str) -> Optional[Any]:
         if not self.live_enabled:
@@ -99,16 +99,23 @@ class BlockstreamClient:
         logger.warning(f"All live API providers failed for path: {path}")
         return None
 
-    def fetch_address_transactions(self, address: str) -> Optional[List[Dict[str, Any]]]:
+    def fetch_address_transactions(self, address: str) -> Tuple[Optional[List[Dict[str, Any]]], bool]:
         data = self._get_with_failover(f"address/{address}/txs")
         if data is None:
-            return None
-        return data[:25] if isinstance(data, list) else []
+            return None, False
+        is_truncated = False
+        if isinstance(data, list):
+            if len(data) >= 25:
+                is_truncated = True
+            data = data[:25]
+        else:
+            data = []
+        return data, is_truncated
 
     def fetch_transaction_details(self, txid: str) -> Optional[Dict[str, Any]]:
         return self._get_with_failover(f"tx/{txid}")
 
-    def resolve_utxo_edges(self, tx_obj: dict) -> List[UniformEdge]:
+    def resolve_utxo_edges(self, tx_obj: dict) -> Tuple[List[UniformEdge], bool]:
         """
         Parses raw Blockstream / Mempool.space transaction JSON into UniformEdge list:
         - vin[].prevout.scriptpubkey_address -> source
@@ -120,9 +127,16 @@ class BlockstreamClient:
         block_time = status.get("block_time")
         timestamp = datetime.fromtimestamp(block_time) if block_time else datetime.utcnow()
 
+        raw_inputs = tx_obj.get("vin", [])
+        raw_outputs = tx_obj.get("vout", [])
+        
+        is_truncated = False
+        if len(raw_inputs) > 15 or len(raw_outputs) > 15:
+            is_truncated = True
+
         # Bound fan-out to top 15 inputs and 15 outputs to avoid combinatorial explosion
-        inputs = tx_obj.get("vin", [])[:15]
-        outputs = tx_obj.get("vout", [])[:15]
+        inputs = raw_inputs[:15]
+        outputs = raw_outputs[:15]
 
         # Extract source addresses and their respective input values (satoshis)
         source_values: Dict[str, int] = {}
@@ -179,16 +193,19 @@ class BlockstreamClient:
                             )
                         )
 
-        return edges
+        return edges, is_truncated
 
-    def fetch_from_blockchain_info(self, address: str) -> List[UniformEdge]:
+    def fetch_from_blockchain_info(self, address: str) -> Tuple[List[UniformEdge], bool]:
         url = f"https://blockchain.info/rawaddr/{address}?limit=25"
         try:
             resp = self.session.get(url, timeout=REQUEST_TIMEOUT_SECONDS, verify=False)
             if resp.status_code != 200:
-                return []
+                return [], False
             data = resp.json()
             txs = data.get("txs", [])
+            is_truncated = False
+            if data.get("n_tx", 0) > 25 or len(txs) >= 25:
+                is_truncated = True
             edges: List[UniformEdge] = []
             for tx in txs:
                 tx_hash = tx.get("hash", "")
@@ -230,13 +247,14 @@ class BlockstreamClient:
                                         is_coinbase=False,
                                     )
                                 )
-            return edges
+            return edges, is_truncated
         except Exception as e:
             logger.warning(f"Blockchain.info fallback failed for {address}: {e}")
-            return []
+            return [], False
 
-    def get_or_fetch_edges(self, address: str) -> List[UniformEdge]:
+    def get_or_fetch_edges(self, address: str) -> Tuple[List[UniformEdge], bool]:
         cleaned = address.strip() if isinstance(address, str) else ""
+        global_truncated = False
 
         # 1. Check if address has already had its transactions crawled from the live API
         if self.repo.is_address_crawled(cleaned):
@@ -250,7 +268,7 @@ class BlockstreamClient:
                     timestamp=None,
                 )
                 for r in cached
-            ]
+            ], False
 
         # 2. Skip live API for synthetic/demo addresses or non-BTC formats (e.g. peel_hop_*, suspect_*, mixer_*)
         is_btc_format = (
@@ -271,25 +289,34 @@ class BlockstreamClient:
                     timestamp=None,
                 )
                 for r in cached
-            ] if cached else []
+            ] if cached else [], False
 
         # 3. Fetch live via Blockstream / Mempool.space
         logger.info(f"Querying live Bitcoin API for {cleaned}...")
-        raw_txs = self.fetch_address_transactions(cleaned)
+        raw_txs, is_txs_truncated = self.fetch_address_transactions(cleaned)
+        if is_txs_truncated:
+            global_truncated = True
+            
         new_edges: List[UniformEdge] = []
 
         if raw_txs is not None:
             for tx in raw_txs:
-                resolved = self.resolve_utxo_edges(tx)
+                resolved, is_utxo_truncated = self.resolve_utxo_edges(tx)
+                if is_utxo_truncated:
+                    global_truncated = True
                 new_edges.extend(resolved)
 
         # 4. Fallback to Blockchain.info ONLY if primary providers failed with error (raw_txs is None)
         if raw_txs is None:
             logger.info(f"Falling back to Blockchain.info API for {cleaned}...")
-            new_edges = self.fetch_from_blockchain_info(cleaned)
+            new_edges, is_fallback_truncated = self.fetch_from_blockchain_info(cleaned)
+            if is_fallback_truncated:
+                global_truncated = True
 
         if new_edges:
             # Prioritize largest value transfers and cap to top 100
+            if len(new_edges) > 100:
+                global_truncated = True
             new_edges.sort(key=lambda e: e.amount_satoshis, reverse=True)
             new_edges = new_edges[:100]
             tuples = [
@@ -298,7 +325,7 @@ class BlockstreamClient:
                     e.source_address,
                     e.target_address,
                     e.amount_satoshis,
-                    e.timestamp,
+                    e.timestamp.isoformat() if e.timestamp else None,
                     e.chain,
                     e.is_coinbase,
                 )
@@ -322,6 +349,7 @@ class BlockstreamClient:
                     timestamp=None,
                 )
                 for r in cached
-            ]
+            ], global_truncated
 
-        return new_edges
+        return new_edges, global_truncated
+

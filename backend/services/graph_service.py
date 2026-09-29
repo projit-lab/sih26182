@@ -25,7 +25,7 @@ class GraphService:
     def get_cytoscape_subgraph(
         self, suspect_address: str, max_depth: int = 3, chain: str = "BTC"
     ) -> SubgraphResponse:
-        graph, candidate_vasps, metadata = self.extractor.extract_subgraph(
+        graph, candidate_vasps, metadata, is_truncated = self.extractor.extract_subgraph(
             suspect_address=suspect_address, max_depth=max_depth, chain=chain
         )
 

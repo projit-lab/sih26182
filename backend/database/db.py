@@ -45,8 +45,8 @@ class DatabaseConnection:
                     logger.error(f"Failed to connect to DuckDB: {e}. Falling back to SQLite.")
                     self.use_duckdb = False
 
-            SQLITE_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-            self._conn = sqlite3.connect(str(SQLITE_DB_PATH), check_same_thread=False)
+            self.db_path.parent.mkdir(parents=True, exist_ok=True)
+            self._conn = sqlite3.connect(str(self.db_path), check_same_thread=False)
             self._conn.row_factory = sqlite3.Row
             return self._conn
 

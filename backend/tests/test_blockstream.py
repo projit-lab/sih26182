@@ -35,7 +35,7 @@ def test_utxo_edge_resolution(tmp_path):
         "status": {"confirmed": True, "block_time": 1725300000},
     }
 
-    edges = client.resolve_utxo_edges(sample_tx)
+    edges, _ = client.resolve_utxo_edges(sample_tx)
     assert len(edges) == 2
     assert edges[0].source_address == "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
     assert edges[0].target_address == "1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s"
@@ -46,5 +46,5 @@ def test_utxo_edge_resolution(tmp_path):
     repo.insert_edges(tuples)
 
     # Verify get_or_fetch_edges returns cached edges even with use_live_api=False
-    cached_edges = client.get_or_fetch_edges("1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa")
+    cached_edges, _ = client.get_or_fetch_edges("1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa")
     assert len(cached_edges) == 2

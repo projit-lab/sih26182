@@ -52,7 +52,7 @@ def test_etherscan_edge_resolution(tmp_path):
             "isError": "0",
         }
     ]
-    edges = client.resolve_evm_edges(raw_txs)
+    edges, _ = client.resolve_evm_edges(raw_txs)
     assert len(edges) == 1
     assert edges[0].source_address == "0x1111111111111111111111111111111111111111"
     assert edges[0].target_address == "0x2222222222222222222222222222222222222222"
@@ -62,7 +62,7 @@ def test_etherscan_edge_resolution(tmp_path):
     # Test caching and get_outgoing_edges
     tuples = [(e.tx_hash, e.source_address, e.target_address, e.amount_satoshis, e.timestamp, e.chain, e.is_coinbase) for e in edges]
     edge_repo.insert_edges(tuples)
-    cached = client.get_or_fetch_edges("0x1111111111111111111111111111111111111111")
+    cached, _ = client.get_or_fetch_edges("0x1111111111111111111111111111111111111111")
     assert len(cached) == 1
     assert cached[0].target_address == "0x2222222222222222222222222222222222222222"
 

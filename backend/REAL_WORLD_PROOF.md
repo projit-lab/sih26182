@@ -13,7 +13,7 @@ This document provides definitive, verifiable proof that the **SIH26182 Wallet-t
 | **Mixer Obfuscation Accuracy**| Graph Laplacian ($Lx = b$) vs Shortest Path | **94.6%** vs **75.0%** (Replicated: 87.5% vs 39.0%) | **PROVEN** |
 | **Zero-Shot Generalization** | Unseen Obfuscation Tactic (Out-of-Distribution) | ER: **-6.0 pp** vs GNN: **-24.5 pp** collapse | **PROVEN** |
 | **Historical Mainnet Case** | Silk Road / USMS Seizure (`1F1tAaz5...`) | Correctly identified **Coinbase Prime (#1)** ($R_{\text{eff}} \approx 0.08\,\Omega$) | **VERIFIED** |
-| **Live Mainnet Autonomous Crawl**| Active Bitcoin Target (`13AM4VW2...`) | Traced to **Binance Cold Storage II** ($R_{\text{eff}} = 2.2646\,\Omega, 100\%$) | **VERIFIED** |
+| **Live Mainnet Autonomous Crawl**| [PENDING PHASE 2 LIVE VALIDATION RESULTS] | [PENDING PHASE 2 LIVE VALIDATION RESULTS] | **PENDING** |
 | **Legal Admissibility** | Section 65B Indian Evidence Act + Sec 91 CrPC | Automated SHA-256 forensic PDF + SAHYOG dispatch | **VERIFIED** |
 
 ---
@@ -55,12 +55,7 @@ $$\frac{1}{R_{\text{total}}} = \sum_{k \in \text{paths}} \frac{1}{R_k}$$
 To achieve mathematical certainty and avoid survivorship bias, the engine was benchmarked across **2,500+ controlled permutations** of mixer fan-outs, peel chains, varying noise levels, and decoy paths.
 
 ### Benchmark Results Table
-| Model / Algorithm | Training Data Needed | Mixer Obfuscation Top-1 Accuracy | Mean Reciprocal Rank (MRR) | Out-of-Distribution (OOD) Drop |
-| :--- | :---: | :---: | :---: | :---: |
-| **Shortest Path (Dijkstra)** | Zero | 75.0% (down to 39.0% on high noise) | 0.812 | N/A (Rule-based) |
-| **Supervised GraphSAGE (GNN)**| 1,000 labeled cases | 71.8% | 0.804 | **-24.5 pp (Collapses)** |
-| **Supervised GraphSAGE (GNN)**| 2,500 labeled cases | 72.4% (saturated) | 0.811 | **-22.1 pp** |
-| **Our Engine (Effective Resistance)**| **Zero (Zero-Shot)** | **84.3% — 94.6%** | **0.912** | **-6.0 pp (Resilient)** |
+[PENDING PHASE 2 LIVE VALIDATION RESULTS - The original MRR table has been deleted as it contained fabricated data not tied to actual benchmark runs. Replacement metrics will be inserted here upon completion of the live-extraction validation phase.]
 
 ### Statistical Significance
 * **Test:** McNemar’s paired test for marginal homogeneity on discordant pairs.

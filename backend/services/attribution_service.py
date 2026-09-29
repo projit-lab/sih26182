@@ -43,7 +43,7 @@ class AttributionService:
         t0 = time.perf_counter()
 
         # 1. Extract k-hop neighborhood graph
-        graph, discovered_vasps, metadata = self.extractor.extract_subgraph(
+        graph, discovered_vasps, metadata, is_truncated = self.extractor.extract_subgraph(
             suspect_address=req.suspect_address,
             max_depth=req.depth_limit,
             chain=req.chain,
@@ -97,6 +97,7 @@ class AttributionService:
 
         # Generic fallback: top-volume recipient nodes in connected component
         if not candidate_pool:
+            heuristic_applied = True
             if nx.is_connected(graph):
                 reachable_nodes = set(graph.nodes)
             else:
@@ -155,6 +156,9 @@ class AttributionService:
             node_meta = metadata.get(c, {})
             tag = self.tag_repo.get_tag(c)
             entity_name = node_meta.get("entity") or (tag["entity_name"] if tag else c)
+            
+            if heuristic_applied:
+                entity_name = f"[HEURISTIC] Top Degree Hub: {entity_name}"
 
             ranked_items.append(
                 RankedVaspItem(

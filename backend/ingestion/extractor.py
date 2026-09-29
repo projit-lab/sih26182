@@ -40,7 +40,7 @@ class SubgraphExtractor:
         suspect_address: str,
         max_depth: int = DEFAULT_HOP_DEPTH,
         chain: str = "BTC",
-    ) -> Tuple[nx.Graph, List[str], Dict[str, dict]]:
+    ) -> Tuple[nx.Graph, List[str], Dict[str, dict], bool]:
         """
         Performs k-hop traversal:
         1. Uses Breadth-First Expansion across UTXO or EVM movements
@@ -52,9 +52,11 @@ class SubgraphExtractor:
             G (nx.Graph): Undirected weighted graph for AttributionEngine
             candidate_vasps (List[str]): Discovered VASP wallet addresses
             node_metadata (Dict[str, dict]): Map of address -> {role, entity, category}
+            is_truncated (bool): True if the API or extraction truncated the history
         """
         known_vasps: Set[str] = set(self.tag_repo.list_all_vasp_addresses())
         is_eth = chain.upper() == "ETH" or suspect_address.startswith("0x")
+        global_truncated = False
 
         visited_nodes: Set[str] = {suspect_address}
         # queue stores (address, depth, arrival_timestamp)
@@ -86,13 +88,14 @@ class SubgraphExtractor:
             if not batch:
                 continue
 
-            def _fetch_node_edges(item: Tuple[str, int, Optional[datetime]]) -> Tuple[str, int, Optional[datetime], list]:
+            def _fetch_node_edges(item: Tuple[str, int, Optional[datetime]]) -> Tuple[str, int, Optional[datetime], list, bool]:
                 a, dep, t_a = item
                 try:
-                    return a, dep, t_a, fetch_client.get_or_fetch_edges(a)
+                    edges, is_trunc = fetch_client.get_or_fetch_edges(a)
+                    return a, dep, t_a, edges, is_trunc
                 except Exception as ex:
                     logger.warning(f"Error fetching edges for {a}: {ex}")
-                    return a, dep, t_a, []
+                    return a, dep, t_a, [], False
 
             # Execute parallel concurrent fetch across all batch nodes
             if len(batch) == 1:
@@ -101,7 +104,9 @@ class SubgraphExtractor:
                 with ThreadPoolExecutor(max_workers=len(batch)) as executor:
                     batch_results = list(executor.map(_fetch_node_edges, batch))
 
-            for curr_addr, depth, t_arrival, edges in batch_results:
+            for curr_addr, depth, t_arrival, edges, is_trunc in batch_results:
+                if is_trunc:
+                    global_truncated = True
                 if not edges:
                     continue
                 logger.info(f"Extractor fetched {len(edges)} edges for {curr_addr}")
@@ -216,4 +221,4 @@ class SubgraphExtractor:
             f"Extracted subgraph for '{suspect_address}' ({chain}): {G.number_of_nodes()} nodes, "
             f"{G.number_of_edges()} edges, {len(candidate_vasps)} candidate VASPs"
         )
-        return G, candidate_vasps, node_metadata
+        return G, candidate_vasps, node_metadata, global_truncated

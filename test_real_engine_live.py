@@ -69,7 +69,7 @@ def test_1_raw_utxo_ingestion_and_graph():
     print(f"[*] Blockstream / Mempool live client status: live_enabled={client.live_enabled}")
 
     t0 = time.perf_counter()
-    edges = client.get_or_fetch_edges(target_addr)
+    edges, _ = client.get_or_fetch_edges(target_addr)
     fetch_ms = (time.perf_counter() - t0) * 1000
 
     print(f"[✓] Retrieved {len(edges)} transaction flow edges in {fetch_ms:.2f} ms")
@@ -84,12 +84,12 @@ def test_1_raw_utxo_ingestion_and_graph():
     return target_addr
 
 
-def test_2_core_laplacian_engine(target_addr: str):
+def test_2_core_laplacian_engine(target_addr: str = "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"):
     print_banner("PHASE 2: CORE DIRICHLET GROUNDED LAPLACIAN SOLVER (Lx = b)")
     
     extractor = SubgraphExtractor()
     t0 = time.perf_counter()
-    G, candidates, metadata = extractor.extract_subgraph(target_addr, max_depth=2, chain="BTC")
+    G, candidates, metadata, is_truncated = extractor.extract_subgraph(target_addr, max_depth=2, chain="BTC")
     extract_ms = (time.perf_counter() - t0) * 1000
 
     print(f"[*] Subgraph Extracted in {extract_ms:.2f} ms:")
@@ -129,7 +129,7 @@ def test_2_core_laplacian_engine(target_addr: str):
     return result
 
 
-def test_3_fastapi_backend_pipeline(target_addr: str):
+def test_3_fastapi_backend_pipeline(target_addr: str = "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"):
     print_banner("PHASE 3: FASTAPI REST BACKEND END-TO-END PIPELINE")
 
     try:
@@ -234,7 +234,7 @@ def test_4_mathematical_enhancements():
         ]
     }
 
-    edges = client.resolve_utxo_edges(mock_tx)
+    edges, _ = client.resolve_utxo_edges(mock_tx)
     alice_edge = next(e for e in edges if e.source_address == "1SourceHighStakeAlice")
     bob_edge = next(e for e in edges if e.source_address == "1SourceLowStakeBob")
 
@@ -255,6 +255,10 @@ def test_4_mathematical_enhancements():
             self.base_time = datetime(2023, 1, 1, 12, 0, 0)
 
         def get_or_fetch_edges(self, address: str):
+            edges = self._get_edges(address)
+            return edges, False
+            
+        def _get_edges(self, address: str):
             if address == "1SuspectRoot":
                 # Suspect sends to IntermediateHop at T=0
                 return [
@@ -317,7 +321,7 @@ def test_4_mathematical_enhancements():
 
     mock_client = MockTemporalClient()
     extractor = SubgraphExtractor(btc_client=mock_client)
-    G, candidates, meta = extractor.extract_subgraph("1SuspectRoot", max_depth=3, chain="BTC")
+    G, candidates, meta, is_trunc = extractor.extract_subgraph("1SuspectRoot", max_depth=3, chain="BTC")
 
     nodes = list(G.nodes())
     leaves_discovered = [n for n in nodes if "PeelLeaf" in n]

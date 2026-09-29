@@ -23,7 +23,7 @@ def test_extractor_khop_and_vasp_isolation(tmp_path):
     ])
 
     extractor = SubgraphExtractor(db=db, tag_repo=tag_repo, edge_repo=edge_repo)
-    graph, candidates, metadata = extractor.extract_subgraph("suspect_001", max_depth=3)
+    graph, candidates, metadata, is_truncated = extractor.extract_subgraph("suspect_001", max_depth=3)
 
     assert "suspect_001" in graph.nodes
     assert "hop1" in graph.nodes

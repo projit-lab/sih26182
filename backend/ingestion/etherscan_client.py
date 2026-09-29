@@ -2,7 +2,7 @@ import logging
 import os
 import time
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 import requests
 
 from backend.config import MAX_RETRIES, REQUEST_TIMEOUT_SECONDS, USE_LIVE_API
@@ -32,6 +32,7 @@ class EtherscanClient:
         self.api_key = api_key
         self.base_url = base_url.rstrip("/")
         self.repo = repo or TransactionEdgeRepository()
+        self.use_live_api = use_live_api
         self.session = requests.Session()
         self.session.verify = False
         import urllib3
@@ -40,14 +41,13 @@ class EtherscanClient:
 
     @property
     def live_enabled(self) -> bool:
-        import backend.config as cfg
-        return self.use_live_api or getattr(cfg, "USE_LIVE_API", True)
+        return self.use_live_api
 
     def fetch_account_transactions(
         self, address: str, limit: int = 50
     ) -> List[Dict[str, Any]]:
         if not self.live_enabled:
-            return []
+            return [], False
 
         params = {
             "module": "account",
@@ -69,19 +69,19 @@ class EtherscanClient:
                 if resp.status_code == 200:
                     data = resp.json()
                     if data.get("status") == "1" and isinstance(data.get("result"), list):
-                        return data["result"]
+                        return data["result"], False
                     elif "rate limit" in str(data.get("message", "")).lower():
                         time.sleep(2 ** (attempt + 1))
                     else:
                         logger.warning(f"Etherscan message: {data.get('message')}")
-                        return []
+                        return [], False
             except Exception as e:
                 logger.debug(f"Etherscan attempt {attempt + 1} failed: {e}")
                 time.sleep(1)
 
-        return []
+        return [], False
 
-    def resolve_evm_edges(self, raw_txs: List[dict]) -> List[UniformEdge]:
+    def resolve_evm_edges(self, raw_txs: List[dict]) -> Tuple[List[UniformEdge], bool]:
         edges: List[UniformEdge] = []
         for tx in raw_txs:
             # Skip failed transactions (isError == "1")
@@ -122,9 +122,9 @@ class EtherscanClient:
                 )
             )
 
-        return edges
+        return edges, False
 
-    def get_or_fetch_edges(self, address: str) -> List[UniformEdge]:
+    def get_or_fetch_edges(self, address: str) -> Tuple[List[UniformEdge], bool]:
         if self.repo.is_address_crawled(address):
             cached = self.repo.get_outgoing_edges(address)
             return [
@@ -137,7 +137,7 @@ class EtherscanClient:
                     chain="ETH",
                 )
                 for r in cached
-            ]
+            ], False
 
         # 2. Skip live API for non-EVM or synthetic address formats
         is_eth_format = isinstance(address, str) and address.startswith("0x") and len(address) == 42
@@ -154,12 +154,13 @@ class EtherscanClient:
                     chain="ETH",
                 )
                 for r in cached
-            ] if cached else []
+            ] if cached else [], False
 
-        raw_txs = self.fetch_account_transactions(address)
-        new_edges = self.resolve_evm_edges(raw_txs)
+        raw_txs, is_txs_truncated = self.fetch_account_transactions(address)
+        new_edges, is_evm_truncated = self.resolve_evm_edges(raw_txs)
 
         if new_edges:
+            global_truncated = is_txs_truncated or is_evm_truncated
             tuples = [
                 (
                     e.tx_hash,
@@ -189,6 +190,7 @@ class EtherscanClient:
                     chain="ETH",
                 )
                 for r in cached
-            ]
+            ], is_txs_truncated or is_evm_truncated
 
-        return new_edges
+        return new_edges, is_txs_truncated or is_evm_truncated
+

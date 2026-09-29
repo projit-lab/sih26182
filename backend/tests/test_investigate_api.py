@@ -49,7 +49,7 @@ def test_investigate_seeded_case():
 
 def test_investigate_unknown_wallet_returns_404():
     payload = {
-        "suspect_address": "1UnknownWalletThatDoesNotExist9999x",
+        "suspect_address": "demo_UnknownWalletThatDoesNotExist9999x",
         "chain": "BTC",
         "depth_limit": 3,
     }

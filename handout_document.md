@@ -88,7 +88,7 @@ The exact evasion tactic criminals use—splitting funds across dozens of parall
 
 ### Real Mainnet Blockchain Proofs:
 * **Historical Ground Truth (USMS Silk Road Seizure):** Evaluated on real 29,657 BTC DOJ forfeiture cluster `1F1tAaz5...` over 199 nodes and 235 UTXOs. Correctly identified **Coinbase Prime as #1** ($R_{\text{eff}} = 1293.14\,\Omega$, 95.7% confidence).
-* **Live Mainnet Autonomous Trace (`13AM4VW2...`):** Crawled live un-cached Bitcoin transactions across **1,394 nodes and 1,595 edges**, successfully attributing the sweep flow to **Binance Cold Storage II** in **2.5 seconds**.
+* **Live Mainnet Autonomous Trace:** [PENDING PHASE 2 LIVE VALIDATION RESULTS]
 
 ---
 

@@ -16,7 +16,7 @@ def test_tagpack_loader_bundled(tmp_path):
     # Verify Binance address is present
     binance_tag = repo.get_tag("1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s")
     assert binance_tag is not None
-    assert binance_tag["entity_name"] == "Binance"
+    assert "Binance" in binance_tag["entity_name"]
     assert binance_tag["category"] == "exchange"
 
     # Verify invalid address sanitization

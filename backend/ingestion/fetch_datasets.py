@@ -81,7 +81,7 @@ def query_live_bitcoin(address: str, repo: TransactionEdgeRepository):
     """
     logger.info(f"=== [Step 3] Fetching Live UTXO Movements for Bitcoin Address: {address} ===")
     client = BlockstreamClient(repo=repo, use_live_api=True)
-    edges = client.get_or_fetch_edges(address)
+    edges, _ = client.get_or_fetch_edges(address)
     logger.info(f"Retrieved and cached {len(edges)} UTXO edges for {address}")
     for idx, e in enumerate(edges[:5], 1):
         logger.info(f"  Edge {idx}: {e.source_address[:12]}... -> {e.target_address[:12]}... [{e.amount_satoshis} sats]")
@@ -93,7 +93,7 @@ def query_live_ethereum(address: str, repo: TransactionEdgeRepository):
     """
     logger.info(f"=== [Step 4] Fetching Live EVM Account Movements for Address: {address} ===")
     client = EtherscanClient(repo=repo, use_live_api=True)
-    edges = client.get_or_fetch_edges(address)
+    edges, _ = client.get_or_fetch_edges(address)
     logger.info(f"Retrieved and cached {len(edges)} EVM edges for {address}")
     for idx, e in enumerate(edges[:5], 1):
         logger.info(f"  Edge {idx}: {e.source_address[:12]}... -> {e.target_address[:12]}... [{e.amount_satoshis} units]")
