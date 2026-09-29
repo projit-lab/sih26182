@@ -169,9 +169,7 @@ class AttributionEngine:
 
         von Luxburg, Radl & Hein (2010) show R_eff(u,v) -> 1/d_u + 1/d_v as the
         graph grows, i.e. it stops carrying global structure. Subtracting that
-        term leaves the structural signal. Verified: on the validated mixer
-        topology this raised top-1 from 95.3% +/-3.3% to 99.2% +/-0.3%, and it
-        is what stops a high-degree exchange winning purely on size.
+        term leaves the structural signal. Topology-dependent: fixed the adversarial hub graph (6/6 correct, 0/40 false wins) but LOWERED the validated mixer-mesh benchmark from 84.3% to 68.3%, because there high candidate degree is genuine evidence. Enable only when null_test() flags the specific graph.
         """
         if not np.isfinite(r):
             return r

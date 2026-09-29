@@ -1,13 +1,7 @@
 """
 API for the demo: loads real cached case data and exposes /attribute.
 
-Uses silkroad/loader.py's build_silkroad_graph() for the raw edge data, but
-does NOT use silkroad/engine.py's SilkRoadAttributionEngine -- that solver
-is unaudited (separate implementation, raw BTC weighting, not covered by
-the adversarial review in docs/ENGINE_CODE_REVIEW.md). This uses the
-audited src/attribution/engine.py AttributionEngine instead, with weights
-converted to log-scaled conductance here rather than mutating loader.py
-(which other scripts may depend on in its current raw-BTC form).
+Uses audited src/attribution/engine.py AttributionEngine.
 """
 import math
 from contextlib import asynccontextmanager
@@ -17,51 +11,45 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from src.attribution.engine import AttributionEngine
-from silkroad.loader import build_silkroad_graph
+from src.attribution.weights import _log_scale_weights
 import json
 from pathlib import Path
 
 _CASES: dict = {}
 
 
-def _log_scale_weights(G: nx.Graph) -> nx.Graph:
-    """Replace raw-BTC edge weights with log1p(amount_satoshis) conductance.
-    See docs/ENGINE_CODE_REVIEW.md Improvement A: raw amounts gave ~208x
-    worse Laplacian conditioning on heavy-tailed real transaction data."""
-    for u, v, data in G.edges(data=True):
-        sats = data.get("amount_satoshis")
-        if sats is not None:
-            data["weight"] = math.log1p(float(sats))
-    return G
+def load_case(case_id: str) -> dict:
+    case_dir = Path(f"data/cases/{case_id}")
+    edges_file = case_dir / "edges.json"
+    meta_file = case_dir / "meta.json"
 
+    with open(meta_file, "r", encoding="utf-8") as f:
+        meta = json.load(f)
 
-def _load_silkroad_case() -> dict:
-    G, candidate_vasps = build_silkroad_graph()
-    G = _log_scale_weights(G)
+    with open(edges_file, "r", encoding="utf-8") as f:
+        edges = json.load(f)
 
-    # Determine the suspect address from entity_tags.json (category == "illicit")
-    # rather than hardcoding it, so this generalizes to future cases.
-    tags_file = Path("silkroad/entity_tags.json")
-    suspect = None
-    with open(tags_file, "r", encoding="utf-8") as f:
-        tags_data = json.load(f)
-    for t in tags_data:
-        if t.get("category") == "illicit":
-            suspect = t["address"]
-            break
+    G = nx.Graph()
+    for e in edges:
+        # weights are already log-scaled, so we just add them
+        G.add_edge(e["source"], e["target"], **e)
 
     return {
         "graph": G,
-        "candidate_vasps": candidate_vasps,   # address -> entity_name
-        "suspect": suspect,
-        "truncated": False,   # this case is the fully-verified 199/235 extraction
-        "degree_correction": True,
+        "candidate_vasps": meta["candidates"],
+        "suspect": meta["suspect"],
+        "truncated": meta.get("truncated", False),
+        "degree_correction": meta.get("degree_correction", False),
     }
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    _CASES["silkroad"] = _load_silkroad_case()
+    cases_dir = Path("data/cases")
+    if cases_dir.exists():
+        for case_dir in cases_dir.iterdir():
+            if case_dir.is_dir() and (case_dir / "meta.json").exists():
+                _CASES[case_dir.name] = load_case(case_dir.name)
     yield
 
 

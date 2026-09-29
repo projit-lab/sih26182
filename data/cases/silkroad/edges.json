@@ -1,0 +1,1647 @@
+[
+  {
+    "source": "bc1qt2q0w2l3tnmcmqdegqh32mjr26s3s8z46dpmfy",
+    "target": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "weight": 12.03830466974373,
+    "amount_satoshis": 169109,
+    "tx_hash": "6f952bdec878456ab273c4ced35c1684fd81dff52d9f8c33e9025c422a80e94e"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qzprnwqkrz0enng644reqkkjy32s6pydv7mxmyr",
+    "weight": 4.442651256490317,
+    "amount_satoshis": 84,
+    "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1q4nex84d9mx8pfw9yqxme4dvsc74r8pg90r0vfm",
+    "weight": 7.558516743045645,
+    "amount_satoshis": 1916,
+    "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qcza6s6ew2kaxe9hdyrqqeuadc3za7fva5yjcnf",
+    "weight": 7.744136627627991,
+    "amount_satoshis": 2307,
+    "tx_hash": "3f1306079b9ad78c01bcd2936681c80bcc192a70b114de2875004ce589f45b7d"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "3HFdcGXVvSnvhmajTGeSLJWBL5yYrsH9fN",
+    "weight": 10.043292972227004,
+    "amount_satoshis": 23000,
+    "tx_hash": "93185883594063c982b658971bae57324d45b1010956c530fc2d4d9993ee6040"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qxszp7ph8e0d4nm4jl0muq0nwfaw42azryuakyj",
+    "weight": 8.855378246041125,
+    "amount_satoshis": 7011,
+    "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qxgqdd4eze72ydjmxre3z64uc9x74uk7432yzst",
+    "weight": 6.804614520062624,
+    "amount_satoshis": 901,
+    "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1q4k00axsx5clvwvx2nagc7tp9at3ex94k2nj038",
+    "weight": 9.480596490604585,
+    "amount_satoshis": 13102,
+    "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qezy4z7hyl0m58uvfy62m2hqxzasawz8xnc4k72",
+    "weight": 9.084323531392696,
+    "amount_satoshis": 8815,
+    "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qzyxlf9yntyphuseeq3s7jtpg4dlgtjae276l0l",
+    "weight": 6.073044534100405,
+    "amount_satoshis": 433,
+    "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1q4zn3l3yjskq7tn5rxx4x9hss9gltya26cpgas8",
+    "weight": 6.082218910376446,
+    "amount_satoshis": 437,
+    "tx_hash": "9dc38c96ec54971d9538bf23b99b7b4b74f3e08923a929b2f3f4fac7f9fb6a7a"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+    "weight": 7.309212365692763,
+    "amount_satoshis": 1493,
+    "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qf5hyusxxwrezma5j0wqj50ds7gejup90sjjhun",
+    "weight": 11.763450693025655,
+    "amount_satoshis": 128469,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qdxd4undmruc3cwuzqqu8dct44g9lrtfu0w3q7j",
+    "weight": 11.768381305751685,
+    "amount_satoshis": 129104,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qphnl7rzx626v890jldwxmx7374nqfvjge82acq",
+    "weight": 11.770764119681315,
+    "amount_satoshis": 129412,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qd3utns7f6v4hzgrutfzr92d669pey9xmewnsac",
+    "weight": 11.776104781807662,
+    "amount_satoshis": 130105,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qt95q96ecfgwxlc8my0swutmltwzznse3n64j49",
+    "weight": 11.790572352968876,
+    "amount_satoshis": 132001,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qg7exsgnnxt98dakvujdk9eah40z4xm58eqrw6m",
+    "weight": 11.799096396223058,
+    "amount_satoshis": 133131,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qfunupqnnrha5t57739qhwsf5492fsdgtmwyuyu",
+    "weight": 11.801249831107251,
+    "amount_satoshis": 133418,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qrnygk5vqflayqq9aps6d3ea869x5v5ew3qllqr",
+    "weight": 11.806572213322008,
+    "amount_satoshis": 134130,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1q27wy0n52qeuv60seehyztndwn0cw958t8dkdzc",
+    "weight": 11.806654219338315,
+    "amount_satoshis": 134141,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1q0hvcrhdy3zf736887yz6zp5n0243w4lyewam2d",
+    "weight": 11.813326309829783,
+    "amount_satoshis": 135039,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qnqgz4yqssta6ygnmtj9pemshwt97pxl3ejkkhp",
+    "weight": 11.827925967826019,
+    "amount_satoshis": 137025,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qy4lcxxa0f42we6eppkc2cz97sjyfm7f62pekm7",
+    "weight": 11.828939859689045,
+    "amount_satoshis": 137164,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qdlrc7p8mgvnl9crpnj5mtk6gegm730gesrhrvj",
+    "weight": 11.845877226269494,
+    "amount_satoshis": 139507,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qyly6mm7lzhqk8uqh9g99047hg7sj45z70snm5w",
+    "weight": 11.847281177619681,
+    "amount_satoshis": 139703,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qwuc5h7lhjhdfkgsggjeg8crgedzdeduzsergam",
+    "weight": 11.86637421032236,
+    "amount_satoshis": 142396,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "weight": 7.599901959208498,
+    "amount_satoshis": 1997,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "weight": 7.826842098158293,
+    "amount_satoshis": 2506,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "weight": 7.822044008185619,
+    "amount_satoshis": 2494,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qxh07erq7848f88w34veyffg2s7rg6y8ayhh2lk",
+    "weight": 8.237479288613633,
+    "amount_satoshis": 3779,
+    "tx_hash": "9fad00d67c673cdde578650c0e2e35ddc49dfafa20fbcbaf6cf3332b9a8e029e"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6",
+    "weight": 11.255863120452393,
+    "amount_satoshis": 77331,
+    "tx_hash": "167b79d81ca24b105dfe4483ef3de33a38e8b906d1e224a12b1c45b8ded8b1e4"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "weight": 9.675896626294639,
+    "amount_satoshis": 15928,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qsj409uhdcx8ey908mwd98f8m0q5c607g29xxmu",
+    "weight": 8.331827004436057,
+    "amount_satoshis": 4153,
+    "tx_hash": "8a50daa988bdac0d1872659d170f3022eda69cbcbd5b4587babaca64b63c4acf"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "1EYpxUdBVM8Krq9yiAoYcnvAF7MAWRQdEz",
+    "weight": 8.114324709155339,
+    "amount_satoshis": 3341,
+    "tx_hash": "bfc0ce71ff4535d746445e9046bb786d93add0115171bfca9fc9998ec7556e57"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1q8trrh0vchmchw88sk70r4sg0kqrlwr7nf92vnv",
+    "weight": 8.254008590564844,
+    "amount_satoshis": 3842,
+    "tx_hash": "1f4e4025c0352061571d6e6fb6a2c3d06b783932af9c5f9280df04a31e110f7b"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qxpyd87l3f9fdv4whtrvdfq2e90mm9s8zyhjykl",
+    "weight": 8.264363329731667,
+    "amount_satoshis": 3882,
+    "tx_hash": "56de2ea7f58b137dc9cea454f488eae7965d17646133efc2961468bc57ff5170"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qekuv2664vmu4hh424jkw4j0kt7hj7k8v68jr0k",
+    "weight": 8.363575702750637,
+    "amount_satoshis": 4287,
+    "tx_hash": "0150b0704437d9fe579746ed3f45025642cc62b5b95aa3455a15205ab53bab77"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qgd2jqecfr76dl8hkle38keqd2s7h9pd5ydhfar",
+    "weight": 8.913550280493675,
+    "amount_satoshis": 7431,
+    "tx_hash": "aa7c824d7471800baea5b195b8024b333b23df2e7c76252274b682c4b78ad037"
+  },
+  {
+    "source": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
+    "target": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+    "weight": 8.745921121024347,
+    "amount_satoshis": 6284,
+    "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+  },
+  {
+    "source": "bc1qzprnwqkrz0enng644reqkkjy32s6pydv7mxmyr",
+    "target": "bc1qu9nffluypf3grzeelpn44c6fherkcwwc2k02wn",
+    "weight": 7.454141078146678,
+    "amount_satoshis": 1726,
+    "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab"
+  },
+  {
+    "source": "bc1q4nex84d9mx8pfw9yqxme4dvsc74r8pg90r0vfm",
+    "target": "bc1qu9nffluypf3grzeelpn44c6fherkcwwc2k02wn",
+    "weight": 10.580683180882003,
+    "amount_satoshis": 39366,
+    "tx_hash": "db9ddd28944f1ddb290b05943204efe0f7aa07d3debaabe1c275d9dd198a9dab"
+  },
+  {
+    "source": "bc1qcza6s6ew2kaxe9hdyrqqeuadc3za7fva5yjcnf",
+    "target": "bc1qdtr4tw5kqyu3pwh7y0aj2f5rpgzqlesnpmfera",
+    "weight": 11.630806273624454,
+    "amount_satoshis": 112510,
+    "tx_hash": "3f1306079b9ad78c01bcd2936681c80bcc192a70b114de2875004ce589f45b7d"
+  },
+  {
+    "source": "3HFdcGXVvSnvhmajTGeSLJWBL5yYrsH9fN",
+    "target": "33iYJrYGerMuqiwBBMdd6n8acwT4JXsKUa",
+    "weight": 6.736966958001855,
+    "amount_satoshis": 842,
+    "tx_hash": "93185883594063c982b658971bae57324d45b1010956c530fc2d4d9993ee6040"
+  },
+  {
+    "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+    "target": "bc1qkfwmfk8cx3lxhj9ddps9negj0tr4qk5w5czzyp",
+    "weight": 13.943860675937705,
+    "amount_satoshis": 1136950,
+    "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+  },
+  {
+    "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+    "target": "bc1qdu6ppetkarjrtwt9thz9f6vslu62w6uzj6kyn5",
+    "weight": 10.998627151725264,
+    "amount_satoshis": 59791,
+    "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+  },
+  {
+    "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+    "target": "bc1qz6al3p2e52smtnmgx773c8ckhp2jc4njr8pf9n",
+    "weight": 9.611127890533236,
+    "amount_satoshis": 14929,
+    "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+  },
+  {
+    "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+    "target": "bc1q9jq7t96dtsr7f9eae80a2dpz7v7jhkmjkezlqn",
+    "weight": 14.980496245851091,
+    "amount_satoshis": 3205876,
+    "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+  },
+  {
+    "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+    "target": "bc1qgx53arl59snnyg8pwja4jgswdfsh4lflgcsdq2",
+    "weight": 11.453493881200801,
+    "amount_satoshis": 94229,
+    "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+  },
+  {
+    "source": "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg",
+    "target": "bc1q0fq0u4c7yxc20hrqyja633p5fsd0tcsy7ff809",
+    "weight": 13.044295884376004,
+    "amount_satoshis": 462450,
+    "tx_hash": "8ab19247a642c3c8c06b172ab92bb401cf7538fe84322480f10a0b80ab5bf8a1"
+  },
+  {
+    "source": "bc1qf5hyusxxwrezma5j0wqj50ds7gejup90sjjhun",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.193400231952097,
+    "amount_satoshis": 3616,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qdxd4undmruc3cwuzqqu8dct44g9lrtfu0w3q7j",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.19836438996762,
+    "amount_satoshis": 3634,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qphnl7rzx626v890jldwxmx7374nqfvjge82acq",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.200562797008564,
+    "amount_satoshis": 3642,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qd3utns7f6v4hzgrutfzr92d669pey9xmewnsac",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.206037762778815,
+    "amount_satoshis": 3662,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qt95q96ecfgwxlc8my0swutmltwzznse3n64j49",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.22040309993373,
+    "amount_satoshis": 3715,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qg7exsgnnxt98dakvujdk9eah40z4xm58eqrw6m",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.228977643358313,
+    "amount_satoshis": 3747,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qfunupqnnrha5t57739qhwsf5492fsdgtmwyuyu",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.231109840328154,
+    "amount_satoshis": 3755,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qrnygk5vqflayqq9aps6d3ea869x5v5ew3qllqr",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.236420527265391,
+    "amount_satoshis": 3775,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1q27wy0n52qeuv60seehyztndwn0cw958t8dkdzc",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.236685322712457,
+    "amount_satoshis": 3776,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1q0hvcrhdy3zf736887yz6zp5n0243w4lyewam2d",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.243282523048375,
+    "amount_satoshis": 3801,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qnqgz4yqssta6ygnmtj9pemshwt97pxl3ejkkhp",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.257904193465674,
+    "amount_satoshis": 3857,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qy4lcxxa0f42we6eppkc2cz97sjyfm7f62pekm7",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.258940462988459,
+    "amount_satoshis": 3861,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qdlrc7p8mgvnl9crpnj5mtk6gegm730gesrhrvj",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.275885669474356,
+    "amount_satoshis": 3927,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qyly6mm7lzhqk8uqh9g99047hg7sj45z70snm5w",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.27715777243181,
+    "amount_satoshis": 3932,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qwuc5h7lhjhdfkgsggjeg8crgedzdeduzsergam",
+    "target": "bc1qx8mpvyhk098tnvxe67nj6tc5tf89vurxe6zluf",
+    "weight": 8.296297112642508,
+    "amount_satoshis": 4008,
+    "tx_hash": "7135bdb9e596e76b601a3d356d29efbcca3d8060d458d71dbb79732c67e03c0c"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "3BiMs2zAcQaGi2EQTsSpHP62hmjhTNkrFu",
+    "weight": 12.259343233783138,
+    "amount_satoshis": 210942,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "3N31xmTWbRiYX8ZqqmxhaaHjGukkWkYUWf",
+    "weight": 12.493031956853045,
+    "amount_satoshis": 266473,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "bc1q64l3894ej0a5muw4g58qg34ul5y0ndcvsd6glr",
+    "weight": 10.805192426081865,
+    "amount_satoshis": 49275,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "bc1qt08zcyyawa84fymj8l3p5pz4tyhy09hpk0x225",
+    "weight": 13.080315631958255,
+    "amount_satoshis": 479411,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "12tyZDL9dkdjSEjxpYgWqEpFx89pyQqpmE",
+    "weight": 10.803608251247645,
+    "amount_satoshis": 49197,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "bc1qkylc7tl5x7eltua04hk2f3ppz34d5taf2vumj4",
+    "weight": 10.816994413033667,
+    "amount_satoshis": 49860,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "36mfmAea8SjomZyCNrMsSoAkkXwchr6oEZ",
+    "weight": 11.866907787054226,
+    "amount_satoshis": 142472,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "3ESFoFJHCFcEQEki846arPfRJRbXQW2KmW",
+    "weight": 11.726463026139204,
+    "amount_satoshis": 123804,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "18svuucVP8hxCfhktVBuFSPK6vY1UNTvDd",
+    "weight": 13.955725441224482,
+    "amount_satoshis": 1150520,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "bc1q6y9f0u674neuuhtz6syu76lsujjalp2w0gazyk",
+    "weight": 10.814745641882208,
+    "amount_satoshis": 49748,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "bc1qvq5ln005t0c8e7vf76jpsw79qzl784drhrg4ql",
+    "weight": 12.768282209575252,
+    "amount_satoshis": 350908,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "1PiPPagqpBVHyL6o2me1oN3v6F3dMrMF23",
+    "weight": 11.142325444188144,
+    "amount_satoshis": 69031,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "bc1qpfe5hqph8y9d9nm2wc8p9y4g279cs95wcyrf3f",
+    "weight": 12.058633559153765,
+    "amount_satoshis": 172582,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "3NuiE2UWRzubLYLHA7wwACaj45J8SDuejb",
+    "weight": 13.78374018199538,
+    "amount_satoshis": 968728,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "bc1qr3ds05v0x242swd0vm7mtp4aayyksfppnlvv9t",
+    "target": "3AQ6rS8iv5Q969vC8Bn4yPXdHH7aecCi2o",
+    "weight": 10.788493994370517,
+    "amount_satoshis": 48459,
+    "tx_hash": "20134c61a50fce12113e435c244b0313d84ac6c617ef8da0e1cdd314ef894ffa"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "363EVJoMz7dJh2bySL1mLic1TJJTXEadv1",
+    "weight": 15.061340980367222,
+    "amount_satoshis": 3475819,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "14RuP3zvt9NLShBb82jRqf1DFTnCdXiCDp",
+    "weight": 15.53875900388361,
+    "amount_satoshis": 5602698,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "bc1qyfgrvknkqx0uet674fuhztl4yhrhtc704xq6t9",
+    "weight": 12.042017242143052,
+    "amount_satoshis": 169738,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "bc1qcym6nqvx0cjunwspg6g4k7slh36yt0a36qj5ep",
+    "weight": 10.818357275254836,
+    "amount_satoshis": 49928,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "bc1qecnew47qrqrncl58s8vyf3cvca5qyzphzee8xn",
+    "weight": 13.824660568646673,
+    "amount_satoshis": 1009191,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "bc1qstxdz5rqlythf8nsyt2ryqle52detytzfxa5se",
+    "weight": 12.081433032177294,
+    "amount_satoshis": 176562,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "bc1qjdej9kf9s9dspjx06ffmm30402v2axzyx7vlz7",
+    "weight": 12.11163558444674,
+    "amount_satoshis": 181976,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "bc1q6lrh2lm5hcf840p8s9hamt0ery23c9lwc9yfw9",
+    "weight": 13.908918019657118,
+    "amount_satoshis": 1097908,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "bc1qzqtyqat3hlfc7dla8tv4ahw736ynsgdd60c39m",
+    "weight": 16.59106774494977,
+    "amount_satoshis": 16047565,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "1K1LAfaDBuhKP2gj6kPYh3dB9XMsuXNvaM",
+    "weight": 13.397888350880276,
+    "amount_satoshis": 658610,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "1A3fReEgqgYWxNsMb4uzV5dQjLAdmNeVby",
+    "weight": 14.253702906292018,
+    "amount_satoshis": 1549902,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt",
+    "target": "3MkwcARXpojbotu78JP73SiqMAJR721M9L",
+    "weight": 11.926431491404072,
+    "amount_satoshis": 151210,
+    "tx_hash": "d44643a0f5c649b4d71115ee4b0781ca2aa7bbe85613dc4f7898ccd460e7b320"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "1HmfNofcyBa1vsNbQPZVLba5AkBvvyj18s",
+    "weight": 12.98876798273172,
+    "amount_satoshis": 437471,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "1CWtus5SdVFLGyFm6UZjP1rExFyDte3ZSi",
+    "weight": 14.015352728476218,
+    "amount_satoshis": 1221209,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "bc1qu696r2j2c0fvm6f34ce9lgw77jdzvja57h26f9",
+    "weight": 10.068747721401788,
+    "amount_satoshis": 23593,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "35cK64Wy5EXoN4qiuEjnahx5HYudRjWuHu",
+    "weight": 12.295520219247926,
+    "amount_satoshis": 218713,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "3FeqA2TqrjqWKZGeZuCudHA6oPpviNizZP",
+    "weight": 13.361499955752516,
+    "amount_satoshis": 635075,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "3HBdBPmEvQ1XpZu6RRN7hUNqy9FPL9Y1Ty",
+    "weight": 12.370633239412086,
+    "amount_satoshis": 235774,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "17xNsnr4zh8AxRyhKcwnAbynm8kauQS8wb",
+    "weight": 12.247703912501127,
+    "amount_satoshis": 208501,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "bc1qsadtda0w57dcgpwlapvmp9xulgk76k6ypzpccf",
+    "weight": 9.994333235835704,
+    "amount_satoshis": 21901,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "11imnyN2ZB5iT2B4kaNce73LJ11QDK5gu",
+    "weight": 11.171195430321974,
+    "amount_satoshis": 71053,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "34KhsB8TrXP7h9J3bh8D9xSv3yFBB9w78G",
+    "weight": 10.356758213258692,
+    "amount_satoshis": 31468,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "3KwGz3X4j6CXPhBbMGjuHJq16V5A8UKftY",
+    "weight": 10.868435106356703,
+    "amount_satoshis": 52492,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "bc1qdlescnwlakvq5amzpkqa2yynncl3r5j4qwpjys",
+    "weight": 10.552552220525884,
+    "amount_satoshis": 38274,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "bc1qrnamhjvjfwfmez6e0ktag75k6454zrauhqxpmz",
+    "weight": 12.16781506841244,
+    "amount_satoshis": 192492,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "1MkS7hDPt2FygD6B5eRGQtKqQ5eS959yxZ",
+    "weight": 11.60206208203649,
+    "amount_satoshis": 109322,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q29xl2zjpccp630jju3nahgcfv7ehjflyhrudhp",
+    "target": "1CE9io4PanPW1rApnQNvcLjq3s9zcVS2A7",
+    "weight": 10.78925721934233,
+    "amount_satoshis": 48496,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "1HmfNofcyBa1vsNbQPZVLba5AkBvvyj18s",
+    "target": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "weight": 12.965119919866822,
+    "amount_satoshis": 427247,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "1CWtus5SdVFLGyFm6UZjP1rExFyDte3ZSi",
+    "weight": 13.991706726144633,
+    "amount_satoshis": 1192671,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "bc1qu696r2j2c0fvm6f34ce9lgw77jdzvja57h26f9",
+    "weight": 10.045117314666792,
+    "amount_satoshis": 23042,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "35cK64Wy5EXoN4qiuEjnahx5HYudRjWuHu",
+    "weight": 12.271874430913368,
+    "amount_satoshis": 213602,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "3FeqA2TqrjqWKZGeZuCudHA6oPpviNizZP",
+    "weight": 13.337853717464759,
+    "amount_satoshis": 620234,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "3HBdBPmEvQ1XpZu6RRN7hUNqy9FPL9Y1Ty",
+    "weight": 12.346986098575412,
+    "amount_satoshis": 230264,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "17xNsnr4zh8AxRyhKcwnAbynm8kauQS8wb",
+    "weight": 12.22405990054456,
+    "amount_satoshis": 203629,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "bc1qsadtda0w57dcgpwlapvmp9xulgk76k6ypzpccf",
+    "weight": 9.970678802076451,
+    "amount_satoshis": 21389,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "11imnyN2ZB5iT2B4kaNce73LJ11QDK5gu",
+    "weight": 11.14754127685441,
+    "amount_satoshis": 69392,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "34KhsB8TrXP7h9J3bh8D9xSv3yFBB9w78G",
+    "weight": 10.333092274830772,
+    "amount_satoshis": 30732,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "3KwGz3X4j6CXPhBbMGjuHJq16V5A8UKftY",
+    "weight": 10.844802549315018,
+    "amount_satoshis": 51266,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "bc1qdlescnwlakvq5amzpkqa2yynncl3r5j4qwpjys",
+    "weight": 10.52891783292566,
+    "amount_satoshis": 37380,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "bc1qrnamhjvjfwfmez6e0ktag75k6454zrauhqxpmz",
+    "weight": 12.144165326409178,
+    "amount_satoshis": 187993,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "1MkS7hDPt2FygD6B5eRGQtKqQ5eS959yxZ",
+    "weight": 11.57842290120173,
+    "amount_satoshis": 106768,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "bc1q6sy0tx3ulzd46876rjkqdgk3m6mthqh36e5eal",
+    "target": "1CE9io4PanPW1rApnQNvcLjq3s9zcVS2A7",
+    "weight": 10.765617725450847,
+    "amount_satoshis": 47363,
+    "tx_hash": "7052037616ab2bf493c110ca0e9d4dc752ded29cd52e59bc92a16adee925ee16"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "1Bofd2Q9PU85aQbZundq4cvZMyMvXtCfXK",
+    "weight": 6.911747300251674,
+    "amount_satoshis": 1003,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "12R3jq7ZUs4CStacG1Ny1tjQQGBuHSQTMs",
+    "weight": 7.275864600546533,
+    "amount_satoshis": 1444,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "1AjsYcJxswiipckfGePJLjDzMpb84Wyo6C",
+    "weight": 6.90875477931522,
+    "amount_satoshis": 1000,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "1NSp4dFim5TkMJ46s8vwqAhKwMjRnLczKW",
+    "weight": 6.957497370876951,
+    "amount_satoshis": 1050,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "124SzGk8LWDKy3BKKvUeKdN9A9AdHA6a1h",
+    "weight": 7.358830898342354,
+    "amount_satoshis": 1569,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "16nmVFjuQDatKNx15vn5pXD9bcWFv4zh4r",
+    "weight": 6.913737350659685,
+    "amount_satoshis": 1005,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "3LMz848zjLqzu1Ms1XzJCKF6GuvKEDv6rk",
+    "weight": 8.098338846189057,
+    "amount_satoshis": 3288,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "1LrNfVz6eKTQJUwWx8LVQbpniw9uZFqdVa",
+    "weight": 6.910750787961936,
+    "amount_satoshis": 1002,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "172rNpvtpStH1XMoVvZfym2qQLR3fPzUJu",
+    "weight": 7.044905117129371,
+    "amount_satoshis": 1146,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "1KscEVdMqqk1ZyYP3EJTyX921Ufku99mSD",
+    "weight": 6.932447891572509,
+    "amount_satoshis": 1024,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "3LW46nTGWav75BDpCLgjG8dgBiLJ3Xmstm",
+    "weight": 6.90875477931522,
+    "amount_satoshis": 1000,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "1EQNxzaEh5D8mJHZCxgLvRvPTUsgvK6XgS",
+    "weight": 6.920671504248683,
+    "amount_satoshis": 1012,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "1L72To2EPLLU1wkvAv8KNzihXFTnCup5bN",
+    "weight": 6.920671504248683,
+    "amount_satoshis": 1012,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "18UPWfCTKhmZM4QbmgsmomvARsc4u1MEZs",
+    "weight": 6.994849985833071,
+    "amount_satoshis": 1090,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "1BESTCHANGEuX2oUwodgvJqB52kTsrfXS9",
+    "target": "1FktL3eKioNhjJBhQuHKvu57goKBdfthDY",
+    "weight": 6.90875477931522,
+    "amount_satoshis": 1000,
+    "tx_hash": "8e3a0d37a300a0320ae401ae2d494477a3ce93d5be3f30bef38aba77f855289d"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "bc1qepe2cpqdnppwgpgjp8jqseunqtkqa38qgfvwtl",
+    "weight": 12.39278040220317,
+    "amount_satoshis": 241054,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "bc1qyf9fcpwffp5xg9v6vqnmkgd8q64sew7pdk09we",
+    "weight": 12.3950759960046,
+    "amount_satoshis": 241608,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "3NuPHq99EDqpu4CWwpjha8kJUw5Nm4nMCJ",
+    "weight": 9.261793653565098,
+    "amount_satoshis": 10527,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "bc1qjgzxlmde8fhctp5g7tejfafjfvexcnd06vr8wh",
+    "weight": 13.468471892740645,
+    "amount_satoshis": 706777,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "3D4qVb9dJTCpcLFs3DffYej2Z2yfnkChFM",
+    "weight": 11.304732100608703,
+    "amount_satoshis": 81204,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "3Qh6pdrjLTzg8tARtwcqbDZUM2jfNJzQBx",
+    "weight": 9.906034306802704,
+    "amount_satoshis": 20050,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "bc1q8zu2ep08ceayeghgrmjzmhyc7s7l227tvswwvg",
+    "weight": 10.4274761628284,
+    "amount_satoshis": 33774,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "1DDRzi3NyCnV29HCdtjKm5YDA8h666Nuyz",
+    "weight": 9.112837790614945,
+    "amount_satoshis": 9070,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "bc1qqynssc08dsty54jahwe345y6sfc3hd4v2quhua",
+    "weight": 12.684890440636023,
+    "amount_satoshis": 322832,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "17R2swTna2qTPqj6nw2zMtmMPTHAE9vmtQ",
+    "weight": 11.876616736811588,
+    "amount_satoshis": 143862,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "14vnsVA6oxGpKyQWU6NStASkCXmd5b5EUt",
+    "weight": 9.800679332554447,
+    "amount_satoshis": 18045,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "138t3njjq2jTpoaFNBbfTCY4Np27nbMEsr",
+    "weight": 11.866907787054226,
+    "amount_satoshis": 142472,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "bc1qhzqr8wf0qlpdyed782nzq5l38x0msz40vulrgc",
+    "weight": 13.709890008500588,
+    "amount_satoshis": 899765,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3E2adcep2NRRpriLnWn1AvW3AHKqBx2mMr",
+    "target": "bc1qn7mlkeux0rc73mhjwja86dnzg8ulx8mj02t7km",
+    "weight": 13.712672414006114,
+    "amount_satoshis": 902272,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "bc1qepe2cpqdnppwgpgjp8jqseunqtkqa38qgfvwtl",
+    "target": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "weight": 12.387735652194252,
+    "amount_satoshis": 239841,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "bc1qyf9fcpwffp5xg9v6vqnmkgd8q64sew7pdk09we",
+    "weight": 12.39003036308281,
+    "amount_satoshis": 240392,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "3NuPHq99EDqpu4CWwpjha8kJUw5Nm4nMCJ",
+    "weight": 9.256651274839433,
+    "amount_satoshis": 10473,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "bc1qjgzxlmde8fhctp5g7tejfafjfvexcnd06vr8wh",
+    "weight": 13.463425066359349,
+    "amount_satoshis": 703219,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "3D4qVb9dJTCpcLFs3DffYej2Z2yfnkChFM",
+    "weight": 11.299695115107028,
+    "amount_satoshis": 80796,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "3Qh6pdrjLTzg8tARtwcqbDZUM2jfNJzQBx",
+    "weight": 9.901034546375062,
+    "amount_satoshis": 19950,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "bc1q8zu2ep08ceayeghgrmjzmhyc7s7l227tvswwvg",
+    "weight": 10.422400386484737,
+    "amount_satoshis": 33603,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "1DDRzi3NyCnV29HCdtjKm5YDA8h666Nuyz",
+    "weight": 9.107753783201082,
+    "amount_satoshis": 9024,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "bc1qqynssc08dsty54jahwe345y6sfc3hd4v2quhua",
+    "weight": 12.679844167344829,
+    "amount_satoshis": 321207,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "17R2swTna2qTPqj6nw2zMtmMPTHAE9vmtQ",
+    "weight": 11.871571465100796,
+    "amount_satoshis": 143138,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "14vnsVA6oxGpKyQWU6NStASkCXmd5b5EUt",
+    "weight": 9.795679599901822,
+    "amount_satoshis": 17955,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "138t3njjq2jTpoaFNBbfTCY4Np27nbMEsr",
+    "weight": 11.861855494336515,
+    "amount_satoshis": 141754,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "bc1qhzqr8wf0qlpdyed782nzq5l38x0msz40vulrgc",
+    "weight": 13.704842649648484,
+    "amount_satoshis": 895235,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "3NALUedhpe5uj1GcqcP2gAATe5RBz31prH",
+    "target": "bc1qn7mlkeux0rc73mhjwja86dnzg8ulx8mj02t7km",
+    "weight": 13.70762352000187,
+    "amount_satoshis": 897728,
+    "tx_hash": "5698c5f2eb1f7fe40d01b24d364d4483b8636b1e2b51759eeb3b31d7389753e1"
+  },
+  {
+    "source": "bc1qxh07erq7848f88w34veyffg2s7rg6y8ayhh2lk",
+    "target": "bc1qqpkq358ykd8gj2397khl8uy2eu0mxnwwpjj69a",
+    "weight": 12.463169213862368,
+    "amount_satoshis": 258633,
+    "tx_hash": "9fad00d67c673cdde578650c0e2e35ddc49dfafa20fbcbaf6cf3332b9a8e029e"
+  },
+  {
+    "source": "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6",
+    "target": "bc1qdt80mv8lrzjeen388604vr220469mezz0ukjjl",
+    "weight": 16.63161466429197,
+    "amount_satoshis": 16711616,
+    "tx_hash": "167b79d81ca24b105dfe4483ef3de33a38e8b906d1e224a12b1c45b8ded8b1e4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "bc1qnzhcm4guf967fkg4anuxvuqfy3jamkadsvwqkh",
+    "weight": 10.27377443229468,
+    "amount_satoshis": 28962,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "33573PzWC43WprP12GHYspf7qM5Y8EV3x4",
+    "weight": 13.052127590961359,
+    "amount_satoshis": 466086,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "1mTmGLGFWmyi8vLyExJsH4fsK6A3kzTWD",
+    "weight": 10.774111238226828,
+    "amount_satoshis": 47767,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "3H6EG1wFL9oAM7MJA5T2QBnJSzdcwiTjh1",
+    "weight": 11.921911035638436,
+    "amount_satoshis": 150528,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "32yTv5U9uCd4MUsjdZET5MbHDd7HtBCtBc",
+    "weight": 11.813874145522394,
+    "amount_satoshis": 135113,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "bc1qyeeysc6s43nr8czthl9yzesa7yzhqqas99l77d",
+    "weight": 10.04914512495849,
+    "amount_satoshis": 23135,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "39ykp4t7trJZ4iaBB6SqVesbJ1QHTz8MeE",
+    "weight": 12.735856422477369,
+    "amount_satoshis": 339712,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "bc1q93gqmsflfp0kyvnspkad67qq0535p066zfc0nn",
+    "weight": 12.170445467887022,
+    "amount_satoshis": 192999,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "3HgRYRG8YF8PKMVkxjouxYkr75822Cx39P",
+    "weight": 12.042541439147108,
+    "amount_satoshis": 169827,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "bc1q5x4xsngz8ftxaz7u7tfp0cwndz6c6hvup3zdrj",
+    "weight": 12.851666896230572,
+    "amount_satoshis": 381423,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "bc1q5wscg3urkltlx7pyvy59qym25e8425cn3uw2ne",
+    "weight": 12.149258878175155,
+    "amount_satoshis": 188953,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "bc1q78ukv6nv5mzaxf85ua62m5jy7gj03n4dynt4cu",
+    "weight": 11.649508446756762,
+    "amount_satoshis": 114634,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "3QYDZWM139PDVLmMTfyNRzKYxPRnvFt4QY",
+    "weight": 11.47733973724522,
+    "amount_satoshis": 96503,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "36KZAL8UC484spJBSZoJNPZ7Jg3z9Cb5pM",
+    "target": "bc1qxvvs2z22wupev48d5z6279dsdctrxrmwc05mdu",
+    "weight": 11.53398220749584,
+    "amount_satoshis": 102127,
+    "tx_hash": "2a426e7c9e8230a3fe2c4b295052415f608de09e3c57ba2254164173e2fc07d4"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "bc1qzr4m0j9gr6pg0xcjszzjmvz3nut9unwa988rtd",
+    "weight": 13.540680213799517,
+    "amount_satoshis": 759700,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "bc1q7pv4q9a0mv8nmk7n6vqd6w69gvljm4ntggyeal",
+    "weight": 9.210440366976517,
+    "amount_satoshis": 10000,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "bc1qr9wf63xevyqhav7m47vq9ht087qldgxpassnt5",
+    "weight": 12.37581963951765,
+    "amount_satoshis": 237000,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "bc1quk3k89wdwlcze5vdlq3vrwk386vuchz3ndqwal",
+    "weight": 10.229223792606835,
+    "amount_satoshis": 27700,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "3QdDXqVx1moxpwRZoxPEDjStgNdM5ngiCE",
+    "weight": 13.904803580020998,
+    "amount_satoshis": 1093400,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "371tPcXYhwu3LH8xN2jdWzFqbHFTKA7iAx",
+    "weight": 13.544227942968698,
+    "amount_satoshis": 762400,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "3MKWiMS4QfMeaP7nKFRta3gk2AULktnN5v",
+    "weight": 13.570889252111332,
+    "amount_satoshis": 783000,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "bc1q786mysjy7jmncpkwjsmm350y8x7z7vqnflj2yp",
+    "weight": 12.420381283681547,
+    "amount_satoshis": 247800,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "344LjHdWHyst93FPGhUE3amf6TwE3XWbAQ",
+    "weight": 13.261953131042814,
+    "amount_satoshis": 574900,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "16qTBw9gzHAVHeh7txLXdNVvp2WNK53t4s",
+    "weight": 13.635188201437066,
+    "amount_satoshis": 835000,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "bc1qwtycdq77wng74l7kcd6hd7rn7974de0qxjwpph",
+    "weight": 9.803722464346553,
+    "amount_satoshis": 18100,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "3PPaer59jbwfwy4NYBBJUwuLVp3utCRwkK",
+    "weight": 14.163559101267337,
+    "amount_satoshis": 1416300,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "35nDba7UsLP84Kj3QRWtjN44WB31VXevLy",
+    "weight": 12.661283017110742,
+    "amount_satoshis": 315300,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "1JZyC1pUNW86oc5S6yGu1s155Lq1mi8Rbg",
+    "weight": 11.39640288460621,
+    "amount_satoshis": 89000,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "1A5PFH8NdhLy1raKXKxFoqUgMAPUaqivqp",
+    "target": "bc1qsh9mc2pa8y9smhatwacsqh2a47zu0hgrhvprst",
+    "weight": 13.643892711528204,
+    "amount_satoshis": 842300,
+    "tx_hash": "c24684d9ebed26cce3c7608543c99108092e5abe54ac4952a6f064543043ace6"
+  },
+  {
+    "source": "bc1q8trrh0vchmchw88sk70r4sg0kqrlwr7nf92vnv",
+    "target": "bc1q0rrmr7wau4486k59g6888c5g2exf6aqlrgdjnq",
+    "weight": 13.28307647737299,
+    "amount_satoshis": 587173,
+    "tx_hash": "1f4e4025c0352061571d6e6fb6a2c3d06b783932af9c5f9280df04a31e110f7b"
+  },
+  {
+    "source": "bc1qxpyd87l3f9fdv4whtrvdfq2e90mm9s8zyhjykl",
+    "target": "bc1qrv0heyrq3fw2dqtfufyu4tau226gqqwj3ldmse",
+    "weight": 13.631658630750643,
+    "amount_satoshis": 832058,
+    "tx_hash": "56de2ea7f58b137dc9cea454f488eae7965d17646133efc2961468bc57ff5170"
+  },
+  {
+    "source": "bc1qekuv2664vmu4hh424jkw4j0kt7hj7k8v68jr0k",
+    "target": "bc1qtr9p6mw84nk4x3txjtp8a3lg0luufz6r69pkna",
+    "weight": 13.828829466210273,
+    "amount_satoshis": 1013407,
+    "tx_hash": "0150b0704437d9fe579746ed3f45025642cc62b5b95aa3455a15205ab53bab77"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "3FYkEUT2jd1p1WkbrqRf1uzxj7E6eZkP3i",
+    "weight": 15.191449991392734,
+    "amount_satoshis": 3958793,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "3PraLKGzLfHFSoqCtWv6jivt5QQxDkpecf",
+    "weight": 12.611541086966115,
+    "amount_satoshis": 300000,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "3Nv6KcGLNxx4cEtNDvsRooih2bKzqYC85q",
+    "weight": 14.237619059875582,
+    "amount_satoshis": 1525173,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "1PC9BdXsrpTBQG7obH6iacEcEab2PggKNv",
+    "weight": 12.192450281005975,
+    "amount_satoshis": 197293,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "3NyPR5872dRMZm3imyUHiFFbwSsAKqUHyr",
+    "weight": 12.735653289219783,
+    "amount_satoshis": 339643,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "1BQq6Hz1Bnf7VvMoz4t4PsPWpCesxm1yGX",
+    "weight": 13.46293007740115,
+    "amount_satoshis": 702871,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "3D3BZ23wRP75w912k5DQsssHZ3G6pN5wQh",
+    "weight": 13.681165119808863,
+    "amount_satoshis": 874287,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "3N64UXjdMgwQ3SzdyN1WnqwS2o5izTra63",
+    "weight": 12.022408187447777,
+    "amount_satoshis": 166442,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "194hi8XoQZKHozwJCFb3qEX2HBENudqnws",
+    "weight": 12.09140226054657,
+    "amount_satoshis": 178331,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "35ES4P43WG3g2rkjxzzwPH4wxxtafQZ3TV",
+    "weight": 9.893285690051531,
+    "amount_satoshis": 19796,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "1E6DExZnwmpBqk9BQv9D5vxjtGhRSYzEMS",
+    "weight": 12.582036849720653,
+    "amount_satoshis": 291278,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "3FHwTtZ3beqCZFVASVDXvfzEjo3GsYunnm",
+    "weight": 12.994850409105307,
+    "amount_satoshis": 440140,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "3KX3SSRPFuKhkAoxiUHJGPQVoGuXDfgSvN",
+    "weight": 14.635787182335125,
+    "amount_satoshis": 2271127,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "12p8NzuKGgqCjXup4d6nZQNVxsrYRKf6M8",
+    "weight": 11.577879524759654,
+    "amount_satoshis": 106710,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "3KXsaWqHRqxALLHb3y575QKGqq2WFm64D1",
+    "target": "bc1qkkyzr28z534v0nukx3l4h6swe98heap4gct03r",
+    "weight": 13.30538802030864,
+    "amount_satoshis": 600421,
+    "tx_hash": "cfd87604a27f1d7475fa797c323adad9cfcfac3a5a4c1d02d26060671cc0b848"
+  },
+  {
+    "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+    "target": "1FJaLfAs6t954LVkYWLLEkkk3AJbfhMUqZ",
+    "weight": 14.273321406444374,
+    "amount_satoshis": 1580609,
+    "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+  },
+  {
+    "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+    "target": "3C9saf6VAEtQQD9GDLJ5esDXyystDNjG6j",
+    "weight": 11.766924065413505,
+    "amount_satoshis": 128916,
+    "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+  },
+  {
+    "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+    "target": "bc1q22ekwchmseup6ungkal5pcduwn6qprpetzh8gm",
+    "weight": 12.994505005581939,
+    "amount_satoshis": 439988,
+    "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+  },
+  {
+    "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+    "target": "3QVswRtA2c8bU5ZXGuBdCvezPVPnzEcZ1H",
+    "weight": 10.67498369950705,
+    "amount_satoshis": 43259,
+    "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+  },
+  {
+    "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+    "target": "bc1qx8pka4cuz3v2jkexaw9cpgm0atwra0recu0eeq",
+    "weight": 12.396316901362813,
+    "amount_satoshis": 241908,
+    "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+  },
+  {
+    "source": "bc1qq904ynep5mvwpjxdlyecgeupg22dm8am6cfvgq",
+    "target": "1EtfWpNsQuBPhLjFEGHcJsWx4wJt8HUrYs",
+    "weight": 13.421888542759946,
+    "amount_satoshis": 674608,
+    "tx_hash": "36ad37591835b5e7d86fe1d8687c1ce7b5c791b41f028b9254883742813911b9"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "1DU9tHtQR87NoEA3VKbBcHm7Yy62YZ6ohB",
+    "weight": 14.498607907721096,
+    "amount_satoshis": 1980000,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "35VcUc3xjTEssbRM2SaxHmMGwfEhZGmuno",
+    "weight": 12.511352710974496,
+    "amount_satoshis": 271400,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1py0qq59xpjs6vq07mk0eswh2n0mhfhs63z7c62czjl2j2trg0p35q98zqtg",
+    "weight": 14.683427938790338,
+    "amount_satoshis": 2381944,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1qmgy057v0zal4aeeh8688yhr5dgj8ntqn3672z5",
+    "weight": 15.518621128377184,
+    "amount_satoshis": 5491000,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "1KLcBeVUJ3YgC15y9dS3JHG6y3wh1DWm9c",
+    "weight": 13.163507240119458,
+    "amount_satoshis": 521000,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1ql29saxeutz50hwcafvxvn4pz0mze5cuph8mkpx",
+    "weight": 13.544685602578916,
+    "amount_satoshis": 762749,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1qzm528amq5v6fdsuf7mqx4nlvsvhge4jyzzlhxw",
+    "weight": 12.320048442843603,
+    "amount_satoshis": 224144,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "1HUawyyhL9zGyrDaEPnuaDFrxzeryubUUg",
+    "weight": 11.92504173829169,
+    "amount_satoshis": 151000,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1q2xduj6tmyy6v4q7yxmjfl5467aehr3s62t40aq",
+    "weight": 13.930064385335303,
+    "amount_satoshis": 1121372,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1q65uh3a7px94dngc5hst8x2uy2kg2njwskxnmur",
+    "weight": 14.842652981356252,
+    "amount_satoshis": 2793072,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "12hNCnBRzjgdnxxJMu7h4bkGhkegYGYvcg",
+    "weight": 14.784668844427886,
+    "amount_satoshis": 2635724,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1qtpfgdlxhzct5nnfrjrp6wyukcxsgdn6dkysrqr",
+    "weight": 17.39317743423568,
+    "amount_satoshis": 35789940,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1q7rd2xflrt3vhjj82zqgcsntx8dqxsrx5kym6wc",
+    "weight": 13.95178904885679,
+    "amount_satoshis": 1146000,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1qahnukksr77mpfl70z0mmekxge573w36ut5xs9h",
+    "weight": 15.855925757599541,
+    "amount_satoshis": 7693802,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  },
+  {
+    "source": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+    "target": "bc1qqensa8pzrec0yvdayp0rr6su6z5847w448s703",
+    "weight": 17.392985881626874,
+    "amount_satoshis": 35783085,
+    "tx_hash": "1958efbe9d089eecc151f3aed58d8ac1a0c48ccd1b47a1f767a4f4574dffd887"
+  }
+]

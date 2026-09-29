@@ -1,0 +1,84 @@
+=== Graph Health ===
+{
+  "nodes": 199,
+  "edges": 235,
+  "connected": false,
+  "n_components": 7,
+  "largest_component": 102,
+  "isolated_nodes": 0,
+  "weight_min": 4.442651256490317,
+  "weight_max": 17.39317743423568,
+  "weight_dynamic_range": 3.9150445151025086
+}
+
+=== Degree Correction: False ===
+Separation Ratio: 1.4810514566134574
+Ranked Candidates:
+  Coinbase Prime Institutional Vault (bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6): score=0.08884257134380472, raw R_eff=0.08884257134380472
+  Kraken Exchange Liquidation Node (3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt): score=0.13158041969802697, raw R_eff=0.13158041969802697
+  Binance Multi-Sig Sweep Relay (366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg): score=0.13681351591311128, raw R_eff=0.13681351591311128
+Unreachable:
+
+=== Degree Correction: True ===
+Separation Ratio: 2.4199101098839644
+Ranked Candidates:
+  Coinbase Prime Institutional Vault (bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6): score=0.05038025030379676, raw R_eff=0.08884257134380472
+  Binance Multi-Sig Sweep Relay (366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg): score=0.12191567704864245, raw R_eff=0.13681351591311128
+  Kraken Exchange Liquidation Node (3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt): score=0.12306478788574543, raw R_eff=0.13158041969802697
+Unreachable:
+
+=== Null Test Runs ===
+[
+  {
+    "n": 19,
+    "wins_by_candidate": {
+      "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6": 16,
+      "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg": 2,
+      "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt": 1
+    },
+    "chance_rate": 0.3333333333333333,
+    "degree_correction_currently": false,
+    "likely_needs_degree_correction": true,
+    "n_requested": 40,
+    "seed": 0
+  },
+  {
+    "n": 18,
+    "wins_by_candidate": {
+      "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6": 15,
+      "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg": 1,
+      "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt": 2
+    },
+    "chance_rate": 0.3333333333333333,
+    "degree_correction_currently": false,
+    "likely_needs_degree_correction": true,
+    "n_requested": 40,
+    "seed": 1
+  },
+  {
+    "n": 21,
+    "wins_by_candidate": {
+      "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6": 17,
+      "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt": 2,
+      "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg": 2
+    },
+    "chance_rate": 0.3333333333333333,
+    "degree_correction_currently": false,
+    "likely_needs_degree_correction": false,
+    "n_requested": 40,
+    "seed": 2
+  },
+  {
+    "n": 98,
+    "wins_by_candidate": {
+      "bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6": 80,
+      "366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg": 6,
+      "3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt": 12
+    },
+    "chance_rate": 0.3333333333333333,
+    "degree_correction_currently": false,
+    "likely_needs_degree_correction": false,
+    "n_requested": 200,
+    "seed": 0
+  }
+]
