@@ -9,20 +9,20 @@ from backend.models.sahyog import SahyogDispatchRequest, SahyogDispatchResponse
 
 class SahyogService:
     """
-    Mock Indian Law Enforcement / SAHYOG Portal Dispatcher.
-    Simulates statutory Section 91 CrPC lawful freeze / KYC requests to VASPs.
+    Mock SAHYOG Portal Dispatcher (simulated only).
+    No real SAHYOG integration exists. Simulates statutory Section 91 CrPC lawful freeze / KYC requests to VASPs.
     """
 
     def __init__(self, repo: Optional[SahyogRepository] = None):
         self.repo = repo or SahyogRepository()
 
     def dispatch_notice(self, req: SahyogDispatchRequest) -> SahyogDispatchResponse:
-        # Generate official acknowledgment token
+        # Generate MOCK acknowledgment token (no real SAHYOG call)
         unique_suffix = uuid.uuid4().hex[:6].upper()
         ack_token = f"SAHYOG-ACK-2026-{unique_suffix}"
         now_str = datetime.utcnow().isoformat() + "Z"
 
-        # Cryptographic audit hash representing tamper-proof dispatch record
+        # Demo checksum of request parameters (not tamper-proof, not a certification)
         payload_raw = (
             f"{req.case_id}:{req.suspect_address}:{req.target_vasp}:{req.action}:{now_str}"
         )
@@ -39,11 +39,10 @@ class SahyogService:
             jurisdiction=req.jurisdiction,
             law_section=req.law_section,
             dispatch_hash=dispatch_hash,
-            status="SUBMITTED",
+            status="SIMULATED",
         )
 
-        vasp_slug = req.target_vasp.lower().replace(" ", "")
-        compliance_url = f"https://compliance.{vasp_slug}.in/le-portal/v2/dispatches/{ack_token}"
+        vasp_compliance_portal = f"mock://sahyog/dispatches/{ack_token}"
 
         return SahyogDispatchResponse(
             ack_token=ack_token,
@@ -51,15 +50,15 @@ class SahyogService:
             suspect_address=req.suspect_address,
             target_vasp=req.target_vasp,
             action=req.action,
-            status="SUBMITTED",
+            status="SIMULATED",
             timestamp=now_str,
             dispatch_hash=dispatch_hash,
-            vasp_compliance_portal=compliance_url,
+            vasp_compliance_portal=vasp_compliance_portal,
+            simulated=True,
         )
 
     def get_dispatch_status(self, ack_token: str) -> Optional[dict]:
         record = self.repo.get_dispatch(ack_token)
         if record and "target_vasp" in record:
-            vasp_slug = record["target_vasp"].lower().replace(" ", "")
-            record["vasp_compliance_portal"] = f"https://compliance.{vasp_slug}.in/le-portal/v2/dispatches/{ack_token}"
+            record["vasp_compliance_portal"] = f"mock://sahyog/dispatches/{ack_token}"
         return record

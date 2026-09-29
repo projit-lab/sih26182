@@ -119,8 +119,8 @@ $$\mathbf{L}_{\text{grounded}} \cdot \mathbf{v} = \mathbf{I}_{\text{unit}}$$
 │                                             (routers/sahyog.py, services/report_service.py)                          │
 │                                                                                                                      │
 │   ┌──────────────────────────────┐   ┌──────────────────────────────┐   ┌──────────────────────────────┐             │
-│   │    CYTOSCAPE.JS CANVAS       │   │  SAHYOG SECTION 91 CrPC      │   │  SECTION 65B FORENSIC PDF    │             │
-│   │  Interactive Graph Topology  │   │  Statutory Freeze Notice     │   │  Court-Admissible Evidence   │             │
+│   │    CYTOSCAPE.JS CANVAS       │   │  SAHYOG (MOCK/SIMULATED)     │   │  INVESTIGATOR LEAD REPORT    │             │
+│   │  Interactive Graph Topology  │   │  Simulated Freeze Notice     │   │  Prototype PDF (not legal)   │             │
 │   │  Roles: Suspect, Mixer, VASP │   │  Token: SAHYOG-ACK-2026-XXXX │   │  SHA256 Hash Chain & Matrix  │             │
 │   └──────────────────────────────┘   └──────────────────────────────┘   └──────────────────────────────┘             │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -174,7 +174,7 @@ flowchart TD
         Softmax --> APIRouter["FastAPI REST Endpoints"]
         APIRouter --> CytoscapeUI["Cytoscape.js Visualizer\n(Dynamic Graph Canvas)"]
         APIRouter --> SahyogPortal["SAHYOG Statutory Notice\n(Section 91 CrPC Freeze Notice)"]
-        APIRouter --> CourtPDF["Section 65B Forensic PDF\n(Court-Admissible Evidence Report)"]
+        APIRouter --> ReportPDF["Investigator Lead PDF\n(Prototype - not a legal document)"]
     end
 
     DataIngestion --> SubgraphExtraction
@@ -185,7 +185,7 @@ flowchart TD
     style SeedNode fill:#ef4444,stroke:#fca5a5,color:#fff
     style SparseSolve fill:#10b981,stroke:#a7f3d0,color:#fff
     style SahyogPortal fill:#3b82f6,stroke:#93c5fd,color:#fff
-    style CourtPDF fill:#8b5cf6,stroke:#c4b5fd,color:#fff
+    style ReportPDF fill:#8b5cf6,stroke:#c4b5fd,color:#fff
 ```
 
 ---
@@ -307,14 +307,14 @@ flowchart TD
 
 ---
 
-### Module 6: Section 65B Indian Evidence Act Forensic PDF Report (`backend/services/report_service.py`)
-* **Role:** Programmatic PDF generation engine that compiles an admissible forensic audit report for judicial presentation in Indian courts.
+### Module 6: Investigator Lead Report Service (`backend/services/report_service.py`)
+* **Role:** Programmatic PDF generation engine that compiles prototype investigator lead reports.
 * **Inputs:**
   * `case_id` (`str`): Reference case identifier stored in `cases` repository.
 * **Outputs:**
   * Binary PDF stream (`application/pdf`) entitled `Forensic_Report_{case_id}.pdf`.
 * **Legal & Technical Contents of Generated Report:**
-  1. **Section 65B Electronic Certificate:** Mandated certification of computer-generated electronic record integrity under Section 65B of the Indian Evidence Act, 1872.
+  1. **Demo Checksum:** SHA-256 demo hash of case parameters (not a certification).
   2. **Cryptographic SHA-256 Audit Chain:** Hash proof of transaction inputs, mathematical solver outputs, and node classifications.
   3. **Attribution Evidence Table:** Ranked VASP destinations, effective resistance values ($R_{\text{eff}}$), and normalized confidence scores.
   4. **Graph Metrics:** Total analyzed nodes, edge counts, and transacted Bitcoin volume.
@@ -329,7 +329,7 @@ flowchart TD
 | `POST` | `/api/v1/investigate` | Execute full Dirichlet Laplacian investigation | `{ "suspect_address": str, "depth_limit": 1-10, "chain": "BTC" }` |
 | `GET` | `/api/v1/graph/subgraph/{address}` | Export Cytoscape-formatted transaction graph | `address`, `depth` (1-10), `chain` ("BTC") |
 | `POST` | `/api/v1/sahyog/dispatch` | Issue Section 91 CrPC notice via SAHYOG | `{ "case_id": str, "target_vasp": str, "action": str, ... }` |
-| `GET` | `/api/v1/reports/{case_id}/export` | Download court-admissible Section 65B PDF | `case_id` (Path parameter) |
+| `GET` | `/api/v1/reports/{case_id}/export` | Download investigator lead report PDF | `case_id` (Path parameter) |
 | `GET` | `/health` | Ingestion & engine health status | None |
 
 ---
@@ -379,7 +379,7 @@ python test_real_engine_live.py
 This test suite executes all 4 phases end-to-end:
 - **Phase 1:** Live UTXO extraction from Mempool.space / Blockstream.
 - **Phase 2:** Core Grounded Laplacian Dirichlet solver ($Lx = b$) & effective resistance calculation.
-- **Phase 3:** Full FastAPI investigation, SAHYOG Section 91 CrPC notice dispatch, and Section 65B court PDF generation.
+- **Phase 3:** Full FastAPI investigation, mock SAHYOG (simulated) notice dispatch, and investigator lead report generation.
 - **Phase 4:** Mathematical assertions for proportional UTXO attribution, directional temporal order filtering, and adaptive volume beam search.
 
 ---
@@ -391,7 +391,7 @@ The backend has been verified against **live Bitcoin mainnet blockchain transact
 ### Live Visualizer Execution Proof (Mainnet Target: `13AM4VW2...`)
 Below is the live execution captured from the running engine visualizer:
 
-![Live Mainnet Proof - 1,394 Nodes Crawled and Attributed to Binance Cold Storage II](file:///C:/Users/Danish/.gemini/antigravity-ide/brain/a6353c39-7da9-4d09-b097-cc65b9a4380d/.user_uploaded/media_1788582168216.png)
+
 
 ### Live Forensic Metrics Breakdown:
 | Parameter | Value Observed in Live Run | Significance |
@@ -399,20 +399,17 @@ Below is the live execution captured from the running engine visualizer:
 | **Suspect Target** | `13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94` | Real active Bitcoin mainnet address |
 | **Attributed Destination**| `bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h` | **Binance Cold Storage Vault II** (verified via Arkham & GraphSense) |
 | **Attribution Confidence**| **100.0%** | 100% of outward conductance drained into Binance vault |
-| **Effective Resistance** | **$2.2646\,\Omega$** | Circuit theory potential solution across multi-hop sweeps |
-| **Graph Scale** | **1,394 Nodes • 1,595 Edges** | Proves the engine easily handles massive mainnet clusters |
-| **Compute Execution Time**| **2,570.3 ms (~2.5 sec)** | Ultra-fast Sparse LU factorization on 1,394 nodes |
-| **Statutory Actions** | Court PDF & SAHYOG Dispatch | Generates Section 65B certified PDF and Section 91 CrPC freeze directive |
+| **Compute Execution Time**| **2,570.3 ms (~2.5 sec)** | Ultra-fast Sparse LU factorization |
 
 ### Historical Silk Road Mainnet Proof (`1F1tAaz5...` → Coinbase Prime)
 Below is the live execution captured from `graph_visualizer.html` rendering the 102-node real Silk Road graph and Grounded Laplacian attribution solution:
 
-![Live Silk Road Graph Visualizer - 102 Nodes Attributed to Coinbase Prime Institutional Vault](file:///C:/Users/Danish/.gemini/antigravity-ide/brain/a6353c39-7da9-4d09-b097-cc65b9a4380d/silkroad_attribution_modal_1788588982366.png)
+
 
 ### Summary of Real-World Validations:
-1. **Live Autonomous Ingestion:** Crawled live UTXOs from Mempool.space across 1,394 nodes, identifying **Binance Cold Storage II** in 2.5 seconds.
+1. **Live Autonomous Ingestion:** Crawled live UTXOs from Mempool.space, identifying **Binance Cold Storage II**.
 2. **Historical Silk Road Seizure Case:** Analyzed DOJ-seized cluster `1F1tAaz5...` over 199 real nodes and 235 live UTXO edges, confirming **Coinbase Prime as #1** ($R_{\text{eff}} = 1293.14\,\Omega$, 95.7% confidence).
-3. **Forensic & Statutory Admissibility:** Automated Section 65B Indian Evidence Act compliant evidence report generation with SHA-256 hash.
+3. **Investigator Lead Report:** Prototype PDF report generation with a demo checksum.
 
-*(For the complete mathematical, statistical, and forensic proof dossier, see [`backend/REAL_WORLD_PROOF.md`](file:///d:/hackathon/SIH/sih26182/backend/REAL_WORLD_PROOF.md)).*
+*(For the complete mathematical, statistical, and forensic proof dossier, see [`backend/REAL_WORLD_PROOF.md`](REAL_WORLD_PROOF.md)).*
 

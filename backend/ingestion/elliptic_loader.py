@@ -88,8 +88,8 @@ class EllipticLoader:
 
     def generate_and_ingest_sample(self, num_nodes: int = 40) -> Tuple[int, int]:
         """
-        Creates a bundled, authentic Elliptic++ benchmark sample
-        with known illicit peeling/mixing chains leading into licit exchanges.
+        Creates a small, hand-authored SYNTHETIC illustrative sample shaped like an Elliptic++-style
+        peeling/mixing chain. NOT real Elliptic++ data; must not be cited as real-world or benchmark evidence.
         """
         sample_file = SAMPLE_DATA_DIR / "elliptic_sample.csv"
         lines = ["source,target,amount_sats,class\n"]
@@ -111,12 +111,12 @@ class EllipticLoader:
 
         # Ingest tags
         tags = [
-            ("tx_101", "Suspect Illicit Syndicate", "mixer", "BTC", "Elliptic++", 1.0),
-            ("tx_102", "Mixer Hub Alpha", "mixer", "BTC", "Elliptic++", 0.9),
-            ("tx_103", "Mixer Hub Beta", "mixer", "BTC", "Elliptic++", 0.9),
-            ("tx_104", "Mixer Hub Gamma", "mixer", "BTC", "Elliptic++", 0.9),
-            ("tx_201", "Elliptic Regulated Exchange Alpha", "exchange", "BTC", "Elliptic++", 1.0),
-            ("tx_202", "Elliptic Regulated Exchange Beta", "exchange", "BTC", "Elliptic++", 1.0),
+            ("tx_101", "[SYNTHETIC] Suspect Illicit Syndicate", "mixer", "BTC", "Synthetic-Elliptic-style", 1.0),
+            ("tx_102", "[SYNTHETIC] Mixer Hub Alpha", "mixer", "BTC", "Synthetic-Elliptic-style", 0.9),
+            ("tx_103", "[SYNTHETIC] Mixer Hub Beta", "mixer", "BTC", "Synthetic-Elliptic-style", 0.9),
+            ("tx_104", "[SYNTHETIC] Mixer Hub Gamma", "mixer", "BTC", "Synthetic-Elliptic-style", 0.9),
+            ("tx_201", "[SYNTHETIC] Elliptic Regulated Exchange Alpha", "exchange", "BTC", "Synthetic-Elliptic-style", 1.0),
+            ("tx_202", "[SYNTHETIC] Elliptic Regulated Exchange Beta", "exchange", "BTC", "Synthetic-Elliptic-style", 1.0),
         ]
         self.tag_repo.bulk_insert_tags(tags)
 
@@ -141,4 +141,4 @@ if __name__ == "__main__":
     init_db(conn)
     loader = EllipticLoader()
     t_count, e_count = loader.generate_and_ingest_sample()
-    print(f"Successfully ingested Elliptic++ benchmark sample: {t_count} tags, {e_count} edges.")
+    print(f"Ingested SYNTHETIC illustrative sample (Elliptic++-style, not real data): {t_count} tags, {e_count} edges.")

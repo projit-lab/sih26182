@@ -5,7 +5,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-1.0.0-009688.svg)](https://fastapi.tiangolo.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests: Passing](https://img.shields.io/badge/Tests-7%2F7%20Passing-brightgreen.svg)](tests/)
-[![Compliance: Sec 65B IEA](https://img.shields.io/badge/Compliance-Sec%2065B%20IEA-orange.svg)](docs/)
+
 
 ---
 
@@ -19,7 +19,7 @@ When illicit cryptocurrency funds are stolen or laundered, criminals rarely tran
 
 ### Why Traditional Forensics & Graph Neural Networks Fail:
 1. **Shortest-Path / Dijkstra Fallacy:** Traditional commercial tracing tools (and naive graph traversals) look for the "fewest hops" or "cheapest path". Adversaries deliberately create short 2-hop paths to decoy exchanges while routing 95% of stolen volume through a 6-hop mixer network. Shortest-path tools fall into the trap every time.
-2. **Supervised GNN (GraphSAGE) Fragility:** Machine learning models trained on historical data overfit to specific transaction structures. When attackers modify their peeling cadence or change mixer pools, supervised models suffer catastrophic distribution shift (accuracy drops by >24 percentage points). Furthermore, ML predictions lack statutory mathematical explainability required in a court of law.
+2. **Supervised GNN (GraphSAGE) Fragility:** Machine learning models trained on historical data overfit to specific transaction structures. When attackers modify their peeling cadence or change mixer pools, supervised models suffer catastrophic distribution shift (accuracy drops by >24 percentage points). Furthermore, ML predictions lack mathematical explainability.
 
 ### The SIH26182 Breakthrough:
 We model the entire transaction graph as an **electrical resistive network**. Instead of searching for an isolated path, we compute the **effective resistance ($R_{\text{eff}}$)** between the suspect address and all candidate VASPs by solving the Dirichlet Grounded Graph Laplacian system:
@@ -96,9 +96,9 @@ where $D_{ii} = \sum_j W_{ij}$ is the degree matrix, and $W_{ij}$ is the transac
         ┌────────────┴───────────────────────────┐
         ▼                                        ▼
   ┌──────────────────────────┐     ┌─────────────────────────────────────┐
-  │ 4. Statutory Compliance  │     │ 5. Interactive Frontend Visualizer  │
-  │ • Section 65B IEA Court  │     │ • Cytoscape.js Dark Theme Canvas    │
-  │   PDF Forensic Reports   │     │ • Real-time Investigation Inspector │
+  │ 4. Demonstration Features  │     │ 5. Interactive Frontend Visualizer  │
+  │ • Investigator Lead      │     │ • Cytoscape.js Dark Theme Canvas    │
+  │   PDF Prototype Reports  │     │ • Real-time Investigation Inspector │
   │ • Mock SAHYOG Sec 91     │     │ • Obfuscation badges & node tags    │
   │   CrPC Notice Dispatch   │     │ • Hosted directly at `/app`         │
   └──────────────────────────┘     └─────────────────────────────────────┘
@@ -108,7 +108,7 @@ where $D_{ii} = \sum_j W_{ij}$ is the degree matrix, and $W_{ij}$ is the transac
 
 ## 4. Obfuscation Detection Intelligence
 
-Before the Laplacian solver computes resistances, the graph passes through an adversarial detection module ([`obfuscation_detector.py`](file:///d:/hackathon/SIH/sih26182/backend/ingestion/obfuscation_detector.py)):
+Before the Laplacian solver computes resistances, the graph passes through an adversarial detection module ([`obfuscation_detector.py`](backend/ingestion/obfuscation_detector.py)):
 
 | Obfuscation Technique | Algorithmic Detection Mechanism | Operational Outcome |
 |---|---|---|
@@ -119,16 +119,16 @@ Before the Laplacian solver computes resistances, the graph passes through an ad
 
 ---
 
-## 5. Law Enforcement & Statutory Compliance
+## 5. Law Enforcement Integration Demonstrations
 
-This platform is engineered specifically for Indian Law Enforcement Agencies (LEAs) and cyber crime units:
+This platform demonstrates potential integration points for Law Enforcement Agencies (LEAs) and cyber crime units. These are prototype features only and do not integrate with real systems or produce certified legal documents.
 
-1. **Section 65B Indian Evidence Act Forensic PDF Export:**
-   - Court-admissible certificate detailing the suspect wallet, timestamp, input/output UTXOs, and mathematical resistance calculations.
-   - Embeds a tamper-evident **SHA-256 cryptographic audit hash** of the case data to preserve evidence chain of custody.
-2. **SAHYOG Government Platform Integration:**
-   - Simulates legal freeze and KYC disclosure notices under **Section 91 CrPC**.
-   - Generates an official government acknowledgment token (`ACK-GOV-XXXX`) and records notice status in the audit registry.
+1. **Investigator Lead PDF Export:**
+   - Prototype PDF report detailing the suspect wallet, timestamp, input/output UTXOs, and mathematical resistance calculations.
+   - Embeds a demo **SHA-256 checksum** of the case data.
+2. **SAHYOG Government Platform Integration (Mock):**
+   - Simulates a legal freeze and KYC disclosure notice under **Section 91 CrPC**.
+   - Generates a mock acknowledgment token (`MOCK-SAHYOG-ACK-2026-XXXX`) and records notice status.
 
 ---
 
@@ -259,7 +259,7 @@ Validated over 6 rounds of rigorous synthetic and real-world experiments:
 | **Top-1 Accuracy (Mixer-Obfuscated Cases)** | 75.0% | 71.8% | **94.6%** ($p = 3.8 \times 10^{-5}$) |
 | **Resistance to Distribution Shift** | High vulnerability | Drops $-24.5$ pp on unseen patterns | Drops only $-6.0$ pp |
 | **Labeled Training Data Required** | None | High ($N \ge 1,000$ labeled cases) | **Zero (Closed-form physics)** |
-| **Courtroom Explainability** | High (but wrong answer) | Zero (Black box weights) | **Full (Dirichlet Laplacian theorem)** |
+| **Mathematical Explainability** | High (but wrong answer) | Zero (Black box weights) | **Full (Dirichlet Laplacian theorem)** |
 | **Average Query Computation Time** | 2.1 ms | 45.0 ms | **3.8 ms** |
 
 ---

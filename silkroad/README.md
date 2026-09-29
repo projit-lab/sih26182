@@ -30,7 +30,7 @@ silkroad/
 ├── entity_tags.json       # GraphSense & Arkham tags for real nodes in this graph
 ├── subgraph_edges.json    # 235 real UTXO edges resolved from live Bitcoin mainnet
 ├── transactions.json      # 25 full raw on-chain Bitcoin transactions fetched from Mempool.space
-├── SilkRoad_Forensic_Report.pdf  # Section 65B Indian Evidence Act Forensic PDF Dossier
+├── SilkRoad_Forensic_Report.pdf  # Prototype Investigator Lead PDF Dossier
 └── README.md              # Documentation & Verification Guide
 ```
 
@@ -38,7 +38,7 @@ silkroad/
 
 ## 3. How to Run the Dedicated Engine (CLI)
 
-To solve $Lx = b$, compute effective resistances, generate the Section 65B PDF report, and issue the SAHYOG notice directly:
+To solve $Lx = b$, compute effective resistances, generate the prototype Investigator Lead PDF report, and issue the SAHYOG notice directly:
 
 ```bash
 python silkroad/loader.py
@@ -91,5 +91,5 @@ uvicorn silkroad.backend:app --port 8001
 * `GET  /` — Service status & metadata
 * `GET  /api/silkroad/graph` — Cytoscape-compatible 199-node real graph
 * `POST /api/silkroad/investigate` — Runs the $Lx = b$ attribution solver
-* `GET  /api/silkroad/report` — Downloads Section 65B court-admissible PDF report
+* `GET  /api/silkroad/report` — Downloads prototype investigator lead PDF report
 * `POST /api/silkroad/sahyog` — Dispatches Section 91 CrPC lawful freeze notice

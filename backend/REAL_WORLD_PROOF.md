@@ -1,5 +1,4 @@
 # SIH26182 — Comprehensive Real-World Validation & Proof of Work Dossier
-### *Mathematical Rigor, Mainnet Blockchain Validation, and Court-Admissible Law Enforcement Architecture*
 
 ---
 
@@ -14,7 +13,7 @@ This document provides definitive, verifiable proof that the **SIH26182 Wallet-t
 | **Zero-Shot Generalization** | Unseen Obfuscation Tactic (Out-of-Distribution) | ER: **-6.0 pp** vs GNN: **-24.5 pp** collapse | **PROVEN** |
 | **Historical Mainnet Case** | Silk Road / USMS Seizure (`1F1tAaz5...`) | Correctly identified **Coinbase Prime (#1)** ($R_{\text{eff}} \approx 0.08\,\Omega$) | **VERIFIED** |
 | **Live Mainnet Autonomous Crawl**| [PENDING PHASE 2 LIVE VALIDATION RESULTS] | [PENDING PHASE 2 LIVE VALIDATION RESULTS] | **PENDING** |
-| **Legal Admissibility** | Section 65B Indian Evidence Act + Sec 91 CrPC | Automated SHA-256 forensic PDF + SAHYOG dispatch | **VERIFIED** |
+
 
 ---
 
@@ -84,7 +83,7 @@ To prove that the algorithm translates from theory to real Bitcoin UTXOs, the en
 ### Visual Execution Proof: Silk Road On-Chain Graph & Attribution Solver
 Below is the live execution screenshot captured directly from `graph_visualizer.html` rendering the 102-node connected on-chain Bitcoin transaction graph and the Grounded Laplacian Dirichlet solver ($Lx = b$) modal:
 
-![Live Silk Road Graph Visualizer - 102 Nodes, 130 Edges Attributed to Coinbase Prime Institutional Vault](file:///C:/Users/Danish/.gemini/antigravity-ide/brain/a6353c39-7da9-4d09-b097-cc65b9a4380d/silkroad_attribution_modal_1788588982366.png)
+
 
 ### Real Engine Execution Result
 When executed through the Dirichlet Grounded Laplacian Solver on the 100% real on-chain transaction graph:
@@ -124,7 +123,7 @@ To demonstrate live, un-cached blockchain interoperability, the engine was execu
 ### Live Execution Proof & Verification Screenshot
 Below is the full-screen visualizer screenshot showing the live mainnet crawl and grounded Laplacian solution:
 
-![Live Mainnet Proof - 1,394 Nodes Crawled and Attributed to Binance Cold Storage II](file:///C:/Users/Danish/.gemini/antigravity-ide/brain/a6353c39-7da9-4d09-b097-cc65b9a4380d/.user_uploaded/media_1788582168216.png)
+
 
 ### Forensic Parameters Confirmed by Live Execution:
 | Parameter | Value Observed in Live Run | Meaning & Significance |
@@ -133,11 +132,9 @@ Below is the full-screen visualizer screenshot showing the live mainnet crawl an
 | **Search Configuration** | **Custom Live Search (9 Hops — Ultra-Deep Trace)** | Proves deep multi-hop live crawling capability. |
 | **Attributed Destination**| `bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h` | **Binance Cold Storage Vault II** (verified via Arkham & GraphSense). |
 | **Attribution Confidence**| **100.0%** | 100% of outward traceable financial conductance drained into Binance. |
-| **Effective Resistance** | **$2.2646\,\Omega$** | Grounded Laplacian resistance across multi-hop deposit sweep relays. |
-| **Graph Complexity** | **1,394 Nodes • 1,595 Edges** | Proves the engine handles massive, real-world multi-hop cluster graphs. |
 | **Total Analyzed Flow** | **32,070.9462 BTC** | Traced and balanced over 32,000 Bitcoins in transaction volume. |
-| **Compute Execution Time**| **2,570.3 ms (~2.5 sec)** | Near-instant solve time over 1,394 nodes via Sparse LU factorization. |
-| **Statutory Actions** | Court PDF & SAHYOG Dispatch | Generates Section 65B certified PDF and Section 91 CrPC freeze directive. |
+| **Compute Execution Time**| **2,570.3 ms (~2.5 sec)** | Near-instant solve time via Sparse LU factorization. |
+| **Output Actions** | Mock PDF & simulated SAHYOG dispatch | Generates prototype investigator lead report (not a legal document). |
 
 ### Why this is mathematically and practically correct:
 * **The Destination:** `bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h` is verified across Arkham Intelligence, Glassnode, and Whale Alert as Binance's primary cold storage vault.
@@ -151,15 +148,15 @@ Below is the full-screen visualizer screenshot showing the live mainnet crawl an
 When presenting to hackathon judges, technical evaluators, or law enforcement officers, here are the **6 essential proof pillars** that guarantee no one can doubt your solution:
 
 1. **The Live Working Screenshot (Visual Execution Proof):**
-   * The screenshot above showing **1,394 nodes, 1,595 edges**, and $R_{\text{eff}} = 2.2646\,\Omega$. It visually demonstrates that the algorithm can process complex graphs without crashing.
+   * The screenshot above demonstrates that the algorithm can process complex graphs without crashing.
 2. **On-Chain Blockchain Verification (Ground Truth):**
    * Public explorer links showing both addresses are real mainnet entities:
      * Suspect: [mempool.space/address/13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94](https://mempool.space/address/13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94)
      * Binance Vault: [mempool.space/address/bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h](https://mempool.space/address/bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h)
-3. **The Court-Admissible Forensic PDF (Section 65B Certificate):**
-   * Clicking the blue **"Export Court Forensic Report (PDF)"** button in the UI generates an official, cryptographic evidence package with a SHA-256 audit hash.
-4. **The Statutory Legal Dispatch Token (Section 91 CrPC Directive):**
-   * Clicking the green **"Dispatch Sec 91 CrPC Notice (SAHYOG)"** button creates the statutory freeze notice dispatched to the exchange with an audit token (`SAHYOG-ACK-2026-XXXXXX`).
+3. **The Investigator Lead Report (PDF):**
+   * Clicking the **"Export Investigator Lead Report (PDF)"** button in the UI generates a prototype PDF with a demo checksum.
+4. **The Mock SAHYOG Dispatch Token:**
+   * Clicking the **"Simulate SAHYOG Request (mock)"** button creates a mock freeze notice with a `MOCK-SAHYOG-ACK-2026-XXXXXX` token (no real SAHYOG integration).
 5. **Statistical Benchmark Rigor (Scientific Superiority):**
    * The paired McNemar test showing **$\chi^2 = 49.04, p = 2.5 \times 10^{-12} \ll 0.001$** against GraphSAGE and Shortest Path across 2,500+ trials.
 6. **Live Interactive Reproducibility:**
@@ -189,22 +186,10 @@ To maintain complete credibility with technical evaluators, here is the clear di
 
 ---
 
-## 6. Indian Legal & Regulatory Admissibility
+## 6. Investigator Lead Export & Mock SAHYOG
 
-A technical attribution is useless to law enforcement if it cannot be defended in court or acted upon before funds are cashed out. Our backend integrates directly into the Indian legal framework:
-
-### 1. Section 65B Indian Evidence Act / Section 63 BSA Compliance
-* **Black-Box AI Rejection:** Defense attorneys routinely challenge GNN/AI evidence under Indian law because neural weights cannot be mathematically explained or independently verified.
-* **Our Audit Trail:** Our engine generates an automated [Digital Forensic Evidence PDF Report](file:///d:/hackathon/SIH/sih26182/silkroad/SilkRoad_Forensic_Report.pdf) with:
-  * Deterministic mathematical proof ($Lx = b$, conservation of flow).
-  * SHA-256 cryptographic audit hash.
-  * System operational certificate matching statutory requirements.
-
-### 2. Statutory Section 91 CrPC Dispatch via SAHYOG
-* When the engine identifies the destination VASP, it automatically formats and issues a **Section 91 CrPC Directive** requiring the exchange to immediately freeze the account and preserve KYC records.
-* Dispatches a mock **SAHYOG-ACK-2026-XXXXXX** compliance token for tracking across Indian cyber crime coordination cells.
-
----
+The backend generates prototype PDF reports and a mock SAHYOG dispatch for demonstration purposes.
+These are NOT legal documents and NOT connected to any real government SAHYOG platform.
 
 ## 7. How to Reproduce All Results On-Demand
 
@@ -235,13 +220,13 @@ uvicorn backend.main:app --reload --port 8000
 start graph_visualizer.html
 ```
 * In the visualizer, select **"Custom Live Search"**, enter `13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94`, and click **Investigate (Lx=b)**.
-* Observe the live trace attributing **Binance Cold Storage II** with $R_{\text{eff}} = 2.2646\,\Omega$.
+* Observe the live trace attributing **Binance Cold Storage II**.
 
 ---
 
 ## 8. Advanced Evasion Benchmark: 6-Hop Asymmetric Swarm with Decoy Diversion
 
-To evaluate our algorithm against sophisticated adversaries actively trying to defeat graph analysis, we engineered a dedicated 6-hop evasion topology in [`demo/`](file:///d:/hackathon/SIH/sih26182/demo).
+To evaluate our algorithm against sophisticated adversaries actively trying to defeat graph analysis, we engineered a dedicated 6-hop evasion topology in [`demo/`](../demo/).
 
 ### The Evasion Strategy Topology (100 BTC)
 The suspect injects **100 BTC** from `bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8` and bifurcates the flow:
@@ -251,13 +236,13 @@ The suspect injects **100 BTC** from `bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8
 ### Visual Verification & Attribution Modal
 The visualizer displays the full 15-node, 17-edge graph with the exact bifurcation and primary attribution:
 
-![6-Hop Asymmetric Swarm Visualizer Attribution Modal](C:\Users\Danish\.gemini\antigravity-ide\brain\a6353c39-7da9-4d09-b097-cc65b9a4380d\demo_6hop_attribution_modal.png)
+
 
 ### The Scientific Showdown: Dijkstra vs. Grounded Laplacian
 
 | Metric | Traditional Dijkstra (Shortest-Path) | Grounded Laplacian ($Lx = b$) |
 | :--- | :--- | :--- |
-| **Identified Target** | ❌ **WazirX Decoy Exchange** (Hop Count: 2) |  **Binance Institutional Cold Storage Vault II** (Hop Count: 6) |
+| **Identified Target** | ❌ **Decoy Exchange** (Hop Count: 2) | **Binance Cold Storage** (Hop Count: 6) |
 | **Attribution Confidence** | 100% (Shortest unweighted distance) | **86.3%** ($R_{\text{eff}} = 0.0636\,\Omega$) |
 | **Value Recovered** | **5.0%** (Only 4.98 BTC trapped) | **95.0%** (Full 93.75 BTC recovered) |
 | **Algorithmic Blindspot** | Fooled by hop depth; penalizes deeper laundering chains | Solves electrical network potential via parallel conductance |
@@ -274,6 +259,6 @@ python demo/loader.py
 ```
 * Solves the 15-node, 17-edge resistive network in **3.8 ms**.
 * Proves Dijkstra was fooled by the 2-hop decoy.
-* Generates statutory evidence report: [`demo/Demo_Forensic_Report.pdf`](file:///d:/hackathon/SIH/sih26182/demo/Demo_Forensic_Report.pdf).
+* Generates statutory evidence report: [`demo/Demo_Forensic_Report.pdf`](../demo/Demo_Forensic_Report.pdf).
 * Dispatches Section 91 CrPC SAHYOG freeze notice with token `SAHYOG-LE-DEMO-2026-S991`.
 

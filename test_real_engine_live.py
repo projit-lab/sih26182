@@ -4,7 +4,7 @@ Tests:
   1. Live / Authentic UTXO Ingestion (Blockstream / Mempool.space)
   2. Dynamic Graph Construction & Flow Balancing
   3. Core Laplacian Solver (AttributionEngine: Lx = b)
-  4. End-to-End FastAPI Backend Pipeline (Investigate -> Graph -> SAHYOG -> Court Report)
+  4. End-to-End FastAPI Backend Pipeline (Investigate -> Graph -> SAHYOG -> Investigator Lead Report)
 """
 
 import json
@@ -191,14 +191,14 @@ def test_3_fastapi_backend_pipeline(target_addr: str = "1F1tAaz5x1HUXrCNLbtMDqcw
             print(f"    - Acknowledgment Token: {s_data['ack_token']}")
             print(f"    - Cryptographic Audit Hash: {s_data['dispatch_hash']}")
 
-        # 5. Export Section 65B Indian Evidence Act Forensic PDF
-        print(f"\n[*] GET /api/v1/reports/{case_id}/export (Section 65B PDF)...")
+        # 5. Export Investigator Lead Report PDF
+        print(f"\n[*] GET /api/v1/reports/{case_id}/export (Investigator Lead PDF)...")
         pdf_resp = client.get(f"/api/v1/reports/{case_id}/export")
         if pdf_resp.status_code == 200:
             out_pdf = PROJECT_ROOT / f"Forensic_Report_{case_id}.pdf"
             with open(out_pdf, "wb") as f:
                 f.write(pdf_resp.content)
-            print(f"[✓] Generated Court-Admissible Forensic PDF: {out_pdf.name} ({len(pdf_resp.content)} bytes)")
+            print(f"[✓] Generated Investigator Lead Report PDF: {out_pdf.name} ({len(pdf_resp.content)} bytes)")
     else:
         print(f"[!] Investigate returned HTTP {resp.status_code}: {resp.text}")
 

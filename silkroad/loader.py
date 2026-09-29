@@ -57,7 +57,7 @@ def build_silkroad_graph() -> tuple[nx.Graph, dict]:
 
 
 def generate_silkroad_pdf_report(res, pdf_path: Path):
-    """Generates an official Section 65B Indian Evidence Act compliant PDF report."""
+    """Generates an illustrative investigator lead report PDF (NOT a legal or forensic document)."""
     from reportlab.lib import colors
     from reportlab.lib.pagesizes import letter
     from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
@@ -68,8 +68,8 @@ def generate_silkroad_pdf_report(res, pdf_path: Path):
     story = []
 
     title_style = ParagraphStyle("Title", parent=styles["Heading1"], fontSize=18, leading=22, textColor=colors.HexColor("#0f172a"))
-    story.append(Paragraph("DIGITAL FORENSIC EVIDENCE REPORT (SILK ROAD CASE)", title_style))
-    story.append(Paragraph("<b>Under Section 65B of the Indian Evidence Act, 1872 / Section 63 BSA</b>", styles["Normal"]))
+    story.append(Paragraph("ILLUSTRATIVE INVESTIGATOR LEAD REPORT (NOT A LEGAL OR FORENSIC DOCUMENT)", title_style))
+    story.append(Paragraph("<b>[MOCK/SIMULATED] For demonstration purposes only — not a legal certificate</b>", styles["Normal"]))
     story.append(Spacer(1, 10))
     story.append(HRFlowable(width="100%", thickness=2, color=colors.HexColor("#3b82f6")))
     story.append(Spacer(1, 12))
@@ -114,7 +114,7 @@ def generate_silkroad_pdf_report(res, pdf_path: Path):
     story.append(t_results)
     story.append(Spacer(1, 20))
 
-    story.append(Paragraph("<b>2. SECTION 65B CERTIFICATE OF ELECTRONIC EVIDENCE</b>", styles["Heading3"]))
+    story.append(Paragraph("<b>2. ILLUSTRATIVE DOSSIER DETAILS</b>", styles["Heading3"]))
     cert_text = (
         "I hereby certify that the electronic outputs in this dossier were produced by an automated "
         "graph analysis system during regular investigation. The mathematical attribution applies "
@@ -124,7 +124,7 @@ def generate_silkroad_pdf_report(res, pdf_path: Path):
     story.append(Spacer(1, 14))
 
     sha = hashlib.sha256(f"CASE-SR-USMS-2026-{res.suspect_address}-{datetime.datetime.utcnow().isoformat()}".encode()).hexdigest()
-    story.append(Paragraph(f"<b>Cryptographic Audit Hash:</b> <font color='#0284c7'>{sha}</font>", styles["Normal"]))
+    story.append(Paragraph(f"<b>Demo checksum (not a certification):</b> <font color='#0284c7'>{sha}</font>", styles["Normal"]))
 
     doc.build(story)
 
@@ -194,20 +194,20 @@ def run_silkroad_pipeline(fetch_live: bool = False):
     assert "Coinbase" in top_vasp.vasp_name, f"Expected Coinbase Prime to rank #1, got {top_vasp.vasp_name}"
     print("[PASS] Mathematical Ground Truth Confirmed: Coinbase Prime Custody has the lowest effective resistance!")
 
-    # 3. Generate Section 65B PDF
+    # 3. Generate illustrative investigator lead report PDF
     pdf_path = SILKROAD_DIR / "SilkRoad_Forensic_Report.pdf"
     generate_silkroad_pdf_report(res, pdf_path)
-    print(f"\n--- [2] SECTION 65B INDIAN EVIDENCE ACT REPORT ---")
-    print(f"[+] Court-Admissible Dossier Generated: {pdf_path.name}")
+    print(f"\n--- [2] ILLUSTRATIVE INVESTIGATOR LEAD REPORT ---")
+    print(f"[+] Illustrative dossier details generated: {pdf_path.name}")
 
     # 4. Generate SAHYOG Freeze Notice
     ack_token = "SAHYOG-LE-SR-2026-X889"
     dispatch_hash = hashlib.sha256(f"{ack_token}:{suspect_wallet}:{top_vasp.vasp_name}".encode()).hexdigest()
-    print(f"\n--- [3] SAHYOG LAWFUL NOTICE (Section 91 CrPC) ---")
-    print(f"[+] Statutory Section     : Section 91 CrPC (Asset Freeze & Preservation)")
-    print(f"[+] Recipient VASP Portal : https://compliance.{top_vasp.vasp_name.lower().replace(' ', '')}.com/lea")
-    print(f"[+] Dispatch Audit Token  : {ack_token}")
-    print(f"[+] Cryptographic SHA256  : {dispatch_hash}")
+    print(f"\n--- [3] [MOCK/SIMULATED] SAHYOG NOTICE ---")
+    print(f"[MOCK/SIMULATED] Statutory Section     : Section 91 CrPC (Asset Freeze & Preservation)")
+    print(f"[MOCK/SIMULATED] Recipient VASP Portal : mock://sahyog/{top_vasp.vasp_name.lower().replace(' ', '')}")
+    print(f"[MOCK/SIMULATED] Dispatch Audit Token  : {ack_token}")
+    print(f"[MOCK/SIMULATED] Demo checksum (not a certification): {dispatch_hash}")
 
     print("\n" + "=" * 88)
     print("  ALL SILK ROAD REAL-ENGINE TESTS PASSED (100% OPERATIONAL IN < 100ms)")

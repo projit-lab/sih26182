@@ -3,7 +3,7 @@ Demo Dedicated FastAPI Backend Server
 Provides endpoints for:
 - GET  /api/demo/graph       : Cytoscape-compatible 6-hop graph
 - POST /api/demo/investigate : Grounded Laplacian & Dijkstra comparison
-- GET  /api/demo/report      : Section 65B court PDF download
+- GET  /api/demo/report      : Investigator Lead PDF download
 - POST /api/demo/sahyog      : SAHYOG Section 91 CrPC notice dispatch
 """
 import io

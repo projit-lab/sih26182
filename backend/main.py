@@ -44,8 +44,8 @@ app = FastAPI(
     title="SIH26182 - Wallet-to-VASP Attribution & Ingestion Engine",
     description=(
         "Production backend orchestration layer connecting on-chain UTXO data and "
-        "the Core Laplacian Solver (Lx = b) to the UI, Mock SAHYOG dispatcher, "
-        "and Section 65B PDF reporting pipeline."
+        "the Core Laplacian Solver (Lx = b) to the UI, mock SAHYOG dispatcher (simulated), "
+        "and investigator lead report export."
     ),
     version="1.0.0",
     lifespan=lifespan,

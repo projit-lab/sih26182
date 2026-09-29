@@ -466,8 +466,8 @@ def correlate_tc_timing(
     via timing analysis. This is the ONLY feasible de-anonymization
     method — ZK proofs make on-chain linking impossible.
 
-    NOTE: Results are PROBABILISTIC. Court-admissible as supporting
-    evidence only, not as proof of direct linkage.
+    NOTE: Results are PROBABILISTIC. Use as investigator lead
+    only, not as proof of direct linkage.
     """
     correlations = []
 

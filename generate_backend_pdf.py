@@ -206,7 +206,7 @@ def build_backend_report_pdf(target_path: Path) -> str:
         "<b>3. Multi-Tier Ingestion:</b> Bitcoin transactions are fetched via Mempool.space, Blockstream, and Blockchain.info with Proportional UTXO Haircut allocation. EVM transfers are fetched via Etherscan.<br/>"
         "<b>4. Grounded Laplacian Circuit Solver:</b> Constructs the grounded Laplacian matrix from transaction conductances ($w = satoshis$), grounds Node 0 ($V_0 = 0V$), and solves $Lx = b$ via Sparse LU.<br/>"
         "<b>5. Inverse Resistance Scoring:</b> Conductance weights $w_i = 1 / (R_{eff} + 10^{-6})$ normalize effective resistance into probability confidence percentages.<br/>"
-        "<b>6. SAHYOG Dispatch & Section 65B PDF:</b> Issues Section 91 CrPC statutory notice with SHA-256 tamper-proof hash and outputs court-certified PDF dossiers."
+        "<b>6. SAHYOG Dispatch (Mock) & Investigator Lead PDF:</b> Issues simulated freeze notice with demo hash and outputs prototype investigator lead reports."
     )
     story.append(Paragraph(flow_text, body_style))
     story.append(Spacer(1, 8))
@@ -294,7 +294,7 @@ def build_backend_report_pdf(target_path: Path) -> str:
             Paragraph("<code>GET /api/v1/reports/{id}/export</code>", td_style),
             Paragraph("Endpoint", td_style),
             Paragraph("<code>case_id: str</code>", td_style),
-            Paragraph("<code>StreamingResponse</code> (Section 65B PDF)", td_style),
+            Paragraph("<code>StreamingResponse</code> (Investigator Lead PDF)", td_style),
         ],
         [
             Paragraph("<code>SubgraphExtractor.extract_subgraph</code>", td_style),
@@ -312,7 +312,7 @@ def build_backend_report_pdf(target_path: Path) -> str:
             Paragraph("<code>ReportService.generate_pdf_report</code>", td_style),
             Paragraph("Method", td_style),
             Paragraph("<code>case_id: str</code>", td_style),
-            Paragraph("<code>io.BytesIO</code> (Court-admissible PDF buffer)", td_style),
+            Paragraph("<code>io.BytesIO</code> (Investigator Lead PDF buffer)", td_style),
         ],
     ]
 

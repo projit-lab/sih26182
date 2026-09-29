@@ -18,12 +18,13 @@ class SahyogDispatchRequest(BaseModel):
 
 
 class SahyogDispatchResponse(BaseModel):
-    ack_token: str = Field(..., description="Government acknowledgment token e.g. SAHYOG-ACK-2026-XXXX")
+    ack_token: str = Field(..., description="MOCK acknowledgment token (simulated, no real SAHYOG call)")
     case_id: str
     suspect_address: str
     target_vasp: str
     action: str
-    status: str = "SUBMITTED"
+    status: str = "SIMULATED"
     timestamp: str
-    dispatch_hash: str = Field(..., description="Cryptographic SHA256 audit hash of dispatch parameters")
+    dispatch_hash: str = Field(..., description="Demo checksum of request parameters (not a certification)")
     vasp_compliance_portal: str
+    simulated: bool = True

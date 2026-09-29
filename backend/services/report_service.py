@@ -22,8 +22,8 @@ except ImportError:
 
 class ReportService:
     """
-    Compiles official Law Enforcement Agency (LEA) incident reports
-    with mathematical proof of attribution and Section 65B Indian Evidence Act certification.
+    Compiles investigator lead reports with mathematical attribution output.
+    These are prototype outputs for lead generation only, not legal documents.
     """
 
     def __init__(self, case_repo: Optional[CaseRepository] = None):
@@ -48,14 +48,13 @@ class ReportService:
         if not HAS_REPORTLAB:
             # Fallback plain text / PDF emulation
             content = f"""%PDF-1.4
-% FORENSIC INCIDENT REPORT
+% INVESTIGATOR LEAD REPORT (PROTOTYPE)
 Case ID: {case_id}
 Suspect Wallet: {suspect}
 Top Attributed VASP: {top_vasp}
-Attribution Confidence: {confidence * 100:.1f}%
 Generated At: {datetime.utcnow().isoformat()}Z
 ==================================================
-Section 65B Indian Evidence Act Certification Verified.
+Prototype output for investigator lead generation. Not evidence. Not certified under Section 65B / Section 63 BSA.
 """
             buffer.write(content.encode("utf-8"))
             buffer.seek(0)
@@ -68,7 +67,7 @@ Section 65B Indian Evidence Act Certification Verified.
             rightMargin=36,
             leftMargin=36,
             topMargin=36,
-            bottomMargin=36,
+            bottomMargin=54,
         )
 
         styles = getSampleStyleSheet()
@@ -76,10 +75,10 @@ Section 65B Indian Evidence Act Certification Verified.
             "DocTitle",
             parent=styles["Normal"],
             fontName="Helvetica-Bold",
-            fontSize=16,
-            leading=20,
+            fontSize=14,
+            leading=18,
             textColor=colors.HexColor("#1e293b"),
-            alignment=1,  # Center
+            alignment=1,
         )
         subtitle_style = ParagraphStyle(
             "DocSubtitle",
@@ -121,8 +120,8 @@ Section 65B Indian Evidence Act Certification Verified.
         story = []
 
         # Header
-        story.append(Paragraph("CYBER CRIME FORENSIC INTELLIGENCE DOSSIER", title_style))
-        story.append(Paragraph("Cryptocurrency Flow & VASP Attribution Analysis (Circuit Theory Engine)", subtitle_style))
+        story.append(Paragraph("INVESTIGATOR LEAD REPORT - PROTOTYPE (NOT A LEGAL OR FORENSIC DOCUMENT)", title_style))
+        story.append(Paragraph("Cryptocurrency Flow &amp; VASP Attribution Analysis (Circuit Theory Engine)", subtitle_style))
         story.append(Spacer(1, 8))
         story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor("#0284c7"), spaceAfter=12))
 
@@ -143,8 +142,8 @@ Section 65B Indian Evidence Act Certification Verified.
             [
                 Paragraph("<b>Top Attributed VASP:</b>", body_style),
                 Paragraph(f"<b>{top_vasp}</b>", body_style),
-                Paragraph("<b>Attribution Confidence:</b>", body_style),
-                Paragraph(f"<b>{confidence * 100:.1f}%</b>", body_style),
+                Paragraph("<b>Rank:</b>", body_style),
+                Paragraph("#1 by effective resistance", body_style),
             ],
         ]
         meta_table = Table(meta_table_data, colWidths=[110, 160, 110, 160])
@@ -162,16 +161,21 @@ Section 65B Indian Evidence Act Certification Verified.
         story.append(meta_table)
         story.append(Spacer(1, 12))
 
-        # Section 1: Executive Summary
-        story.append(Paragraph("1. EXECUTIVE FORENSIC SUMMARY", h2_style))
+        # Section 1: Case Summary
+        story.append(Paragraph("1. CASE SUMMARY", h2_style))
+        best_r_eff = ranked_vasps[0].get("effective_resistance", 0.0) if ranked_vasps else 0.0
+        second_r_eff = ranked_vasps[1].get("effective_resistance", None) if len(ranked_vasps) > 1 else None
+        sep_text = ""
+        if second_r_eff and best_r_eff and best_r_eff > 0:
+            sep_ratio = round(second_r_eff / best_r_eff, 2)
+            sep_text = f" (separation ratio vs. rank #2: <b>{sep_ratio}x</b>)"
         summary_text = (
             f"An automated topological graph resistance analysis was conducted for suspect address "
             f"<b>{suspect}</b>. By calculating the grounded Laplacian matrix <b>(Lx = b)</b> across the "
             f"k-hop transaction neighborhood, multiple parallel obfuscation paths (mixers / peeling hops) "
             f"were aggregated into a unified effective resistance metric. The destination VASP demonstrating the "
             f"strongest conductance is <b>{top_vasp}</b> with an effective resistance of "
-            f"<b>{ranked_vasps[0].get('effective_resistance', 0.0) if ranked_vasps else 0.0}</b>, "
-            f"yielding a statistical confidence rating of <b>{confidence * 100:.1f}%</b>."
+            f"<b>{best_r_eff}</b>{sep_text}."
         )
         story.append(Paragraph(summary_text, body_style))
         story.append(Spacer(1, 10))
@@ -183,8 +187,7 @@ Section 65B Indian Evidence Act Certification Verified.
                 Paragraph("<b>Rank</b>", body_style),
                 Paragraph("<b>Entity Name</b>", body_style),
                 Paragraph("<b>Candidate Address</b>", body_style),
-                Paragraph("<b>Effective Resistance</b>", body_style),
-                Paragraph("<b>Confidence</b>", body_style),
+                Paragraph("<b>Effective Resistance (Ohms)</b>", body_style),
             ]
         ]
         for idx, item in enumerate(ranked_vasps[:6], 1):
@@ -194,11 +197,10 @@ Section 65B Indian Evidence Act Certification Verified.
                     Paragraph(item.get("vasp_name", "Unknown"), body_style),
                     Paragraph(f"<code>{item.get('candidate_address', '')[:16]}...</code>", code_style),
                     Paragraph(str(item.get("effective_resistance", "N/A")), body_style),
-                    Paragraph(f"{item.get('confidence_score', 0.0) * 100:.1f}%", body_style),
                 ]
             )
 
-        vasp_table = Table(table_rows, colWidths=[40, 120, 160, 110, 110])
+        vasp_table = Table(table_rows, colWidths=[40, 140, 180, 180])
         vasp_table.setStyle(
             TableStyle(
                 [
@@ -224,29 +226,26 @@ Section 65B Indian Evidence Act Certification Verified.
         story.append(Paragraph(metrics_text, body_style))
         story.append(Spacer(1, 12))
 
-        # Section 4: Indian Evidence Act Section 65B Certificate
-        story.append(Paragraph("4. CERTIFICATE UNDER SECTION 65B INDIAN EVIDENCE ACT", h2_style))
+        # Demo checksum (not a certification)
         raw_hash = hashlib.sha256(f"{case_id}:{suspect}:{top_vasp}".encode()).hexdigest()
-        cert_text = (
-            f"It is certified that the cryptocurrency graph extraction and attribution outputs contained "
-            f"in this dossier were produced by an automated digital forensics computer system during its lawful, "
-            f"ordinary operation. The cryptographic integrity hash for this digital record is: "
-            f"<br/><b>SHA-256: </b><code>{raw_hash}</code>."
+        story.append(Paragraph(
+            f"<b>Demo checksum (not a certification):</b> <code>{raw_hash}</code>",
+            body_style,
+        ))
+
+        # Footer on every page
+        footer_text = (
+            "Prototype output for investigator lead generation. "
+            "Not evidence. Not certified under Section 65B / Section 63 BSA."
         )
-        story.append(Paragraph(cert_text, body_style))
-        story.append(Spacer(1, 14))
 
-        # Signatures
-        sig_data = [
-            [
-                Paragraph("<b>Investigating Officer</b><br/><br/>______________________<br/>Cyber Crime Unit", body_style),
-                Paragraph("<b>Digital Forensics Lead (General CSE)</b><br/><br/>______________________<br/>SIH26182 System Verification", body_style),
-            ]
-        ]
-        sig_table = Table(sig_data, colWidths=[270, 270])
-        sig_table.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP")]))
-        story.append(sig_table)
+        def add_footer(canvas, doc):
+            canvas.saveState()
+            canvas.setFont("Helvetica", 7.5)
+            canvas.setFillColor(colors.HexColor("#94a3b8"))
+            canvas.drawCentredString(letter[0] / 2.0, 22, footer_text)
+            canvas.restoreState()
 
-        doc.build(story)
+        doc.build(story, onFirstPage=add_footer, onLaterPages=add_footer)
         buffer.seek(0)
         return buffer

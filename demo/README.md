@@ -77,7 +77,7 @@ As a result, **Binance absorbs the vast majority of current**, achieving **86.3%
 - `engine.py`: Self-contained Dirichlet Grounded Laplacian and Dijkstra comparison engine.
 - `loader.py`: Automated CLI benchmark runner, PDF evidence generator, and SAHYOG notice dispatcher.
 - `backend.py`: Dedicated FastAPI microservice providing REST endpoints for this 6-hop demo scenario.
-- `Demo_Forensic_Report.pdf`: Automated forensic PDF report compliant with Section 65B of the Indian Evidence Act.
+- `Demo_Forensic_Report.pdf`: Automated prototype investigator lead PDF report.
 
 ---
 
@@ -130,7 +130,7 @@ ATTRIBUTION RESULTS:
    Missed Target:     Binance Vault II (Hop count = 6, ignored)
    False Attribution Impact: 95% OF CRIME PROCEEDS LOST TO INVESTIGATION
 
-[+] Generating Section 65B Compliant Forensic PDF Report...
+[+] Generating Investigator Lead PDF Report...
     -> Saved to: demo/Demo_Forensic_Report.pdf
 [+] Generating SAHYOG VASP Freeze Notice...
     -> Target: Binance Institutional Cold Storage Vault II
@@ -150,5 +150,5 @@ uvicorn demo.backend:app --port 8001
 ### Available Endpoints:
 - `GET /api/demo/graph`: Returns the Cytoscape-formatted node and edge JSON for the 6-hop swarm.
 - `POST /api/demo/investigate`: Runs both $Lx = b$ and Dijkstra solvers and returns side-by-side comparative metrics.
-- `GET /api/demo/report`: Serves the generated Section 65B Forensic PDF report.
+- `GET /api/demo/report`: Serves the generated Investigator Lead PDF report.
 - `POST /api/demo/sahyog`: Returns the pre-filled emergency statutory freeze notice for the attributed VASP.

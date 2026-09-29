@@ -15,7 +15,7 @@ def export_project_overview_report():
     """
     Exports a comprehensive multi-page PDF report covering the full SIH26182 implementation:
     circuit theory mathematical breakthrough (Lx = b), multi-tier ingestion, bounded subgraph extraction,
-    benchmarks, law enforcement integration (SAHYOG & Sec 65B), and architecture specs.
+    benchmarks, mock SAHYOG integration (simulated), and architecture specs.
     """
     try:
         import io
@@ -78,9 +78,9 @@ def export_backend_implementation_report():
 @router.get("/{case_id}/export")
 def export_case_report(case_id: str):
     """
-    Exports a court-admissible LEA-style forensic incident report (PDF)
-    featuring circuit theory mathematical attribution tables,
-    top-1 VASP identification, and Section 65B Indian Evidence Act certification.
+    Exports a prototype investigator lead report (PDF) featuring circuit theory
+    mathematical attribution tables and top-1 VASP identification.
+    This is NOT a court-admissible document and NOT certified under any evidence act.
     """
     try:
         pdf_buffer = _report_service.generate_pdf_report(case_id)

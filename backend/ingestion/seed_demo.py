@@ -94,10 +94,10 @@ def seed_database(num_cases: int = 25):
     loaded_tags = loader.load_all_bundled_tagpacks()
     logger.info(f"Step 1: Ingested {loaded_tags} entity tags from GraphSense TagPacks.")
 
-    # 2. Ingest Elliptic++ Benchmark Sample
+    # 2. Ingest Elliptic++-style SYNTHETIC Illustrative Sample
     elliptic_loader = EllipticLoader(tag_repo, edge_repo)
     el_tags, el_edges = elliptic_loader.generate_and_ingest_sample()
-    logger.info(f"Step 2: Ingested Elliptic++ benchmark: {el_tags} tags, {el_edges} edges.")
+    logger.info(f"Step 2: Ingested SYNTHETIC illustrative sample (Elliptic++-style, not real data): {el_tags} tags, {el_edges} edges.")
 
     # 2b. Load Silk Road cached case (real Bitcoin mainnet data)
     sr_edges = load_silkroad_cache(edge_repo, tag_repo)

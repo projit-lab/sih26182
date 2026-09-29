@@ -198,7 +198,7 @@ def build_project_implementation_pdf(output_stream: io.BytesIO) -> None:
             Paragraph("<b>Problem Statement:</b>", meta_label),
             Paragraph("SIH26182 — Cryptocurrency Flow Attribution", meta_val),
             Paragraph("<b>Evaluation Standard:</b>", meta_label),
-            Paragraph("Sec 65B IEA / Sec 91 CrPC Compliant", meta_val),
+            Paragraph("Prototype investigator lead report output (not a legal document)", meta_val),
         ],
         [
             Paragraph("<b>Engine Core:</b>", meta_label),
@@ -307,13 +307,13 @@ def build_project_implementation_pdf(output_stream: io.BytesIO) -> None:
         [
             Paragraph("<b>6. LEA Integration</b>", td_bold),
             Paragraph("<code>routers/sahyog.py<br/>services/report_service.py</code>", td_style),
-            Paragraph("Statutory Section 91 CrPC notice dispatch to exchanges via mock SAHYOG portal, and automated Section 65B Indian Evidence Act certified PDF dossier generator.", td_style),
-            Paragraph("Statutory Ack Tokens & Court Evidence PDF Reports", td_style),
+            Paragraph("Mock SAHYOG statutory notice dispatch (simulated) and prototype investigator lead PDF generator.", td_style),
+            Paragraph("Mock Ack Tokens & Investigator Lead PDF Reports", td_style),
         ],
         [
             Paragraph("<b>7. Graph Visualizer</b>", td_bold),
             Paragraph("<code>graph_visualizer.html</code>", td_style),
-            Paragraph("Hardware-accelerated Cytoscape.js interactive canvas with Dagre hierarchical layout, node pulse animations, Silk Road presets, and one-click court export.", td_style),
+            Paragraph("Hardware-accelerated Cytoscape.js interactive canvas with Dagre hierarchical layout, node pulse animations, Silk Road presets, and one-click report export.", td_style),
             Paragraph("Rich interactive forensic canvas in browser", td_style),
         ],
     ]
@@ -440,10 +440,11 @@ def build_project_implementation_pdf(output_stream: io.BytesIO) -> None:
     story.append(Spacer(1, 10))
 
     # ==================== 5. LAW ENFORCEMENT & COMPLIANCE ====================
-    story.append(Paragraph("5. Law Enforcement Integration (SAHYOG & Section 65B)", h1_style))
+    story.append(Paragraph("5. Law Enforcement Integration (Mock SAHYOG & Investigator Lead Reports)", h1_style))
     story.append(
         Paragraph(
-            "Unlike academic tools, SIH26182 bridges the forensic gap between mathematical output and court admissibility under Indian jurisprudence:",
+            "SIH26182 bridges the gap between mathematical output and law enforcement lead generation. "
+            "These are prototype outputs for investigator leads only, not certified legal documents:",
             body_style,
         )
     )
@@ -457,8 +458,8 @@ def build_project_implementation_pdf(output_stream: io.BytesIO) -> None:
     )
     story.append(
         Paragraph(
-            "&bull; <b>Section 65B Indian Evidence Act Forensic Dossiers:</b> Generates court-certified PDF reports containing electronic evidence certificates, input/output SHA-256 hash chains, "
-            "effective resistance rankings, and dual signature blocks for Investigating Officers and Forensics Leads.",
+            "&bull; <b>Investigator Lead Report (PDF):</b> Generates prototype PDF reports with a demo checksum. "
+            "These are NOT court-certified documents and NOT certified under Section 65B or any evidence act.",
             bullet_style,
         )
     )
@@ -484,7 +485,7 @@ def build_project_implementation_pdf(output_stream: io.BytesIO) -> None:
         [
             Paragraph("<b>Compiled By:</b><br/>SIH26182 Core Engineering Team", td_style),
             Paragraph("<b>Architecture Status:</b><br/>Production Validated & Certified", td_style),
-            Paragraph("<b>Audit Hash (SHA-256):</b><br/><code>a9f8c2e47b01d3e8...65B_OK</code>", td_style),
+            Paragraph("<b>Demo Checksum (not a certification):</b><br/><code>a9f8c2e47b01d3e8...demo</code>", td_style),
         ]
     ]
     signoff_table = Table(signoff_data, colWidths=[180, 180, 180])

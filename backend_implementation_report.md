@@ -112,9 +112,9 @@ The following diagram and 7-step walkthrough illustrate the complete lifecycle o
                                      │
                                      ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│ 7. Court-Admissible Reporting & Visualization                           │
+│ 7. Investigator Lead Reporting & Visualization                          │
 │    • Returns Cytoscape.js subgraphs (GET /api/v1/graph/subgraph/{addr}) │
-│    • Compiles Section 65B Indian Evidence Act certified PDF dossier     │
+│    • Compiles prototype investigator lead PDF dossier                   │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -533,10 +533,10 @@ def dispatch_notice(self, req: SahyogDispatchRequest) -> SahyogDispatchResponse:
 ---
 
 #### File: `backend/services/report_service.py`
-Generates court-admissible forensic incident dossiers.
+Generates prototype investigator lead dossiers (not legal documents).
 
 ##### `generate_pdf_report(self, case_id: str) -> io.BytesIO`
-* **Description**: Builds a ReportLab document containing Executive Summary, Attribution Matrix, Graph Computation Metrics, and Section 65B Indian Evidence Act Certificate (with SHA-256 integrity hash).
+* **Description**: Builds a ReportLab document containing Executive Summary, Attribution Matrix, Graph Computation Metrics, and a Demo Checksum.
 * **Inputs**: `case_id: str`
 * **Outputs**: `io.BytesIO` positioned at byte 0 ready for streaming.
 * **Code Snippet**:
@@ -552,7 +552,7 @@ def generate_pdf_report(self, case_id: str) -> io.BytesIO:
     # Title & Meta Box
     # 1. Executive Forensic Summary
     # 2. Candidate VASP Attribution Matrix
-    # 3. Section 65B Certificate:
+    # 3. Demo Checksum:
     raw_hash = hashlib.sha256(f"{case_id}:{case_data['suspect_address']}:{case_data['top_vasp']}".encode()).hexdigest()
     cert_text = (
         f"It is certified that the cryptocurrency graph extraction and attribution outputs contained "
@@ -664,7 +664,7 @@ You can convert this markdown document into a PDF through any of the following m
 
 ### Method 1: Interactive 1-Click Print (Immediate Vector PDF)
 Open the companion HTML document in Chrome or Edge:  
-👉 **[`Backend_Implementation_Report.html`](file:///d:/hackathon/SIH/sih26182/Backend_Implementation_Report.html)**  
+👉 **[`Backend_Implementation_Report.html`](Backend_Implementation_Report.html)**  
 - Click the floating **"Save / Print as PDF"** button (or press `Ctrl + P`).
 - Destination: **Save as PDF** $\rightarrow$ Click **Save**.
 - Generates an A4 vector PDF with page-break protection for code snippets and tables.

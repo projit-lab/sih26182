@@ -282,8 +282,8 @@
         Effective Resistance ($R_{eff}$) via SciPy Sparse LU
       </div>
       <div class="meta-item">
-        <strong>Compliance Standard</strong>
-        Section 91 CrPC / Section 65B IEA
+        <strong>Reporting Format</strong>
+        Prototype Investigator Lead PDF
       </div>
       <div class="meta-item">
         <strong>Status</strong>
@@ -307,7 +307,7 @@
       <li><strong>Multi-Tier Data Fetcher:</strong> Bitcoin queries execute across Mempool.space, Blockstream Info, and Blockchain.info with <strong>Proportional UTXO Haircut Apportionment</strong>. Ethereum account transfers are ingested via Etherscan API.</li>
       <li><strong>Grounded Laplacian Solver ($Lx = b$):</strong> Maps the graph into an electrical resistor network where conductances equal transaction volume. Node 0 is grounded (Dirichlet boundary) and Sparse LU factorizes the grounded Laplacian. Effective resistance ($R_{\text{eff}}$) is computed between suspect and each candidate VASP.</li>
       <li><strong>Statistical Confidence Normalization:</strong> Conductance weighting ($w_i = \frac{1}{R_{\text{eff}} + 10^{-6}}$) normalizes effective resistance into a percentage probability.</li>
-      <li><strong>Audit, SAHYOG Dispatch & Section 65B PDF:</strong> The case is logged in DuckDB/SQLite; a formal Section 91 CrPC freeze directive is issued via SAHYOG with a SHA-256 tamper-proof hash and government tracking token; a court-certified PDF report is compiled.</li>
+      <li><strong>Audit, SAHYOG Dispatch (Mock) & Investigator Lead PDF:</strong> The case is logged in DuckDB/SQLite; a simulated freeze directive is issued via SAHYOG with a demo hash; a prototype PDF report is compiled.</li>
     </ol>
 
     <!-- Section 2 -->
@@ -455,7 +455,7 @@ self.repo.create_dispatch(
           <td><code>GET /api/v1/reports/{case_id}/export</code></td>
           <td><span class="badge badge-get">GET</span></td>
           <td><code>case_id: str</code></td>
-          <td><code>StreamingResponse</code> (Section 65B Forensic PDF)</td>
+          <td><code>StreamingResponse</code> (Investigator Lead PDF)</td>
         </tr>
         <tr>
           <td><code>GET /api/v1/reports/project-overview/export</code></td>

@@ -13,9 +13,8 @@ _sahyog_service = SahyogService()
 @router.post("/dispatch", response_model=SahyogDispatchResponse)
 def dispatch_lawful_notice(req: SahyogDispatchRequest):
     """
-    Simulates formal Section 91 CrPC lawful freeze / KYC disclosure dispatch
-    to destination VASP via mock Indian Government SAHYOG platform.
-    Returns official government acknowledgment token.
+    Simulates a lawful-notice request to a mock SAHYOG endpoint.
+    Returns a MOCK acknowledgment token; no real SAHYOG integration exists.
     """
     try:
         return _sahyog_service.dispatch_notice(req)

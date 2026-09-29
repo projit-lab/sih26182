@@ -34,3 +34,4 @@ data/raw/
 # Build artifacts (keep docs images/diagrams, ignore stray generated pngs elsewhere)
 build/
 dist/
+Forensic_Report_*.pdf

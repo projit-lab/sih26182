@@ -54,7 +54,7 @@ The exact evasion tactic criminals use—splitting funds across dozens of parall
                                                  │
    ┌─────────────────────────────────────────────┴────────────────────────────────┐
    ▼                                             ▼                                ▼
-[ Cytoscape.js Interactive UI ]      [ Section 65B Court PDF ]      [ SAHYOG Sec 91 CrPC Notice ]
+[ Cytoscape.js Interactive UI ]      [ Investigator Lead PDF ]      [ Mock SAHYOG Notice ]
 ```
 
 ### Key Modules Developed:
@@ -68,11 +68,11 @@ The exact evasion tactic criminals use—splitting funds across dozens of parall
 3. **Core Sparse Laplacian Solver (`src/attribution/engine.py`):**
    * Eliminates null-space singularity via Dirichlet grounding ($V_0 = 0\text{ V}$).
    * Pre-factorizes $\mathbf{L}_{\text{grounded}}$ using **Sparse LU Decomposition** (`splu`), enabling sub-millisecond query evaluation.
-4. **Law Enforcement & Court Integration:**
-   * **Section 65B Indian Evidence Act Forensic PDF (`report_service.py`):** Programmatically compiles court-admissible forensic packages with SHA-256 cryptographic audit chains.
+4. **Law Enforcement Lead Generation:**
+   * **Investigator Lead PDF (`report_service.py`):** Programmatically compiles prototype packages with SHA-256 cryptographic demo hashes.
    * **SAHYOG Section 91 CrPC Dispatcher (`routers/sahyog.py`):** Issues formal statutory freeze notices to exchange compliance nodal officers with government acknowledgment tokens (`SAHYOG-ACK-2026-XXXX`).
 5. **Interactive Forensic Canvas (`graph_visualizer.html`):**
-   * Full Cytoscape.js visualizer featuring Dagre and CoSE physics layouts, real-time node inspector, and one-click court export.
+   * Full Cytoscape.js visualizer featuring Dagre and CoSE physics layouts, real-time node inspector, and one-click report export.
 
 ---
 
@@ -97,7 +97,7 @@ The exact evasion tactic criminals use—splitting funds across dozens of parall
 * **Backend & API:** Python 3.11, FastAPI, Uvicorn, Pydantic v2
 * **Linear Algebra & Graph Theory:** NetworkX, NumPy, SciPy (`scipy.sparse.linalg.splu`)
 * **Databases:** DuckDB (`attribution.duckdb`) and SQLite (`attribution.sqlite`)
-* **Forensic PDF Engine:** ReportLab (Section 65B certification with SHA-256 hash)
+* **PDF Engine:** ReportLab (Prototype with SHA-256 demo hash)
 * **Frontend Visualization:** Cytoscape.js, Dagre Layout, HTML5/CSS3 Glassmorphism
 
 ### Quick Run Commands:
