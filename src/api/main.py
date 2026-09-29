@@ -55,6 +55,7 @@ def _load_silkroad_case() -> dict:
         "candidate_vasps": candidate_vasps,   # address -> entity_name
         "suspect": suspect,
         "truncated": False,   # this case is the fully-verified 199/235 extraction
+        "degree_correction": True,
     }
 
 
@@ -107,7 +108,7 @@ def attribute(req: AttributionRequest):
 
     candidates = req.candidate_vasps or list(case["candidate_vasps"].keys())
 
-    engine = AttributionEngine(case["graph"])
+    engine = AttributionEngine(case["graph"], degree_correction=case.get("degree_correction", False))
     try:
         result = engine.attribute(suspect, candidates)
     except ValueError as e:
