@@ -1,8 +1,11 @@
 import hashlib
+import json
 import logging
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
+
+from backend.config import PROJECT_ROOT
 
 from backend.database.db import get_db_connection, init_db
 from backend.database.repositories import EntityTagRepository, TransactionEdgeRepository
@@ -16,6 +19,61 @@ logger = logging.getLogger(__name__)
 def generate_fake_tx_hash(src: str, dst: str, nonce: int) -> str:
     raw = f"{src}->{dst}:{nonce}".encode("utf-8")
     return hashlib.sha256(raw).hexdigest()
+
+
+def load_silkroad_cache(edge_repo: TransactionEdgeRepository, tag_repo: EntityTagRepository) -> int:
+    """
+    Load pre-fetched Silk Road case (2117 real Bitcoin mainnet edges)
+    into the local DB for offline demo. This is the only verified
+    real-world case and is the primary demo substrate.
+    """
+    silkroad_dir = PROJECT_ROOT / "silkroad"
+    edges_path = silkroad_dir / "subgraph_edges.json"
+    tags_path = silkroad_dir / "entity_tags.json"
+
+    if not edges_path.exists():
+        logger.warning("Silk Road cache not found at %s, skipping", edges_path)
+        return 0
+
+    with open(edges_path, "r", encoding="utf-8") as f:
+        raw_edges = json.load(f)
+
+    tuples = [
+        (
+            e["tx_hash"],
+            e["source_address"],
+            e["target_address"],
+            e["amount_satoshis"],
+            e.get("timestamp"),
+            e.get("chain", "BTC"),
+            e.get("is_coinbase", False),
+        )
+        for e in raw_edges
+    ]
+    edge_repo.insert_edges(tuples)
+
+    # Load verified entity tags (DOJ filing, Arkham/GraphSense sourced)
+    if tags_path.exists():
+        with open(tags_path, "r", encoding="utf-8") as f:
+            tags = json.load(f)
+        tag_tuples = [
+            (
+                t["address"],
+                t["entity_name"],
+                t.get("category", "exchange"),
+                t.get("chain", "BTC"),
+                t.get("source", "SilkRoad"),
+                t.get("confidence", 1.0),
+            )
+            for t in tags
+        ]
+        tag_repo.bulk_insert_tags(tag_tuples)
+        logger.info("Loaded %d Silk Road entity tags.", len(tag_tuples))
+
+    # Mark the suspect address as crawled so the extractor uses cached data
+    edge_repo.mark_address_crawled("1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX", chain="BTC")
+
+    return len(tuples)
 
 
 def seed_database(num_cases: int = 25):
@@ -41,6 +99,10 @@ def seed_database(num_cases: int = 25):
     el_tags, el_edges = elliptic_loader.generate_and_ingest_sample()
     logger.info(f"Step 2: Ingested Elliptic++ benchmark: {el_tags} tags, {el_edges} edges.")
 
+    # 2b. Load Silk Road cached case (real Bitcoin mainnet data)
+    sr_edges = load_silkroad_cache(edge_repo, tag_repo)
+    logger.info(f"Step 2b: Loaded {sr_edges} Silk Road cached edges (real mainnet).")
+
     # 3. Generate 25 Laundering Test Scenarios
     edges_to_insert = []
     rng = random.Random(42)
@@ -58,6 +120,16 @@ def seed_database(num_cases: int = 25):
         ("1G47mSr3oANXMafVrR8UC4pzV7FEAzo3r9", "Huobi"),
         ("bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4", "OKX"),
     ]
+
+    demo_tags = [
+        ("VASP_true", "Binance", "exchange", "BTC", "DemoSeed", 1.0),
+        ("VASP_decoy", "WazirX", "exchange", "BTC", "DemoSeed", 1.0),
+    ] + [
+        (addr, name, "exchange", "BTC", "DemoSeed", 1.0)
+        for addr, name in vasp_list
+    ]
+    tag_repo.bulk_insert_tags(demo_tags)
+    logger.info("Inserted %d demo VASP entity tags.", len(demo_tags))
 
     # Scenario 0: Frozen Contract demo case from ENGINE_CONTRACT.md
     edges_to_insert.extend([

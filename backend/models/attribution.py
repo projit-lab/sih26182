@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from backend.models.common import CryptoAddress
@@ -26,6 +26,10 @@ class GraphSummary(BaseModel):
     edges_analyzed: int
     compute_time_ms: float
     solver_method: str = "effective_resistance"
+    truncated: bool = Field(
+        False,
+        description="True if the subgraph was truncated by MAX_SUBGRAPH_NODES cap",
+    )
 
 
 class InvestigateResponse(BaseModel):
@@ -33,6 +37,10 @@ class InvestigateResponse(BaseModel):
     suspect_address: str
     ranked_vasps: List[RankedVaspItem]
     graph_summary: GraphSummary
+    obfuscation_report: Optional[Dict[str, Any]] = Field(
+        None,
+        description="Detected obfuscation techniques: CoinJoin, nested exchanges, P2P sinks, Tornado Cash",
+    )
 
 
 # --- Backwards compatibility with frozen ENGINE_CONTRACT.md ---

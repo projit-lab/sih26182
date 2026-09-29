@@ -3,7 +3,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.config import CORS_ORIGINS, USE_LIVE_API
+from fastapi.responses import FileResponse, RedirectResponse
+from backend.config import CORS_ORIGINS, PROJECT_ROOT, USE_LIVE_API
 from backend.database.db import get_db_connection, init_db
 from backend.database.repositories import EntityTagRepository, TransactionEdgeRepository
 from backend.ingestion.seed_demo import seed_database
@@ -76,12 +77,19 @@ def health_check():
     }
 
 
+@app.get("/app", response_class=FileResponse, tags=["UI"])
+def serve_ui():
+    visualizer_path = PROJECT_ROOT / "graph_visualizer.html"
+    return FileResponse(str(visualizer_path), media_type="text/html")
+
+
 @app.get("/", tags=["System"])
 def root():
     return {
         "message": "Welcome to SIH26182 Wallet Attribution API",
         "docs_url": "/docs",
         "health_url": "/health",
+        "ui_url": "/app",
     }
 
 

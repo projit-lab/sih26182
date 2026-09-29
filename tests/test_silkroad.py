@@ -33,9 +33,11 @@ def test_silkroad_dedicated_engine():
     assert "Coinbase" in top.vasp_name, f"Expected Coinbase Prime #1, got {top.vasp_name}"
 
     # Verify resistance ordering: Coinbase < Kraken < Binance
-    r_map = {item.vasp_name: item.effective_resistance for item in res.ranked_vasps}
-    assert r_map["Coinbase Prime Custody"] < r_map["Kraken"] < r_map["Binance"], (
-        f"Resistance ordering mismatch: {r_map}"
+    coinbase_r = next(item.effective_resistance for item in res.ranked_vasps if "Coinbase" in item.vasp_name)
+    kraken_r = next(item.effective_resistance for item in res.ranked_vasps if "Kraken" in item.vasp_name)
+    binance_r = next(item.effective_resistance for item in res.ranked_vasps if "Binance" in item.vasp_name)
+    assert coinbase_r < kraken_r < binance_r, (
+        f"Resistance ordering mismatch: Coinbase={coinbase_r}, Kraken={kraken_r}, Binance={binance_r}"
     )
 
     print(f"PASS: Silk Road dedicated engine verified! Top VASP: {top.vasp_name} ({top.confidence_score * 100:.1f}%)")
