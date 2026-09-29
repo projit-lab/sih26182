@@ -8,6 +8,7 @@ class InvestigateRequest(BaseModel):
     suspect_address: CryptoAddress = Field(..., description="Target wallet address under investigation")
     chain: str = Field("BTC", description="Blockchain network (BTC, ETH, etc.)")
     depth_limit: int = Field(4, ge=1, le=10, description="Maximum traversal depth (k-hop)")
+    case_id: Optional[str] = Field(None, description="Optional case ID to load pre-verified cases (e.g. 'silkroad')")
     candidate_vasps: Optional[List[str]] = Field(
         None,
         description="Optional explicit candidate VASP address list. If omitted, discovered VASPs in subgraph are used.",
@@ -18,7 +19,9 @@ class RankedVaspItem(BaseModel):
     vasp_name: str = Field(..., description="Entity name of the VASP (e.g., Binance, WazirX)")
     candidate_address: str = Field(..., description="Wallet address associated with the VASP")
     effective_resistance: float = Field(..., description="Computed circuit effective resistance (lower = stronger link)")
-    confidence_score: float = Field(..., description="Normalized attribution probability [0.0 - 1.0]")
+    raw_effective_resistance: float = Field(..., description="Uncorrected effective resistance")
+    score: float = Field(..., description="Ranked score")
+    confidence_score: Optional[float] = Field(None, description="Deprecated. Normalized attribution probability")
 
 
 class GraphSummary(BaseModel):
@@ -41,6 +44,11 @@ class InvestigateResponse(BaseModel):
         None,
         description="Detected obfuscation techniques: CoinJoin, nested exchanges, P2P sinks, Tornado Cash",
     )
+    separation_ratio: Optional[float] = None
+    degree_corrected: bool = False
+    null_test: Optional[Dict[str, Any]] = None
+    unreachable_vasps: List[Dict[str, str]] = Field(default_factory=list)
+    data_source: str = "live/cached crawl"
 
 
 # --- Backwards compatibility with frozen ENGINE_CONTRACT.md ---

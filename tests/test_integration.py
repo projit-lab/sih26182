@@ -52,6 +52,7 @@ def test_investigate_scenario_0(client):
 
 def test_investigate_silkroad(client):
     payload = {
+        "case_id": "silkroad",
         "suspect_address": "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX",
         "depth_limit": 2,
         "chain": "BTC"

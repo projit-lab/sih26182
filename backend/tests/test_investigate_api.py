@@ -40,7 +40,8 @@ def test_investigate_seeded_case():
     assert "effective_resistance" in top_vasp
     assert "confidence_score" in top_vasp
     assert top_vasp["effective_resistance"] > 0.0
-    assert top_vasp["confidence_score"] > 0.0
+    assert top_vasp["confidence_score"] is None
+    assert top_vasp["score"] > 0.0
 
     assert "graph_summary" in data
     assert data["graph_summary"]["nodes_analyzed"] > 1

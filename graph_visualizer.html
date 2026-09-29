@@ -3745,6 +3745,22 @@
         `;
       });
 
+      if (data.unreachable_vasps && data.unreachable_vasps.length > 0) {
+        html += `<div style="font-size:11px; font-weight:700; text-transform:uppercase; color:#ef4444; margin-top:16px; margin-bottom:8px;">No path found (${data.unreachable_vasps.length})</div>`;
+        data.unreachable_vasps.forEach((v, idx) => {
+          const candAddr = v.candidate_address || '';
+          const shortAddr = candAddr.length > 16 ? `${candAddr.substring(0, 10)}...${candAddr.substring(candAddr.length - 6)}` : candAddr;
+          html += `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 6px; border-bottom:1px solid rgba(255,255,255,0.05); border-radius:4px; opacity:0.6;">
+              <div>
+                <div style="font-size:13px; font-weight:600; color:#fff;">${v.vasp_name || 'Unknown'}</div>
+                <div style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-muted);">${shortAddr}</div>
+              </div>
+            </div>
+          `;
+        });
+      }
+
       html += `
         <div style="margin-top:14px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted);">
           <span>Nodes: ${summary.nodes_analyzed}</span>
