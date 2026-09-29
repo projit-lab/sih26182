@@ -30,7 +30,7 @@ def test_silkroad_dedicated_engine():
 
     assert len(res.ranked_vasps) >= 3, "Expected at least 3 ranked candidate VASPs"
     top = res.ranked_vasps[0]
-    assert "Coinbase" in top.vasp_name, f"Expected Coinbase Prime #1, got {top.vasp_name}"
+    assert "Coinbase" in top.vasp_name, "regression check against the stored result, not ground truth"
 
     # Verify resistance ordering: Coinbase < Kraken < Binance
     coinbase_r = next(item.effective_resistance for item in res.ranked_vasps if "Coinbase" in item.vasp_name)

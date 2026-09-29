@@ -338,7 +338,6 @@
         <select id="scenarioSelect" onchange="loadPresetScenario(this.value)">
           <option value="silkroad" selected>Scenario 3: Silk Road Seizure &amp; Liquidation (1F1tAa...)</option>
           <option value="scenario_0">[SYNTHETIC] Scenario 0: Frozen Contract (suspect_042)</option>
-          <option value="genesis">[SYNTHETIC] Scenario 1: Genesis / Multi-Mixer (1A1zP1...)</option>
           <option value="peel_chain">[SYNTHETIC] Scenario 2: Peel Chain Hop (suspect_003)</option>
           <option value="custom">Custom Live Search (Any BTC/ETH Address)</option>
         </select>
@@ -3414,7 +3413,6 @@
       if (scenario) {
         if (key === 'demo_6hop') document.getElementById('addressInput').value = 'bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8';
         else if (key === 'scenario_0') document.getElementById('addressInput').value = 'suspect_042';
-        else if (key === 'genesis') document.getElementById('addressInput').value = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
         else if (key === 'peel_chain') document.getElementById('addressInput').value = 'suspect_003';
         else if (key === 'silkroad') document.getElementById('addressInput').value = '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX';
         initCytoscape(scenario);
@@ -3665,13 +3663,20 @@
       }
 
       if (topVasp) {
+        let topSourceLabelHtml = '';
+        if (topVasp.candidate_address === 'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6') {
+          topSourceLabelHtml = `<span style="margin-left:8px; font-size:9px; background:rgba(255,255,255,0.1); padding:2px 4px; border-radius:4px; color:#94a3b8; font-weight:normal;">label: Arkham-reported (address unverified)</span>`;
+        } else if (topVasp.candidate_address === '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt' || topVasp.candidate_address === '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg') {
+          topSourceLabelHtml = `<span style="margin-left:8px; font-size:9px; background:rgba(255,255,255,0.1); padding:2px 4px; border-radius:4px; color:#94a3b8; font-weight:normal;">label: unverified</span>`;
+        }
+        
         html += `
           <div onclick="focusNodeOnGraph('${topVasp.candidate_address}')" title="Click to locate on graph" style="cursor:pointer; background:linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(5,150,105,0.05) 100%); border:1px solid rgba(16,185,129,0.4); border-radius:8px; padding:12px; margin-bottom:16px; transition:transform 0.15s, border-color 0.15s;" onmouseover="this.style.borderColor='#10b981'" onmouseout="this.style.borderColor='rgba(16,185,129,0.4)'">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
               <span style="font-size:10px; font-weight:700; text-transform:uppercase; color:#10b981; letter-spacing:0.5px;">PRIMARY ATTRIBUTION (TOP 1) &bull; CLICK TO LOCATE</span>
               <span style="font-size:15px; font-weight:800; color:#10b981;">RANK #1 - separation x${data.separation_ratio ? data.separation_ratio.toFixed(2) : 'n/a'}</span>
             </div>
-            <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:2px;">${topVasp.vasp_name || 'Unknown'}</div>
+            <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:2px;">${topVasp.vasp_name || 'Unknown'}${topSourceLabelHtml}</div>
             <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-muted); word-break:break-all; margin-bottom:8px;">${topVasp.candidate_address || ''}</div>
             <div style="font-size:11px; color:#94a3b8;">Effective Resistance (R<sub>eff</sub>): <span style="color:#38bdf8; font-family:'JetBrains Mono',monospace; font-weight:600;">${topVasp.effective_resistance} Ω</span></div>
           </div>
@@ -3683,6 +3688,13 @@
       html += `<div style="font-size:10px; color:#94a3b8; margin-bottom:8px;">Degree correction: ${data.degree_corrected ? 'on' : 'off'}</div>`;
 
       rankedVasps.forEach((v, idx) => {
+        let sourceLabelHtml = '';
+        if (v.candidate_address === 'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6') {
+          sourceLabelHtml = `<span style="margin-left:8px; font-size:9px; background:rgba(255,255,255,0.1); padding:2px 4px; border-radius:4px; color:#94a3b8; font-weight:normal;">label: Arkham-reported (address unverified)</span>`;
+        } else if (v.candidate_address === '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt' || v.candidate_address === '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg') {
+          sourceLabelHtml = `<span style="margin-left:8px; font-size:9px; background:rgba(255,255,255,0.1); padding:2px 4px; border-radius:4px; color:#94a3b8; font-weight:normal;">label: unverified</span>`;
+        }
+
         const rawREff = v.raw_effective_resistance ? v.raw_effective_resistance.toFixed(4) : (v.effective_resistance || 0).toFixed(4);
         const scoreVal = (v.score || 0).toFixed(4);
         const candAddr = v.candidate_address || '';
@@ -3690,7 +3702,7 @@
         html += `
           <div onclick="focusNodeOnGraph('${candAddr}')" title="Click to locate on graph" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:8px 6px; border-bottom:1px solid rgba(255,255,255,0.05); border-radius:4px; transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
             <div>
-              <div style="font-size:13px; font-weight:600; color:#fff;">#${idx + 1} ${v.vasp_name || 'Unknown'}</div>
+              <div style="font-size:13px; font-weight:600; color:#fff;">#${idx + 1} ${v.vasp_name || 'Unknown'}${sourceLabelHtml}</div>
               <div style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-muted);">${shortAddr}</div>
             </div>
             <div style="text-align:right;">

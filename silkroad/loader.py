@@ -191,7 +191,7 @@ def run_silkroad_pipeline(fetch_live: bool = False):
 
     top_vasp = res.ranked_vasps[0]
     print(f"\n[+] Primary Attributed VASP : {top_vasp.vasp_name} ({top_vasp.confidence_score * 100:.1f}%)")
-    assert "Coinbase" in top_vasp.vasp_name, f"Expected Coinbase Prime to rank #1, got {top_vasp.vasp_name}"
+    assert "Coinbase" in top_vasp.vasp_name, "regression check against the stored result, not ground truth"
     print("[PASS] Mathematical Ground Truth Confirmed: Coinbase Prime Custody has the lowest effective resistance!")
 
     # 3. Generate illustrative investigator lead report PDF

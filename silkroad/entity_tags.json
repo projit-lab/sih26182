@@ -12,7 +12,7 @@
     "entity_name": "Coinbase Prime Institutional Vault",
     "category": "exchange",
     "chain": "BTC",
-    "source": "Arkham/GraphSense",
+    "source": "Team label (added 2026-09-04); consistent with Arkham-reported US Gov Silk Road transfers to Coinbase Prime, Aug and Dec 2024; address not independently verified",
     "confidence": 0.98
   },
   {
@@ -20,7 +20,7 @@
     "entity_name": "Kraken Exchange Liquidation Node",
     "category": "exchange",
     "chain": "BTC",
-    "source": "Arkham/GraphSense",
+    "source": "Team label (added 2026-09-04); no source on record; UNVERIFIED",
     "confidence": 0.95
   },
   {
@@ -28,7 +28,7 @@
     "entity_name": "Binance Multi-Sig Sweep Relay",
     "category": "exchange",
     "chain": "BTC",
-    "source": "Mempool_Space",
+    "source": "Team label (added 2026-09-04); no source on record; UNVERIFIED",
     "confidence": 0.90
   },
   {
