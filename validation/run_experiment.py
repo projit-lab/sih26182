@@ -1,7 +1,7 @@
 import time
 import numpy as np
-from gen_graph import generate_graph
-from methods import (
+from validation.synthetic_graph_generator import generate_graph
+from validation.attribution_methods_baselines import (
     prepare_shortest_path_graph, shortest_path_rank,
     build_laplacian, factorize_laplacian, effective_resistance_rank,
     graphsage_rank_all,
@@ -98,12 +98,15 @@ def main():
     results_summary.append(evaluate("Effective Resistance (our hypothesis)", er_ranks, ground_truth, suspects, obfuscated_flags))
 
     # ---------------- Method 3: GraphSAGE ----------------
-    t0 = time.time()
-    gs_results, final_loss = graphsage_rank_all(G, suspects, vasp_nodes, embedding_dim=32, epochs=80)
-    gs_ranks = {s: gs_results[s][0] for s in suspects}
-    t_gs = time.time() - t0
-    print(f"\n[GraphSAGE] trained + inferred in {t_gs:.2f}s (final training loss: {final_loss:.4f})")
-    results_summary.append(evaluate("GraphSAGE (learned embeddings, obvious ML baseline)", gs_ranks, ground_truth, suspects, obfuscated_flags))
+    try:
+        t0 = time.time()
+        gs_results, final_loss = graphsage_rank_all(G, suspects, vasp_nodes, embedding_dim=32, epochs=80)
+        gs_ranks = {s: gs_results[s][0] for s in suspects}
+        t_gs = time.time() - t0
+        print(f"\n[GraphSAGE] trained + inferred in {t_gs:.2f}s (final training loss: {final_loss:.4f})")
+        results_summary.append(evaluate("GraphSAGE (learned embeddings, obvious ML baseline)", gs_ranks, ground_truth, suspects, obfuscated_flags))
+    except ModuleNotFoundError:
+        print("\n[GraphSAGE] Skipping GraphSAGE because 'torch' is not installed.")
 
     # ---------------- Summary table ----------------
     print("\n" + "=" * 100)
