@@ -4,8 +4,10 @@ import time
 from typing import Dict, List, Optional
 import networkx as nx
 
+from backend.config import MAX_SUBGRAPH_NODES
 from backend.database.repositories import CaseRepository, EntityTagRepository
 from backend.ingestion.extractor import SubgraphExtractor
+from backend.ingestion.obfuscation_detector import analyze_obfuscation
 from backend.models.attribution import (
     GraphSummary,
     InvestigateRequest,
@@ -52,6 +54,26 @@ class AttributionService:
                 f"Suspect wallet '{req.suspect_address}' has no transaction history in the graph"
             )
 
+        # 1b. Run obfuscation analysis on the extracted subgraph
+        known_vasps_set = set(discovered_vasps)
+        obfuscation_report = analyze_obfuscation(
+            graph, req.suspect_address, known_vasps_set, self.tag_repo, chain=req.chain
+        )
+
+        # Promote detected nested exchanges to candidate VASP pool
+        for ne in obfuscation_report.nested_exchanges:
+            if ne.address not in discovered_vasps:
+                discovered_vasps.append(ne.address)
+                metadata[ne.address] = {
+                    "role": "nested_exchange",
+                    "entity": ne.suggested_tag,
+                    "category": "nested_exchange",
+                    "label": ne.suggested_tag,
+                    "parent_vasp": ne.parent_name,
+                    "funnel_ratio": ne.funnel_ratio,
+                }
+                logger.info(f"Promoted nested exchange {ne.address} to candidate pool (via {ne.parent_name})")
+
         # 2. Determine candidate VASPs
         candidate_pool = req.candidate_vasps or discovered_vasps
 
@@ -60,9 +82,20 @@ class AttributionService:
             all_known = self.tag_repo.list_all_vasp_addresses()
             candidate_pool = [v for v in all_known if v in graph.nodes and v != req.suspect_address]
 
-        # Dynamic fallback for real-world unlabelled subgraphs:
-        # If no tagged exchange was hit within k hops, select top-volume recipient nodes
-        # in the same connected component as candidate targets
+        # P2P/OTC fallback: if no tagged exchange found, use detected P2P sinks
+        if not candidate_pool and obfuscation_report.p2p_sinks:
+            candidate_pool = [s.address for s in obfuscation_report.p2p_sinks]
+            for s in obfuscation_report.p2p_sinks:
+                metadata[s.address] = {
+                    "role": "suspected_p2p",
+                    "entity": s.suggested_tag,
+                    "category": "p2p_otc",
+                    "label": s.suggested_tag,
+                    "volume_btc": s.total_volume_btc,
+                }
+            logger.info(f"Using {len(candidate_pool)} P2P sink(s) as fallback candidates")
+
+        # Generic fallback: top-volume recipient nodes in connected component
         if not candidate_pool:
             if nx.is_connected(graph):
                 reachable_nodes = set(graph.nodes)
@@ -137,6 +170,7 @@ class AttributionService:
             edges_analyzed=graph.number_of_edges(),
             compute_time_ms=compute_ms,
             solver_method=attr_result.method,
+            truncated=graph.number_of_nodes() >= MAX_SUBGRAPH_NODES,
         )
 
         # 5. Persist case for audit & report export
@@ -149,6 +183,7 @@ class AttributionService:
             suspect_address=req.suspect_address,
             ranked_vasps=ranked_items,
             graph_summary=graph_summary,
+            obfuscation_report=obfuscation_report.to_dict(),
         )
 
         self.case_repo.save_case(

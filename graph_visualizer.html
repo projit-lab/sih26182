@@ -380,7 +380,7 @@
         Reset View
       </button>
 
-      <a href="http://127.0.0.1:8000/api/v1/reports/project-overview/export" target="_blank"
+      <a id="projectReportLink" href="/api/v1/reports/project-overview/export" target="_blank"
          style="display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #fff; border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; text-decoration: none; box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         Project Report (PDF)
@@ -428,6 +428,14 @@
         <div class="legend-dot" style="background: var(--accent-hop);"></div>
         <span>Intermediary Hop</span>
       </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #f59e0b; box-shadow: 0 0 8px #f59e0b;"></div>
+        <span>Nested Exchange (Funnel)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #f43f5e; box-shadow: 0 0 8px #f43f5e;"></div>
+        <span>P2P / OTC Sink</span>
+      </div>
       <div class="legend-item" style="margin-top: 10px;">
         <div class="legend-line"></div>
         <span>Edge thickness = Weight (Volume)</span>
@@ -469,6 +477,11 @@
   </div>
 
   <script>
+    // Dynamic backend base URL (works seamlessly in browser, localhost, or reverse proxy)
+    const API_BASE = (window.location.origin && window.location.origin.startsWith('http'))
+      ? window.location.origin
+      : 'http://127.0.0.1:8000';
+
     // Safely register cytoscape-dagre extension if present
     if (typeof cytoscape !== 'undefined' && typeof cytoscapeDagre !== 'undefined') {
       try {
@@ -3144,6 +3157,50 @@
               'height': 40
             }
           },
+          {
+            selector: 'node[role = "nested_exchange"]',
+            style: {
+              'background-color': '#f59e0b',
+              'border-color': '#fef08a',
+              'border-width': 4,
+              'width': 50,
+              'height': 50,
+              'font-weight': 'bold'
+            }
+          },
+          {
+            selector: 'node[role = "suspected_p2p"]',
+            style: {
+              'background-color': '#f43f5e',
+              'border-color': '#fecdd3',
+              'border-width': 4,
+              'width': 48,
+              'height': 48,
+              'font-weight': 'bold'
+            }
+          },
+          {
+            selector: 'node[role = "coinjoin_pool"]',
+            style: {
+              'background-color': '#9333ea',
+              'border-color': '#e9d5ff',
+              'border-width': 4,
+              'width': 52,
+              'height': 52,
+              'font-weight': 'bold'
+            }
+          },
+          {
+            selector: 'node[role = "tornado_cash"]',
+            style: {
+              'background-color': '#06b6d4',
+              'border-color': '#a5f3fc',
+              'border-width': 4,
+              'width': 52,
+              'height': 52,
+              'font-weight': 'bold'
+            }
+          },
           // Edges with Weights & Arrows
           {
             selector: 'edge',
@@ -3318,6 +3375,10 @@
         case 'mixer_hop': return 'var(--accent-mixer)';
         case 'candidate_vasp': return 'var(--accent-vasp)';
         case 'hop': return 'var(--accent-hop)';
+        case 'nested_exchange': return '#f59e0b';
+        case 'suspected_p2p': return '#f43f5e';
+        case 'coinjoin_pool': return '#9333ea';
+        case 'tornado_cash': return '#06b6d4';
         default: return 'var(--accent-bg)';
       }
     }
@@ -3370,7 +3431,7 @@
         return;
       }
 
-      const url = `http://127.0.0.1:8000/api/v1/graph/subgraph/${encodeURIComponent(address)}?depth=${depth}&chain=BTC`;
+      const url = `${API_BASE}/api/v1/graph/subgraph/${encodeURIComponent(address)}?depth=${depth}&chain=BTC`;
 
       try {
         const res = await fetch(url);
@@ -3389,7 +3450,7 @@
           edges: data.edges
         });
       } catch (err) {
-        alert(`Failed to fetch from live backend:\n${err.message}\n\nMake sure FastAPI is running on http://127.0.0.1:8000 (uvicorn backend.main:app)`);
+        alert(`Failed to fetch from live backend:\n${err.message}\n\nMake sure FastAPI is running on ${API_BASE} (uvicorn backend.main:app)`);
       }
     }
 
@@ -3426,7 +3487,7 @@
       }
 
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/v1/investigate", {
+        const res = await fetch(`${API_BASE}/api/v1/investigate`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -3559,6 +3620,86 @@
         </div>
       `;
 
+      // Bounded Subgraph Cap Notice
+      if (summary && summary.truncated) {
+        html += `
+          <div style="background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.4); border-radius:8px; padding:10px 12px; margin-bottom:14px; font-size:11px; color:#fde047; display:flex; align-items:flex-start; gap:8px;">
+            <span style="font-size:14px; line-height:1;">⚠️</span>
+            <div>
+              <div style="font-weight:700; margin-bottom:2px;">Bounded Subgraph Notice</div>
+              <div style="color:#fef08a; opacity:0.85;">Graph capped at 3,500 nodes (k-hop boundary) to guarantee O(k) sub-second Laplacian solve.</div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Obfuscation Intelligence Report
+      const obf = data.obfuscation_report;
+      if (obf && obf.techniques_detected && obf.techniques_detected.length > 0) {
+        html += `
+          <div style="background:rgba(147,51,234,0.12); border:1px solid rgba(147,51,234,0.4); border-radius:8px; padding:12px; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:10px; font-weight:700; text-transform:uppercase; color:#c084fc; letter-spacing:0.5px;">🛡️ Obfuscation Intelligence (${obf.techniques_detected.length} Detected)</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+              ${obf.techniques_detected.map(t => {
+                let bg = '#7e22ce';
+                if (t === 'Nested Exchange') bg = '#b45309';
+                else if (t === 'P2P/OTC') bg = '#be123c';
+                else if (t === 'Tornado Cash') bg = '#0e7490';
+                return `<span class="badge" style="background:${bg}; color:#fff; font-size:10px;">${t}</span>`;
+              }).join('')}
+            </div>
+        `;
+
+        if (obf.coinjoin_transactions && obf.coinjoin_transactions.length > 0) {
+          html += `<div style="font-size:11px; color:#d8b4fe; margin-top:6px; font-weight:600;">CoinJoin Patterns (${obf.coinjoin_transactions.length}):</div>`;
+          obf.coinjoin_transactions.forEach(cj => {
+            html += `
+              <div style="font-size:10.5px; color:#cbd5e1; background:rgba(0,0,0,0.25); border-radius:4px; padding:6px 8px; margin-top:4px;">
+                <div>Type: <b style="color:#c084fc;">${cj.type || 'Equal-Output CoinJoin'}</b> &bull; Pool Size: <b>${cj.pool_size}</b></div>
+                <div style="color:var(--text-muted); font-size:9.5px; font-family:'JetBrains Mono',monospace;">Entropy: ${cj.output_entropy?.toFixed(3) || 'N/A'} &bull; Conf: ${(cj.confidence * 100).toFixed(0)}%</div>
+              </div>
+            `;
+          });
+        }
+
+        if (obf.nested_exchanges && obf.nested_exchanges.length > 0) {
+          html += `<div style="font-size:11px; color:#fde68a; margin-top:8px; font-weight:600;">Nested Exchanges (${obf.nested_exchanges.length}):</div>`;
+          obf.nested_exchanges.forEach(ne => {
+            html += `
+              <div onclick="focusNodeOnGraph('${ne.address}')" title="Click to locate" style="cursor:pointer; font-size:10.5px; color:#cbd5e1; background:rgba(0,0,0,0.25); border-radius:4px; padding:6px 8px; margin-top:4px; border-left:3px solid #f59e0b;">
+                <div>Parent VASP: <b style="color:#fbbf24;">${ne.parent_vasp || 'Unknown'}</b> &bull; Funnel: <b>${(ne.funnel_ratio * 100).toFixed(0)}%</b></div>
+                <div style="color:var(--text-muted); font-size:9.5px; font-family:'JetBrains Mono',monospace; word-break:break-all;">${ne.address}</div>
+              </div>
+            `;
+          });
+        }
+
+        if (obf.p2p_sinks && obf.p2p_sinks.length > 0) {
+          html += `<div style="font-size:11px; color:#fda4af; margin-top:8px; font-weight:600;">P2P / OTC Sinks (${obf.p2p_sinks.length}):</div>`;
+          obf.p2p_sinks.forEach(ps => {
+            html += `
+              <div onclick="focusNodeOnGraph('${ps.address}')" title="Click to locate" style="cursor:pointer; font-size:10.5px; color:#cbd5e1; background:rgba(0,0,0,0.25); border-radius:4px; padding:6px 8px; margin-top:4px; border-left:3px solid #f43f5e;">
+                <div>Volume: <b style="color:#fb7185;">${ps.volume_btc?.toFixed(4) || 0} BTC</b> &bull; Round Amt: <b>${ps.is_round_amount ? 'YES' : 'NO'}</b></div>
+                <div style="color:var(--text-muted); font-size:9.5px; font-family:'JetBrains Mono',monospace; word-break:break-all;">${ps.address}</div>
+              </div>
+            `;
+          });
+        }
+
+        if (obf.tornado_cash && obf.tornado_cash.detected) {
+          html += `
+            <div style="font-size:10.5px; color:#67e8f9; background:rgba(0,0,0,0.25); border-radius:4px; padding:6px 8px; margin-top:6px; border-left:3px solid #06b6d4;">
+              <div><b>Tornado Cash Contract Interactions Detected</b></div>
+              <div style="color:var(--text-muted); font-size:9.5px;">Deposits: ${obf.tornado_cash.deposits?.length || 0} &bull; Withdrawals: ${obf.tornado_cash.withdrawals?.length || 0}</div>
+            </div>
+          `;
+        }
+
+        html += `</div>`;
+      }
+
       if (data.dijkstra_comparison) {
         html += `
           <div style="background:rgba(239,68,68,0.08); border:1px dashed rgba(239,68,68,0.4); border-radius:8px; padding:10px; margin-bottom:14px; font-size:11px;">
@@ -3615,7 +3756,7 @@
       if (data.case_id) {
         html += `
           <div style="margin-top:14px; display:flex; flex-direction:column; gap:8px;">
-            <a href="http://127.0.0.1:8000/api/v1/reports/${encodeURIComponent(data.case_id)}/export" target="_blank"
+            <a href="${API_BASE}/api/v1/reports/${encodeURIComponent(data.case_id)}/export" target="_blank"
                style="display:block; width:100%; padding:9px 12px; background:#0284c7; hover:background:#0369a1; color:#fff; font-weight:600; font-size:12px; border-radius:6px; text-decoration:none; text-align:center; transition:background 0.2s;">
               Export Court Forensic Report (PDF)
             </a>
@@ -3648,11 +3789,43 @@
           console.warn("Node animation error:", animErr);
         }
       }
+
+      // Highlight detected obfuscation nodes on Cytoscape canvas
+      if (window.cy && obf) {
+        try {
+          if (obf.nested_exchanges) {
+            obf.nested_exchanges.forEach(ne => {
+              const ele = window.cy.getElementById(ne.address);
+              if (ele && ele.length > 0) {
+                ele.style({
+                  'border-color': '#f59e0b',
+                  'border-width': 6,
+                  'background-color': '#d97706'
+                });
+              }
+            });
+          }
+          if (obf.p2p_sinks) {
+            obf.p2p_sinks.forEach(ps => {
+              const ele = window.cy.getElementById(ps.address);
+              if (ele && ele.length > 0) {
+                ele.style({
+                  'border-color': '#f43f5e',
+                  'border-width': 6,
+                  'background-color': '#e11d48'
+                });
+              }
+            });
+          }
+        } catch (obfAnimErr) {
+          console.warn("Obfuscation highlight notice:", obfAnimErr);
+        }
+      }
     }
 
     async function dispatchSahyogNotice(caseId, suspectAddress, targetVasp) {
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/v1/sahyog/dispatch", {
+        const res = await fetch(`${API_BASE}/api/v1/sahyog/dispatch`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
