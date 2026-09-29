@@ -33,6 +33,8 @@ class GraphSummary(BaseModel):
         False,
         description="True if the subgraph was truncated by MAX_SUBGRAPH_NODES cap",
     )
+    n_components: int = 1
+    suspect_component_size: int = 0
 
 
 class InvestigateResponse(BaseModel):

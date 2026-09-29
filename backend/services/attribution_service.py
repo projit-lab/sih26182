@@ -199,12 +199,18 @@ class AttributionService:
             entity_name = node_meta.get("entity") or (tag["entity_name"] if tag else c)
             unreachable_vasps.append({"vasp_name": entity_name, "candidate_address": c})
 
+        components = list(nx.connected_components(graph))
+        n_components = len(components)
+        suspect_component_size = len(nx.node_connected_component(graph, req.suspect_address)) if req.suspect_address in graph else 0
+
         graph_summary = GraphSummary(
             nodes_analyzed=graph.number_of_nodes(),
             edges_analyzed=graph.number_of_edges(),
             compute_time_ms=compute_ms,
             solver_method=attr_result.method,
             truncated=is_truncated,
+            n_components=n_components,
+            suspect_component_size=suspect_component_size,
         )
 
         # 5. Persist case for audit & report export

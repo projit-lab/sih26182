@@ -336,11 +336,10 @@
       <div class="input-group">
         <label>Scenario:</label>
         <select id="scenarioSelect" onchange="loadPresetScenario(this.value)">
-          <option value="demo_6hop" selected>Scenario 4: 6-Hop Asymmetric Swarm (Advanced Demo)</option>
-          <option value="silkroad">Scenario 3: Silk Road Seizure &amp; Liquidation (1F1tAa...)</option>
-          <option value="scenario_0">Scenario 0: Frozen Contract (suspect_042)</option>
-          <option value="genesis">Scenario 1: Genesis / Multi-Mixer (1A1zP1...)</option>
-          <option value="peel_chain">Scenario 2: Peel Chain Hop (suspect_003)</option>
+          <option value="silkroad" selected>Scenario 3: Silk Road Seizure &amp; Liquidation (1F1tAa...)</option>
+          <option value="scenario_0">[SYNTHETIC] Scenario 0: Frozen Contract (suspect_042)</option>
+          <option value="genesis">[SYNTHETIC] Scenario 1: Genesis / Multi-Mixer (1A1zP1...)</option>
+          <option value="peel_chain">[SYNTHETIC] Scenario 2: Peel Chain Hop (suspect_003)</option>
           <option value="custom">Custom Live Search (Any BTC/ETH Address)</option>
         </select>
       </div>
@@ -348,7 +347,7 @@
       <!-- Live Address Input -->
       <div class="input-group">
         <label>Address:</label>
-        <input type="text" id="addressInput" value="bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8" placeholder="BTC/ETH address" oninput="document.getElementById('scenarioSelect').value='custom'">
+        <input type="text" id="addressInput" value="1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX" placeholder="BTC/ETH address" oninput="document.getElementById('scenarioSelect').value='custom'">
       </div>
 
       <div class="input-group">
@@ -3723,6 +3722,9 @@
           <span>Nodes: ${summary.nodes_analyzed}</span>
           <span>Edges: ${summary.edges_analyzed}</span>
           <span>Time: <span style="color:#10b981; font-weight:600;">${summary.compute_time_ms} ms</span></span>
+        </div>
+        <div style="margin-top:6px; font-size:10px; color:var(--text-muted); text-align:center;">
+          Suspect's connected cluster: ${summary.suspect_component_size || 0} nodes of ${summary.nodes_analyzed}
         </div>
       `;
 
