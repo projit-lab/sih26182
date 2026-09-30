@@ -1,0 +1,940 @@
+import { useEffect, useRef, useState } from 'react';
+import * as d3 from 'd3';
+import { ChevronLeft, ExternalLink, RefreshCw, ZoomIn, ZoomOut, Layers, Info, BarChart2, Minus, GitFork } from 'lucide-react';
+import type { AttributeResponse } from '../types';
+
+interface GraphScreenProps {
+  result: AttributeResponse;
+  onBack: () => void;
+}
+
+interface RenderNode extends d3.SimulationNodeDatum {
+  id: string;
+  label: string;
+  role: 'suspect' | 'hop' | 'mixer_hop' | 'candidate_vasp' | 'unreachable';
+  entity?: string;
+  category?: string;
+  level: number;
+  amountBtc?: number;
+  score?: number | null;
+  rank?: number;
+  x?: number;
+  y?: number;
+}
+
+interface RenderEdge extends d3.SimulationLinkDatum<RenderNode> {
+  id: string;
+  source: any;
+  target: any;
+  amountBtc: number;
+  branchType?: 'decoy' | 'swarm' | 'direct';
+  txHash?: string;
+}
+
+const ROLE_COLORS: Record<string, string> = {
+  suspect: '#dc2626',        // Crimson Red - Suspect root
+  candidate_vasp: '#059669', // Emerald - True VASP exit
+  mixer_hop: '#7c3aed',      // Purple - Mixer channel
+  hop: '#2563eb',            // Blue - Relay / Mule
+  unreachable: '#9ca3af',    // Muted Grey - Unreachable
+};
+
+export function GraphScreen({ result, onBack }: GraphScreenProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const zoomBehaviorRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  const [layoutMode, setLayoutMode] = useState<'branching' | 'force'>('branching');
+  const [selectedNode, setSelectedNode] = useState<RenderNode | null>(null);
+  const [hoveredEdge, setHoveredEdge] = useState<RenderEdge | null>(null);
+  const [isLegendOpen, setIsLegendOpen] = useState(false);
+  const [isAttributesOpen, setIsAttributesOpen] = useState(false);
+  const [currentHopDepth, setCurrentHopDepth] = useState<number>(6);
+
+  // Extract nodes and edges with dynamic hop depth filtering
+  const { nodesData, edgesData, totalNodeCount, totalEdgeCount } = (() => {
+    let allNodes: RenderNode[] = [];
+    let allEdges: RenderEdge[] = [];
+
+    if (result.graph_elements && result.graph_elements.nodes.length > 0) {
+      allNodes = result.graph_elements.nodes.map((n) => ({
+        ...n,
+        level: n.level ?? 0,
+        amountBtc: n.amountBtc,
+        role: n.role as RenderNode['role'],
+      }));
+
+      allEdges = result.graph_elements.edges.map((e) => ({
+        id: e.id,
+        source: e.source,
+        target: e.target,
+        amountBtc: e.amountBtc,
+        branchType: e.branchType as RenderEdge['branchType'],
+        txHash: e.txHash,
+      }));
+    } else {
+      // Fallback synthetic graph
+      const suspectId = result.suspect || 'suspect_root';
+      allNodes.push({
+        id: suspectId,
+        label: 'Suspect Root',
+        entity: 'Suspect',
+        role: 'suspect',
+        level: 0,
+        amountBtc: 100.0,
+      });
+
+      // Decoy chain (2 hops)
+      allNodes.push({ id: 'hop_mule_1', label: 'Decoy Mule 1', role: 'hop', level: 1, amountBtc: 5.0 });
+      allNodes.push({ id: 'hop_mule_2', label: 'Decoy Mule 2', role: 'hop', level: 2, amountBtc: 5.0 });
+      allEdges.push({ id: 'e_decoy_1', source: suspectId, target: 'hop_mule_1', amountBtc: 5.0, branchType: 'decoy' });
+      allEdges.push({ id: 'e_decoy_2', source: 'hop_mule_1', target: 'hop_mule_2', amountBtc: 5.0, branchType: 'decoy' });
+
+      // Laundering Swarm
+      allNodes.push({ id: 'hop_split_1', label: 'Swarm Layer 1A', role: 'hop', level: 1, amountBtc: 47.5 });
+      allNodes.push({ id: 'hop_split_2', label: 'Swarm Layer 1B', role: 'hop', level: 1, amountBtc: 47.5 });
+      allEdges.push({ id: 'e_swarm_1a', source: suspectId, target: 'hop_split_1', amountBtc: 47.5, branchType: 'swarm' });
+      allEdges.push({ id: 'e_swarm_1b', source: suspectId, target: 'hop_split_2', amountBtc: 47.5, branchType: 'swarm' });
+
+      allNodes.push({ id: 'mixer_chan_1', label: 'Mixer Obfuscator A', role: 'mixer_hop', level: 2, amountBtc: 30.0 });
+      allNodes.push({ id: 'mixer_chan_2', label: 'Mixer Obfuscator B', role: 'mixer_hop', level: 2, amountBtc: 35.0 });
+      allNodes.push({ id: 'mixer_chan_3', label: 'Mixer Obfuscator C', role: 'mixer_hop', level: 2, amountBtc: 30.0 });
+      allEdges.push({ id: 'e_mix_1', source: 'hop_split_1', target: 'mixer_chan_1', amountBtc: 25.0, branchType: 'swarm' });
+      allEdges.push({ id: 'e_mix_2', source: 'hop_split_1', target: 'mixer_chan_2', amountBtc: 22.5, branchType: 'swarm' });
+      allEdges.push({ id: 'e_mix_3', source: 'hop_split_2', target: 'mixer_chan_2', amountBtc: 12.5, branchType: 'swarm' });
+      allEdges.push({ id: 'e_mix_4', source: 'hop_split_2', target: 'mixer_chan_3', amountBtc: 35.0, branchType: 'swarm' });
+
+      allNodes.push({ id: 'hop_agg_1', label: 'Consolidator Alpha', role: 'hop', level: 3, amountBtc: 55.0 });
+      allNodes.push({ id: 'hop_agg_2', label: 'Consolidator Beta', role: 'hop', level: 3, amountBtc: 40.0 });
+      allEdges.push({ id: 'e_agg_1', source: 'mixer_chan_1', target: 'hop_agg_1', amountBtc: 30.0, branchType: 'swarm' });
+      allEdges.push({ id: 'e_agg_2', source: 'mixer_chan_2', target: 'hop_agg_1', amountBtc: 25.0, branchType: 'swarm' });
+      allEdges.push({ id: 'e_agg_3', source: 'mixer_chan_2', target: 'hop_agg_2', amountBtc: 10.0, branchType: 'swarm' });
+      allEdges.push({ id: 'e_agg_4', source: 'mixer_chan_3', target: 'hop_agg_2', amountBtc: 30.0, branchType: 'swarm' });
+
+      // Exit VASP
+      const topVasp = result.ranked_candidates[0] || '1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s';
+      allNodes.push({
+        id: topVasp,
+        label: result.candidate_labels?.[topVasp] || 'Binance Hot Wallet',
+        entity: 'Binance',
+        role: 'candidate_vasp',
+        level: 4,
+        amountBtc: 95.0,
+        rank: 1,
+        score: result.scores?.[topVasp] ?? 0.1245,
+      });
+      allEdges.push({ id: 'e_exit_1', source: 'hop_agg_1', target: topVasp, amountBtc: 55.0, branchType: 'swarm' });
+      allEdges.push({ id: 'e_exit_2', source: 'hop_agg_2', target: topVasp, amountBtc: 40.0, branchType: 'swarm' });
+
+      // Decoy VASP
+      const decoyVasp = result.ranked_candidates[1] || '1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ';
+      allNodes.push({
+        id: decoyVasp,
+        label: result.candidate_labels?.[decoyVasp] || 'Huobi Deposit',
+        entity: 'Huobi',
+        role: 'candidate_vasp',
+        level: 3,
+        amountBtc: 5.0,
+        rank: 2,
+        score: result.scores?.[decoyVasp] ?? 0.4512,
+      });
+      allEdges.push({ id: 'e_exit_decoy', source: 'hop_mule_2', target: decoyVasp, amountBtc: 5.0, branchType: 'decoy' });
+
+      // Unreachable candidate
+      result.unreachable?.forEach((u: string) => {
+        allNodes.push({
+          id: u,
+          label: result.candidate_labels?.[u] || u,
+          role: 'unreachable',
+          level: 5,
+          score: null,
+        });
+      });
+    }
+
+    const filteredNodes = allNodes.filter((n) => n.level <= currentHopDepth);
+    const visibleNodeIds = new Set(filteredNodes.map((n) => n.id));
+    const filteredEdges = allEdges.filter(
+      (e) =>
+        visibleNodeIds.has(typeof e.source === 'string' ? e.source : e.source.id) &&
+        visibleNodeIds.has(typeof e.target === 'string' ? e.target : e.target.id)
+    );
+
+    return {
+      nodesData: filteredNodes,
+      edgesData: filteredEdges,
+      totalNodeCount: allNodes.length,
+      totalEdgeCount: allEdges.length,
+    };
+  })();
+
+  useEffect(() => {
+    if (!svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    svg.selectAll('*').remove();
+
+    const width = svgRef.current.clientWidth || 1000;
+    const height = svgRef.current.clientHeight || 700;
+    const W = width;
+    const H = height;
+
+    // Marker defs for directional arrows
+    const defs = svg.append('defs');
+
+    // Arrow markers
+    ['decoy', 'swarm', 'default'].forEach((type) => {
+      const color = type === 'decoy' ? '#d97706' : type === 'swarm' ? '#059669' : '#A1A1AA';
+      defs.append('marker')
+        .attr('id', `arrow-${type}`)
+        .attr('viewBox', '0 -5 10 10')
+        .attr('refX', 22)
+        .attr('refY', 0)
+        .attr('markerWidth', 6)
+        .attr('markerHeight', 6)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M0,-4L8,0L0,4')
+        .attr('fill', color);
+    });
+
+    // Subtle glow filter
+    const glow = defs.append('filter').attr('id', 'glow');
+    glow.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'coloredBlur');
+    const feMerge = glow.append('feMerge');
+    feMerge.append('feMergeNode').attr('in', 'coloredBlur');
+    feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+
+    const g = svg.append('g').attr('class', 'main-container');
+
+    // Zoom setup
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.3, 3.5])
+      .on('zoom', (event) => {
+        g.attr('transform', event.transform.toString());
+      });
+
+    svg.call(zoom);
+    zoomBehaviorRef.current = zoom;
+
+    // Clone data for render
+    const nodes: RenderNode[] = nodesData.map((d) => ({ ...d }));
+    const nodeMap = new Map<string, RenderNode>(nodes.map((n) => [n.id, n]));
+
+    const links: RenderEdge[] = edgesData
+      .map((e) => ({
+        ...e,
+        source: nodeMap.get(typeof e.source === 'string' ? e.source : e.source.id)!,
+        target: nodeMap.get(typeof e.target === 'string' ? e.target : e.target.id)!,
+      }))
+      .filter((e) => e.source && e.target);
+
+    // ==========================================
+    // LAYOUT 1: HIERARCHICAL BRANCHING (LEFT-TO-RIGHT)
+    // ==========================================
+    if (layoutMode === 'branching') {
+      const levelGroups: Record<number, RenderNode[]> = {};
+      nodes.forEach((n) => {
+        const lvl = n.level ?? 0;
+        if (!levelGroups[lvl]) levelGroups[lvl] = [];
+        levelGroups[lvl].push(n);
+      });
+
+      const maxLevel = Math.max(...nodes.map((n) => n.level ?? 0), 1);
+      const horizontalSpacing = Math.max(140, (W - 320) / maxLevel);
+      const startX = 140;
+
+      Object.keys(levelGroups).forEach((lvlStr) => {
+        const lvl = Number(lvlStr);
+        const group = levelGroups[lvl];
+        const groupCount = group.length;
+        const totalHeight = Math.min(H - 120, groupCount * 90);
+        const startY = (H - totalHeight) / 2 + 30;
+        const stepY = groupCount > 1 ? totalHeight / (groupCount - 1) : 0;
+
+        group.forEach((node, i) => {
+          node.x = startX + lvl * horizontalSpacing;
+          node.y = groupCount === 1 ? H / 2 : startY + i * stepY;
+        });
+      });
+
+      // Draw Branch Links (Curved Bezier Paths)
+      g.append('g')
+        .attr('class', 'links')
+        .selectAll('path')
+        .data(links)
+        .join('path')
+        .attr('d', (d) => {
+          const s = d.source as RenderNode;
+          const t = d.target as RenderNode;
+          const sx = s.x ?? 0;
+          const sy = s.y ?? 0;
+          const tx = t.x ?? 0;
+          const ty = t.y ?? 0;
+          const dx = tx - sx;
+          return `M ${sx} ${sy} C ${sx + dx * 0.45} ${sy}, ${tx - dx * 0.45} ${ty}, ${tx} ${ty}`;
+        })
+        .attr('fill', 'none')
+        .attr('stroke', (d) => {
+          if (d.branchType === 'decoy') return 'rgba(217, 119, 6, 0.70)';
+          if (d.branchType === 'swarm') return 'rgba(5, 150, 105, 0.78)';
+          return 'rgba(161, 161, 170, 0.50)';
+        })
+        .attr('stroke-width', (d) => {
+          if (d.amountBtc >= 50) return 4;
+          if (d.amountBtc >= 20) return 2.5;
+          return 1.5;
+        })
+        .attr('marker-end', (d) => {
+          if (d.branchType === 'decoy') return 'url(#arrow-decoy)';
+          if (d.branchType === 'swarm') return 'url(#arrow-swarm)';
+          return 'url(#arrow-default)';
+        })
+        .style('cursor', 'pointer')
+        .on('mouseenter', (_, d) => setHoveredEdge(d))
+        .on('mouseleave', () => setHoveredEdge(null));
+
+      // Flow volume badges along the edges
+      g.append('g')
+        .attr('class', 'edge-labels')
+        .selectAll('text')
+        .data(links)
+        .join('text')
+        .attr('x', (d) => ((d.source.x + d.target.x) / 2))
+        .attr('y', (d) => ((d.source.y + d.target.y) / 2) - 8)
+        .attr('text-anchor', 'middle')
+        .attr('fill', (d) => d.branchType === 'decoy' ? '#d97706' : '#059669')
+        .attr('font-size', '10px')
+        .attr('font-family', 'ui-monospace, monospace')
+        .attr('font-weight', '700')
+        .text((d) => d.amountBtc > 0 ? `${d.amountBtc} BTC` : '');
+
+      // Initial center fit
+      svg.transition().duration(400).call(
+        zoom.transform,
+        d3.zoomIdentity.translate(40, 15).scale(0.88)
+      );
+    } else {
+      // ==========================================
+      // LAYOUT 2: FORCE-DIRECTED SWARM
+      // ==========================================
+      const simulation = d3.forceSimulation<RenderNode>(nodes)
+        .force('link', d3.forceLink<RenderNode, RenderEdge>(links).id((d) => d.id).distance(100).strength(0.7))
+        .force('charge', d3.forceManyBody().strength(-280))
+        .force('center', d3.forceCenter(W / 2, H / 2))
+        .force('collision', d3.forceCollide().radius(35));
+
+      const link = g.append('g')
+        .attr('class', 'links')
+        .selectAll('line')
+        .data(links)
+        .join('line')
+        .attr('stroke', (d) => d.branchType === 'decoy' ? '#d97706' : '#059669')
+        .attr('stroke-width', 2);
+
+      simulation.on('tick', () => {
+        link
+          .attr('x1', (d) => (d.source as RenderNode).x ?? 0)
+          .attr('y1', (d) => (d.source as RenderNode).y ?? 0)
+          .attr('x2', (d) => (d.target as RenderNode).x ?? 0)
+          .attr('y2', (d) => (d.target as RenderNode).y ?? 0);
+
+        nodeGroup.attr('transform', (d) => `translate(${d.x ?? 0},${d.y ?? 0})`);
+      });
+    }
+
+    // Draw Nodes
+    const nodeGroup = g.append('g')
+      .attr('class', 'nodes')
+      .selectAll<SVGGElement, RenderNode>('g')
+      .data(nodes)
+      .join('g')
+      .attr('transform', (d) => `translate(${d.x ?? 0},${d.y ?? 0})`)
+      .style('cursor', 'pointer')
+      .on('click', (_, d) => setSelectedNode(d));
+
+    // Outer glow ring for suspect and true VASP
+    nodeGroup.filter((d) => d.role === 'suspect' || (d.role === 'candidate_vasp' && d.rank === 1))
+      .append('circle')
+      .attr('r', (d) => d.role === 'suspect' ? 22 : 19)
+      .attr('fill', 'none')
+      .attr('stroke', (d) => ROLE_COLORS[d.role])
+      .attr('stroke-width', 2)
+      .attr('opacity', 0.4)
+      .attr('filter', 'url(#glow)');
+
+    // Main Circle with dark canvas stroke
+    nodeGroup.append('circle')
+      .attr('r', (d) => {
+        if (d.role === 'suspect') return 18;
+        if (d.role === 'candidate_vasp') return 16;
+        if (d.role === 'mixer_hop') return 14;
+        return 11;
+      })
+      .attr('fill', (d) => ROLE_COLORS[d.role] || '#71717A')
+      .attr('stroke', '#070B14')
+      .attr('stroke-width', 2.5);
+
+    // Inner icon / text
+    nodeGroup.filter((d) => d.role === 'suspect')
+      .append('text')
+      .attr('dy', 4)
+      .attr('text-anchor', 'middle')
+      .attr('fill', '#FFFFFF')
+      .attr('font-size', '10px')
+      .attr('font-weight', '700')
+      .text('ROOT');
+
+    nodeGroup.filter((d) => d.role === 'candidate_vasp')
+      .append('text')
+      .attr('dy', 4)
+      .attr('text-anchor', 'middle')
+      .attr('fill', '#FFFFFF')
+      .attr('font-size', '10px')
+      .attr('font-weight', '700')
+      .text((d) => d.rank ? `#${d.rank}` : 'V');
+
+    // Label beneath nodes (crisp light text on dark canvas)
+    nodeGroup.append('text')
+      .attr('dy', (d) => (d.role === 'suspect' ? 32 : 28))
+      .attr('text-anchor', 'middle')
+      .attr('fill', '#F8FAFC')
+      .attr('font-size', '11px')
+      .attr('font-family', 'ui-monospace, monospace')
+      .attr('font-weight', (d) => d.role === 'suspect' || d.role === 'candidate_vasp' ? '700' : '600')
+      .text((d) => d.label);
+
+    // Sub-label for entity tag
+    nodeGroup.filter((d) => !!d.entity && d.role !== 'hop')
+      .append('text')
+      .attr('dy', (d) => (d.role === 'suspect' ? 44 : 40))
+      .attr('text-anchor', 'middle')
+      .attr('fill', (d) => d.role === 'suspect' ? '#dc2626' : d.rank === 1 ? '#059669' : '#71717A')
+      .attr('font-size', '10px')
+      .attr('font-weight', '600')
+      .text((d) => d.entity || '');
+
+  }, [nodesData, edgesData, layoutMode]);
+
+  const handleResetZoom = () => {
+    if (svgRef.current && zoomBehaviorRef.current) {
+      d3.select(svgRef.current).transition().duration(500).call(
+        zoomBehaviorRef.current.transform,
+        d3.zoomIdentity.translate(20, 0).scale(0.92)
+      );
+    }
+  };
+
+  const handleZoom = (factor: number) => {
+    if (svgRef.current && zoomBehaviorRef.current) {
+      d3.select(svgRef.current).transition().duration(300).call(
+        zoomBehaviorRef.current.scaleBy,
+        factor
+      );
+    }
+  };
+
+  const handleOpenBackendVisualizer = () => {
+    window.open('/graph_visualizer.html', '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <div className="graph-screen">
+      {/* Top Floating Control Bar */}
+      <div style={{
+        position: 'absolute',
+        top: 16,
+        left: 16,
+        right: 16,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        zIndex: 20,
+        pointerEvents: 'none',
+      }}>
+        <div style={{ display: 'flex', gap: 10, pointerEvents: 'auto' }}>
+          <button className="btn-secondary" onClick={onBack} id="graph-back-btn" style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+            color: 'var(--text)',
+            backdropFilter: 'blur(10px)',
+          }}>
+            <ChevronLeft size={14} />
+            Back to Results
+          </button>
+
+          <div style={{
+            display: 'flex',
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+            borderRadius: 7,
+            padding: 3,
+            boxShadow: 'var(--shadow-sm)',
+            backdropFilter: 'blur(10px)',
+          }}>
+            <button
+              onClick={() => setLayoutMode('branching')}
+              style={{
+                background: layoutMode === 'branching' ? 'var(--accent-green)' : 'transparent',
+                color: layoutMode === 'branching' ? '#060A12' : 'var(--muted)',
+                border: 'none',
+                borderRadius: 5,
+                padding: '4px 10px',
+                fontSize: 11,
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+                transition: 'all var(--t)',
+              }}
+            >
+              <Layers size={12} />
+              Branching Tree
+            </button>
+            <button
+              onClick={() => setLayoutMode('force')}
+              style={{
+                background: layoutMode === 'force' ? 'var(--accent-green)' : 'transparent',
+                color: layoutMode === 'force' ? '#060A12' : 'var(--muted)',
+                border: 'none',
+                borderRadius: 5,
+                padding: '4px 10px',
+                fontSize: 11,
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+                transition: 'all var(--t)',
+              }}
+            >
+              <RefreshCw size={12} />
+              Force-Directed
+            </button>
+          </div>
+
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+            borderRadius: 7,
+            padding: '3px 10px',
+            boxShadow: 'var(--shadow-sm)',
+            backdropFilter: 'blur(10px)',
+          }}>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
+              <GitFork size={13} style={{ color: 'var(--accent)' }} /> Depth:
+            </span>
+            <select
+              id="graph-depth-select"
+              value={currentHopDepth}
+              onChange={(e) => setCurrentHopDepth(Number(e.target.value))}
+              style={{
+                colorScheme: 'dark',
+                background: '#0F172A',
+                border: '1px solid rgba(255, 255, 255, 0.22)',
+                color: '#34D399',
+                borderRadius: 6,
+                padding: '3px 8px',
+                fontSize: 11,
+                fontWeight: 600,
+                cursor: 'pointer',
+                outline: 'none',
+              }}
+            >
+              <option value={1} style={{ background: '#0F172A', color: '#F8FAFC' }}>1 Hop (Direct Peers)</option>
+              <option value={2} style={{ background: '#0F172A', color: '#F8FAFC' }}>2 Hops (Mules & Relays)</option>
+              <option value={3} style={{ background: '#0F172A', color: '#F8FAFC' }}>3 Hops (Mixer Layering)</option>
+              <option value={4} style={{ background: '#0F172A', color: '#F8FAFC' }}>4 Hops (Deep Trace)</option>
+              <option value={5} style={{ background: '#0F172A', color: '#F8FAFC' }}>5 Hops (Aggregators)</option>
+              <option value={6} style={{ background: '#0F172A', color: '#F8FAFC' }}>6 Hops (Deep Layering / Swarm Exit)</option>
+              <option value={7} style={{ background: '#0F172A', color: '#F8FAFC' }}>7 Hops (Complex Peeling)</option>
+              <option value={8} style={{ background: '#0F172A', color: '#F8FAFC' }}>8 Hops (Deep Obfuscation)</option>
+            </select>
+          </div>
+
+          <button
+            onClick={() => setIsLegendOpen((prev) => !prev)}
+            className={`graph-panel-pill ${isLegendOpen ? 'active' : ''}`}
+            title={isLegendOpen ? 'Hide Topology Legend' : 'Show Topology Legend'}
+          >
+            <Info size={13} />
+            Legend {isLegendOpen ? '▾' : '▸'}
+          </button>
+
+          <button
+            onClick={() => setIsAttributesOpen((prev) => !prev)}
+            className={`graph-panel-pill ${isAttributesOpen ? 'active' : ''}`}
+            title={isAttributesOpen ? 'Hide Graph Attributes' : 'Show Graph Attributes'}
+          >
+            <BarChart2 size={13} />
+            Attributes {isAttributesOpen ? '▾' : '▸'}
+          </button>
+        </div>
+
+        <div style={{ display: 'flex', gap: 8, pointerEvents: 'auto' }}>
+          <button
+            onClick={() => handleZoom(1.25)}
+            title="Zoom In"
+            style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              color: 'var(--text)',
+              borderRadius: 7,
+              width: 32,
+              height: 32,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+          >
+            <ZoomIn size={15} />
+          </button>
+          <button
+            onClick={() => handleZoom(0.8)}
+            title="Zoom Out"
+            style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              color: 'var(--text)',
+              borderRadius: 7,
+              width: 32,
+              height: 32,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+          >
+            <ZoomOut size={15} />
+          </button>
+          <button
+            onClick={handleResetZoom}
+            title="Reset Zoom"
+            style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              color: 'var(--text)',
+              borderRadius: 7,
+              width: 32,
+              height: 32,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+          >
+            <RefreshCw size={14} />
+          </button>
+          <button
+            onClick={handleOpenBackendVisualizer}
+            title="Open backend graph_visualizer.html in a new window"
+            style={{
+              background: 'var(--secondary)',
+              border: '1px solid var(--secondary-border)',
+              color: 'var(--accent)',
+              borderRadius: 7,
+              padding: '6px 12px',
+              fontSize: 12,
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              cursor: 'pointer',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+          >
+            <ExternalLink size={13} />
+            Backend Visualizer
+          </button>
+        </div>
+      </div>
+
+      {/* Graph Canvas */}
+      <div className="graph-canvas-wrap">
+        <svg ref={svgRef} width="100%" height="100%" />
+      </div>
+
+      {/* Legend — Minimizable */}
+      {isLegendOpen ? (
+        <div className="graph-legend fade-in" style={{ top: 72, left: 16 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <div className="legend-title" style={{ margin: 0 }}>Topology Legend</div>
+            <button
+              onClick={() => setIsLegendOpen(false)}
+              title="Minimize Legend"
+              style={{
+                background: 'var(--surface-subtle)',
+                border: '1px solid var(--border)',
+                color: 'var(--muted)',
+                borderRadius: 4,
+                padding: '2px 6px',
+                cursor: 'pointer',
+                fontSize: 11,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+              }}
+            >
+              <Minus size={11} />
+              <span>Hide</span>
+            </button>
+          </div>
+          <div className="legend-row">
+            <div className="legend-dot" style={{ background: ROLE_COLORS.suspect }} />
+            Suspect Root Wallet
+          </div>
+          <div className="legend-row">
+            <div className="legend-dot" style={{ background: ROLE_COLORS.hop }} />
+            Relay & Mule Forwarder
+          </div>
+          <div className="legend-row">
+            <div className="legend-dot" style={{ background: ROLE_COLORS.mixer_hop }} />
+            Mixer Swarm Channel
+          </div>
+          <div className="legend-row">
+            <div className="legend-dot" style={{ background: ROLE_COLORS.candidate_vasp }} />
+            Candidate VASP (Exit)
+          </div>
+          <div className="legend-row">
+            <div className="legend-dot" style={{ background: ROLE_COLORS.unreachable }} />
+            Unreachable (No Path)
+          </div>
+
+          <div style={{ borderTop: '1px solid var(--border)', marginTop: 10, paddingTop: 10 }}>
+            <div className="legend-row">
+              <div className="legend-line" style={{ background: '#d97706', height: 3 }} />
+              <span>Decoy Diversion</span>
+            </div>
+            <div className="legend-row">
+              <div className="legend-line" style={{ background: '#059669', height: 4 }} />
+              <span>True Laundering Swarm</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <button
+          onClick={() => setIsLegendOpen(true)}
+          className="graph-panel-pill"
+          style={{ position: 'absolute', top: 72, left: 16, zIndex: 15 }}
+          title="Expand Topology Legend"
+        >
+          <Info size={13} />
+          Topology Legend
+        </button>
+      )}
+
+      {/* Graph Attributes — Minimizable */}
+      {isAttributesOpen ? (
+        <div className="graph-info fade-in" style={{ top: 72, right: 16 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)', margin: 0 }}>
+              Graph Attributes
+            </div>
+            <button
+              onClick={() => setIsAttributesOpen(false)}
+              title="Minimize Attributes"
+              style={{
+                background: 'var(--surface-subtle)',
+                border: '1px solid var(--border)',
+                color: 'var(--muted)',
+                borderRadius: 4,
+                padding: '2px 6px',
+                cursor: 'pointer',
+                fontSize: 11,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+              }}
+            >
+              <Minus size={11} />
+              <span>Hide</span>
+            </button>
+          </div>
+          <div className="graph-info-row">
+            <span>Traversal Depth</span>
+            <span className="graph-info-val" style={{ color: currentHopDepth >= 6 ? '#059669' : '#d97706' }}>
+              {currentHopDepth} Hops
+            </span>
+          </div>
+          <div className="graph-info-row">
+            <span>Visible Nodes</span>
+            <span className="graph-info-val">{nodesData.length} / {totalNodeCount}</span>
+          </div>
+          <div className="graph-info-row">
+            <span>Visible Flows</span>
+            <span className="graph-info-val">{edgesData.length} / {totalEdgeCount}</span>
+          </div>
+          <div className="graph-info-row">
+            <span>Topology</span>
+            <span className="graph-info-val" style={{ color: '#059669' }}>Branching Swarm</span>
+          </div>
+          <div className="graph-info-row">
+            <span>Decoy Hops</span>
+            <span className="graph-info-val" style={{ color: '#d97706' }}>2 hops (5 BTC)</span>
+          </div>
+          <div className="graph-info-row">
+            <span>Swarm Hops</span>
+            <span className="graph-info-val" style={{ color: '#059669' }}>6 hops (95 BTC)</span>
+          </div>
+          {currentHopDepth < 6 && (
+            <div style={{
+              marginTop: 10,
+              padding: '8px 10px',
+              background: 'var(--gold-dim)',
+              border: '1px solid rgba(217, 119, 6, 0.25)',
+              borderRadius: 6,
+              fontSize: 10,
+              color: '#92400e',
+              lineHeight: 1.45,
+            }}>
+              ⚡ <strong>Decoy Trap Horizon:</strong> At depth {currentHopDepth}, only early decoy nodes are exposed. Increase depth to 6 to trace the full swarm exit.
+            </div>
+          )}
+          {result.truncated && (
+            <div style={{
+              marginTop: 8,
+              padding: '6px 8px',
+              background: 'var(--gold-dim)',
+              border: '1px solid rgba(217, 119, 6, 0.25)',
+              borderRadius: 5,
+              fontSize: 10,
+              color: '#92400e',
+            }}>
+              ⚠ Partial data shown
+            </div>
+          )}
+        </div>
+      ) : (
+        <button
+          onClick={() => setIsAttributesOpen(true)}
+          className="graph-panel-pill"
+          style={{ position: 'absolute', top: 72, right: 16, zIndex: 15 }}
+          title="Expand Graph Attributes"
+        >
+          <BarChart2 size={13} />
+          Graph Attributes
+        </button>
+      )}
+
+      {/* Node Inspector Drawer */}
+      {selectedNode && (
+        <div style={{
+          position: 'absolute',
+          top: 72,
+          right: 20,
+          width: 320,
+          background: 'rgba(255, 255, 255, 0.96)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-lg)',
+          backdropFilter: 'blur(16px)',
+          padding: '18px 20px',
+          boxShadow: 'var(--shadow-lg)',
+          zIndex: 30,
+          color: 'var(--text)',
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                background: ROLE_COLORS[selectedNode.role] || 'var(--primary)',
+              }} />
+              <strong style={{ fontSize: 13, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--primary)' }}>
+                Node Details
+              </strong>
+            </div>
+            <button
+              onClick={() => setSelectedNode(null)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'var(--muted)',
+                fontSize: 16,
+                cursor: 'pointer',
+              }}
+            >
+              ✕
+            </button>
+          </div>
+
+          <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--primary)', marginBottom: 4 }}>
+            {selectedNode.entity || selectedNode.label}
+          </div>
+
+          <div className="mono" style={{ fontSize: 11, color: 'var(--primary)', wordBreak: 'break-all', marginBottom: 14, background: 'var(--surface-subtle)', padding: '6px 8px', borderRadius: 4, border: '1px solid var(--border)' }}>
+            {selectedNode.id}
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 12 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border)', paddingBottom: 6 }}>
+              <span style={{ color: 'var(--muted)' }}>Network Role:</span>
+              <span style={{ fontWeight: 600, color: ROLE_COLORS[selectedNode.role] }}>
+                {selectedNode.role.replace('_', ' ').toUpperCase()}
+              </span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border)', paddingBottom: 6 }}>
+              <span style={{ color: 'var(--muted)' }}>Hop Level:</span>
+              <span className="mono">Level {selectedNode.level}</span>
+            </div>
+            {selectedNode.amountBtc !== undefined && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border)', paddingBottom: 6 }}>
+                <span style={{ color: 'var(--muted)' }}>Transaction Volume:</span>
+                <span className="mono" style={{ fontWeight: 700, color: '#059669' }}>
+                  {selectedNode.amountBtc.toFixed(2)} BTC
+                </span>
+              </div>
+            )}
+            {selectedNode.score !== undefined && selectedNode.score !== null && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border)', paddingBottom: 6 }}>
+                <span style={{ color: 'var(--muted)' }}>R_eff to Suspect:</span>
+                <span className="mono" style={{ fontWeight: 700, color: '#059669' }}>
+                  {selectedNode.score.toFixed(4)} Ω
+                </span>
+              </div>
+            )}
+            {selectedNode.rank && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border)', paddingBottom: 6 }}>
+                <span style={{ color: 'var(--muted)' }}>Attribution Rank:</span>
+                <span style={{ fontWeight: 700, color: selectedNode.rank === 1 ? '#059669' : '#d97706' }}>
+                  #{selectedNode.rank} {selectedNode.rank === 1 ? '(True VASP)' : '(Decoy)'}
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Edge Hover Tooltip */}
+      {hoveredEdge && (
+        <div style={{
+          position: 'absolute',
+          bottom: 24,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: 'var(--primary)',
+          border: '1px solid #27272a',
+          borderRadius: 8,
+          padding: '10px 16px',
+          color: '#FAFAF7',
+          fontSize: 12,
+          pointerEvents: 'none',
+          boxShadow: 'var(--shadow-md)',
+          zIndex: 30,
+        }}>
+          <strong>Flow: {hoveredEdge.amountBtc} BTC</strong> ·
+          Branch: <span style={{ color: hoveredEdge.branchType === 'decoy' ? '#f59e0b' : '#34d399', fontWeight: 600 }}>
+            {hoveredEdge.branchType?.toUpperCase() || 'STANDARD'}
+          </span>
+          {hoveredEdge.txHash && <div className="mono" style={{ fontSize: 10, color: '#A1A1AA', marginTop: 2 }}>Tx: {hoveredEdge.txHash}</div>}
+        </div>
+      )}
+    </div>
+  );
+}
