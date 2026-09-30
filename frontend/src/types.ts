@@ -6,7 +6,6 @@ export interface Case {
   description: string;
   defaultSuspect: string;
   defaultCandidates?: string[];
-  defaultDepth?: number;
   totalBtc?: number;
   highlight?: string;
 }

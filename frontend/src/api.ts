@@ -12,6 +12,7 @@ function normalizeCases(raw: unknown): Case[] {
     return Object.entries(obj).map(([key, meta]) => {
       const LABELS: Record<string, string> = {
         silkroad: 'Silk Road (USMS Seized Asset Cluster — 199 nodes)',
+        synthetic_mixer: '[SYNTHETIC] Mixer-routed benchmark case (seed 42)'
       };
       const DESCS: Record<string, string> = {
         silkroad: 'Real-world seized Bitcoin graph from the DOJ/USMS Silk Road forfeiture. 199 nodes, 235 transaction edges across 7 disconnected components.',
@@ -19,20 +20,13 @@ function normalizeCases(raw: unknown): Case[] {
       const HIGHLIGHTS: Record<string, string> = {
         silkroad: 'Historical federal criminal asset forfeiture — adversarially tested engine',
       };
-      const DEFAULT_CANDIDATES: Record<string, string[]> = {
-        silkroad: [
-          'bc1qy6a2hrtsen4ssxasl97c5krn7w9uxg6k2hrww6',
-          '366zTCcC9nVDyF3SMSju3GbfYmMVXfewHg',
-          '3BJr4VGfCNrv4w55yM2gjK1rB4gNWxV8Tt',
-        ],
-      };
+      
       return {
         id: key,
         label: LABELS[key] || key,
         description: DESCS[key] || `${meta.nodes ?? '?'} nodes, ${meta.edges ?? '?'} edges`,
         defaultSuspect: meta.suspect || '',
-        defaultCandidates: DEFAULT_CANDIDATES[key],
-        defaultDepth: 4,
+        defaultCandidates: undefined,
         highlight: HIGHLIGHTS[key],
       } as Case;
     });

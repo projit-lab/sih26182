@@ -34,9 +34,8 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
         setSelectedCase(targetId);
         const match = data.find((c) => c.id === targetId);
         if (match) {
-          if (match.defaultSuspect) setSuspect(match.defaultSuspect);
-          if (match.defaultCandidates) setCandidates(match.defaultCandidates.join('\n'));
-          if (match.defaultDepth !== undefined) setDepth(match.defaultDepth);
+          setSuspect(match.defaultSuspect || '');
+          setCandidates('');
         }
       })
       .catch((e) => {
@@ -52,9 +51,8 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
     setNotFound(false);
     const match = cases.find((c) => c.id === caseId);
     if (match) {
-      if (match.defaultSuspect) setSuspect(match.defaultSuspect);
-      if (match.defaultCandidates) setCandidates(match.defaultCandidates.join('\n'));
-      if (match.defaultDepth !== undefined) setDepth(match.defaultDepth);
+      setSuspect(match.defaultSuspect || '');
+      setCandidates('');
     }
   };
 
@@ -259,7 +257,7 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
                     id="suspect"
                     type="text"
                     className="input mono"
-                    placeholder="e.g. bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8"
+                    placeholder="Suspect wallet address (defaults to the case's suspect)"
                     value={suspect}
                     onChange={(e) => {
                       setSuspect(e.target.value);
@@ -284,16 +282,16 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
                     onChange={(e) => setDepth(e.target.value === 'all' ? 'all' : Number(e.target.value))}
                   >
                     <option value="all">All (whole cluster)</option>
-                    <option value={1}>1 Hop (Direct Peers / Immediate UTXOs)</option>
-                    <option value={2}>2 Hops (Mules &amp; Relays — Decoy Horizon)</option>
-                    <option value={3}>3 Hops (Mixer Layering Channels)</option>
-                    <option value={4}>4 Hops (Deep Trace &amp; Mixer Demux)</option>
-                    <option value={5}>5 Hops (Aggregators &amp; Consolidation)</option>
-                    <option value={6}>6 Hops (Deep Layering / Full Swarm Exit)</option>
-                    <option value={7}>7 Hops (Complex Peeling / Extended Trace)</option>
-                    <option value={8}>8 Hops (Deep Obfuscation Trace)</option>
-                    <option value={9}>9 Hops (Extended Trace)</option>
-                    <option value={10}>10 Hops (Maximum Depth)</option>
+                    <option value={1}>1 hop</option>
+                    <option value={2}>2 hops</option>
+                    <option value={3}>3 hops</option>
+                    <option value={4}>4 hops</option>
+                    <option value={5}>5 hops</option>
+                    <option value={6}>6 hops</option>
+                    <option value={7}>7 hops</option>
+                    <option value={8}>8 hops</option>
+                    <option value={9}>9 hops</option>
+                    <option value={10}>10 hops</option>
                   </select>
                   <p className="field-hint">
                     Controls the number of transaction hops traversed from the suspect address before solving the Grounded Laplacian.

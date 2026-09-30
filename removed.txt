@@ -1,0 +1,310 @@
+        "nodes": [
+                {
+                        "data": {
+                                "id": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+                                "label": "bc1q9vza... [Suspect Root 100 BTC]",
+                                "role": "suspect",
+                                "entity": "Suspect Shadow Syndicate Root",
+                                "category": "suspect"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_decoy_relay_1",
+                                "label": "Decoy Diversion Relay (Short Path)",
+                                "role": "hop",
+                                "entity": "Decoy Diversion Relay (Short Path)",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq",
+                                "label": "WazirX Decoy [Trap 5 BTC]",
+                                "role": "candidate_vasp",
+                                "entity": "WazirX Decoy Exchange",
+                                "category": "exchange"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_layer1_peel_relay",
+                                "label": "Layer-1 Peeling Relay (95 BTC)",
+                                "role": "hop",
+                                "entity": "Layer-1 Peeling Relay (95 BTC)",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_swarm_splitter_alpha",
+                                "label": "Parallel Swarm Splitter Hub",
+                                "role": "hop",
+                                "entity": "Parallel Swarm Splitter Hub",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1Mixer_Channel_Alpha",
+                                "label": "Channel Alpha",
+                                "role": "mixer_hop",
+                                "entity": "Mixer Swarm Channel Alpha",
+                                "category": "mixer"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1Mixer_Channel_Beta",
+                                "label": "Channel Beta",
+                                "role": "mixer_hop",
+                                "entity": "Mixer Swarm Channel Beta",
+                                "category": "mixer"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1Mixer_Channel_Gamma",
+                                "label": "Channel Gamma",
+                                "role": "mixer_hop",
+                                "entity": "Mixer Swarm Channel Gamma",
+                                "category": "mixer"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "1Mixer_Channel_Delta",
+                                "label": "Channel Delta",
+                                "role": "mixer_hop",
+                                "entity": "Mixer Swarm Channel Delta",
+                                "category": "mixer"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_mule_hop_a",
+                                "label": "Mule Forwarding Hop A",
+                                "role": "hop",
+                                "entity": "Mule Forwarding Hop A",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_mule_hop_b",
+                                "label": "Mule Forwarding Hop B",
+                                "role": "hop",
+                                "entity": "Mule Forwarding Hop B",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_mule_hop_c",
+                                "label": "Mule Forwarding Hop C",
+                                "role": "hop",
+                                "entity": "Mule Forwarding Hop C",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_mule_hop_d",
+                                "label": "Mule Forwarding Hop D",
+                                "role": "hop",
+                                "entity": "Mule Forwarding Hop D",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1q_consolidation_aggregator",
+                                "label": "Fan-In Consolidation Aggregator",
+                                "role": "hop",
+                                "entity": "Fan-In Consolidation Aggregator",
+                                "category": "hop"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+                                "label": "Binance Vault II [True Exit 93.75 BTC]",
+                                "role": "candidate_vasp",
+                                "entity": "Binance Institutional Cold Storage Vault II",
+                                "category": "exchange"
+                        }
+                }
+        ],
+        "edges": [
+                {
+                        "data": {
+                                "id": "demo_e1",
+                                "source": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+                                "target": "bc1q_decoy_relay_1",
+                                "weight": 500000000,
+                                "amount_satoshis": 500000000,
+                                "tx_hash": "a1f87c92b450e189d273c4ced35c1684fd81dff52d9f8c33e9025c422a80e94e"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e2",
+                                "source": "bc1q_decoy_relay_1",
+                                "target": "1AnwDVbwsLB4om3PnZ54FjWc1m8qP2XbVq",
+                                "weight": 498000000,
+                                "amount_satoshis": 498000000,
+                                "tx_hash": "b2c98d03a561f290e384d5dfe46d27950e92e0063e00a9d44f036d533b91fa5f"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e3",
+                                "source": "bc1q9vza2e8424t6m5qgxp2r83kwln8y0e78k37df8",
+                                "target": "bc1q_layer1_peel_relay",
+                                "weight": 9500000000,
+                                "amount_satoshis": 9500000000,
+                                "tx_hash": "c3d09e14b672a301f495e6e0f57e38a61f03f1174f11b0e550147e644c020b60"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e4",
+                                "source": "bc1q_layer1_peel_relay",
+                                "target": "bc1q_swarm_splitter_alpha",
+                                "weight": 9480000000,
+                                "amount_satoshis": 9480000000,
+                                "tx_hash": "d4e1af25c783b412a506f7f1068f49b7201402285022c1f661258f755d131c71"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e5",
+                                "source": "bc1q_swarm_splitter_alpha",
+                                "target": "1Mixer_Channel_Alpha",
+                                "weight": 2370000000,
+                                "amount_satoshis": 2370000000,
+                                "tx_hash": "e5f2b036d894c523b6170802179050c8312513396133d207723690866e242d82"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e6",
+                                "source": "bc1q_swarm_splitter_alpha",
+                                "target": "1Mixer_Channel_Beta",
+                                "weight": 2370000000,
+                                "amount_satoshis": 2370000000,
+                                "tx_hash": "f603c147e905d634c7281913280161d9423624407244e318834701977f353e93"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e7",
+                                "source": "bc1q_swarm_splitter_alpha",
+                                "target": "1Mixer_Channel_Gamma",
+                                "weight": 2370000000,
+                                "amount_satoshis": 2370000000,
+                                "tx_hash": "0714d258fa16e745d8392024391272ea534735518355f4299458120880464fa4"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e8",
+                                "source": "bc1q_swarm_splitter_alpha",
+                                "target": "1Mixer_Channel_Delta",
+                                "weight": 2370000000,
+                                "amount_satoshis": 2370000000,
+                                "tx_hash": "1825e3690b27f856e94a3135402383fb6458466294660530a5692319915750b5"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e9",
+                                "source": "1Mixer_Channel_Alpha",
+                                "target": "bc1q_mule_hop_a",
+                                "weight": 2350000000,
+                                "amount_satoshis": 2350000000,
+                                "tx_hash": "2936f47a1c380967fa5b42465134940c7569577305771641b6703420a26861c6"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e10",
+                                "source": "1Mixer_Channel_Beta",
+                                "target": "bc1q_mule_hop_b",
+                                "weight": 2350000000,
+                                "amount_satoshis": 2350000000,
+                                "tx_hash": "3047058b2d491a780b6c53576245a51d8670688416882752c7814531b37972d7"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e11",
+                                "source": "1Mixer_Channel_Gamma",
+                                "target": "bc1q_mule_hop_c",
+                                "weight": 2350000000,
+                                "amount_satoshis": 2350000000,
+                                "tx_hash": "4158169c3e5a2b891c7d64687356b62e9781799527993863d8925642c48a83e8"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e12",
+                                "source": "1Mixer_Channel_Delta",
+                                "target": "bc1q_mule_hop_d",
+                                "weight": 2350000000,
+                                "amount_satoshis": 2350000000,
+                                "tx_hash": "526927ad4f6b3c9a2d8e75798467c73fa8928aa638aa4974e9036753d59b94f9"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e13",
+                                "source": "bc1q_mule_hop_a",
+                                "target": "bc1q_consolidation_aggregator",
+                                "weight": 2345000000,
+                                "amount_satoshis": 2345000000,
+                                "tx_hash": "637a38be507c4da03e9f868a9578d840b9a39bb749bb5a85fa147864e6ac050a"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e14",
+                                "source": "bc1q_mule_hop_b",
+                                "target": "bc1q_consolidation_aggregator",
+                                "weight": 2345000000,
+                                "amount_satoshis": 2345000000,
+                                "tx_hash": "748b49cf618d5eb14fa0979ba689e951caa4acc85acc6b960b258975f7bd161b"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e15",
+                                "source": "bc1q_mule_hop_c",
+                                "target": "bc1q_consolidation_aggregator",
+                                "weight": 2345000000,
+                                "amount_satoshis": 2345000000,
+                                "tx_hash": "859c5ad0729e6fc250b1080cb79af062dbb5bdd96bdd7ca71c369a8608ce272c"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e16",
+                                "source": "bc1q_mule_hop_d",
+                                "target": "bc1q_consolidation_aggregator",
+                                "weight": 2345000000,
+                                "amount_satoshis": 2345000000,
+                                "tx_hash": "96ad6be183af70d361c2191dc8ab0173ecc6cee07cee8db82d470b9719df383d"
+                        }
+                },
+                {
+                        "data": {
+                                "id": "demo_e17",
+                                "source": "bc1q_consolidation_aggregator",
+                                "target": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+                                "weight": 9375000000,
+                                "amount_satoshis": 9375000000,
+                                "tx_hash": "a7be7cf294b081e472d32a2ed9bc1284fdd7dff18dff9ec93e581ca82ae0494e"
+                        }
+                }
+        ]
+},

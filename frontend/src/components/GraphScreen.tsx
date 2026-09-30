@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { ChevronLeft, ExternalLink, RefreshCw, ZoomIn, ZoomOut, Layers, Info, BarChart2, Minus, GitFork } from 'lucide-react';
+import { ChevronLeft, RefreshCw, ZoomIn, ZoomOut, Info, BarChart2, Minus } from 'lucide-react';
 import type { AttributeResponse } from '../types';
 
 interface GraphScreenProps {
@@ -42,12 +42,12 @@ const ROLE_COLORS: Record<string, string> = {
 export function GraphScreen({ result, onBack }: GraphScreenProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const zoomBehaviorRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
-  const [layoutMode, setLayoutMode] = useState<'branching' | 'force'>('branching');
+  const [layoutMode] = useState<'branching' | 'force'>('force');
   const [selectedNode, setSelectedNode] = useState<RenderNode | null>(null);
   const [hoveredEdge, setHoveredEdge] = useState<RenderEdge | null>(null);
   const [isLegendOpen, setIsLegendOpen] = useState(false);
   const [isAttributesOpen, setIsAttributesOpen] = useState(false);
-  const [currentHopDepth, setCurrentHopDepth] = useState<number>(6);
+
 
   if (!result.graph_elements || result.graph_elements.nodes.length === 0) {
     return (
@@ -369,9 +369,6 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
     }
   };
 
-  const handleOpenBackendVisualizer = () => {
-    window.open('http://localhost:8000/app', '_blank', 'noopener,noreferrer');
-  };
 
   return (
     <div className="graph-screen">
@@ -398,98 +395,7 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
             Back to Results
           </button>
 
-          <div style={{
-            display: 'flex',
-            background: 'var(--surface)',
-            border: '1px solid var(--border)',
-            borderRadius: 7,
-            padding: 3,
-            boxShadow: 'var(--shadow-sm)',
-            backdropFilter: 'blur(10px)',
-          }}>
-            <button
-              onClick={() => setLayoutMode('branching')}
-              style={{
-                background: layoutMode === 'branching' ? 'var(--accent-green)' : 'transparent',
-                color: layoutMode === 'branching' ? '#060A12' : 'var(--muted)',
-                border: 'none',
-                borderRadius: 5,
-                padding: '4px 10px',
-                fontSize: 11,
-                fontWeight: 700,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                transition: 'all var(--t)',
-              }}
-            >
-              <Layers size={12} />
-              Branching Tree
-            </button>
-            <button
-              onClick={() => setLayoutMode('force')}
-              style={{
-                background: layoutMode === 'force' ? 'var(--accent-green)' : 'transparent',
-                color: layoutMode === 'force' ? '#060A12' : 'var(--muted)',
-                border: 'none',
-                borderRadius: 5,
-                padding: '4px 10px',
-                fontSize: 11,
-                fontWeight: 700,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                transition: 'all var(--t)',
-              }}
-            >
-              <RefreshCw size={12} />
-              Force-Directed
-            </button>
-          </div>
 
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            background: 'var(--surface)',
-            border: '1px solid var(--border)',
-            borderRadius: 7,
-            padding: '3px 10px',
-            boxShadow: 'var(--shadow-sm)',
-            backdropFilter: 'blur(10px)',
-          }}>
-            <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
-              <GitFork size={13} style={{ color: 'var(--accent)' }} /> Depth:
-            </span>
-            <select
-              id="graph-depth-select"
-              value={currentHopDepth}
-              onChange={(e) => setCurrentHopDepth(Number(e.target.value))}
-              style={{
-                colorScheme: 'dark',
-                background: '#0F172A',
-                border: '1px solid rgba(255, 255, 255, 0.22)',
-                color: '#34D399',
-                borderRadius: 6,
-                padding: '3px 8px',
-                fontSize: 11,
-                fontWeight: 600,
-                cursor: 'pointer',
-                outline: 'none',
-              }}
-            >
-              <option value={1} style={{ background: '#0F172A', color: '#F8FAFC' }}>1 Hop (Direct Peers)</option>
-              <option value={2} style={{ background: '#0F172A', color: '#F8FAFC' }}>2 Hops (Mules & Relays)</option>
-              <option value={3} style={{ background: '#0F172A', color: '#F8FAFC' }}>3 Hops (Mixer Layering)</option>
-              <option value={4} style={{ background: '#0F172A', color: '#F8FAFC' }}>4 Hops (Deep Trace)</option>
-              <option value={5} style={{ background: '#0F172A', color: '#F8FAFC' }}>5 Hops (Aggregators)</option>
-              <option value={6} style={{ background: '#0F172A', color: '#F8FAFC' }}>6 Hops (Deep Layering / Swarm Exit)</option>
-              <option value={7} style={{ background: '#0F172A', color: '#F8FAFC' }}>7 Hops (Complex Peeling)</option>
-              <option value={8} style={{ background: '#0F172A', color: '#F8FAFC' }}>8 Hops (Deep Obfuscation)</option>
-            </select>
-          </div>
 
           <button
             onClick={() => setIsLegendOpen((prev) => !prev)}
@@ -568,27 +474,7 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
           >
             <RefreshCw size={14} />
           </button>
-          <button
-            onClick={handleOpenBackendVisualizer}
-            title="Open backend graph_visualizer.html in a new window"
-            style={{
-              background: 'var(--secondary)',
-              border: '1px solid var(--secondary-border)',
-              color: 'var(--accent)',
-              borderRadius: 7,
-              padding: '6px 12px',
-              fontSize: 12,
-              fontWeight: 600,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              cursor: 'pointer',
-              boxShadow: 'var(--shadow-sm)',
-            }}
-          >
-            <ExternalLink size={13} />
-            Backend Visualizer
-          </button>
+
         </div>
       </div>
 
@@ -643,16 +529,7 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
             Unreachable (No Path)
           </div>
 
-          <div style={{ borderTop: '1px solid var(--border)', marginTop: 10, paddingTop: 10 }}>
-            <div className="legend-row">
-              <div className="legend-line" style={{ background: '#d97706', height: 3 }} />
-              <span>Decoy Diversion</span>
-            </div>
-            <div className="legend-row">
-              <div className="legend-line" style={{ background: '#059669', height: 4 }} />
-              <span>True Laundering Swarm</span>
-            </div>
-          </div>
+
         </div>
       ) : (
         <button
@@ -695,8 +572,8 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
           </div>
           <div className="graph-info-row">
             <span>Traversal Depth</span>
-            <span className="graph-info-val" style={{ color: currentHopDepth >= 6 ? '#059669' : '#d97706' }}>
-              {currentHopDepth} Hops
+            <span className="graph-info-val">
+              {result.max_hops !== null ? `${result.max_hops} Hops` : 'All'}
             </span>
           </div>
           <div className="graph-info-row">
@@ -707,32 +584,7 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
             <span>Visible Flows</span>
             <span className="graph-info-val">{edgesData.length} / {totalEdgeCount}</span>
           </div>
-          <div className="graph-info-row">
-            <span>Topology</span>
-            <span className="graph-info-val" style={{ color: '#059669' }}>Branching Swarm</span>
-          </div>
-          <div className="graph-info-row">
-            <span>Decoy Hops</span>
-            <span className="graph-info-val" style={{ color: '#d97706' }}>2 hops (5 BTC)</span>
-          </div>
-          <div className="graph-info-row">
-            <span>Swarm Hops</span>
-            <span className="graph-info-val" style={{ color: '#059669' }}>6 hops (95 BTC)</span>
-          </div>
-          {currentHopDepth < 6 && (
-            <div style={{
-              marginTop: 10,
-              padding: '8px 10px',
-              background: 'var(--gold-dim)',
-              border: '1px solid rgba(217, 119, 6, 0.25)',
-              borderRadius: 6,
-              fontSize: 10,
-              color: '#92400e',
-              lineHeight: 1.45,
-            }}>
-              ⚡ <strong>Decoy Trap Horizon:</strong> At depth {currentHopDepth}, only early decoy nodes are exposed. Increase depth to 6 to trace the full swarm exit.
-            </div>
-          )}
+
           {result.truncated && (
             <div style={{
               marginTop: 8,
@@ -840,7 +692,7 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
               <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border)', paddingBottom: 6 }}>
                 <span style={{ color: 'var(--muted)' }}>Attribution Rank:</span>
                 <span style={{ fontWeight: 700, color: selectedNode.rank === 1 ? '#059669' : '#d97706' }}>
-                  #{selectedNode.rank} {selectedNode.rank === 1 ? '(True VASP)' : '(Decoy)'}
+                  #{selectedNode.rank} {selectedNode.rank === 1 ? '(Top ranked)' : ''}
                 </span>
               </div>
             )}

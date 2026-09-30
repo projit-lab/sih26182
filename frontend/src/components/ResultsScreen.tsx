@@ -71,7 +71,9 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
         const name = labelMap[c] || c;
         const score = scores[c] != null ? `${fmt(scores[c])} Ω` : '—';
         const hops = hop_depths[c] != null ? `${hop_depths[c]} hops` : '—';
-        const status = idx === 0 ? 'Matched' : 'Decoy';
+        let status = idx === 0 ? 'Top ranked' : `Rank ${idx + 1}`;
+        if (result.synthetic && result.truth === c) status = 'Ground truth';
+        else if (result.synthetic && result.dijkstra_comparison?.winner === c) status = 'Shortest-path pick';
         return `${idx + 1}. [${status}] ${name} (${c})\n   R_eff: ${score} | Depth: ${hops}`;
       }),
       ...unreachable.map((c: string, idx: number) => {
@@ -224,15 +226,18 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
                       </td>
 
                       <td className="analyst-td">
-                        {isTop ? (
-                          <span style={{ color: '#22c55e', fontWeight: 500 }}>
-                            Matched
-                          </span>
-                        ) : (
-                          <span style={{ color: '#8b919b' }}>
-                            Decoy
-                          </span>
-                        )}
+                        {(() => {
+                           if (result.synthetic && result.truth === vasp) {
+                             return <span style={{ color: '#0ea5e9', fontWeight: 500 }}>Ground truth</span>;
+                           }
+                           if (result.synthetic && result.dijkstra_comparison?.winner === vasp) {
+                             return <span style={{ color: '#d97706', fontWeight: 500 }}>Shortest-path pick</span>;
+                           }
+                           if (isTop) {
+                             return <span style={{ color: '#22c55e', fontWeight: 500 }}>Top ranked</span>;
+                           }
+                           return <span style={{ color: '#8b919b' }}>Rank {idx + 1}</span>;
+                        })()}
                       </td>
                     </tr>
                   );
@@ -296,7 +301,7 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
 
                       <td className="analyst-td">
                         <span style={{ color: '#c0564b' }}>
-                          Disconnected
+                          No path
                         </span>
                         {unreachable_reasons[vasp] && (
                           <div style={{ fontSize: 10, color: '#8b919b', marginTop: 2 }}>
