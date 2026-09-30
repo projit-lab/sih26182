@@ -142,7 +142,7 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
             <div style={{ width: '100%' }}>
               <strong>Ground truth: {labelMap[result.truth!] || result.truth}</strong>
               <div style={{ color: '#64748b', marginTop: 4 }}>
-                Synthetic benchmark case. ER is right and shortest path is wrong in {result.er_wins} cases; the reverse in {result.sp_wins} cases (seed 42). {result.full_nodes ? `Shown: 400-node neighbourhood of a ${result.full_nodes}-node benchmark graph.` : ''}
+                Synthetic benchmark case. ER is right and shortest path is wrong in {result.er_wins} {result.er_wins === 1 ? 'case' : 'cases'}; the reverse in {result.sp_wins} {result.sp_wins === 1 ? 'case' : 'cases'} (seed 42). {result.full_nodes ? `Shown: 400-node neighbourhood of a ${result.full_nodes}-node benchmark graph.` : ''}
               </div>
             </div>
           )}
@@ -169,7 +169,8 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
                   <th className="analyst-th" style={{ width: 50 }}>Rank</th>
                   <th className="analyst-th">Candidate endpoint</th>
                   <th className="analyst-th" style={{ width: 170 }}>Wallet address</th>
-                  <th className="analyst-th num" style={{ width: 120 }}>R_eff</th>
+                  <th className="analyst-th num" style={{ width: 120 }}>Score</th>
+                  <th className="analyst-th num" style={{ width: 120 }}>Raw R_eff</th>
                   <th className="analyst-th num" style={{ width: 95 }}>Hop depth</th>
                   <th className="analyst-th" style={{ width: 120 }}>Status</th>
                 </tr>
@@ -221,6 +222,10 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
                         {fmt(score)}
                       </td>
 
+                      <td className="analyst-td num" style={{ color: '#e6e8ec' }}>
+                        {result.raw_resistance[vasp] != null ? result.raw_resistance[vasp].toFixed(4) : '—'}
+                      </td>
+
                       <td className="analyst-td num" style={{ color: '#8b919b' }}>
                         {hops != null ? `${hops}` : '—'}
                       </td>
@@ -246,7 +251,7 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
                 {/* Disconnected Candidates Header */}
                 {unreachable.length > 0 && (
                   <tr>
-                    <td colSpan={6} style={{ padding: '16px 16px 8px', color: '#94a3b8', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <td colSpan={7} style={{ padding: '16px 16px 8px', color: '#94a3b8', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                       No path found
                     </td>
                   </tr>
@@ -292,7 +297,11 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
                       </td>
 
                       <td className="analyst-td num" style={{ color: '#8b919b' }}>
-                        ∞ (null)
+                        —
+                      </td>
+
+                      <td className="analyst-td num" style={{ color: '#8b919b' }}>
+                        —
                       </td>
 
                       <td className="analyst-td num" style={{ color: '#8b919b' }}>
@@ -314,6 +323,9 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
                 })}
               </tbody>
             </table>
+          </div>
+          <div style={{ marginTop: 12, fontSize: 11, color: '#8b919b', fontStyle: 'italic', paddingLeft: 4 }}>
+            Score = raw R_eff, degree-corrected when 'Degree correction: on'. Lower = stronger connection.
           </div>
         </div>
       </div>
