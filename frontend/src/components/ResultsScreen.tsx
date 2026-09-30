@@ -128,7 +128,10 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
           <div><strong>Separation ratio:</strong> {separation_ratio != null ? `${separation_ratio.toFixed(2)}x` : '—'}</div>
           <div><strong>Degree correction:</strong> {degree_corrected ? 'on' : 'off'}</div>
           <div>
-            <strong>Search depth:</strong> {max_hops !== null ? `${max_hops} hops` : 'whole cluster'} - {depth_nodes || suspect_component_size || (result.graph_elements?.nodes?.length ?? 0)} nodes, {depth_edges || 0} edges analysed
+            <strong>Search depth:</strong> {max_hops !== null 
+              ? `${max_hops} hops - ${depth_nodes || suspect_component_size || (result.graph_elements?.nodes?.length ?? 0)} nodes, ${depth_edges || 0} edges analysed`
+              : `Whole case graph: ${graph.nodes} nodes (${suspect_component_size || (result.graph_elements?.nodes?.length ?? 0)} connected to the suspect)`
+            }
           </div>
           {dijkstra_comparison && (
              <div style={{ width: '100%' }}><strong>Shortest path check:</strong> {dijkstra_comparison.flaw}</div>

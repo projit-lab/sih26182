@@ -1,7 +1,7 @@
 import type { Case, AttributeRequest, AttributeResponse } from './types';
 import { DEMO_CASES, generateMockAttribution } from './mockData';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/engine';
 
 function normalizeCases(raw: unknown): Case[] {
   if (Array.isArray(raw)) {
@@ -59,7 +59,7 @@ export async function fetchCases(): Promise<Case[]> {
     }
     throw new Error(`Server returned ${res.status}`);
   } catch (err) {
-    throw new Error(`Engine API not reachable at ${BASE_URL}. Start it with: uvicorn src.api.main:app --port 8001`);
+    throw new Error(`Engine API not reachable. Start it with: uvicorn src.api.main:app --port 8001`);
   }
 }
 
@@ -116,7 +116,7 @@ export async function postAttribute(req: AttributeRequest): Promise<AttributeRes
     throw new Error(`Server returned ${res.status}`);
   } catch (e) {
     if (e instanceof NotFoundError) throw e;
-    throw new Error(`Engine API not reachable at ${BASE_URL}. Start it with: uvicorn src.api.main:app --port 8001`);
+    throw new Error(`Engine API not reachable. Start it with: uvicorn src.api.main:app --port 8001`);
   }
 }
 

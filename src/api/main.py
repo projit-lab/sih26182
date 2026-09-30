@@ -236,7 +236,13 @@ def attribute(req: AttributionRequest):
         winner_name = "None"
         hop_count = 0
         
-    if winner and result.ranked_candidates and winner != result.ranked_candidates[0]:
+    if not winner and not result.ranked_candidates:
+        flaw = f"No candidate exchange within {req.max_hops if req.max_hops is not None else 'N'} hops"
+    elif not winner:
+        flaw = "Shortest path has no result, but effective resistance does"
+    elif not result.ranked_candidates:
+        flaw = "Effective resistance has no result, but shortest path does"
+    elif winner != result.ranked_candidates[0]:
         eff_winner = result.ranked_candidates[0]
         flaw = f"Shortest path picks {winner_name}; effective resistance picks {candidate_labels.get(eff_winner, eff_winner)}"
     else:

@@ -4,4 +4,22 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/engine': {
+        target: 'http://localhost:8001',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/engine/, '')
+      }
+    }
+  },
+  preview: {
+    proxy: {
+      '/engine': {
+        target: 'http://localhost:8001',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/engine/, '')
+      }
+    }
+  }
 })

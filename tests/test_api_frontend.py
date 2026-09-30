@@ -69,3 +69,4 @@ def test_api_max_hops():
         cand = unreachable[0]
         assert cand in sm_data["unreachable_reasons"]
         assert sm_data["unreachable_reasons"][cand] == "beyond 1 hops"
+        assert "No candidate" in sm_data["dijkstra_comparison"]["flaw"]
