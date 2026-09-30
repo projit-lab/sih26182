@@ -49,108 +49,45 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
   const [isAttributesOpen, setIsAttributesOpen] = useState(false);
   const [currentHopDepth, setCurrentHopDepth] = useState<number>(6);
 
+  if (!result.graph_elements || result.graph_elements.nodes.length === 0) {
+    return (
+      <div className="graph-screen">
+        <div style={{ padding: 16 }}>
+          <button className="btn-secondary" onClick={onBack} id="graph-back-btn" style={{
+            background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text)', backdropFilter: 'blur(10px)',
+          }}>
+            <ChevronLeft size={14} /> Back to Results
+          </button>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--muted)' }}>
+          Graph data unavailable for this result
+        </div>
+      </div>
+    );
+  }
+
   // Extract nodes and edges with dynamic hop depth filtering
   const { nodesData, edgesData, totalNodeCount, totalEdgeCount } = (() => {
-    let allNodes: RenderNode[] = [];
-    let allEdges: RenderEdge[] = [];
+    const candidateRanks = new Map<string, number>();
+    result.ranked_candidates.forEach((c, idx) => candidateRanks.set(c, idx + 1));
 
-    if (result.graph_elements && result.graph_elements.nodes.length > 0) {
-      allNodes = result.graph_elements.nodes.map((n) => ({
-        ...n,
-        level: n.level ?? 0,
-        amountBtc: n.amountBtc,
-        role: n.role as RenderNode['role'],
-      }));
+    let allNodes: RenderNode[] = result.graph_elements!.nodes.map((n) => ({
+      ...n,
+      level: n.level ?? 0,
+      amountBtc: n.amountBtc,
+      role: n.role as RenderNode['role'],
+      rank: candidateRanks.get(n.id)
+    }));
 
-      allEdges = result.graph_elements.edges.map((e) => ({
-        id: e.id,
-        source: e.source,
-        target: e.target,
-        amountBtc: e.amountBtc,
-        branchType: e.branchType as RenderEdge['branchType'],
-        txHash: e.txHash,
-      }));
-    } else {
-      // Fallback synthetic graph
-      const suspectId = result.suspect || 'suspect_root';
-      allNodes.push({
-        id: suspectId,
-        label: 'Suspect Root',
-        entity: 'Suspect',
-        role: 'suspect',
-        level: 0,
-        amountBtc: 100.0,
-      });
+    let allEdges: RenderEdge[] = result.graph_elements!.edges.map((e) => ({
+      ...e,
+      source: e.source,
+      target: e.target,
+      amountBtc: e.amountBtc,
+      txHash: e.txHash,
+    }));
 
-      // Decoy chain (2 hops)
-      allNodes.push({ id: 'hop_mule_1', label: 'Decoy Mule 1', role: 'hop', level: 1, amountBtc: 5.0 });
-      allNodes.push({ id: 'hop_mule_2', label: 'Decoy Mule 2', role: 'hop', level: 2, amountBtc: 5.0 });
-      allEdges.push({ id: 'e_decoy_1', source: suspectId, target: 'hop_mule_1', amountBtc: 5.0, branchType: 'decoy' });
-      allEdges.push({ id: 'e_decoy_2', source: 'hop_mule_1', target: 'hop_mule_2', amountBtc: 5.0, branchType: 'decoy' });
-
-      // Laundering Swarm
-      allNodes.push({ id: 'hop_split_1', label: 'Swarm Layer 1A', role: 'hop', level: 1, amountBtc: 47.5 });
-      allNodes.push({ id: 'hop_split_2', label: 'Swarm Layer 1B', role: 'hop', level: 1, amountBtc: 47.5 });
-      allEdges.push({ id: 'e_swarm_1a', source: suspectId, target: 'hop_split_1', amountBtc: 47.5, branchType: 'swarm' });
-      allEdges.push({ id: 'e_swarm_1b', source: suspectId, target: 'hop_split_2', amountBtc: 47.5, branchType: 'swarm' });
-
-      allNodes.push({ id: 'mixer_chan_1', label: 'Mixer Obfuscator A', role: 'mixer_hop', level: 2, amountBtc: 30.0 });
-      allNodes.push({ id: 'mixer_chan_2', label: 'Mixer Obfuscator B', role: 'mixer_hop', level: 2, amountBtc: 35.0 });
-      allNodes.push({ id: 'mixer_chan_3', label: 'Mixer Obfuscator C', role: 'mixer_hop', level: 2, amountBtc: 30.0 });
-      allEdges.push({ id: 'e_mix_1', source: 'hop_split_1', target: 'mixer_chan_1', amountBtc: 25.0, branchType: 'swarm' });
-      allEdges.push({ id: 'e_mix_2', source: 'hop_split_1', target: 'mixer_chan_2', amountBtc: 22.5, branchType: 'swarm' });
-      allEdges.push({ id: 'e_mix_3', source: 'hop_split_2', target: 'mixer_chan_2', amountBtc: 12.5, branchType: 'swarm' });
-      allEdges.push({ id: 'e_mix_4', source: 'hop_split_2', target: 'mixer_chan_3', amountBtc: 35.0, branchType: 'swarm' });
-
-      allNodes.push({ id: 'hop_agg_1', label: 'Consolidator Alpha', role: 'hop', level: 3, amountBtc: 55.0 });
-      allNodes.push({ id: 'hop_agg_2', label: 'Consolidator Beta', role: 'hop', level: 3, amountBtc: 40.0 });
-      allEdges.push({ id: 'e_agg_1', source: 'mixer_chan_1', target: 'hop_agg_1', amountBtc: 30.0, branchType: 'swarm' });
-      allEdges.push({ id: 'e_agg_2', source: 'mixer_chan_2', target: 'hop_agg_1', amountBtc: 25.0, branchType: 'swarm' });
-      allEdges.push({ id: 'e_agg_3', source: 'mixer_chan_2', target: 'hop_agg_2', amountBtc: 10.0, branchType: 'swarm' });
-      allEdges.push({ id: 'e_agg_4', source: 'mixer_chan_3', target: 'hop_agg_2', amountBtc: 30.0, branchType: 'swarm' });
-
-      // Exit VASP
-      const topVasp = result.ranked_candidates[0] || '1NDyJtNTjmwk5xPNhjgAMu4HDHigtobu1s';
-      allNodes.push({
-        id: topVasp,
-        label: result.candidate_labels?.[topVasp] || 'Binance Hot Wallet',
-        entity: 'Binance',
-        role: 'candidate_vasp',
-        level: 4,
-        amountBtc: 95.0,
-        rank: 1,
-        score: result.scores?.[topVasp] ?? 0.1245,
-      });
-      allEdges.push({ id: 'e_exit_1', source: 'hop_agg_1', target: topVasp, amountBtc: 55.0, branchType: 'swarm' });
-      allEdges.push({ id: 'e_exit_2', source: 'hop_agg_2', target: topVasp, amountBtc: 40.0, branchType: 'swarm' });
-
-      // Decoy VASP
-      const decoyVasp = result.ranked_candidates[1] || '1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ';
-      allNodes.push({
-        id: decoyVasp,
-        label: result.candidate_labels?.[decoyVasp] || 'Huobi Deposit',
-        entity: 'Huobi',
-        role: 'candidate_vasp',
-        level: 3,
-        amountBtc: 5.0,
-        rank: 2,
-        score: result.scores?.[decoyVasp] ?? 0.4512,
-      });
-      allEdges.push({ id: 'e_exit_decoy', source: 'hop_mule_2', target: decoyVasp, amountBtc: 5.0, branchType: 'decoy' });
-
-      // Unreachable candidate
-      result.unreachable?.forEach((u: string) => {
-        allNodes.push({
-          id: u,
-          label: result.candidate_labels?.[u] || u,
-          role: 'unreachable',
-          level: 5,
-          score: null,
-        });
-      });
-    }
-
-    const filteredNodes = allNodes.filter((n) => n.level <= currentHopDepth);
+    const filteredNodes = allNodes; // Show all for now since level is not guaranteed
     const visibleNodeIds = new Set(filteredNodes.map((n) => n.id));
     const filteredEdges = allEdges.filter(
       (e) =>
@@ -305,7 +242,7 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
         .attr('font-size', '10px')
         .attr('font-family', 'ui-monospace, monospace')
         .attr('font-weight', '700')
-        .text((d) => d.amountBtc > 0 ? `${d.amountBtc} BTC` : '');
+        .text((d) => d.amountBtc > 0 ? `${d.amountBtc.toFixed(4)} BTC` : '');
 
       // Initial center fit
       svg.transition().duration(400).call(
@@ -433,7 +370,7 @@ export function GraphScreen({ result, onBack }: GraphScreenProps) {
   };
 
   const handleOpenBackendVisualizer = () => {
-    window.open('/graph_visualizer.html', '_blank', 'noopener,noreferrer');
+    window.open('http://localhost:8000/app', '_blank', 'noopener,noreferrer');
   };
 
   return (

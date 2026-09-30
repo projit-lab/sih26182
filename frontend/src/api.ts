@@ -3,17 +3,13 @@ import { DEMO_CASES, generateMockAttribution } from './mockData';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
-// The real /cases response is an object: { "silkroad": { nodes, edges, suspect, ... } }
-// Normalize that into Case[] for the UI.
 function normalizeCases(raw: unknown): Case[] {
   if (Array.isArray(raw)) {
-    // Already an array — pass through if it has the right shape
     return raw as Case[];
   }
   if (raw && typeof raw === 'object') {
     const obj = raw as Record<string, { suspect?: string; nodes?: number; edges?: number; truncated?: boolean }>;
     return Object.entries(obj).map(([key, meta]) => {
-      // Human-readable labels for known cases
       const LABELS: Record<string, string> = {
         silkroad: 'Silk Road (USMS Seized Asset Cluster — 199 nodes)',
       };
@@ -21,7 +17,7 @@ function normalizeCases(raw: unknown): Case[] {
         silkroad: 'Real-world seized Bitcoin graph from the DOJ/USMS Silk Road forfeiture. 199 nodes, 235 transaction edges across 7 disconnected components.',
       };
       const HIGHLIGHTS: Record<string, string> = {
-        silkroad: 'Historical federal criminal asset forfeiture — adversarially tested engine (14 passing tests)',
+        silkroad: 'Historical federal criminal asset forfeiture — adversarially tested engine',
       };
       const DEFAULT_CANDIDATES: Record<string, string[]> = {
         silkroad: [
@@ -45,6 +41,10 @@ function normalizeCases(raw: unknown): Case[] {
 }
 
 export async function fetchCases(): Promise<Case[]> {
+  if (import.meta.env.VITE_OFFLINE_DEMO === 'true') {
+    return DEMO_CASES;
+  }
+
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3000);
@@ -57,16 +57,13 @@ export async function fetchCases(): Promise<Case[]> {
       const parsed = normalizeCases(data);
       if (parsed.length > 0) return parsed;
     }
-  } catch {
-    // Backend offline / not reachable — fall back to built-in demo cases
-    console.info('[Blockchainheist] Live backend offline — using built-in demo cases.');
+    throw new Error(`Server returned ${res.status}`);
+  } catch (err) {
+    throw new Error(`Engine API not reachable at ${BASE_URL}. Start it with: uvicorn src.api.main:app --port 8001`);
   }
-
-  return DEMO_CASES;
 }
 
 export async function postAttribute(req: AttributeRequest): Promise<AttributeResponse> {
-  // Guard: deliberate test strings
   if (
     req.suspect.trim().toLowerCase() === 'notfound' ||
     req.suspect.trim().toLowerCase() === 'invalid'
@@ -74,15 +71,18 @@ export async function postAttribute(req: AttributeRequest): Promise<AttributeRes
     throw new NotFoundError('Suspect address not found in this case.');
   }
 
+  if (import.meta.env.VITE_OFFLINE_DEMO === 'true') {
+    const caseId = req.case_id || 'silkroad';
+    return generateMockAttribution(caseId, req.suspect);
+  }
+
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000);
 
-    // Backend field names: suspect_wallet, candidate_vasps (not suspect/candidates)
     const body: Record<string, unknown> = {
       case_id: req.case_id || 'silkroad',
     };
-    // Only send suspect_wallet if the user manually typed one different from the default
     if (req.suspect && req.suspect.trim()) {
       body.suspect_wallet = req.suspect.trim();
     }
@@ -104,8 +104,6 @@ export async function postAttribute(req: AttributeRequest): Promise<AttributeRes
 
     if (res.ok) {
       const data = await res.json() as AttributeResponse;
-      // Back-fill candidate_names from candidate_labels so the rest of the UI
-      // can use either field without branching everywhere.
       if (data.candidate_labels && !data.candidate_names) {
         data.candidate_names = data.candidate_labels;
       }
@@ -115,14 +113,8 @@ export async function postAttribute(req: AttributeRequest): Promise<AttributeRes
     throw new Error(`Server returned ${res.status}`);
   } catch (e) {
     if (e instanceof NotFoundError) throw e;
-    console.info('[Blockchainheist] Live backend offline — computing via local engine.');
+    throw new Error(`Engine API not reachable at ${BASE_URL}. Start it with: uvicorn src.api.main:app --port 8001`);
   }
-
-  // Realistic sub-second computation simulation
-  await new Promise((resolve) => setTimeout(resolve, 380));
-
-  const caseId = req.case_id || 'silkroad';
-  return generateMockAttribution(caseId, req.suspect, req.depth);
 }
 
 export class NotFoundError extends Error {

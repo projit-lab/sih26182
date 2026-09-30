@@ -386,7 +386,7 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
 
             <div className="modal-body">
               <p>
-                Commercial blockchain forensics tools often compute Dijkstra shortest-path metrics. In adversarial laundering, criminals deliberately create 1-hop or 2-hop decoy transfers to high-volume exchanges while running 95%+ of funds through parallel mixer swarms.
+                Shortest-path tracing follows the single shortest route, so a short decoy transfer can outrank the exchange that most of the funds actually reach. Effective resistance weighs every parallel route.
               </p>
 
               <h4>1. Electrical Circuit Analogy</h4>
