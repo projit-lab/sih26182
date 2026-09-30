@@ -1,3 +1,0 @@
-# 
-
-{"suspect_address":"13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94","nodes":[{"data":{"id":"13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94","label":"13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94","role":"suspect","entity":"Suspect Target","category":null}}],"edges":[],"stats":{"total_nodes":1,"total_edges":0,"candidate_vasps_count":0,"depth_explored":1}}

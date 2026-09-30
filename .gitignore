@@ -35,3 +35,5 @@ data/raw/
 build/
 dist/
 Forensic_Report_*.pdf
+frontend/sih26182/
+step*.txt
