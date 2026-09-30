@@ -1,0 +1,25 @@
+{
+  "suspect": "suspect_114",
+  "candidates": {
+    "VASP_0": "[SYNTHETIC] VASP 0",
+    "VASP_1": "[SYNTHETIC] VASP 1",
+    "VASP_2": "[SYNTHETIC] VASP 2",
+    "VASP_3": "[SYNTHETIC] VASP 3",
+    "VASP_4": "[SYNTHETIC] VASP 4",
+    "VASP_5": "[SYNTHETIC] VASP 5"
+  },
+  "truth": "VASP_3",
+  "degree_correction": true,
+  "generator_args": {
+    "n_background_wallets": 2500,
+    "n_vasps": 6,
+    "n_suspects": 180,
+    "mixer_fraction": 0.6
+  },
+  "seed": 42,
+  "er_wins": 10,
+  "sp_wins": 1,
+  "k_hop": 4,
+  "nodes": 400,
+  "edges": 568
+}

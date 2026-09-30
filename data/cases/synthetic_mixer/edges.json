@@ -1,0 +1,3978 @@
+[
+  {
+    "source": "mixer_663",
+    "target": "VASP_2",
+    "weight": 0.33936377806103557,
+    "amount_satoshis": 40405401.63692769,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_663",
+    "target": "VASP_3",
+    "weight": 0.15916043978506217,
+    "amount_satoshis": 17252605.141824163,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_279",
+    "target": "VASP_0",
+    "weight": 0.4251525271093433,
+    "amount_satoshis": 52982374.146206655,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_279",
+    "target": "bg_1327",
+    "weight": 0.38922922544598293,
+    "amount_satoshis": 47584281.328952685,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_469",
+    "target": "VASP_2",
+    "weight": 0.7343417991660119,
+    "amount_satoshis": 108410977.8164146,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_469",
+    "target": "VASP_0",
+    "weight": 0.24961208212206115,
+    "amount_satoshis": 28352741.68706415,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_145",
+    "target": "VASP_0",
+    "weight": 0.37241990727089463,
+    "amount_satoshis": 45124224.05366443,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_511",
+    "target": "VASP_5",
+    "weight": 0.4136732481982091,
+    "amount_satoshis": 51236287.8844949,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_511",
+    "target": "VASP_0",
+    "weight": 0.3595255885267717,
+    "amount_satoshis": 43264958.79126884,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_511",
+    "target": "VASP_2",
+    "weight": 0.21499044384213034,
+    "amount_satoshis": 23985004.870664988,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_162",
+    "target": "bg_1928",
+    "weight": 2.2139351829919827,
+    "amount_satoshis": 815165907.9290721,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_212",
+    "target": "VASP_0",
+    "weight": 0.26924953308797905,
+    "amount_satoshis": 30898173.455115985,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_613",
+    "target": "bg_628",
+    "weight": 0.6309422411514581,
+    "amount_satoshis": 87938057.49689816,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_171",
+    "target": "VASP_4",
+    "weight": 0.19189888126080198,
+    "amount_satoshis": 21154800.0564358,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_171",
+    "target": "VASP_3",
+    "weight": 0.3032260492057177,
+    "amount_satoshis": 35422055.03255173,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_171",
+    "target": "VASP_5",
+    "weight": 0.5842032622394421,
+    "amount_satoshis": 79356141.81126179,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_664",
+    "target": "VASP_3",
+    "weight": 0.5551901716531126,
+    "amount_satoshis": 74227228.40716435,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_254",
+    "target": "VASP_1",
+    "weight": 0.4097306964397984,
+    "amount_satoshis": 50641204.835437655,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_254",
+    "target": "VASP_0",
+    "weight": 0.29639702161876474,
+    "amount_satoshis": 34500404.65259614,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_210",
+    "target": "VASP_0",
+    "weight": 0.4589904738327511,
+    "amount_satoshis": 58247562.77832325,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_446",
+    "target": "VASP_3",
+    "weight": 0.824267812335389,
+    "amount_satoshis": 128021061.18883044,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2067",
+    "target": "VASP_3",
+    "weight": 1.3947570603665462,
+    "amount_satoshis": 303399443.6450315,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_347",
+    "target": "VASP_5",
+    "weight": 0.28774540693954304,
+    "amount_satoshis": 33341778.19912441,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_347",
+    "target": "VASP_0",
+    "weight": 0.3265041695133188,
+    "amount_satoshis": 38611402.91718659,
+    "tx_hash": ""
+  },
+  {
+    "source": "hop_3",
+    "target": "VASP_0",
+    "weight": 1.3262949385558012,
+    "amount_satoshis": 276706030.9572267,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2315",
+    "target": "bg_1143",
+    "weight": 0.5014856327557204,
+    "amount_satoshis": 65117248.53765,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_125",
+    "target": "VASP_3",
+    "weight": 0.24109261983981412,
+    "amount_satoshis": 27263890.146096725,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_438",
+    "target": "VASP_3",
+    "weight": 0.2301670686009398,
+    "amount_satoshis": 25881030.00382276,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_88",
+    "target": "bg_1928",
+    "weight": 0.94772781323293,
+    "amount_satoshis": 157984111.3785072,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_122",
+    "target": "VASP_0",
+    "weight": 0.4923889418523108,
+    "amount_satoshis": 63622039.00503333,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_4",
+    "target": "VASP_1",
+    "weight": 0.4631164503683398,
+    "amount_satoshis": 58901837.341729,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_4",
+    "target": "VASP_3",
+    "weight": 0.26123132487394696,
+    "amount_satoshis": 29852801.252228778,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_422",
+    "target": "VASP_0",
+    "weight": 0.39056543212003203,
+    "amount_satoshis": 47781616.241401754,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2180",
+    "target": "bg_698",
+    "weight": 0.6559823941314763,
+    "amount_satoshis": 92703469.53677878,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2180",
+    "target": "mixer_695",
+    "weight": 1.2809073288881034,
+    "amount_satoshis": 259990454.15993613,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_371",
+    "target": "bg_2486",
+    "weight": 0.7711822017280956,
+    "amount_satoshis": 116232104.30230002,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_442",
+    "target": "VASP_3",
+    "weight": 0.5715725860083108,
+    "amount_satoshis": 77104999.10902362,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_442",
+    "target": "bg_2001",
+    "weight": 0.7416691291677153,
+    "amount_satoshis": 109943682.28503238,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_442",
+    "target": "VASP_1",
+    "weight": 0.338317407526232,
+    "amount_satoshis": 40258562.399251126,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_568",
+    "target": "VASP_2",
+    "weight": 0.5195468807771016,
+    "amount_satoshis": 68126566.32857443,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_568",
+    "target": "VASP_0",
+    "weight": 0.4473018146964775,
+    "amount_satoshis": 56408629.2285194,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "mixer_472",
+    "weight": 0.33161128839590803,
+    "amount_satoshis": 39321118.58891574,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "mixer_473",
+    "weight": 0.7006562929994481,
+    "amount_satoshis": 101507475.30521864,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "mixer_474",
+    "weight": 1.0252086537137926,
+    "amount_satoshis": 178767705.9058625,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "mixer_475",
+    "weight": 0.18912942122711904,
+    "amount_satoshis": 20819730.87430735,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "mixer_476",
+    "weight": 0.8431290677061436,
+    "amount_satoshis": 132362639.75701725,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "mixer_477",
+    "weight": 0.293264353561262,
+    "amount_satoshis": 34079718.80980788,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "mixer_478",
+    "weight": 0.2821912619984783,
+    "amount_satoshis": 32603231.532511923,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "mixer_479",
+    "weight": 0.3212559588776376,
+    "amount_satoshis": 37885846.679526955,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "bg_628",
+    "weight": 0.7188648518040233,
+    "amount_satoshis": 105210244.7622068,
+    "tx_hash": ""
+  },
+  {
+    "source": "suspect_114",
+    "target": "bg_1804",
+    "weight": 0.423274966595637,
+    "amount_satoshis": 52695409.96182872,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2374",
+    "target": "bg_628",
+    "weight": 0.3587212729733391,
+    "amount_satoshis": 43149774.88496443,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2374",
+    "target": "bg_660",
+    "weight": 1.094677017000513,
+    "amount_satoshis": 198821738.41002885,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2374",
+    "target": "bg_2470",
+    "weight": 1.8387802279767556,
+    "amount_satoshis": 528886260.2041295,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_690",
+    "target": "VASP_3",
+    "weight": 0.9486725412643628,
+    "amount_satoshis": 158227951.36328933,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_416",
+    "target": "VASP_0",
+    "weight": 0.6275345663486541,
+    "amount_satoshis": 87298715.66708283,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_256",
+    "target": "VASP_1",
+    "weight": 0.3956931034860182,
+    "amount_satoshis": 48541337.94040932,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_256",
+    "target": "bg_1814",
+    "weight": 0.47048459681901267,
+    "amount_satoshis": 60076973.32107621,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_256",
+    "target": "VASP_0",
+    "weight": 0.375613546212372,
+    "amount_satoshis": 45588439.30034144,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1142",
+    "target": "VASP_0",
+    "weight": 0.6936536807766904,
+    "amount_satoshis": 100101325.70192783,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_93",
+    "target": "VASP_2",
+    "weight": 0.5091583547774086,
+    "amount_satoshis": 66389020.02203969,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_93",
+    "target": "VASP_0",
+    "weight": 0.5007193830589538,
+    "amount_satoshis": 64990775.95700343,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1843",
+    "target": "VASP_3",
+    "weight": 2.5026711136997513,
+    "amount_satoshis": 1121507828.60643,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_545",
+    "target": "bg_1804",
+    "weight": 0.5115526777842005,
+    "amount_satoshis": 66787886.397674754,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2470",
+    "target": "VASP_0",
+    "weight": 0.16142510291150808,
+    "amount_satoshis": 17518443.696938105,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_163",
+    "target": "VASP_3",
+    "weight": 0.7464179024530059,
+    "amount_satoshis": 110943028.19044486,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_547",
+    "target": "VASP_5",
+    "weight": 0.4156910089069816,
+    "amount_satoshis": 51541754.59965798,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_547",
+    "target": "bg_992",
+    "weight": 1.3572300584784855,
+    "amount_satoshis": 288541600.73212516,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_992",
+    "target": "bg_707",
+    "weight": 1.1605034180558187,
+    "amount_satoshis": 219153955.04040548,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_992",
+    "target": "bg_928",
+    "weight": 0.30212685225198826,
+    "amount_satoshis": 35273281.302986786,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_992",
+    "target": "bg_1702",
+    "weight": 0.747421408274828,
+    "amount_satoshis": 111154816.99518299,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_992",
+    "target": "bg_1818",
+    "weight": 1.5125994996294887,
+    "amount_satoshis": 353851333.70596737,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_992",
+    "target": "bg_2001",
+    "weight": 0.3569696100583009,
+    "amount_satoshis": 42899244.21969915,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_992",
+    "target": "bg_1899",
+    "weight": 1.8771191935704463,
+    "amount_satoshis": 553465265.1071485,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_992",
+    "target": "mixer_472",
+    "weight": 0.619999052531869,
+    "amount_satoshis": 85892628.05720988,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_109",
+    "target": "VASP_0",
+    "weight": 0.377644161444489,
+    "amount_satoshis": 45884373.76563335,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_109",
+    "target": "bg_689",
+    "weight": 0.8555876032309387,
+    "amount_satoshis": 135275646.17759973,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_691",
+    "target": "VASP_3",
+    "weight": 0.5321176722801827,
+    "amount_satoshis": 70253390.26263599,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_36",
+    "target": "bg_2087",
+    "weight": 0.13696431200162906,
+    "amount_satoshis": 14678722.12496126,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_36",
+    "target": "bg_1804",
+    "weight": 0.464142725283017,
+    "amount_satoshis": 59064998.02082432,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_69",
+    "target": "VASP_2",
+    "weight": 0.2962321858835504,
+    "amount_satoshis": 34478236.00665133,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_69",
+    "target": "VASP_3",
+    "weight": 0.4996673983789002,
+    "amount_satoshis": 64817299.45165796,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2001",
+    "target": "mixer_622",
+    "weight": 0.6149505259771557,
+    "amount_satoshis": 84956509.1869112,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1702",
+    "target": "mixer_164",
+    "weight": 1.0086485270906853,
+    "amount_satoshis": 174189291.58874902,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1702",
+    "target": "mixer_489",
+    "weight": 0.7799420551462464,
+    "amount_satoshis": 118134586.40690006,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_129",
+    "target": "VASP_3",
+    "weight": 0.6797259686414783,
+    "amount_satoshis": 97333690.19395427,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_129",
+    "target": "VASP_2",
+    "weight": 0.34301155265162375,
+    "amount_satoshis": 40918504.16562733,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_176",
+    "target": "VASP_5",
+    "weight": 0.8315716524586496,
+    "amount_satoshis": 129692587.41387017,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_176",
+    "target": "VASP_0",
+    "weight": 0.3136734137870676,
+    "amount_satoshis": 36844274.90263484,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_687",
+    "target": "VASP_3",
+    "weight": 0.3225154008447269,
+    "amount_satoshis": 38059615.30428286,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_702",
+    "target": "VASP_3",
+    "weight": 0.3613633994526198,
+    "amount_satoshis": 43528494.788318515,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_12",
+    "weight": 0.4304095350327418,
+    "amount_satoshis": 53788721.32897239,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_14",
+    "weight": 0.6433069807195015,
+    "amount_satoshis": 90276288.65210228,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_70",
+    "weight": 0.4760867905017027,
+    "amount_satoshis": 60976272.201003544,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_115",
+    "weight": 0.1944358442792754,
+    "amount_satoshis": 21462555.520741213,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_187",
+    "weight": 0.37286469535246985,
+    "amount_satoshis": 45188787.93642971,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_190",
+    "weight": 0.37271309099384353,
+    "amount_satoshis": 45166778.35177151,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_223",
+    "weight": 0.715426139448055,
+    "amount_satoshis": 104505797.64762893,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_228",
+    "weight": 0.6309363516241878,
+    "amount_satoshis": 87936950.63384286,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_248",
+    "weight": 0.14842260039398175,
+    "amount_satoshis": 16000301.05237284,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_274",
+    "weight": 0.2581252210140164,
+    "amount_satoshis": 29450090.719182227,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_298",
+    "weight": 0.9094767343051997,
+    "amount_satoshis": 148302291.26813957,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_317",
+    "weight": 0.28336950347935935,
+    "amount_satoshis": 32759562.239978995,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_329",
+    "weight": 0.31245115129454,
+    "amount_satoshis": 36677117.45405415,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_360",
+    "weight": 0.47357020805359895,
+    "amount_satoshis": 60571671.458918676,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_409",
+    "weight": 0.3433250426820409,
+    "amount_satoshis": 40962687.636961594,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_435",
+    "weight": 0.5181576220436006,
+    "amount_satoshis": 67893157.198346,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_515",
+    "weight": 0.38704588757986497,
+    "amount_satoshis": 47262406.48771171,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_527",
+    "weight": 0.4739391637477479,
+    "amount_satoshis": 60630926.22194138,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_529",
+    "weight": 0.6451869754272153,
+    "amount_satoshis": 90634343.53295368,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_545",
+    "weight": 0.3145045416887012,
+    "amount_satoshis": 36958057.2749876,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_543",
+    "weight": 0.24243695968181553,
+    "amount_satoshis": 27435091.114426,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_566",
+    "weight": 0.45653502483051295,
+    "amount_satoshis": 57859470.62343123,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_2",
+    "target": "mixer_589",
+    "weight": 0.6608190397324647,
+    "amount_satoshis": 93637765.53297663,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_376",
+    "target": "VASP_1",
+    "weight": 0.36967171833291956,
+    "amount_satoshis": 44725942.79323464,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_376",
+    "target": "VASP_0",
+    "weight": 0.3699327735706951,
+    "amount_satoshis": 44763729.1905967,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_249",
+    "target": "VASP_3",
+    "weight": 0.371202764071489,
+    "amount_satoshis": 44947694.54392775,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_475",
+    "target": "VASP_3",
+    "weight": 0.4319217539662079,
+    "amount_satoshis": 54021459.4762838,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_475",
+    "target": "bg_698",
+    "weight": 0.11834097250299509,
+    "amount_satoshis": 12562785.408761574,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_475",
+    "target": "bg_73",
+    "weight": 0.4061044001409958,
+    "amount_satoshis": 50095924.46353037,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2086",
+    "target": "bg_1928",
+    "weight": 0.10455646028887419,
+    "amount_satoshis": 11021807.532993982,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1071",
+    "target": "VASP_3",
+    "weight": 0.949412297110288,
+    "amount_satoshis": 158419047.67348328,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_412",
+    "target": "VASP_3",
+    "weight": 0.23174019104813132,
+    "amount_satoshis": 26079212.119294263,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_412",
+    "target": "VASP_5",
+    "weight": 0.30940706149872704,
+    "amount_satoshis": 36261692.651486196,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_205",
+    "target": "VASP_3",
+    "weight": 0.17055861536905065,
+    "amount_satoshis": 18596716.5799624,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_205",
+    "target": "VASP_5",
+    "weight": 0.1678368427149621,
+    "amount_satoshis": 18274362.166625284,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_408",
+    "target": "VASP_3",
+    "weight": 0.3444264757815212,
+    "amount_satoshis": 41118034.14310356,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_45",
+    "target": "VASP_1",
+    "weight": 0.6991699018238773,
+    "amount_satoshis": 101208178.86301315,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_45",
+    "target": "VASP_0",
+    "weight": 0.2786759769700164,
+    "amount_satoshis": 32137911.723031722,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1948",
+    "target": "VASP_0",
+    "weight": 0.6129764716491714,
+    "amount_satoshis": 84591755.1300747,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_2221",
+    "weight": 1.5370210301357496,
+    "amount_satoshis": 365071527.40015817,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_1407",
+    "weight": 1.9952880758654246,
+    "amount_satoshis": 635432132.5241355,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_2214",
+    "weight": 1.7492209000634227,
+    "amount_satoshis": 475012101.1484795,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_2238",
+    "weight": 1.2917885393511643,
+    "amount_satoshis": 263928975.13391867,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_72",
+    "weight": 0.9814775386683491,
+    "amount_satoshis": 166839598.89044964,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_129",
+    "weight": 0.48137372981543125,
+    "amount_satoshis": 61829597.735579275,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_1762",
+    "weight": 1.4941213625063325,
+    "amount_satoshis": 345542013.3364069,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_487",
+    "weight": 2.2868694269688,
+    "amount_satoshis": 884407180.6729162,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_1571",
+    "weight": 1.2003413620430359,
+    "amount_satoshis": 232125047.80977902,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_1288",
+    "weight": 0.30644842564810476,
+    "amount_satoshis": 35859139.71995495,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_1541",
+    "weight": 0.41862929049438335,
+    "amount_satoshis": 51987681.75587102,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "bg_1812",
+    "weight": 1.5846414521589451,
+    "amount_satoshis": 387754223.27180517,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_2",
+    "weight": 0.2273112781873591,
+    "amount_satoshis": 25522052.99061357,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_10",
+    "weight": 0.38190739450224515,
+    "amount_satoshis": 46507640.47209727,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_11",
+    "weight": 0.17994157798537647,
+    "amount_satoshis": 19714742.131460484,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_12",
+    "weight": 0.7775494862356606,
+    "amount_satoshis": 117613308.22279441,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_13",
+    "weight": 0.7710375908205778,
+    "amount_satoshis": 116200837.04231028,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_14",
+    "weight": 0.28312934480681434,
+    "amount_satoshis": 32727682.707970053,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_39",
+    "weight": 0.22081629462534644,
+    "amount_satoshis": 24709431.159177665,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "hop_17",
+    "weight": 1.287952248722742,
+    "amount_satoshis": 262535512.39021352,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_103",
+    "weight": 0.4945691761850343,
+    "amount_satoshis": 63979162.55711374,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_108",
+    "weight": 0.2971625546837667,
+    "amount_satoshis": 34603408.58103999,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_124",
+    "weight": 0.5308747748799975,
+    "amount_satoshis": 70041914.2152445,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_126",
+    "weight": 0.5845946837371157,
+    "amount_satoshis": 79426359.40234734,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_127",
+    "weight": 1.1790068226391424,
+    "amount_satoshis": 225114363.66357875,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_128",
+    "weight": 0.18240203871370128,
+    "amount_satoshis": 20009658.21902039,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_160",
+    "weight": 0.4655999002074225,
+    "amount_satoshis": 59296952.50537658,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_161",
+    "weight": 0.43693380202792503,
+    "amount_satoshis": 54795360.22752294,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_162",
+    "weight": 0.19715375419008274,
+    "amount_satoshis": 21793128.83493012,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_189",
+    "weight": 0.22841155832734197,
+    "amount_satoshis": 25660238.420050047,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "hop_56",
+    "weight": 0.5828611043713948,
+    "amount_satoshis": 79115579.02707621,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_200",
+    "weight": 0.5238265342405389,
+    "amount_satoshis": 68847631.62470266,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_201",
+    "weight": 0.33808303831167064,
+    "amount_satoshis": 40225693.96197148,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_202",
+    "weight": 0.7914997913986701,
+    "amount_satoshis": 120670354.06348343,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_203",
+    "weight": 0.2676231147246302,
+    "amount_satoshis": 30685451.29658393,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_204",
+    "weight": 0.3235537810625336,
+    "amount_satoshis": 38203048.13371132,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_206",
+    "weight": 0.269097182868781,
+    "amount_satoshis": 30878232.608732197,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_207",
+    "weight": 0.44367222783016863,
+    "amount_satoshis": 55841959.5326411,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_208",
+    "weight": 0.9670746754509615,
+    "amount_satoshis": 163023889.18062073,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_223",
+    "weight": 0.1342447143235322,
+    "amount_satoshis": 14367265.84839274,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_228",
+    "weight": 0.2522279730679118,
+    "amount_satoshis": 28688937.996646862,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_244",
+    "weight": 0.6025795847879314,
+    "amount_satoshis": 82682517.79700182,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_245",
+    "weight": 0.3735859160041673,
+    "amount_satoshis": 45293538.85840789,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_246",
+    "weight": 0.3626320973479395,
+    "amount_satoshis": 43710704.64776712,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_247",
+    "weight": 0.33427523092864003,
+    "amount_satoshis": 39692756.834116325,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_248",
+    "weight": 0.5808262892739988,
+    "amount_satoshis": 78751482.5028729,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_286",
+    "weight": 0.2590858765556186,
+    "amount_satoshis": 29574507.417419575,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_298",
+    "weight": 0.419581889956258,
+    "amount_satoshis": 52132534.1219124,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_308",
+    "weight": 0.26430774817321767,
+    "amount_satoshis": 30252898.554251622,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_329",
+    "weight": 0.9035781568177339,
+    "amount_satoshis": 146841972.09976232,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_346",
+    "weight": 0.26257609902010876,
+    "amount_satoshis": 30027541.40884832,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_348",
+    "weight": 0.6274841015754437,
+    "amount_satoshis": 87289263.91836624,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_349",
+    "weight": 0.7047242037550389,
+    "amount_satoshis": 102328859.25696942,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_350",
+    "weight": 0.42788317760462263,
+    "amount_satoshis": 53400686.41431196,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_351",
+    "weight": 0.49190754529673286,
+    "amount_satoshis": 63543290.87509969,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_352",
+    "weight": 0.438530579092929,
+    "amount_satoshis": 55042731.35421398,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_353",
+    "weight": 0.4034784890348095,
+    "amount_satoshis": 49702302.94223226,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_354",
+    "weight": 0.5133919194606887,
+    "amount_satoshis": 67094931.90836429,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_360",
+    "weight": 0.25471230270578044,
+    "amount_satoshis": 29009041.195673145,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_370",
+    "weight": 0.32898025694271055,
+    "amount_satoshis": 38955042.134321846,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_366",
+    "weight": 0.2989549086260533,
+    "amount_satoshis": 34844881.86921038,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "hop_92",
+    "weight": 0.44832533222353416,
+    "amount_satoshis": 56568798.15578728,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_394",
+    "weight": 0.24374175384203559,
+    "amount_satoshis": 27601476.202659238,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_396",
+    "weight": 0.1548074861050053,
+    "amount_satoshis": 16743319.235925872,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_409",
+    "weight": 0.7108646975865737,
+    "amount_satoshis": 103575080.66080174,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_410",
+    "weight": 1.2704387025179953,
+    "amount_satoshis": 256241506.00516126,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_411",
+    "weight": 0.4524322431027971,
+    "amount_satoshis": 57213134.46653574,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_413",
+    "weight": 0.42196770768828284,
+    "amount_satoshis": 52495927.94277549,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_414",
+    "weight": 0.48867930579366703,
+    "amount_satoshis": 63016185.23243482,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_423",
+    "weight": 0.22534940903108494,
+    "amount_satoshis": 25276036.551359475,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_439",
+    "weight": 0.5086666697783105,
+    "amount_satoshis": 66307229.146201365,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_440",
+    "weight": 0.6548845663041012,
+    "amount_satoshis": 92492030.38861588,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_441",
+    "weight": 0.22951009491385221,
+    "amount_satoshis": 25798356.639492843,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_443",
+    "weight": 0.37904258335519264,
+    "amount_satoshis": 46088524.38141413,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_444",
+    "weight": 0.21483563090445326,
+    "amount_satoshis": 23965811.873533525,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_445",
+    "weight": 0.21282531687795544,
+    "amount_satoshis": 23716851.990734935,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_447",
+    "weight": 0.26101075036768906,
+    "amount_satoshis": 29824162.19334561,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_448",
+    "weight": 0.285008725189607,
+    "amount_satoshis": 32977363.059791815,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_449",
+    "weight": 0.7370213099409003,
+    "amount_satoshis": 108970166.11804779,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_450",
+    "weight": 0.3350793408529429,
+    "amount_satoshis": 39805130.340510726,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_451",
+    "weight": 0.5224278324094246,
+    "amount_satoshis": 68611629.22014318,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_452",
+    "weight": 0.7790825808641727,
+    "amount_satoshis": 117947185.88435335,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_453",
+    "weight": 0.3787505246196168,
+    "amount_satoshis": 46045864.181646384,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_460",
+    "weight": 0.46186682575653004,
+    "amount_satoshis": 58703393.710771136,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_472",
+    "weight": 0.6416169518441759,
+    "amount_satoshis": 89954987.81031546,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_473",
+    "weight": 0.5489438698661496,
+    "amount_satoshis": 73142344.34300464,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_474",
+    "weight": 0.3587286932937981,
+    "amount_satoshis": 43150837.1061087,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_476",
+    "weight": 0.43085118103004,
+    "amount_satoshis": 53856656.50272148,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_477",
+    "weight": 0.30425515544990217,
+    "amount_satoshis": 35561490.449609324,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_478",
+    "weight": 0.5694556401195204,
+    "amount_satoshis": 76730473.97386637,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_479",
+    "weight": 0.2769136200034312,
+    "amount_satoshis": 31905242.636969592,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_489",
+    "weight": 0.1283165510108769,
+    "amount_satoshis": 13691283.66488751,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "hop_123",
+    "weight": 0.5341993291949182,
+    "amount_satoshis": 70608168.54495242,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_539",
+    "weight": 0.46667575256803007,
+    "amount_satoshis": 59468424.73062691,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_540",
+    "weight": 0.4396730703299547,
+    "amount_satoshis": 55219967.5422679,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_541",
+    "weight": 0.446479105374007,
+    "amount_satoshis": 56280003.30926475,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_542",
+    "weight": 0.3919524734055466,
+    "amount_satoshis": 47986737.667426065,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_543",
+    "weight": 0.6175245226160347,
+    "amount_satoshis": 85433199.85679697,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_544",
+    "weight": 0.8057421623188481,
+    "amount_satoshis": 123835710.68242316,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_545",
+    "weight": 0.5292485414357625,
+    "amount_satoshis": 69765611.09500678,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "hop_131",
+    "weight": 0.9077203820638458,
+    "amount_satoshis": 147866567.73634732,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_562",
+    "weight": 0.7287251122685753,
+    "amount_satoshis": 107243679.85037097,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_563",
+    "weight": 0.4441899222410373,
+    "amount_satoshis": 55922658.93108141,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_564",
+    "weight": 0.6197763529747669,
+    "amount_satoshis": 85851234.4606119,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_565",
+    "weight": 0.398046171439341,
+    "amount_satoshis": 48891277.35660773,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "hop_140",
+    "weight": 0.738507499563384,
+    "amount_satoshis": 109280966.30714208,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "hop_142",
+    "weight": 0.6336100189632834,
+    "amount_satoshis": 88440103.85299368,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "hop_143",
+    "weight": 1.226436147080397,
+    "amount_satoshis": 240905847.8230631,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_577",
+    "weight": 0.13411379803006895,
+    "amount_satoshis": 14352294.289886203,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_584",
+    "weight": 0.2930567553077585,
+    "amount_satoshis": 34051886.98337196,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_585",
+    "weight": 0.5127323622269986,
+    "amount_satoshis": 66984759.573785156,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_586",
+    "weight": 0.21337841733932694,
+    "amount_satoshis": 23785298.76587696,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_587",
+    "weight": 0.1780704155901409,
+    "amount_satoshis": 19490945.85271646,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_588",
+    "weight": 0.35951909518207964,
+    "amount_satoshis": 43264028.52552939,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_589",
+    "weight": 0.9277257248634965,
+    "amount_satoshis": 152875155.61013806,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_590",
+    "weight": 0.20624710075299235,
+    "amount_satoshis": 22905686.73534381,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_607",
+    "weight": 0.36116167574235203,
+    "amount_satoshis": 43499544.60788774,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_618",
+    "weight": 0.5276592508618156,
+    "amount_satoshis": 69496018.49674654,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_665",
+    "weight": 0.5569806864529058,
+    "amount_satoshis": 74539464.28621803,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_666",
+    "weight": 0.47002944585717116,
+    "amount_satoshis": 60004130.71114995,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_667",
+    "weight": 0.4127628093244334,
+    "amount_satoshis": 51098659.14966118,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_668",
+    "weight": 0.41805861058868315,
+    "amount_satoshis": 51900970.18460797,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_669",
+    "weight": 0.37055975239316286,
+    "amount_satoshis": 44854521.44249603,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_670",
+    "weight": 1.0442596471038288,
+    "amount_satoshis": 184129418.43927667,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_671",
+    "weight": 0.2769638175686576,
+    "amount_satoshis": 31911864.12518047,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_682",
+    "weight": 0.490234181396969,
+    "amount_satoshis": 63269852.28104245,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_683",
+    "weight": 0.28585398754552954,
+    "amount_satoshis": 33089811.336428653,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_685",
+    "weight": 0.2556702471165882,
+    "amount_satoshis": 29132683.897592686,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_686",
+    "weight": 0.456534496362775,
+    "amount_satoshis": 57859387.199815914,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_688",
+    "weight": 0.32738681148804205,
+    "amount_satoshis": 38733801.16854745,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_689",
+    "weight": 0.20614169135749405,
+    "amount_satoshis": 22892732.003988933,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_692",
+    "weight": 0.7414293232054752,
+    "amount_satoshis": 109893342.5744084,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_693",
+    "weight": 0.5802347634702749,
+    "amount_satoshis": 78645777.65517326,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_694",
+    "weight": 0.2679887187308402,
+    "amount_satoshis": 30733239.156315494,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_695",
+    "weight": 0.4332719864255417,
+    "amount_satoshis": 54229564.71390917,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_696",
+    "weight": 0.5682236981837135,
+    "amount_satoshis": 76512886.34682322,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_697",
+    "weight": 0.31225050953866285,
+    "amount_satoshis": 36649697.06814911,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_698",
+    "weight": 0.26127059445023443,
+    "amount_satoshis": 29857900.61683798,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_699",
+    "weight": 0.8330525803054264,
+    "amount_satoshis": 130032997.56198929,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_700",
+    "weight": 0.9038770571650037,
+    "amount_satoshis": 146915764.27864826,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_701",
+    "weight": 0.2705261944610214,
+    "amount_satoshis": 31065392.81550497,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_703",
+    "weight": 0.7099828824697513,
+    "amount_satoshis": 103395644.2037843,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_704",
+    "weight": 0.553459492981818,
+    "amount_satoshis": 73925957.835476,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_705",
+    "weight": 0.6302337009516802,
+    "amount_satoshis": 87804942.99215128,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_706",
+    "weight": 0.43072612392705806,
+    "amount_satoshis": 53837416.8380382,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_707",
+    "weight": 0.5300953079540973,
+    "amount_satoshis": 69909423.8097496,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_714",
+    "weight": 0.6457440794140937,
+    "amount_satoshis": 90740576.27436614,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_719",
+    "weight": 0.44635425968944215,
+    "amount_satoshis": 56260493.64314196,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_3",
+    "target": "mixer_729",
+    "weight": 0.5763508929919308,
+    "amount_satoshis": 77953286.23723227,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_165",
+    "target": "VASP_0",
+    "weight": 0.3531882988059108,
+    "amount_satoshis": 42359918.02230378,
+    "tx_hash": ""
+  },
+  {
+    "source": "hop_144",
+    "target": "VASP_0",
+    "weight": 0.8812552294939695,
+    "amount_satoshis": 141392783.89387393,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_604",
+    "target": "bg_172",
+    "weight": 0.31934770603075335,
+    "amount_satoshis": 37622976.511197835,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_604",
+    "target": "bg_411",
+    "weight": 0.3699628995862522,
+    "amount_satoshis": 44768090.410647154,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_604",
+    "target": "bg_1818",
+    "weight": 1.2389078148410406,
+    "amount_satoshis": 245184135.5317308,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_476",
+    "target": "bg_2486",
+    "weight": 0.9704982314512293,
+    "amount_satoshis": 163925909.37192976,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_476",
+    "target": "bg_411",
+    "weight": 0.6841500540370009,
+    "amount_satoshis": 98208645.30175291,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_476",
+    "target": "VASP_0",
+    "weight": 0.5956997548955545,
+    "amount_satoshis": 81430006.62248069,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_274",
+    "target": "VASP_0",
+    "weight": 0.6445103319204953,
+    "amount_satoshis": 90505395.67303021,
+    "tx_hash": ""
+  },
+  {
+    "source": "hop_50",
+    "target": "VASP_0",
+    "weight": 0.9225439206729628,
+    "amount_satoshis": 151568195.20002237,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2012",
+    "target": "bg_660",
+    "weight": 0.21516747240153894,
+    "amount_satoshis": 24006955.700370062,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_11",
+    "target": "VASP_4",
+    "weight": 0.21653868437633256,
+    "amount_satoshis": 24177112.15660831,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_532",
+    "target": "VASP_5",
+    "weight": 0.3650340287494615,
+    "amount_satoshis": 44056302.78735314,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_532",
+    "target": "bg_1899",
+    "weight": 1.014591232282863,
+    "amount_satoshis": 175823568.92006353,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_532",
+    "target": "VASP_0",
+    "weight": 0.4176412264002746,
+    "amount_satoshis": 51837582.35090899,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_117",
+    "target": "VASP_0",
+    "weight": 0.4195154336085764,
+    "amount_satoshis": 52122424.28526624,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_117",
+    "target": "VASP_5",
+    "weight": 0.15587980850333663,
+    "amount_satoshis": 16868572.856127135,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_141",
+    "target": "VASP_0",
+    "weight": 0.5063522134540547,
+    "amount_satoshis": 65922763.414129525,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_141",
+    "target": "VASP_1",
+    "weight": 0.5017537690421021,
+    "amount_satoshis": 65161528.39974403,
+    "tx_hash": ""
+  },
+  {
+    "source": "hop_51",
+    "target": "VASP_0",
+    "weight": 1.2159916482493203,
+    "amount_satoshis": 237363786.8194799,
+    "tx_hash": ""
+  },
+  {
+    "source": "hop_58",
+    "target": "VASP_0",
+    "weight": 1.0676965493367585,
+    "amount_satoshis": 190867179.5533158,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_396",
+    "target": "VASP_4",
+    "weight": 0.4979498608643664,
+    "amount_satoshis": 64534462.51785695,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_199",
+    "target": "VASP_0",
+    "weight": 0.4713653778832373,
+    "amount_satoshis": 60218028.198109254,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1804",
+    "target": "bg_264",
+    "weight": 0.8381277884526817,
+    "amount_satoshis": 131203430.4884078,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1804",
+    "target": "bg_995",
+    "weight": 1.4012847453972215,
+    "amount_satoshis": 306041321.44677657,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1804",
+    "target": "bg_172",
+    "weight": 0.46524127354091876,
+    "amount_satoshis": 59239834.612927236,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1804",
+    "target": "bg_1906",
+    "weight": 0.9435516835981448,
+    "amount_satoshis": 156908982.78638807,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1804",
+    "target": "bg_2216",
+    "weight": 1.9516734395788504,
+    "amount_satoshis": 604045951.1634516,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1458",
+    "target": "VASP_0",
+    "weight": 1.0373758131856163,
+    "amount_satoshis": 182180235.3350284,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2022",
+    "target": "bg_2486",
+    "weight": 0.3000442770084274,
+    "amount_satoshis": 34991857.66089892,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_574",
+    "target": "bg_79",
+    "weight": 0.4160283349671913,
+    "amount_satoshis": 51592882.20554648,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_574",
+    "target": "bg_985",
+    "weight": 1.1292849820764308,
+    "amount_satoshis": 209344384.13815078,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_574",
+    "target": "bg_2337",
+    "weight": 1.047437037733009,
+    "amount_satoshis": 185033644.36965787,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_574",
+    "target": "bg_1706",
+    "weight": 0.33103869813827697,
+    "amount_satoshis": 39241367.50825431,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_574",
+    "target": "bg_986",
+    "weight": 0.2857672907935855,
+    "amount_satoshis": 33078273.382227734,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_574",
+    "target": "bg_1568",
+    "weight": 1.0233252371199726,
+    "amount_satoshis": 178243164.3029748,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_574",
+    "target": "mixer_473",
+    "weight": 0.26089153643268936,
+    "amount_satoshis": 29808686.266603895,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_2",
+    "target": "VASP_0",
+    "weight": 0.27955408231433776,
+    "amount_satoshis": 32253993.688141212,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_2",
+    "target": "VASP_4",
+    "weight": 0.21094543031971216,
+    "amount_satoshis": 23484496.812765364,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_366",
+    "target": "VASP_1",
+    "weight": 0.6141461048807547,
+    "amount_satoshis": 84807786.09502068,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_0",
+    "target": "VASP_0",
+    "weight": 0.513757553385235,
+    "amount_satoshis": 67156038.6547587,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1984",
+    "target": "VASP_0",
+    "weight": 0.5648088537409428,
+    "amount_satoshis": 75911150.30004707,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_349",
+    "target": "bg_411",
+    "weight": 0.1879055755831979,
+    "amount_satoshis": 20671956.617861785,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_39",
+    "weight": 0.21711658464628117,
+    "amount_satoshis": 24248894.88287573,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_167",
+    "weight": 0.33405897495469383,
+    "amount_satoshis": 39662550.70717935,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_238",
+    "weight": 0.3160840374826142,
+    "amount_satoshis": 37174552.88233699,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_308",
+    "weight": 0.6175258220366584,
+    "amount_satoshis": 85433440.81267773,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_346",
+    "weight": 0.4548597885863948,
+    "amount_satoshis": 57595240.10283308,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_349",
+    "weight": 0.4282730835307629,
+    "amount_satoshis": 53460509.91302932,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_360",
+    "weight": 0.4093471549385795,
+    "amount_satoshis": 50583438.760141395,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_460",
+    "weight": 0.4640836284333049,
+    "amount_satoshis": 59055598.05829866,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_489",
+    "weight": 0.690048573768505,
+    "amount_satoshis": 99381237.78718942,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_552",
+    "weight": 0.7180711352287551,
+    "amount_satoshis": 105047430.6122165,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_562",
+    "weight": 0.2784981831029838,
+    "amount_satoshis": 32114420.50108435,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_577",
+    "weight": 0.5698240431650384,
+    "amount_satoshis": 76795594.01318806,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_579",
+    "weight": 0.7325575884914235,
+    "amount_satoshis": 108039460.25644892,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_580",
+    "weight": 0.49363210545229425,
+    "amount_satoshis": 63825574.45579839,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_592",
+    "weight": 0.5597305258663338,
+    "amount_satoshis": 75020080.28987285,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_596",
+    "weight": 0.48264579511330075,
+    "amount_satoshis": 62035586.53885436,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_602",
+    "weight": 0.5429081006936397,
+    "amount_satoshis": 72100444.61476955,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_616",
+    "weight": 0.3069504636333607,
+    "amount_satoshis": 35927363.292718135,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_618",
+    "weight": 0.31055041363220215,
+    "amount_satoshis": 36417576.846772134,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_619",
+    "weight": 0.37008854356174675,
+    "amount_satoshis": 44786280.79178307,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_682",
+    "weight": 0.6325477950979883,
+    "amount_satoshis": 88240044.5501962,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_683",
+    "weight": 0.3538326404093157,
+    "amount_satoshis": 42451675.998709045,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_685",
+    "weight": 0.2616877190893839,
+    "amount_satoshis": 29912078.845524974,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_5",
+    "target": "mixer_707",
+    "weight": 0.28823484144542105,
+    "amount_satoshis": 33407056.2398099,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_162",
+    "target": "VASP_1",
+    "weight": 0.3551382121142987,
+    "amount_satoshis": 42637778.33475789,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_10",
+    "target": "VASP_4",
+    "weight": 0.5484786486537128,
+    "amount_satoshis": 73061813.58540605,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_450",
+    "target": "VASP_1",
+    "weight": 0.39049740957567586,
+    "amount_satoshis": 47771564.10174588,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_713",
+    "target": "bg_628",
+    "weight": 0.6800314575484988,
+    "amount_satoshis": 97393982.65616027,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_112",
+    "target": "VASP_0",
+    "weight": 0.392810582053735,
+    "amount_satoshis": 48113780.867474295,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_207",
+    "target": "bg_1656",
+    "weight": 0.27764929989533277,
+    "amount_satoshis": 32002318.375570133,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_189",
+    "target": "VASP_0",
+    "weight": 0.4531767810522452,
+    "amount_satoshis": 57330229.19662372,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1523",
+    "target": "bg_1792",
+    "weight": 0.7002468380464574,
+    "amount_satoshis": 101424983.96078753,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_473",
+    "target": "bg_1928",
+    "weight": 0.1633720235849074,
+    "amount_satoshis": 17747465.65592839,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_211",
+    "target": "VASP_0",
+    "weight": 0.52291689062684,
+    "amount_satoshis": 68694110.2903437,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_211",
+    "target": "VASP_1",
+    "weight": 0.39176771312195746,
+    "amount_satoshis": 47959398.121516086,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_415",
+    "target": "VASP_0",
+    "weight": 0.5193524268524314,
+    "amount_satoshis": 68093876.63633299,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_415",
+    "target": "VASP_4",
+    "weight": 0.22242279718943328,
+    "amount_satoshis": 24909938.19451066,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_72",
+    "target": "bg_995",
+    "weight": 0.3796047961870513,
+    "amount_satoshis": 46170680.316805184,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_144",
+    "target": "VASP_0",
+    "weight": 0.674073362556409,
+    "amount_satoshis": 96221387.24287589,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_953",
+    "weight": 0.6930166807828149,
+    "amount_satoshis": 99973901.74751902,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_1739",
+    "weight": 0.6851213275409894,
+    "amount_satoshis": 98401253.62973702,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_2044",
+    "weight": 2.694522410883252,
+    "amount_satoshis": 1379844948.690006,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_1140",
+    "weight": 0.09796012120363651,
+    "amount_satoshis": 10291880.115722325,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_2383",
+    "weight": 0.8661132594135136,
+    "amount_satoshis": 137765155.61335343,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_2431",
+    "weight": 2.328243583498798,
+    "amount_satoshis": 925990503.1377876,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_1118",
+    "weight": 1.0516464356204402,
+    "amount_satoshis": 186235993.19705063,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_1639",
+    "weight": 1.5045864931786703,
+    "amount_satoshis": 350229151.7062837,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_1656",
+    "weight": 1.1068347698195105,
+    "amount_satoshis": 202476913.57786173,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "bg_2094",
+    "weight": 0.5542125236151951,
+    "amount_satoshis": 74056978.73484966,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_1",
+    "weight": 0.4514122457662116,
+    "amount_satoshis": 57052859.2421504,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_3",
+    "weight": 0.36941226087462153,
+    "amount_satoshis": 44688397.438889444,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_38",
+    "weight": 0.19969872224700058,
+    "amount_satoshis": 22103483.21084341,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "hop_9",
+    "weight": 0.7480479228064282,
+    "amount_satoshis": 111287150.0063965,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "hop_11",
+    "weight": 0.704388132752909,
+    "amount_satoshis": 102260873.81908613,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_70",
+    "weight": 0.597553253906434,
+    "amount_satoshis": 81766598.80057156,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_110",
+    "weight": 0.9733209275430768,
+    "amount_satoshis": 164671944.42462185,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_111",
+    "weight": 0.36293619901773627,
+    "amount_satoshis": 43754413.95871855,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_113",
+    "weight": 0.3249634251466965,
+    "amount_satoshis": 38398002.61886185,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_114",
+    "weight": 0.4691071424506554,
+    "amount_satoshis": 59856626.38866415,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_115",
+    "weight": 0.8306216127590517,
+    "amount_satoshis": 129474473.96174823,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_116",
+    "weight": 0.7832277156854266,
+    "amount_satoshis": 118852481.34337965,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_118",
+    "weight": 0.5066207059376143,
+    "amount_satoshis": 65967318.41003076,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_119",
+    "weight": 0.6346311340052185,
+    "amount_satoshis": 88632621.15196894,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_120",
+    "weight": 0.3881503584436887,
+    "amount_satoshis": 47425143.377547644,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_121",
+    "weight": 0.7438353865612131,
+    "amount_satoshis": 110398967.29321614,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_123",
+    "weight": 0.3184370678287103,
+    "amount_satoshis": 37497708.81673854,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "hop_31",
+    "weight": 1.0509480146576695,
+    "amount_satoshis": 186036149.77464348,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_142",
+    "weight": 1.0680614546949532,
+    "amount_satoshis": 190973337.91335702,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_143",
+    "weight": 1.401621945961818,
+    "amount_satoshis": 306178261.8965188,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_146",
+    "weight": 0.9646781693471582,
+    "amount_satoshis": 162394305.526609,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_147",
+    "weight": 0.42141321618929267,
+    "amount_satoshis": 52411393.68602988,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_150",
+    "weight": 0.20805301303686366,
+    "amount_satoshis": 23127844.16281323,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_158",
+    "weight": 0.4601359113481542,
+    "amount_satoshis": 58428929.32564449,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_164",
+    "weight": 0.3619094867540077,
+    "amount_satoshis": 43606895.28151827,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_166",
+    "weight": 0.6922969824816776,
+    "amount_satoshis": 99830032.6475429,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_167",
+    "weight": 0.32422977613776266,
+    "amount_satoshis": 38296504.29802589,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_187",
+    "weight": 0.2415648686268855,
+    "amount_satoshis": 27324004.55721786,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_188",
+    "weight": 0.7265692684892321,
+    "amount_satoshis": 106797376.10578883,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_190",
+    "weight": 0.7219552374966625,
+    "amount_satoshis": 105845404.50538753,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_191",
+    "weight": 0.8193654025701768,
+    "amount_satoshis": 126905944.12553202,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_196",
+    "weight": 1.351232927096953,
+    "amount_satoshis": 286218438.8217611,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_197",
+    "weight": 0.22993072746064663,
+    "amount_satoshis": 25851282.653050244,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_198",
+    "weight": 0.37878622710495125,
+    "amount_satoshis": 46051078.47505155,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_209",
+    "weight": 0.5676564368359845,
+    "amount_satoshis": 76412785.80329144,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_213",
+    "weight": 0.7046797126408464,
+    "amount_satoshis": 102319857.62083569,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_214",
+    "weight": 1.1181593847961977,
+    "amount_satoshis": 205921817.45202827,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_238",
+    "weight": 0.17041534645629297,
+    "amount_satoshis": 18579726.57442023,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_273",
+    "weight": 0.5875169064951716,
+    "amount_satoshis": 79951450.03542444,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_275",
+    "weight": 0.6072905596916006,
+    "amount_satoshis": 83545160.90328848,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_276",
+    "weight": 0.342481536848096,
+    "amount_satoshis": 40843834.92109785,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_277",
+    "weight": 0.5476718531676232,
+    "amount_satoshis": 72922244.40485398,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_278",
+    "weight": 0.4084068682483484,
+    "amount_satoshis": 50441913.70439645,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_283",
+    "weight": 0.3196771647648437,
+    "amount_satoshis": 37668325.0726506,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "hop_78",
+    "weight": 1.056514024667702,
+    "amount_satoshis": 187632668.84634736,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_329",
+    "weight": 0.2809600182021045,
+    "amount_satoshis": 32440065.095752746,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_334",
+    "weight": 0.6286898331763545,
+    "amount_satoshis": 87515220.6966235,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_335",
+    "weight": 0.4206899098453383,
+    "amount_satoshis": 52301193.41716711,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_336",
+    "weight": 0.9114254125652841,
+    "amount_satoshis": 148786624.29641932,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_337",
+    "weight": 0.3438027821750733,
+    "amount_satoshis": 41030047.16876289,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_338",
+    "weight": 0.378085835387496,
+    "amount_satoshis": 45948821.323573366,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_339",
+    "weight": 0.3116572013486754,
+    "amount_satoshis": 36568645.73030816,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_340",
+    "weight": 0.5790153803284752,
+    "amount_satoshis": 78428072.76535845,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_341",
+    "weight": 0.3401618662912711,
+    "amount_satoshis": 40517502.262580425,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_342",
+    "weight": 1.0844552958313138,
+    "amount_satoshis": 195782823.8490335,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_371",
+    "weight": 0.4422636264905844,
+    "amount_satoshis": 55622594.87462674,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_414",
+    "weight": 0.35811248721376343,
+    "amount_satoshis": 43062653.862237714,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_417",
+    "weight": 0.4624218485747446,
+    "amount_satoshis": 58791502.164448015,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_418",
+    "weight": 0.35433303717337716,
+    "amount_satoshis": 42522976.19411967,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_419",
+    "weight": 0.29877624829099714,
+    "amount_satoshis": 34820792.58939849,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_420",
+    "weight": 0.28327677417402963,
+    "amount_satoshis": 32747252.10876038,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_421",
+    "weight": 0.28340975629929255,
+    "amount_satoshis": 32764906.294288147,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_435",
+    "weight": 0.25240762363329505,
+    "amount_satoshis": 28712059.11391524,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_456",
+    "weight": 0.21477286389502015,
+    "amount_satoshis": 23958031.154439062,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "hop_116",
+    "weight": 1.171383745208801,
+    "amount_satoshis": 222645414.14846364,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_502",
+    "weight": 0.2990948591261456,
+    "amount_satoshis": 34863754.79847,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_515",
+    "weight": 0.29979204707117413,
+    "amount_satoshis": 34957812.96683742,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_529",
+    "weight": 0.5281626390569324,
+    "amount_satoshis": 69581362.27029897,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_552",
+    "weight": 0.40303413286974393,
+    "amount_satoshis": 49635796.57834609,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_566",
+    "weight": 0.3145272585272836,
+    "amount_satoshis": 36961168.56440647,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_592",
+    "weight": 0.1913358701360921,
+    "amount_satoshis": 21086607.75450564,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_596",
+    "weight": 0.37625529200091173,
+    "amount_satoshis": 45681900.053937465,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_602",
+    "weight": 0.3386920872753954,
+    "amount_satoshis": 40311124.28855174,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_616",
+    "weight": 0.49377324996293503,
+    "amount_satoshis": 63848699.16826011,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_619",
+    "weight": 0.26080631959896183,
+    "amount_satoshis": 29797624.852685954,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_622",
+    "weight": 0.42104976659830656,
+    "amount_satoshis": 52356009.89255128,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_665",
+    "weight": 0.41321506734079305,
+    "amount_satoshis": 51167010.1845095,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_700",
+    "weight": 0.5382230440190087,
+    "amount_satoshis": 71296030.1131764,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_714",
+    "weight": 0.4340471535673871,
+    "amount_satoshis": 54349164.753798254,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_0",
+    "target": "mixer_729",
+    "weight": 0.27980389981466575,
+    "amount_satoshis": 32287037.177501895,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_487",
+    "target": "bg_1482",
+    "weight": 0.2577103140578826,
+    "amount_satoshis": 29396392.11680286,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_487",
+    "target": "bg_1639",
+    "weight": 1.3594500337135764,
+    "amount_satoshis": 289405111.59528285,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_273",
+    "target": "VASP_1",
+    "weight": 0.5813250218365058,
+    "amount_satoshis": 78840653.9222904,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_110",
+    "target": "bg_2083",
+    "weight": 0.42107168989307353,
+    "amount_satoshis": 52359350.07487944,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_110",
+    "target": "VASP_1",
+    "weight": 0.42395844943438293,
+    "amount_satoshis": 52799810.327957995,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1928",
+    "target": "bg_769",
+    "weight": 0.6057381430723143,
+    "amount_satoshis": 83260443.40238345,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1928",
+    "target": "bg_1239",
+    "weight": 3.2813930182002737,
+    "amount_satoshis": 2561281903.204801,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1928",
+    "target": "bg_1327",
+    "weight": 1.8178070439166634,
+    "amount_satoshis": 515833866.491585,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1928",
+    "target": "bg_2296",
+    "weight": 0.40835859016901194,
+    "amount_satoshis": 50434650.83307125,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1928",
+    "target": "bg_2019",
+    "weight": 0.8782385746488829,
+    "amount_satoshis": 140665682.44122922,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1928",
+    "target": "mixer_527",
+    "weight": 1.3227034937520794,
+    "amount_satoshis": 275355538.6008001,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_508",
+    "target": "mixer_478",
+    "weight": 0.8662023907804051,
+    "amount_satoshis": 137786348.89115128,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_453",
+    "target": "VASP_4",
+    "weight": 0.24092837531147568,
+    "amount_satoshis": 27242989.464943413,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1352",
+    "target": "bg_73",
+    "weight": 0.8016417952346331,
+    "amount_satoshis": 122919781.20889537,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1352",
+    "target": "bg_1019",
+    "weight": 0.9424161115591005,
+    "amount_satoshis": 156617409.7114047,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_423",
+    "target": "VASP_1",
+    "weight": 1.3266154407407031,
+    "amount_satoshis": 276826785.41321397,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1345",
+    "target": "bg_411",
+    "weight": 2.652770219969268,
+    "amount_satoshis": 1319330280.5948043,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_339",
+    "target": "bg_411",
+    "weight": 0.5457468477437973,
+    "amount_satoshis": 72589688.3352879,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_622",
+    "target": "bg_1239",
+    "weight": 0.9125057909967134,
+    "amount_satoshis": 149055553.2456973,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_585",
+    "target": "bg_2214",
+    "weight": 0.28666837559309216,
+    "amount_satoshis": 33198242.234454207,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_585",
+    "target": "bg_986",
+    "weight": 1.1835455285347125,
+    "amount_satoshis": 226593315.86837,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_114",
+    "target": "bg_2337",
+    "weight": 2.2999069827299765,
+    "amount_satoshis": 897325472.6740093,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_114",
+    "target": "VASP_4",
+    "weight": 0.2250895754686483,
+    "amount_satoshis": 25243489.86103875,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_146",
+    "target": "VASP_4",
+    "weight": 0.33401086386637213,
+    "amount_satoshis": 39655831.55150129,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1623",
+    "target": "bg_1143",
+    "weight": 0.9533846652169561,
+    "amount_satoshis": 159447624.8476443,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1016",
+    "target": "bg_1143",
+    "weight": 0.9397102201388398,
+    "amount_satoshis": 155923969.47427645,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1600",
+    "target": "mixer_479",
+    "weight": 0.8838496373396916,
+    "amount_satoshis": 142019868.33096108,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_39",
+    "weight": 0.5194847898759339,
+    "amount_satoshis": 68116127.52264163,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_127",
+    "weight": 0.20463851999639304,
+    "amount_satoshis": 22708141.938760012,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_167",
+    "weight": 0.2765086586848285,
+    "amount_satoshis": 31851836.93033326,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_174",
+    "weight": 0.5869768339759839,
+    "amount_satoshis": 79854289.44171727,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_196",
+    "weight": 0.41897708239815656,
+    "amount_satoshis": 52040551.03427955,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_223",
+    "weight": 0.2960890512444399,
+    "amount_satoshis": 34458988.89036968,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_246",
+    "weight": 0.12682433425267758,
+    "amount_satoshis": 13521758.142011685,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_247",
+    "weight": 0.2935780645020673,
+    "amount_satoshis": 34121787.68292648,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_394",
+    "weight": 0.613356456783218,
+    "amount_satoshis": 84661910.58106181,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_417",
+    "weight": 0.4725548251896194,
+    "amount_satoshis": 60408712.48215593,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_502",
+    "weight": 0.4077735829730911,
+    "amount_satoshis": 50346671.21668154,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_515",
+    "weight": 0.1013188165339238,
+    "amount_satoshis": 10662939.727706853,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_565",
+    "weight": 0.5756212661601314,
+    "amount_satoshis": 77823494.10045746,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_607",
+    "weight": 0.4985121762047048,
+    "amount_satoshis": 64627008.78780013,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_644",
+    "weight": 0.6003058466168751,
+    "amount_satoshis": 82267617.44922999,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_667",
+    "weight": 0.19099857934383743,
+    "amount_satoshis": 21045773.243584093,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_4",
+    "target": "mixer_694",
+    "weight": 0.4481157247411255,
+    "amount_satoshis": 56535983.6033901,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_456",
+    "target": "VASP_1",
+    "weight": 0.25174792546129643,
+    "amount_satoshis": 28627176.005497783,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_108",
+    "target": "VASP_1",
+    "weight": 0.6214256660569828,
+    "amount_satoshis": 86158014.25137217,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_158",
+    "target": "VASP_1",
+    "weight": 0.35480273439390925,
+    "amount_satoshis": 42589934.56374907,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_478",
+    "target": "bg_2189",
+    "weight": 0.7659851007400044,
+    "amount_satoshis": 115111239.36637233,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1204",
+    "target": "mixer_477",
+    "weight": 0.8878714486353155,
+    "amount_satoshis": 142995186.52940908,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_386",
+    "target": "bg_73",
+    "weight": 2.408877161667178,
+    "amount_satoshis": 1012146652.2728664,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_579",
+    "target": "bg_411",
+    "weight": 0.3652412134910751,
+    "amount_satoshis": 44086152.14728313,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_579",
+    "target": "bg_1576",
+    "weight": 0.3115216775663826,
+    "amount_satoshis": 36550138.6849969,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_141",
+    "target": "bg_1143",
+    "weight": 1.067019696539435,
+    "amount_satoshis": 190670371.90160388,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_539",
+    "target": "bg_1792",
+    "weight": 1.4239003030422295,
+    "amount_satoshis": 315328797.2332329,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_411",
+    "target": "bg_256",
+    "weight": 1.9636697313037357,
+    "amount_satoshis": 612542754.9514235,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_411",
+    "target": "bg_2441",
+    "weight": 1.8165526466144601,
+    "amount_satoshis": 515061850.459498,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_411",
+    "target": "bg_735",
+    "weight": 1.6884458265124611,
+    "amount_satoshis": 441106443.3770063,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_411",
+    "target": "bg_1054",
+    "weight": 0.4049809465088776,
+    "amount_satoshis": 49927393.338204056,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_779",
+    "target": "bg_73",
+    "weight": 0.7349219381575056,
+    "amount_satoshis": 108531920.22921388,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_411",
+    "target": "bg_735",
+    "weight": 0.38570076827171096,
+    "amount_satoshis": 47064454.145985365,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_283",
+    "target": "VASP_1",
+    "weight": 0.4398837546143816,
+    "amount_satoshis": 55252673.39524196,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1576",
+    "target": "bg_1792",
+    "weight": 0.932072661833301,
+    "amount_satoshis": 153976780.58529165,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1576",
+    "target": "mixer_544",
+    "weight": 0.5760834952728899,
+    "amount_satoshis": 77905708.29579662,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_336",
+    "target": "bg_2486",
+    "weight": 1.329116474456996,
+    "amount_satoshis": 277770421.4496227,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_174",
+    "target": "bg_660",
+    "weight": 1.0316136152409925,
+    "amount_satoshis": 180558932.58265808,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1019",
+    "target": "bg_1792",
+    "weight": 0.6597871947796732,
+    "amount_satoshis": 93438064.42994776,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1343",
+    "target": "bg_2486",
+    "weight": 0.2985092114691393,
+    "amount_satoshis": 34784795.27994253,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_474",
+    "target": "bg_1143",
+    "weight": 1.634672453036336,
+    "amount_satoshis": 412777813.3767066,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_474",
+    "target": "bg_660",
+    "weight": 1.5135625390875311,
+    "amount_satoshis": 354288620.97706306,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_735",
+    "target": "mixer_147",
+    "weight": 0.5543819375068297,
+    "amount_satoshis": 74086468.90293485,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1480",
+    "target": "bg_628",
+    "weight": 0.8430071241411954,
+    "amount_satoshis": 132334306.35593759,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_580",
+    "target": "bg_2486",
+    "weight": 0.38220878427984323,
+    "amount_satoshis": 46551803.03201334,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_397",
+    "target": "bg_73",
+    "weight": 0.14370696551247678,
+    "amount_satoshis": 15454573.723167386,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2087",
+    "target": "bg_698",
+    "weight": 1.3420041676500403,
+    "amount_satoshis": 282670518.3893464,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2087",
+    "target": "bg_1571",
+    "weight": 0.3123379858790549,
+    "amount_satoshis": 36661651.206408836,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_371",
+    "target": "VASP_1",
+    "weight": 0.413542917195256,
+    "amount_satoshis": 51216578.39181888,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_460",
+    "target": "VASP_1",
+    "weight": 0.25490698469352274,
+    "amount_satoshis": 29034159.377199266,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_38",
+    "target": "VASP_1",
+    "weight": 0.4117989036045621,
+    "amount_satoshis": 50953084.45925162,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1902",
+    "target": "bg_660",
+    "weight": 0.3209636826264576,
+    "amount_satoshis": 37845551.81007223,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1393",
+    "target": "bg_660",
+    "weight": 0.4281023110497601,
+    "amount_satoshis": 53434305.318591,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1393",
+    "target": "bg_698",
+    "weight": 0.5363320599812509,
+    "amount_satoshis": 70972418.12348612,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_286",
+    "target": "VASP_1",
+    "weight": 0.19772694071901084,
+    "amount_satoshis": 21862959.02664506,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1482",
+    "target": "bg_1143",
+    "weight": 0.13468066998333342,
+    "amount_satoshis": 14417135.77498387,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_370",
+    "target": "VASP_1",
+    "weight": 0.16974093830493975,
+    "amount_satoshis": 18499782.400764447,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1792",
+    "target": "bg_1394",
+    "weight": 0.35695647851165696,
+    "amount_satoshis": 42897367.743928835,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1792",
+    "target": "bg_1814",
+    "weight": 1.1298704316352626,
+    "amount_satoshis": 209525542.69579595,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1792",
+    "target": "bg_1815",
+    "weight": 1.1407226181360797,
+    "amount_satoshis": 212902864.12740508,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1792",
+    "target": "mixer_472",
+    "weight": 0.6439235272590673,
+    "amount_satoshis": 90393639.01169385,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1541",
+    "target": "mixer_308",
+    "weight": 1.0346051994051488,
+    "amount_satoshis": 181399504.93706,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_129",
+    "target": "bg_707",
+    "weight": 0.6835633602544705,
+    "amount_satoshis": 98092391.6278991,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_409",
+    "target": "bg_1118",
+    "weight": 0.6674705665382016,
+    "amount_satoshis": 94930045.37351817,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_698",
+    "target": "bg_2006",
+    "weight": 1.0835584753052023,
+    "amount_satoshis": 195517678.6529327,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_698",
+    "target": "bg_705",
+    "weight": 0.3147845163402342,
+    "amount_satoshis": 36996407.42763261,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_698",
+    "target": "bg_1604",
+    "weight": 0.5052611620854153,
+    "amount_satoshis": 65741831.87676713,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_698",
+    "target": "bg_1750",
+    "weight": 0.19094354866541313,
+    "amount_satoshis": 21039112.19584477,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_698",
+    "target": "mixer_317",
+    "weight": 0.5645879877074453,
+    "amount_satoshis": 75872301.79234813,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_698",
+    "target": "mixer_587",
+    "weight": 0.6845770925239377,
+    "amount_satoshis": 98293306.0971628,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2094",
+    "target": "bg_1906",
+    "weight": 0.7903767502880332,
+    "amount_satoshis": 120422671.28897233,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_515",
+    "target": "VASP_1",
+    "weight": 0.4410112053805631,
+    "amount_satoshis": 55427811.85225472,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_2083",
+    "target": "bg_628",
+    "weight": 0.3681331818704419,
+    "amount_satoshis": 44503447.85535699,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_73",
+    "target": "mixer_150",
+    "weight": 0.9228484547945476,
+    "amount_satoshis": 151644817.96589747,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_334",
+    "target": "VASP_1",
+    "weight": 0.33116210369416477,
+    "amount_satoshis": 39258551.72690646,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_589",
+    "target": "VASP_1",
+    "weight": 0.13815253168842737,
+    "amount_satoshis": 14815066.627816569,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_417",
+    "target": "bg_1239",
+    "weight": 0.684000937981936,
+    "amount_satoshis": 98179091.4140201,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_1457",
+    "target": "bg_1143",
+    "weight": 1.3883280514587573,
+    "amount_satoshis": 300814303.87585294,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_150",
+    "target": "VASP_1",
+    "weight": 0.3606735947972747,
+    "amount_satoshis": 43429522.3042035,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_689",
+    "target": "mixer_479",
+    "weight": 0.5180075744909535,
+    "amount_satoshis": 67867967.13090341,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_704",
+    "target": "VASP_1",
+    "weight": 0.24715881464644496,
+    "amount_satoshis": 28038244.011670437,
+    "tx_hash": ""
+  },
+  {
+    "source": "mixer_644",
+    "target": "bg_660",
+    "weight": 0.5628558407207415,
+    "amount_satoshis": 75567928.80023609,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_1",
+    "target": "mixer_103",
+    "weight": 0.2645700195540307,
+    "amount_satoshis": 30287064.642008007,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_1",
+    "target": "mixer_394",
+    "weight": 0.4259101905082415,
+    "amount_satoshis": 53098327.21292417,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_1",
+    "target": "mixer_719",
+    "weight": 0.7328741996117287,
+    "amount_satoshis": 108105338.29133731,
+    "tx_hash": ""
+  },
+  {
+    "source": "VASP_1",
+    "target": "mixer_729",
+    "weight": 0.20197062721664716,
+    "amount_satoshis": 22381206.081689768,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_835",
+    "target": "bg_660",
+    "weight": 0.2244823610698175,
+    "amount_satoshis": 25167463.295184024,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_725",
+    "target": "mixer_477",
+    "weight": 0.6947996184119449,
+    "amount_satoshis": 100330760.77594973,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_660",
+    "target": "bg_1594",
+    "weight": 0.04087603021371342,
+    "amount_satoshis": 4172295.53681382,
+    "tx_hash": ""
+  },
+  {
+    "source": "bg_467",
+    "target": "bg_2486",
+    "weight": 0.997049207310841,
+    "amount_satoshis": 171027256.49621463,
+    "tx_hash": ""
+  }
+]

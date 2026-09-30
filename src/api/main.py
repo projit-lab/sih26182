@@ -41,6 +41,9 @@ def load_case(case_id: str) -> dict:
         "truncated": meta.get("truncated", False),
         "degree_correction": meta.get("degree_correction", False),
         "null_test_runs": meta.get("null_test", []),
+        "truth": meta.get("truth"),
+        "er_wins": meta.get("er_wins"),
+        "sp_wins": meta.get("sp_wins")
     }
 
 @asynccontextmanager
@@ -134,6 +137,11 @@ def attribute(req: AttributionRequest):
     payload["truncated"] = case["truncated"]
     payload["direction"] = req.direction
     payload["graph"] = engine.graph_health()
+    if case.get("truth"):
+        payload["synthetic"] = True
+        payload["truth"] = case["truth"]
+        payload["er_wins"] = case.get("er_wins")
+        payload["sp_wins"] = case.get("sp_wins")
     
     candidate_labels = {}
     for addr in candidates:

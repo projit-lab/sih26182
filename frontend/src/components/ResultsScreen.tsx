@@ -127,6 +127,14 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
           {dijkstra_comparison && (
              <div style={{ width: '100%' }}><strong>Shortest path check:</strong> {dijkstra_comparison.flaw}</div>
           )}
+          {result.synthetic && (
+            <div style={{ width: '100%' }}>
+              <strong>Ground truth: {labelMap[result.truth!] || result.truth}</strong>
+              <div style={{ color: '#64748b', marginTop: 4 }}>
+                Synthetic benchmark case. ER is right and shortest path is wrong in {result.er_wins} cases; the reverse in {result.sp_wins} cases (seed 42)
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Action buttons directly above the table */}

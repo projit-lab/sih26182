@@ -15,6 +15,20 @@ export const DEMO_CASES: Case[] = [
     highlight: 'Historical federal criminal asset forfeiture — adversarially tested engine',
   },
   {
+    id: 'synthetic_mixer',
+    label: '[SYNTHETIC] Mixer-routed benchmark case (seed 42)',
+    description: 'A synthetic graph to benchmark effective resistance against shortest-path.',
+    defaultSuspect: 'suspect_114',
+    defaultCandidates: [
+      'VASP_0',
+      'VASP_1',
+      'VASP_2',
+      'VASP_3',
+      'VASP_4',
+      'VASP_5',
+    ],
+  },
+  {
     id: 'peel_chain',
     label: 'Rapid Multi-Hop Peel Chain',
     description: 'Continuous micro-peel peeling sequence funneling to exchange deposit address',

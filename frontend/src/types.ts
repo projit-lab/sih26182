@@ -67,6 +67,10 @@ export interface AttributeResponse {
     nodes: DetailedNode[];
     edges: DetailedEdge[];
   };
+  synthetic?: boolean;
+  truth?: string;
+  er_wins?: number;
+  sp_wins?: number;
 }
 
 export interface AttributeRequest {
