@@ -16,7 +16,7 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
   const [selectedCase, setSelectedCase] = useState<string>('');
   const [suspect, setSuspect] = useState('');
   const [candidates, setCandidates] = useState('');
-  const [depth, setDepth] = useState<number>(6);
+  const [depth, setDepth] = useState<number | 'all'>('all');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +36,7 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
         if (match) {
           if (match.defaultSuspect) setSuspect(match.defaultSuspect);
           if (match.defaultCandidates) setCandidates(match.defaultCandidates.join('\n'));
-          if (match.defaultDepth) setDepth(match.defaultDepth);
+          if (match.defaultDepth !== undefined) setDepth(match.defaultDepth);
         }
       })
       .catch((e) => {
@@ -54,7 +54,7 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
     if (match) {
       if (match.defaultSuspect) setSuspect(match.defaultSuspect);
       if (match.defaultCandidates) setCandidates(match.defaultCandidates.join('\n'));
-      if (match.defaultDepth) setDepth(match.defaultDepth);
+      if (match.defaultDepth !== undefined) setDepth(match.defaultDepth);
     }
   };
 
@@ -75,7 +75,7 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
     const req: AttributeRequest = {
       suspect: suspect.trim(),
       case_id: selectedCase || undefined,
-      depth: depth,
+      max_hops: depth === 'all' ? null : depth,
     };
 
     if (candidates.trim()) {
@@ -281,8 +281,9 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
                     id="hop-depth"
                     className="select"
                     value={depth}
-                    onChange={(e) => setDepth(Number(e.target.value))}
+                    onChange={(e) => setDepth(e.target.value === 'all' ? 'all' : Number(e.target.value))}
                   >
+                    <option value="all">All (whole cluster)</option>
                     <option value={1}>1 Hop (Direct Peers / Immediate UTXOs)</option>
                     <option value={2}>2 Hops (Mules &amp; Relays — Decoy Horizon)</option>
                     <option value={3}>3 Hops (Mixer Layering Channels)</option>
@@ -291,6 +292,8 @@ export function InputScreen({ onResult, initialCaseId }: InputScreenProps) {
                     <option value={6}>6 Hops (Deep Layering / Full Swarm Exit)</option>
                     <option value={7}>7 Hops (Complex Peeling / Extended Trace)</option>
                     <option value={8}>8 Hops (Deep Obfuscation Trace)</option>
+                    <option value={9}>9 Hops (Extended Trace)</option>
+                    <option value={10}>10 Hops (Maximum Depth)</option>
                   </select>
                   <p className="field-hint">
                     Controls the number of transaction hops traversed from the suspect address before solving the Grounded Laplacian.

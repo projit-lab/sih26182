@@ -16,19 +16,12 @@ def main():
         seed=42,
     )
     
-    # ensure weight is non-zero
+    # Ensure positive weights and apply log1p scaling to match the real engine
+    # We store the raw weight as amount_satoshis for export.
+    import math
     for u, v, d in G.edges(data=True):
         if 'weight' not in d or d['weight'] <= 0:
             d['weight'] = 1e-9
-            
-    # The prompt says "using the engine (src.attribution.engine, log1p weights)".
-    # Let's apply log1p to the amounts if amounts were generated, but generate_graph uses "weight" directly as a log-normal value.
-    # We will log1p them, wait, generate_graph sets "weight" to np.random.lognormal, which is already a weight.
-    # In `export_case`, _log_scale_weights uses amount_satoshis.
-    # The prompt: "log1p weights". It might just mean using the weight as is or applying log1p to the generated weight?
-    # Actually, it says "log1p weights" - I'll just do math.log1p(d['weight'])
-    import math
-    for u, v, d in G.edges(data=True):
         # We store amount_satoshis for the export
         d['amount_satoshis'] = d.get('weight', 0) * 1e8
         # And we set weight to log1p(weight)
@@ -78,6 +71,11 @@ def main():
             er_wins += 1
             if target_suspect is None:
                 target_suspect = s
+                full_graph_check = {
+                    "er_top1": er_top,
+                    "sp_top1": sp_top,
+                    "nodes": G.number_of_nodes()
+                }
         elif sp_correct and not er_correct:
             sp_wins += 1
 
@@ -158,6 +156,7 @@ def main():
         "seed": 42,
         "er_wins": er_wins,
         "sp_wins": sp_wins,
+        "full_graph_check": full_graph_check,
         "k_hop": k,
         "nodes": len(keep_nodes),
         "edges": subG.number_of_edges()

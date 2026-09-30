@@ -71,6 +71,11 @@ export interface AttributeResponse {
   truth?: string;
   er_wins?: number;
   sp_wins?: number;
+  max_hops?: number | null;
+  depth_nodes?: number;
+  depth_edges?: number;
+  unreachable_reasons?: Record<string, string>;
+  full_nodes?: number;
 }
 
 export interface AttributeRequest {
@@ -78,6 +83,7 @@ export interface AttributeRequest {
   candidates?: string[];
   case_id?: string;
   depth?: number;
+  max_hops?: number | null;
 }
 
 export type Screen = 'input' | 'results' | 'graph';

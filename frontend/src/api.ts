@@ -89,6 +89,9 @@ export async function postAttribute(req: AttributeRequest): Promise<AttributeRes
     if (req.candidates && req.candidates.length > 0) {
       body.candidate_vasps = req.candidates;
     }
+    if (req.max_hops !== undefined) {
+      body.max_hops = req.max_hops;
+    }
 
     const res = await fetch(`${BASE_URL}/attribute`, {
       method: 'POST',

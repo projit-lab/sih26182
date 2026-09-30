@@ -19,6 +19,11 @@
   "seed": 42,
   "er_wins": 10,
   "sp_wins": 1,
+  "full_graph_check": {
+    "er_top1": "VASP_3",
+    "sp_top1": "VASP_0",
+    "nodes": 3489
+  },
   "k_hop": 4,
   "nodes": 400,
   "edges": 568

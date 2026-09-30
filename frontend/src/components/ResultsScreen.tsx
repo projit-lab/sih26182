@@ -31,6 +31,10 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
     degree_corrected = false,
     graph = { nodes: 0, edges: 0 },
     suspect_component_size = 0,
+    max_hops = null,
+    depth_nodes = 0,
+    depth_edges = 0,
+    unreachable_reasons = {},
   } = result as any; // Using any for new fields since types.ts wasn't fully updated here
 
   const [copiedAddr, setCopiedAddr] = useState<string | null>(null);
@@ -123,7 +127,9 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginBottom: 16, fontSize: 13, color: '#8b919b', background: '#0F172A', padding: 12, borderRadius: 8, border: '1px solid #1E293B' }}>
           <div><strong>Separation ratio:</strong> {separation_ratio != null ? `${separation_ratio.toFixed(2)}x` : '—'}</div>
           <div><strong>Degree correction:</strong> {degree_corrected ? 'on' : 'off'}</div>
-          <div><strong>Suspect's connected cluster:</strong> {suspect_component_size || (result.graph_elements?.nodes?.length ?? 0)} of {graph.nodes} nodes</div>
+          <div>
+            <strong>Search depth:</strong> {max_hops !== null ? `${max_hops} hops` : 'whole cluster'} - {depth_nodes || suspect_component_size || (result.graph_elements?.nodes?.length ?? 0)} nodes, {depth_edges || 0} edges analysed
+          </div>
           {dijkstra_comparison && (
              <div style={{ width: '100%' }}><strong>Shortest path check:</strong> {dijkstra_comparison.flaw}</div>
           )}
@@ -131,7 +137,7 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
             <div style={{ width: '100%' }}>
               <strong>Ground truth: {labelMap[result.truth!] || result.truth}</strong>
               <div style={{ color: '#64748b', marginTop: 4 }}>
-                Synthetic benchmark case. ER is right and shortest path is wrong in {result.er_wins} cases; the reverse in {result.sp_wins} cases (seed 42)
+                Synthetic benchmark case. ER is right and shortest path is wrong in {result.er_wins} cases; the reverse in {result.sp_wins} cases (seed 42). {result.full_nodes ? `Shown: 400-node neighbourhood of a ${result.full_nodes}-node benchmark graph.` : ''}
               </div>
             </div>
           )}
@@ -289,6 +295,11 @@ export function ResultsScreen({ result, onViewGraph }: ResultsScreenProps) {
                         <span style={{ color: '#c0564b' }}>
                           Disconnected
                         </span>
+                        {unreachable_reasons[vasp] && (
+                          <div style={{ fontSize: 10, color: '#8b919b', marginTop: 2 }}>
+                            {unreachable_reasons[vasp]}
+                          </div>
+                        )}
                       </td>
                     </tr>
                   );

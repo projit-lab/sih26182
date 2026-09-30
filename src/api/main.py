@@ -43,7 +43,8 @@ def load_case(case_id: str) -> dict:
         "null_test_runs": meta.get("null_test", []),
         "truth": meta.get("truth"),
         "er_wins": meta.get("er_wins"),
-        "sp_wins": meta.get("sp_wins")
+        "sp_wins": meta.get("sp_wins"),
+        "full_graph_check": meta.get("full_graph_check")
     }
 
 @asynccontextmanager
@@ -76,6 +77,7 @@ class AttributionRequest(BaseModel):
     suspect_wallet: str | None = None
     candidate_vasps: list[str] | None = None
     direction: str = "undirected"
+    max_hops: int | None = None
 
 @app.get("/cases")
 def list_cases():
@@ -125,6 +127,20 @@ def attribute(req: AttributionRequest):
             G = nx.Graph(DG)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+        
+    unreachable_reasons = {}
+    if req.max_hops is not None:
+        try:
+            dists = nx.single_source_shortest_path_length(G, suspect, cutoff=req.max_hops)
+            allowed_nodes = set(dists.keys())
+        except Exception:
+            allowed_nodes = {suspect}
+            
+        for c in candidates:
+            if c not in allowed_nodes:
+                unreachable_reasons[c] = f"beyond {req.max_hops} hops"
+                
+        G = G.subgraph(allowed_nodes).copy()
 
     engine = AttributionEngine(G, degree_correction=case.get("degree_correction", False))
     try:
@@ -136,12 +152,18 @@ def attribute(req: AttributionRequest):
     payload["case_id"] = req.case_id
     payload["truncated"] = case["truncated"]
     payload["direction"] = req.direction
+    payload["max_hops"] = req.max_hops
+    payload["depth_nodes"] = G.number_of_nodes()
+    payload["depth_edges"] = G.number_of_edges()
+    payload["unreachable_reasons"] = unreachable_reasons
     payload["graph"] = engine.graph_health()
     if case.get("truth"):
         payload["synthetic"] = True
         payload["truth"] = case["truth"]
         payload["er_wins"] = case.get("er_wins")
         payload["sp_wins"] = case.get("sp_wins")
+        if case.get("full_graph_check"):
+            payload["full_nodes"] = case["full_graph_check"].get("nodes")
     
     candidate_labels = {}
     for addr in candidates:
